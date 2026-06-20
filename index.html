@@ -69,7 +69,9 @@
     }
     .hero-photo {
       width: 100%;
-      height: auto;
+      height: 620px;
+      object-fit: cover;
+      object-position: center top;
       display: block;
       filter: grayscale(8%) contrast(1.03);
     }
@@ -87,12 +89,8 @@
       position: absolute;
       bottom: 0;
       left: 0;
-      right: 0;
       padding: 0 48px 48px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: end;
+      max-width: 560px;
     }
     .hero-eyebrow {
       font-size: 11px;
@@ -104,7 +102,7 @@
     }
     .hero h1 {
       font-family: 'TradeGothic', sans-serif;
-      font-size: clamp(40px, 4.2vw, 72px);
+      font-size: clamp(44px, 5vw, 80px);
       font-weight: 700;
       text-transform: uppercase;
       color: var(--white);
@@ -347,17 +345,13 @@
         <img src="assets/hero-photo.jpg" alt="UNO × UNO" class="hero-photo">
       </div>
       <div class="hero-overlay">
-        <div>
-          <p class="hero-eyebrow">Documentos de marca</p>
-          <h1>Sistema de Marca</h1>
-        </div>
-        <div>
-          <div class="hero-divider"></div>
-          <p class="hero-sub">Recursos internos del sistema de comunicación de UNO × UNO. Uso exclusivo del equipo.</p>
-          <div class="hero-meta">
-            <span class="hero-meta-item">Método Uno SRL · 2026</span>
-            <span class="hero-meta-item">Uso interno · No distribuir</span>
-          </div>
+        <p class="hero-eyebrow">Documentos de marca</p>
+        <h1>Sistema de Marca</h1>
+        <div class="hero-divider"></div>
+        <p class="hero-sub">Recursos internos del sistema de comunicación de UNO × UNO. Uso exclusivo del equipo.</p>
+        <div class="hero-meta">
+          <span class="hero-meta-item">Método Uno SRL · 2026</span>
+          <span class="hero-meta-item">Uso interno · No distribuir</span>
         </div>
       </div>
     </div>
