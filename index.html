@@ -13,224 +13,403 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --carbon: #292A2E; --dark: #555152; --mid: #CCCBC8;
-      --warm: #EBE8E3; --cream: #F6F4F1; --white: #fff;
+      --carbon: #292A2E;
+      --dark: #555152;
+      --mid: #CCCBC8;
+      --warm: #EBE8E3;
+      --cream: #F6F4F1;
+      --white: #fff;
     }
-    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--carbon); -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--carbon);
+      -webkit-font-smoothing: antialiased;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-    /* NAV */
+    /* ─── NAV ─── */
     nav {
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex;
+      align-items: center;
       padding: 20px 48px;
       background: var(--carbon);
     }
-    .nav-logo { height: 72px; display: block; }
-    .nav-label { font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); font-weight: 400; }
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .nav-logo { height: 68px; display: block; }
+    .nav-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      font-weight: 400;
+    }
 
-    /* HERO */
+    /* ─── HERO ─── */
     .hero {
       background: var(--carbon);
-      padding: 64px 48px 80px;
       border-top: 1px solid rgba(255,255,255,0.06);
-
     }
-    .hero-left {}
-    .hero-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); margin-bottom: 24px; font-weight: 400; }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 0;
+      align-items: stretch;
+      min-height: 540px;
+    }
+    .hero-left {
+      padding: 72px 56px 80px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 28px;
+      font-weight: 400;
+    }
     .hero h1 {
       font-family: 'TradeGothic', sans-serif;
-      font-size: clamp(60px, 7vw, 140px);
+      font-size: clamp(64px, 7.5vw, 148px);
       font-weight: 700;
       text-transform: uppercase;
       color: var(--white);
-      line-height: 0.92;
+      line-height: 0.9;
       letter-spacing: -0.01em;
     }
-    .hero-right { padding-bottom: 8px; }
-    .hero-photo {
-      width: 100%; height: 100%; min-height: 380px;
-      object-fit: cover; object-position: center 20%;
-      display: block;
-      filter: grayscale(15%) contrast(1.05);
+    .hero-divider {
+      width: 32px;
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      margin: 32px 0 24px;
+    }
+    .hero-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.85;
+      max-width: 400px;
+    }
+    .hero-meta {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .hero-meta-item {
+      font-size: 11px;
+      color: rgba(255,255,255,0.22);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
     }
     .hero-photo-wrap {
       overflow: hidden;
       align-self: stretch;
-      min-height: 380px;
     }
-    .hero-sub { font-size: 14px; color: var(--mid); line-height: 1.8; font-weight: 400; max-width: 440px; }
-    .hero-divider { width: 32px; height: 1px; background: rgba(255,255,255,0.15); margin-bottom: 24px; }
-    .hero-meta { margin-top: 32px; display: flex; flex-direction: column; gap: 8px; }
-    .hero-meta-item { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.12em; text-transform: uppercase; }
-
-    /* GRID */
-    main { flex: 1; padding: 0; }
-    .doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; background: var(--warm); }
-
-    .doc-card {
-      display: block; padding: 44px 40px;
-      background: var(--white);
-      text-decoration: none; color: var(--carbon);
-      border-left: 3px solid transparent;
-      transition: border-color 0.2s ease, background 0.2s ease;
+    .hero-photo {
+      width: 100%;
+      height: 100%;
+      min-height: 540px;
+      object-fit: cover;
+      object-position: center 12%;
+      display: block;
+      filter: grayscale(12%) contrast(1.04);
     }
-    .doc-card:hover { border-left-color: var(--carbon); background: var(--cream); }
-    .doc-card.disabled { opacity: 0.35; pointer-events: none; background: var(--cream); }
 
-    .doc-num { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); margin-bottom: 20px; font-weight: 500; }
-    .doc-title {
-      font-family: 'TradeGothic', sans-serif;
-      font-size: 30px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.02em;
-      margin-bottom: 14px; line-height: 1;
-    }
-    .doc-desc { font-size: 13px; color: var(--dark); line-height: 1.65; font-weight: 400; }
-
-    /* FOOTER */
-    footer {
-      background: var(--carbon);
-      padding: 24px 48px;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .ft-brand { font-family: 'TradeGothic', sans-serif; font-size: 13px; letter-spacing: 0.15em; color: var(--mid); }
-    .ft-note { font-size: 11px; color: var(--dark); letter-spacing: 0.06em; }
-
-    .container { max-width: 1320px; margin: 0 auto; width: 100%; }
-
-    /* GUIDE SECTIONS */
-    .guide {
+    /* ─── INTRO STRIP ─── */
+    .intro-strip {
       background: var(--white);
       border-bottom: 1px solid var(--warm);
-      padding: 56px 0;
+      padding: 28px 0;
     }
-    .guide .container { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
-    .guide-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); margin-bottom: 16px; }
-    .guide-title { font-family: 'TradeGothic', sans-serif; font-size: 24px; text-transform: uppercase; color: var(--carbon); line-height: 1; }
-    .guide-body { font-size: 13px; color: var(--dark); line-height: 1.8; }
-    .guide-body p + p { margin-top: 12px; }
+    .intro-strip .container {
+      display: flex;
+      align-items: baseline;
+      gap: 40px;
+    }
+    .intro-tag {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .intro-text {
+      font-size: 14px;
+      color: var(--dark);
+      line-height: 1.7;
+    }
 
-    /* ROLES */
-    .roles { background: var(--cream); border-bottom: 1px solid var(--warm); padding: 56px 0; }
-    .roles .container { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
-    .roles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--warm); }
-    .role-card { background: var(--cream); padding: 24px 20px; }
-    .role-name { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--carbon); font-weight: 700; margin-bottom: 14px; }
-    .role-links { display: flex; flex-direction: column; gap: 7px; }
-    .role-link { font-size: 12px; color: var(--dark); text-decoration: none; display: flex; align-items: center; gap: 8px; }
-    .role-link::before { content: '→'; color: var(--mid); font-size: 11px; }
-    .role-link:hover { color: var(--carbon); }
+    /* ─── CARDS ─── */
+    main { flex: 1; }
+    .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--warm);
+    }
+    .doc-card {
+      display: block;
+      padding: 48px 40px;
+      background: var(--white);
+      text-decoration: none;
+      color: var(--carbon);
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .doc-card:hover {
+      border-bottom-color: var(--carbon);
+      background: var(--cream);
+    }
+    .doc-card.disabled {
+      opacity: 0.3;
+      pointer-events: none;
+      background: var(--cream);
+    }
+    .doc-num {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 20px;
+      font-weight: 500;
+      display: block;
+    }
+    .doc-cat {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mid);
+      font-weight: 400;
+    }
+    .doc-title {
+      font-family: 'TradeGothic', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      margin-bottom: 16px;
+      line-height: 1;
+      color: var(--carbon);
+    }
+    .doc-desc {
+      font-size: 14px;
+      color: var(--dark);
+      line-height: 1.75;
+      font-weight: 400;
+    }
+    .doc-status {
+      margin-top: 20px;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .doc-status.active {
+      color: var(--carbon);
+      font-weight: 600;
+    }
 
-    /* NO DECIR / SI DECIR */
-    .vocab { background: var(--carbon); padding: 56px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .vocab .container { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
-    .vocab-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.06); }
+    /* ─── VOCAB ─── */
+    .vocab {
+      background: var(--carbon);
+      padding: 64px 0;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .vocab .container {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .vocab-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 16px;
+    }
+    .vocab-title {
+      font-family: 'TradeGothic', sans-serif;
+      font-size: 28px;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1;
+    }
+    .vocab-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+      margin-top: 16px;
+      line-height: 1.65;
+    }
+    .vocab-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+    }
     .vocab-col { padding: 28px 24px; }
     .vocab-col.no { background: rgba(255,255,255,0.02); }
     .vocab-col.si { background: rgba(255,255,255,0.04); }
-    .vocab-col-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; font-weight: 700; }
-    .vocab-col.no .vocab-col-label { color: rgba(255,255,255,0.25); }
-    .vocab-col.si .vocab-col-label { color: rgba(255,255,255,0.5); }
-    .vocab-item { font-size: 12px; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.4; }
-    .vocab-col.no .vocab-item { color: rgba(255,255,255,0.3); text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.15); }
+    .vocab-col-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+    .vocab-col.no .vocab-col-label { color: rgba(255,255,255,0.2); }
+    .vocab-col.si .vocab-col-label { color: rgba(255,255,255,0.45); }
+    .vocab-item {
+      font-size: 13px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      line-height: 1.5;
+    }
+    .vocab-col.no .vocab-item {
+      color: rgba(255,255,255,0.25);
+      text-decoration: line-through;
+      text-decoration-color: rgba(255,255,255,0.1);
+    }
     .vocab-col.si .vocab-item { color: rgba(255,255,255,0.7); }
     .vocab-item:last-child { border-bottom: none; }
 
-    @media (max-width: 640px) {
-      nav, .hero, footer { padding-left: 24px; padding-right: 24px; }
-      .hero { grid-template-columns: 1fr; gap: 0; }
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--carbon);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 24px 48px;
+    }
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .ft-note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── CONTAINER ─── */
+    .container { max-width: 1320px; margin: 0 auto; width: 100%; padding: 0 48px; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .doc-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 680px) {
+      nav, footer { padding-left: 24px; padding-right: 24px; }
+      .container { padding: 0 24px; }
+      .hero-inner { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 48px 0 40px; }
       .hero-photo-wrap { display: none; }
-      .hero-right { padding-bottom: 0; }
-      .doc-card { padding: 32px 24px; }
       .doc-grid { grid-template-columns: 1fr; }
-      .guide .container, .roles .container, .vocab .container { grid-template-columns: 1fr; gap: 24px; }
-      .roles-grid { grid-template-columns: 1fr; }
+      .doc-card { padding: 36px 24px; }
+      .vocab .container { grid-template-columns: 1fr; gap: 32px; }
       .vocab-cols { grid-template-columns: 1fr; }
+      .intro-strip .container { flex-direction: column; gap: 8px; }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <div class="container" style="display:flex;align-items:center;justify-content:space-between;width:100%;">
-  <img src="assets/logo-negativo.png" alt="UNO × UNO" class="nav-logo">
-  <span class="nav-label">Sistema de Marca · Uso Interno</span>
+  <div class="container">
+    <img src="assets/logo-negativo.png" alt="UNO × UNO" class="nav-logo">
+    <span class="nav-label">Sistema de Marca · Uso Interno</span>
   </div>
 </nav>
 
 <div class="hero">
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;width:100%;">
-    <div class="hero-left" style="padding:64px 48px 80px 0;">
-      <p class="hero-eyebrow">Documentos de marca</p>
-      <h1>Sistema<br>de Marca</h1>
-      <div class="hero-divider" style="margin-top:28px;"></div>
-      <p class="hero-sub">Recursos internos del sistema de comunicación de UNO × UNO. Uso exclusivo del equipo.</p>
-      <div class="hero-meta">
-        <span class="hero-meta-item">Método Uno SRL · 2026</span>
-        <span class="hero-meta-item">Uso interno · No distribuir</span>
-      </div>
-    </div>
-    <div class="hero-photo-wrap">
-      <img src="assets/hero-photo.jpg" alt="UNO × UNO" class="hero-photo">
-    </div>
-  </div>
-</div>
-
-<!-- CÓMO USAR -->
-<div class="guide">
   <div class="container">
-    <div>
-      <p class="guide-label">Cómo usar esta guía</p>
-      <p class="guide-title">Una guía,<br>no un folleto</p>
-    </div>
-    <div class="guide-body">
-      <p>Esta web es una herramienta de trabajo, no un documento para leer una vez y archivar. Está hecha para que cualquier persona que cree contenido, diseñe piezas o planifique anuncios para UNO × UNO tenga una referencia clara de qué decir, cómo decirlo y cómo no desviarse del tono de la marca.</p>
-      <p>El orden sugerido de lectura es: <strong>Buyer Personas → Competidores → Manual de Marca → Tipografías → Briefs de Ads.</strong> No hace falta leer todo de corrido. Cada documento funciona solo.</p>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div>
+          <p class="hero-eyebrow">Documentos de marca</p>
+          <h1>Sistema<br>de Marca</h1>
+          <div class="hero-divider"></div>
+          <p class="hero-sub">Recursos internos del sistema de comunicación de UNO × UNO. Uso exclusivo del equipo.</p>
+        </div>
+        <div class="hero-meta">
+          <span class="hero-meta-item">Método Uno SRL · 2026</span>
+          <span class="hero-meta-item">Uso interno · No distribuir</span>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <img src="assets/hero-photo.jpg" alt="UNO × UNO" class="hero-photo">
+      </div>
     </div>
   </div>
 </div>
 
-<!-- POR DÓNDE EMPEZAR -->
-<div class="roles">
+<div class="intro-strip">
   <div class="container">
-    <div>
-      <p class="guide-label">Por dónde empezar</p>
-      <p class="guide-title">Según<br>tu rol</p>
-    </div>
-    <div class="roles-grid">
-      <div class="role-card">
-        <p class="role-name">Creadora de contenido</p>
-        <div class="role-links">
-          <a class="role-link" href="/personas">Buyer Personas</a>
-          <a class="role-link" href="/competidores">Competidores</a>
-          <a class="role-link" href="/tipografias">Tipografías</a>
-          <a class="role-link" href="/briefs">Briefs de Ads</a>
-        </div>
-      </div>
-      <div class="role-card">
-        <p class="role-name">Diseño</p>
-        <div class="role-links">
-          <a class="role-link" href="/manual">Manual de Marca</a>
-          <a class="role-link" href="/tipografias">Tipografías</a>
-          <a class="role-link" href="/personas">Buyer Personas</a>
-        </div>
-      </div>
-      <div class="role-card">
-        <p class="role-name">Ads / Performance</p>
-        <div class="role-links">
-          <a class="role-link" href="/competidores">Competidores</a>
-          <a class="role-link" href="/personas">Buyer Personas</a>
-          <a class="role-link" href="/briefs">Briefs de Ads</a>
-        </div>
-      </div>
-    </div>
+    <span class="intro-tag">Herramienta de trabajo</span>
+    <p class="intro-text">Esta web es una referencia interna para crear contenido, diseñar piezas y planificar anuncios de UNO × UNO. Cada documento funciona de forma independiente.</p>
   </div>
 </div>
 
-<!-- NO DECIR / SÍ DECIR -->
+<main>
+  <div class="doc-grid">
+
+    <a class="doc-card" href="/personas">
+      <span class="doc-num">01 <span class="doc-cat">Estrategia</span></span>
+      <p class="doc-title">Buyer Personas</p>
+      <p class="doc-desc">Los cuatro perfiles que compran UNO × UNO. Quiénes son, qué los trae y cómo les hablamos.</p>
+    </a>
+
+    <a class="doc-card" href="/competidores">
+      <span class="doc-num">02 <span class="doc-cat">Inteligencia</span></span>
+      <p class="doc-title">Análisis Competidores</p>
+      <p class="doc-desc">Ad Library de Tecla, Valfort, UMANO y SER Basics. Insights y oportunidades para UNO × UNO.</p>
+    </a>
+
+    <a class="doc-card" href="/manual">
+      <span class="doc-num">03 <span class="doc-cat">Identidad</span></span>
+      <p class="doc-title">Manual de Marca</p>
+      <p class="doc-desc">Sistema de identidad visual 2026. Logotipo, paleta, tipografía, tono y criterios de aplicación.</p>
+    </a>
+
+    <a class="doc-card" href="/tipografias">
+      <span class="doc-num">03b <span class="doc-cat">Recursos</span></span>
+      <p class="doc-title">Tipografías</p>
+      <p class="doc-desc">Trade Gothic Condensed Bold e Inter. Descargá los archivos OTF para instalar en tu sistema.</p>
+    </a>
+
+    <a class="doc-card" href="/briefs">
+      <span class="doc-num">04 <span class="doc-cat">Creativos</span></span>
+      <p class="doc-title">Briefs de Ads</p>
+      <p class="doc-desc">59 briefs listos para producción. Video, producto solo, modelo y texto sobre foto.</p>
+    </a>
+
+    <a class="doc-card" href="/ecommerce">
+      <span class="doc-num">05 <span class="doc-cat">Ecommerce</span></span>
+      <p class="doc-title">Optimización Web</p>
+      <p class="doc-desc">Diagnóstico y plan de acción para metodounoxuno.com.ar. Prioridades, copy sugerido y mobile checklist.</p>
+    </a>
+
+  </div>
+</main>
+
 <div class="vocab">
   <div class="container">
     <div>
-      <p class="guide-label" style="color:var(--mid);">Vocabulario de marca</p>
-      <p class="guide-title" style="color:#fff;">No decir /<br>Sí decir</p>
+      <p class="vocab-label">Vocabulario de marca</p>
+      <p class="vocab-title">No decir /<br>Sí decir</p>
+      <p class="vocab-sub">Referencia rápida de tono. Si el copy usa alguna palabra de la columna izquierda, revisarlo.</p>
     </div>
     <div class="vocab-cols">
       <div class="vocab-col no">
@@ -257,45 +436,10 @@
   </div>
 </div>
 
-<main>
-  <div class="doc-grid">
-    <a class="doc-card" href="/personas">
-      <p class="doc-num">01 — Estrategia</p>
-      <p class="doc-title">Buyer Personas</p>
-      <p class="doc-desc">Los cuatro perfiles que compran UNO × UNO. Quiénes son, qué los trae y cómo les hablamos.</p>
-    </a>
-    <a class="doc-card" href="/competidores">
-      <p class="doc-num">02 — Inteligencia</p>
-      <p class="doc-title">Análisis Competidores</p>
-      <p class="doc-desc">Ad Library de Tecla, Valfort, UMANO y SER Basics. Insights y oportunidades para UNO × UNO.</p>
-    </a>
-    <a class="doc-card" href="/manual">
-      <p class="doc-num">03 — Identidad</p>
-      <p class="doc-title">Manual de Marca</p>
-      <p class="doc-desc">Sistema de identidad visual 2026. Logotipo, paleta, tipografía, tono y criterios de aplicación.</p>
-    </a>
-    <a class="doc-card" href="/tipografias">
-      <p class="doc-num">03b — Recursos</p>
-      <p class="doc-title">Tipografías</p>
-      <p class="doc-desc">Trade Gothic Condensed Bold e Inter. Descargá los archivos OTF para instalar en tu sistema.</p>
-    </a>
-    <a class="doc-card" href="/briefs">
-      <p class="doc-num">04 — Creativos</p>
-      <p class="doc-title">Briefs de Ads</p>
-      <p class="doc-desc">24 briefs listos para producción. 4 personas × 2 dolores × 3 formatos.</p>
-    </a>
-    <a class="doc-card" href="/ecommerce">
-      <p class="doc-num">05 — Ecommerce</p>
-      <p class="doc-title">Optimización Web</p>
-      <p class="doc-desc">Diagnóstico y plan de acción para metodounoxuno.com.ar. Prioridades, copy sugerido, mobile checklist y qué no hacer.</p>
-    </a>
-  </div>
-</main>
-
 <footer>
-  <div class="container" style="display:flex;justify-content:space-between;align-items:center;width:100%;">
-  <img src="assets/logo-negativo.png" alt="UNO × UNO" style="height:40px;opacity:0.65;">
-  <span class="ft-note">2026</span>
+  <div class="container">
+    <img src="assets/logo-negativo.png" alt="UNO × UNO" style="height:38px;opacity:0.5;">
+    <span class="ft-note">2026</span>
   </div>
 </footer>
 
