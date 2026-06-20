@@ -96,6 +96,44 @@
 
     .container { max-width: 1320px; margin: 0 auto; width: 100%; }
 
+    /* GUIDE SECTIONS */
+    .guide {
+      background: var(--white);
+      border-bottom: 1px solid var(--warm);
+      padding: 56px 0;
+    }
+    .guide .container { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
+    .guide-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); margin-bottom: 16px; }
+    .guide-title { font-family: 'TradeGothic', sans-serif; font-size: 24px; text-transform: uppercase; color: var(--carbon); line-height: 1; }
+    .guide-body { font-size: 13px; color: var(--dark); line-height: 1.8; }
+    .guide-body p + p { margin-top: 12px; }
+
+    /* ROLES */
+    .roles { background: var(--cream); border-bottom: 1px solid var(--warm); padding: 56px 0; }
+    .roles .container { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
+    .roles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--warm); }
+    .role-card { background: var(--cream); padding: 24px 20px; }
+    .role-name { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--carbon); font-weight: 700; margin-bottom: 14px; }
+    .role-links { display: flex; flex-direction: column; gap: 7px; }
+    .role-link { font-size: 12px; color: var(--dark); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .role-link::before { content: '→'; color: var(--mid); font-size: 11px; }
+    .role-link:hover { color: var(--carbon); }
+
+    /* NO DECIR / SI DECIR */
+    .vocab { background: var(--carbon); padding: 56px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .vocab .container { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
+    .vocab-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.06); }
+    .vocab-col { padding: 28px 24px; }
+    .vocab-col.no { background: rgba(255,255,255,0.02); }
+    .vocab-col.si { background: rgba(255,255,255,0.04); }
+    .vocab-col-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; font-weight: 700; }
+    .vocab-col.no .vocab-col-label { color: rgba(255,255,255,0.25); }
+    .vocab-col.si .vocab-col-label { color: rgba(255,255,255,0.5); }
+    .vocab-item { font-size: 12px; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.4; }
+    .vocab-col.no .vocab-item { color: rgba(255,255,255,0.3); text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.15); }
+    .vocab-col.si .vocab-item { color: rgba(255,255,255,0.7); }
+    .vocab-item:last-child { border-bottom: none; }
+
     @media (max-width: 640px) {
       nav, .hero, footer { padding-left: 24px; padding-right: 24px; }
       .hero { grid-template-columns: 1fr; gap: 0; }
@@ -103,6 +141,9 @@
       .hero-right { padding-bottom: 0; }
       .doc-card { padding: 32px 24px; }
       .doc-grid { grid-template-columns: 1fr; }
+      .guide .container, .roles .container, .vocab .container { grid-template-columns: 1fr; gap: 24px; }
+      .roles-grid { grid-template-columns: 1fr; }
+      .vocab-cols { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -129,6 +170,89 @@
     </div>
     <div class="hero-photo-wrap">
       <img src="assets/hero-photo.jpg" alt="UNO × UNO" class="hero-photo">
+    </div>
+  </div>
+</div>
+
+<!-- CÓMO USAR -->
+<div class="guide">
+  <div class="container">
+    <div>
+      <p class="guide-label">Cómo usar esta guía</p>
+      <p class="guide-title">Una guía,<br>no un folleto</p>
+    </div>
+    <div class="guide-body">
+      <p>Esta web es una herramienta de trabajo, no un documento para leer una vez y archivar. Está hecha para que cualquier persona que cree contenido, diseñe piezas o planifique anuncios para UNO × UNO tenga una referencia clara de qué decir, cómo decirlo y cómo no desviarse del tono de la marca.</p>
+      <p>El orden sugerido de lectura es: <strong>Buyer Personas → Competidores → Manual de Marca → Tipografías → Briefs de Ads.</strong> No hace falta leer todo de corrido. Cada documento funciona solo.</p>
+    </div>
+  </div>
+</div>
+
+<!-- POR DÓNDE EMPEZAR -->
+<div class="roles">
+  <div class="container">
+    <div>
+      <p class="guide-label">Por dónde empezar</p>
+      <p class="guide-title">Según<br>tu rol</p>
+    </div>
+    <div class="roles-grid">
+      <div class="role-card">
+        <p class="role-name">Creadora de contenido</p>
+        <div class="role-links">
+          <a class="role-link" href="/personas">Buyer Personas</a>
+          <a class="role-link" href="/competidores">Competidores</a>
+          <a class="role-link" href="/tipografias">Tipografías</a>
+          <a class="role-link" href="/briefs">Briefs de Ads</a>
+        </div>
+      </div>
+      <div class="role-card">
+        <p class="role-name">Diseño</p>
+        <div class="role-links">
+          <a class="role-link" href="/manual">Manual de Marca</a>
+          <a class="role-link" href="/tipografias">Tipografías</a>
+          <a class="role-link" href="/personas">Buyer Personas</a>
+        </div>
+      </div>
+      <div class="role-card">
+        <p class="role-name">Ads / Performance</p>
+        <div class="role-links">
+          <a class="role-link" href="/competidores">Competidores</a>
+          <a class="role-link" href="/personas">Buyer Personas</a>
+          <a class="role-link" href="/briefs">Briefs de Ads</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NO DECIR / SÍ DECIR -->
+<div class="vocab">
+  <div class="container">
+    <div>
+      <p class="guide-label" style="color:var(--mid);">Vocabulario de marca</p>
+      <p class="guide-title" style="color:#fff;">No decir /<br>Sí decir</p>
+    </div>
+    <div class="vocab-cols">
+      <div class="vocab-col no">
+        <p class="vocab-col-label">Evitar</p>
+        <p class="vocab-item">"La remera perfecta"</p>
+        <p class="vocab-item">"La mejor del mercado"</p>
+        <p class="vocab-item">"Lujo accesible"</p>
+        <p class="vocab-item">"Para estar a la moda"</p>
+        <p class="vocab-item">"Oferta imperdible"</p>
+        <p class="vocab-item">"Look canchero"</p>
+        <p class="vocab-item">"El regalo perfecto"</p>
+      </div>
+      <div class="vocab-col si">
+        <p class="vocab-col-label">Usar</p>
+        <p class="vocab-item">"La que funciona siempre"</p>
+        <p class="vocab-item">"Tu básica de todos los días"</p>
+        <p class="vocab-item">"Menos vueltas"</p>
+        <p class="vocab-item">"Mismo calce, misma sensación"</p>
+        <p class="vocab-item">"Un pack que resuelve"</p>
+        <p class="vocab-item">"El regalo que sí se usa"</p>
+        <p class="vocab-item">"Elegís una vez. Funciona todos los días."</p>
+      </div>
     </div>
   </div>
 </div>

@@ -412,6 +412,36 @@
     }
 
     /* ─── FOOTER ─── */
+    /* ACCIONABLE POR PERSONA */
+    .accionable {
+      background: var(--carbon);
+      padding: 36px 64px 44px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .accionable-title {
+      font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.25); margin-bottom: 24px;
+    }
+    .accionable-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+    .ac-col { padding: 20px 18px; background: rgba(255,255,255,0.02); }
+    .ac-col-label {
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-bottom: 12px; font-weight: 700;
+    }
+    .ac-item {
+      font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.55;
+      padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .ac-item:last-child { border-bottom: none; }
+    .ac-item.evitar { color: rgba(255,255,255,0.3); }
+    @media(max-width:768px){
+      .accionable { padding: 28px 24px; }
+      .accionable-grid { grid-template-columns: 1fr; }
+    }
+
     .site-footer {
       background: var(--carbon);
       padding: 40px 64px;
@@ -452,7 +482,37 @@
       .persona-body { grid-template-columns: 1fr; gap: 28px; }
       .pain-grid { grid-template-columns: 1fr; }
       .persona-voice { flex-direction: column; gap: 10px; }
-      .site-footer { padding: 32px 28px; flex-direction: column; align-items: flex-start; gap: 12px; }
+      /* ACCIONABLE POR PERSONA */
+    .accionable {
+      background: var(--carbon);
+      padding: 36px 64px 44px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .accionable-title {
+      font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.25); margin-bottom: 24px;
+    }
+    .accionable-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+    .ac-col { padding: 20px 18px; background: rgba(255,255,255,0.02); }
+    .ac-col-label {
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-bottom: 12px; font-weight: 700;
+    }
+    .ac-item {
+      font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.55;
+      padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .ac-item:last-child { border-bottom: none; }
+    .ac-item.evitar { color: rgba(255,255,255,0.3); }
+    @media(max-width:768px){
+      .accionable { padding: 28px 24px; }
+      .accionable-grid { grid-template-columns: 1fr; }
+    }
+
+    .site-footer { padding: 32px 28px; flex-direction: column; align-items: flex-start; gap: 12px; }
     }
 
   </style>
@@ -569,6 +629,32 @@
       </div>
 
     </div>
+    <div class="accionable">
+      <p class="accionable-title">Cómo convertirlo en contenido</p>
+      <div class="accionable-grid">
+        <div class="ac-col">
+          <p class="ac-col-label">Hooks</p>
+          <p class="ac-item">"No necesitás más ropa. Necesitás ropa que funcione."</p>
+          <p class="ac-item">"Tu placard no debería pedirte decisiones a las 7 AM."</p>
+          <p class="ac-item">"Elegís una vez. Usás todos los días."</p>
+        </div>
+        <div class="ac-col">
+          <p class="ac-col-label">Escenas para reels / fotos</p>
+          <p class="ac-item">Abre el placard y elige rápido — sin dudar.</p>
+          <p class="ac-item">Café, notebook, remera negra, salida al trabajo.</p>
+          <p class="ac-item">Antes de una reunión, se cambia sin pensarlo.</p>
+          <p class="ac-item">Tres remeras apiladas, placard ordenado.</p>
+        </div>
+        <div class="ac-col">
+          <p class="ac-col-label">Evitar</p>
+          <p class="ac-item evitar">Hablar de moda o tendencias.</p>
+          <p class="ac-item evitar">Tono aspiracional vacío ("sentite poderoso").</p>
+          <p class="ac-item evitar">Mostrar exceso de prendas o placard caótico como aspiración.</p>
+          <p class="ac-item evitar">Looks completos o outfits elaborados.</p>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- ──────────────────── PERSONA 2 ── -->
@@ -636,6 +722,32 @@
       </div>
 
     </div>
+    <div class="accionable">
+      <p class="accionable-title">Cómo convertirlo en contenido</p>
+      <div class="accionable-grid">
+        <div class="ac-col">
+          <p class="ac-col-label">Hooks</p>
+          <p class="ac-item">"La calidad que conocés del exterior, disponible acá."</p>
+          <p class="ac-item">"Sin esperar el próximo viaje."</p>
+          <p class="ac-item">"Probaste lo mejor afuera. Por primera vez, lo encontrás acá."</p>
+        </div>
+        <div class="ac-col">
+          <p class="ac-col-label">Escenas para reels / fotos</p>
+          <p class="ac-item">Valija o bolso con básicos bien doblados.</p>
+          <p class="ac-item">Detalle de tela — que se note el gramaje.</p>
+          <p class="ac-item">Placard ordenado, prendas de calidad, pocas pero buenas.</p>
+          <p class="ac-item">Hombre que llega de viaje, abre el pack.</p>
+        </div>
+        <div class="ac-col">
+          <p class="ac-col-label">Evitar</p>
+          <p class="ac-item evitar">Nombrar marcas extranjeras directamente.</p>
+          <p class="ac-item evitar">Tono competitivo agresivo contra otras marcas.</p>
+          <p class="ac-item evitar">Prometer "igual que lo importado" — prometer calidad propia.</p>
+          <p class="ac-item evitar">Estética turística o de aeropuerto.</p>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- ──────────────────── PERSONA 3 ── -->
@@ -703,6 +815,33 @@
       </div>
 
     </div>
+    <div class="accionable">
+      <p class="accionable-title">Cómo convertirlo en contenido</p>
+      <div class="accionable-grid">
+        <div class="ac-col">
+          <p class="ac-col-label">Hooks</p>
+          <p class="ac-item">"Simplificaste todo. ¿Y el placard?"</p>
+          <p class="ac-item">"Tres remeras. El sistema que te faltaba."</p>
+          <p class="ac-item">"Mucho placard. Poca decisión."</p>
+          <p class="ac-item">"Placard lleno y sin remera para usar."</p>
+        </div>
+        <div class="ac-col">
+          <p class="ac-col-label">Escenas para reels / fotos</p>
+          <p class="ac-item">Placard antes (caótico) y después (tres básicas apiladas).</p>
+          <p class="ac-item">Mesa de trabajo limpia, remera básica, foco en lo esencial.</p>
+          <p class="ac-item">La pila perfecta: negra, blanca, gris.</p>
+          <p class="ac-item">Alguien que saca una remera sin mirar, ya sabe cuál es.</p>
+        </div>
+        <div class="ac-col">
+          <p class="ac-col-label">Evitar</p>
+          <p class="ac-item evitar">Estética de lifestyle forzado o "posh".</p>
+          <p class="ac-item evitar">Mostrar muchas prendas como deseable.</p>
+          <p class="ac-item evitar">Tono de "menos es más" que suene pretencioso.</p>
+          <p class="ac-item evitar">Minimalismo estético sin funcionalidad real.</p>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- ──────────────────── PERSONA 4 ── -->
@@ -770,6 +909,32 @@
       </div>
 
     </div>
+    <div class="accionable">
+      <p class="accionable-title">Cómo convertirlo en contenido</p>
+      <div class="accionable-grid">
+        <div class="ac-col">
+          <p class="ac-col-label">Hooks</p>
+          <p class="ac-item">"Dice que no necesita nada. Ya sé."</p>
+          <p class="ac-item">"El regalo que no termina en el cajón."</p>
+          <p class="ac-item">"Le regalé tres remeras. Cuatro meses después, sigue usándolas."</p>
+        </div>
+        <div class="ac-col">
+          <p class="ac-col-label">Escenas para reels / fotos</p>
+          <p class="ac-item">Ella eligiendo el pack — tono cotidiano, no publicitario.</p>
+          <p class="ac-item">Packaging cuidado, sin excesos.</p>
+          <p class="ac-item">Él usando la remera en un contexto real (trabajo, café).</p>
+          <p class="ac-item">Unboxing natural, sin drama.</p>
+        </div>
+        <div class="ac-col">
+          <p class="ac-col-label">Evitar</p>
+          <p class="ac-item evitar">Tono condescendiente ("él no sabe lo que necesita").</p>
+          <p class="ac-item evitar">Estética de regalo genérico o envoltorio exagerado.</p>
+          <p class="ac-item evitar">Lenguaje de "look" o moda masculina.</p>
+          <p class="ac-item evitar">"El regalo perfecto" — suena vacío.</p>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- FOOTER -->
