@@ -5,131 +5,319 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UNO × UNO — Sistema de Identidad Visual</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow: hidden; background: #111; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+    @font-face { font-family: 'TradeGothic'; src: url('assets/fonts/TradeGothicCondBold.otf') format('opentype'); font-weight: 700; }
+    @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter-Regular.otf') format('opentype'); font-weight: 400; }
+    @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter-Medium.otf') format('opentype'); font-weight: 500; }
+    @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter-Bold.otf') format('opentype'); font-weight: 700; }
 
-    header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      height: 52px;
-      background: rgba(10,10,10,0.97);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #222;
-      display: flex; align-items: center;
-      padding: 0 16px;
-      gap: 0;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --carbon: #292A2E; --dark: #555152; --mid: #CCCBC8;
+      --warm: #EBE8E3; --cream: #F6F4F1; --white: #fff;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--carbon);
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      font-size: 15px;
+      line-height: 1.6;
     }
 
-    /* Back button — always visible */
+    /* ─── NAV ─── */
+    .site-nav {
+      background: rgba(15,15,15,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0 48px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
     .btn-back {
-      display: flex; align-items: center; gap: 8px;
-      padding: 8px 16px 8px 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 6px;
-      color: #ccc; text-decoration: none;
-      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      border-radius: 4px;
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       font-weight: 500;
       transition: background 0.15s, color 0.15s;
+    }
+    .btn-back:hover { background: rgba(255,255,255,0.13); color: #fff; }
+    .nav-title {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.3);
+    }
+    .nav-right {
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── REGLAS SECTION ─── */
+    .reglas {
+      background: var(--carbon);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 72px 48px 80px;
+    }
+    .container { max-width: 1320px; margin: 0 auto; width: 100%; }
+    .reglas-top {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 64px;
+      align-items: start;
+      margin-bottom: 56px;
+    }
+    .reglas-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 16px;
+    }
+    .reglas-title {
+      font-family: 'TradeGothic', sans-serif;
+      font-size: clamp(40px, 5vw, 88px);
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 0.92;
+    }
+    .reglas-intro {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.85;
+      max-width: 560px;
+      padding-top: 8px;
+    }
+    .reglas-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.07);
+    }
+    .regla-card {
+      background: rgba(255,255,255,0.03);
+      padding: 28px 24px;
+    }
+    .regla-icon {
+      font-size: 18px;
+      color: rgba(255,255,255,0.2);
+      margin-bottom: 12px;
+      line-height: 1;
+    }
+    .regla-nombre {
+      font-family: 'TradeGothic', sans-serif;
+      font-size: 16px;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 14px;
+      letter-spacing: 0.04em;
+    }
+    .regla-si {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.75;
+      margin-bottom: 10px;
+    }
+    .regla-no {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.65;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .regla-no strong { color: rgba(255,255,255,0.45); }
+
+    /* ─── VIEWER CTA ─── */
+    .viewer-cta {
+      background: rgba(255,255,255,0.03);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .viewer-cta-label {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .viewer-cta-title {
+      font-family: 'TradeGothic', sans-serif;
+      font-size: 22px;
+      text-transform: uppercase;
+      color: #fff;
+      margin-top: 4px;
+    }
+    .btn-scroll {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      font-family: 'Inter', sans-serif;
+      text-decoration: none;
+    }
+    .btn-scroll:hover { background: rgba(255,255,255,0.14); color: #fff; }
+
+    /* ─── VIEWER ─── */
+    .viewer-section {
+      background: #111;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .viewer-header {
+      padding: 16px 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       flex-shrink: 0;
     }
-    .btn-back:hover { background: rgba(255,255,255,0.14); color: #fff; }
-    .btn-back svg { flex-shrink: 0; }
-
-    .h-center { flex: 1; text-align: center; }
-    .h-title { font-size: 11px; letter-spacing: 0.1em; color: #555; }
-    .h-brand { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #777; font-weight: 500; display: none; }
-
-    .h-counter { font-size: 11px; color: #444; font-variant-numeric: tabular-nums; min-width: 48px; text-align: right; flex-shrink: 0; }
-
-    .viewer {
-      position: fixed; top: 52px; bottom: 44px; left: 0; right: 0;
-      display: flex; align-items: center; justify-content: center;
-      padding: 20px 64px;
+    .viewer-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.25);
     }
-
-    .slides-wrap { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-
-    .slide { display: none; width: 100%; height: 100%; }
+    .viewer-counter {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      font-variant-numeric: tabular-nums;
+    }
+    .viewer-stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 80px;
+      min-height: calc(100vh - 120px);
+      position: relative;
+    }
+    .slides-wrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slide { display: none; width: 100%; max-height: calc(100vh - 200px); }
     .slide.active { display: flex; align-items: center; justify-content: center; }
     .slide img {
-      max-width: 100%; max-height: 100%;
-      object-fit: contain; display: block;
-      box-shadow: 0 12px 60px rgba(0,0,0,0.6);
+      max-width: 100%;
+      max-height: calc(100vh - 200px);
+      object-fit: contain;
+      display: block;
+      box-shadow: 0 16px 64px rgba(0,0,0,0.7);
     }
-
     .btn-nav {
-      position: absolute; top: 50%; transform: translateY(-50%);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
       width: 44px; height: 44px;
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 50%;
-      cursor: pointer; color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.15s; z-index: 10;
+      cursor: pointer;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+      z-index: 10;
     }
     .btn-nav:hover:not(:disabled) { background: rgba(255,255,255,0.14); }
     .btn-nav:disabled { opacity: 0.15; cursor: default; }
-    .btn-prev { left: 12px; }
-    .btn-next { right: 12px; }
-
-    footer {
-      position: fixed; bottom: 0; left: 0; right: 0;
-      height: 44px;
-      background: rgba(10,10,10,0.97);
-      backdrop-filter: blur(12px);
-      border-top: 1px solid #222;
-      display: flex; align-items: center; justify-content: center;
-      gap: 5px; overflow-x: auto; padding: 0 8px;
+    .btn-prev { left: 16px; }
+    .btn-next { right: 16px; }
+    .viewer-dots {
+      padding: 12px 48px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      overflow-x: auto;
+      flex-shrink: 0;
     }
-    footer::-webkit-scrollbar { display: none; }
-
+    .viewer-dots::-webkit-scrollbar { display: none; }
     .dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: #333; border: none; cursor: pointer;
-      padding: 0; flex-shrink: 0;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
       transition: background 0.15s, transform 0.15s;
     }
-    .dot:hover { background: #666; }
-    .dot.active { background: #aaa; transform: scale(1.4); }
-
-    .btn-fs {
-      position: fixed; top: 0; right: 16px; height: 52px;
-      display: flex; align-items: center;
-      background: none; border: none; cursor: pointer; color: #444;
-      transition: color 0.15s; z-index: 200; padding: 0;
+    .dot:hover { background: rgba(255,255,255,0.4); }
+    .dot.active { background: rgba(255,255,255,0.7); transform: scale(1.4); }
+    .hint {
+      text-align: center;
+      padding: 10px 0;
+      font-size: 10px;
+      color: rgba(255,255,255,0.12);
+      letter-spacing: 0.08em;
+      flex-shrink: 0;
     }
-    .btn-fs:hover { color: #aaa; }
 
-    .hint { position: fixed; bottom: 52px; right: 16px; font-size: 10px; color: #2a2a2a; letter-spacing: 0.06em; pointer-events: none; }
-
-    @media (max-width: 640px) {
-      .viewer { padding: 12px 48px; }
-      .btn-prev { left: 4px; }
-      .btn-next { right: 4px; }
-      .h-title { display: none; }
+    @media (max-width: 900px) {
+      .reglas-top { grid-template-columns: 1fr; gap: 32px; }
+      .reglas-grid { grid-template-columns: repeat(2, 1fr); }
+      .reglas, .viewer-cta { padding-left: 24px; padding-right: 24px; }
+      .site-nav { padding: 0 24px; }
+      .viewer-stage { padding: 24px 56px; }
+    }
+    @media (max-width: 600px) {
+      .reglas-grid { grid-template-columns: 1fr; }
+      .viewer-stage { padding: 16px 44px; }
+      .nav-title { display: none; }
     }
   </style>
 </head>
 <body>
 
-<header>
+<nav class="site-nav">
   <a class="btn-back" href="/">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
     Volver
   </a>
-  <div class="h-center">
-    <span class="h-title">Sistema de Identidad Visual · 2026</span>
-  </div>
-  <span class="h-counter" id="counter">1 / 37</span>
-</header>
+  <span class="nav-title">Manual de Identidad Visual · UNO × UNO</span>
+  <span class="nav-right">03 — Identidad</span>
+</nav>
 
-<!-- REGLAS RÁPIDAS DE MARCA -->
+<!-- REGLAS DE MARCA -->
 <div class="reglas">
-  <div class="reglas-inner">
+  <div class="container">
     <div class="reglas-top">
       <div>
         <p class="reglas-label">Referencia rápida</p>
-        <p class="reglas-title">Reglas de<br>marca</p>
+        <p class="reglas-title">Reglas<br>de marca</p>
       </div>
       <p class="reglas-intro">Para aplicar sin abrir el manual completo. Estas son las reglas que más se rompen en producción. Ante la duda, volvé acá antes de crear cualquier pieza.</p>
     </div>
@@ -186,24 +374,38 @@
   </div>
 </div>
 
-
-<div class="viewer">
-  <button class="btn-nav btn-prev" id="prev" disabled>
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
-  </button>
-  <div class="slides-wrap" id="slides"></div>
-  <button class="btn-nav btn-next" id="next">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,6 15,12 9,18"/></svg>
-  </button>
+<!-- VIEWER CTA -->
+<div class="viewer-cta">
+  <div>
+    <p class="viewer-cta-label">Manual completo</p>
+    <p class="viewer-cta-title">Sistema de Identidad Visual 2026 · 37 páginas</p>
+  </div>
+  <a class="btn-scroll" href="#viewer">
+    Ver manual
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+  </a>
 </div>
 
-<footer id="dots"></footer>
+<!-- SLIDE VIEWER -->
+<div class="viewer-section" id="viewer">
+  <div class="viewer-header">
+    <span class="viewer-label">Sistema de Identidad Visual · 2026</span>
+    <span class="viewer-counter" id="counter">1 / 37</span>
+  </div>
 
-<button class="btn-fs" id="fsBtn" title="Pantalla completa (F)">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-</button>
+  <div class="viewer-stage">
+    <button class="btn-nav btn-prev" id="prev" disabled>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+    </button>
+    <div class="slides-wrap" id="slides"></div>
+    <button class="btn-nav btn-next" id="next">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,6 15,12 9,18"/></svg>
+    </button>
+  </div>
 
-<span class="hint">← → navegar · F pantalla completa</span>
+  <div class="viewer-dots" id="dots"></div>
+  <p class="hint">← → navegar · F pantalla completa</p>
+</div>
 
 <script>
   const TOTAL = 37;
@@ -251,12 +453,13 @@
   nextBtn.addEventListener('click', () => goTo(current + 1));
 
   document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goTo(current - 1);
+    const inViewer = window.scrollY > document.getElementById('viewer').offsetTop - 100;
+    if (!inViewer) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); goTo(current - 1); }
     if (e.key === 'f' || e.key === 'F') toggleFS();
     if (e.key === 'Home') goTo(0);
     if (e.key === 'End') goTo(TOTAL - 1);
-    if (e.key === 'Escape' && !document.fullscreenElement) window.location.href = '/';
   });
 
   let touchX = null;
@@ -269,10 +472,9 @@
   }, { passive: true });
 
   function toggleFS() {
-    if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+    if (!document.fullscreenElement) document.getElementById('viewer').requestFullscreen?.();
     else document.exitFullscreen?.();
   }
-  document.getElementById('fsBtn').addEventListener('click', toggleFS);
 </script>
 </body>
 </html>
