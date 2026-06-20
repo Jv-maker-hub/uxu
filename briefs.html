@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNO × UNO — Briefs de Ads</title>
+<style>
+@font-face { font-family:'TradeGothic'; src:url('assets/fonts/TradeGothicCondBold.otf') format('opentype'); font-weight:700; }
+@font-face { font-family:'Inter'; src:url('assets/fonts/Inter-Regular.otf') format('opentype'); font-weight:400; }
+@font-face { font-family:'Inter'; src:url('assets/fonts/Inter-Medium.otf') format('opentype'); font-weight:500; }
+@font-face { font-family:'Inter'; src:url('assets/fonts/Inter-Bold.otf') format('opentype'); font-weight:700; }
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--carbon:#292A2E;--dark:#555152;--mid:#CCCBC8;--warm:#EBE8E3;--cream:#F6F4F1;--white:#fff;}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--carbon);-webkit-font-smoothing:antialiased;}
+.container{max-width:1320px;margin:0 auto;width:100%;padding:0 48px;}
+
+/* NAV */
+nav{background:var(--carbon);height:88px;display:flex;align-items:center;padding:0 48px;}
+nav .container{display:flex;align-items:center;justify-content:space-between;}
+nav img{height:56px;}
+.nav-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);}
+
+/* HERO */
+.hero{background:var(--carbon);border-top:1px solid rgba(255,255,255,0.06);padding:64px 48px 80px;}
+.hero .container{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;}
+.hero-eyebrow{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:20px;}
+.hero h1{font-family:'TradeGothic',sans-serif;font-size:clamp(60px,7vw,140px);text-transform:uppercase;color:#fff;line-height:.92;}
+.hero-divider{width:32px;height:1px;background:rgba(255,255,255,0.15);margin-bottom:24px;}
+.hero-sub{font-size:14px;color:var(--mid);line-height:1.8;max-width:400px;}
+.hero-meta{margin-top:28px;display:flex;flex-direction:column;gap:8px;}
+.hero-meta span{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:0.12em;text-transform:uppercase;}
+
+/* PREMISA */
+.premisa{background:var(--white);border-bottom:1px solid var(--warm);padding:48px;}
+.premisa .container{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start;}
+.premisa-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
+.premisa-title{font-family:'TradeGothic',sans-serif;font-size:28px;text-transform:uppercase;color:var(--carbon);}
+.premisa-body{font-size:13px;color:var(--dark);line-height:1.8;}
+.reglas{margin-top:20px;display:flex;flex-direction:column;gap:8px;}
+.regla{display:flex;align-items:flex-start;gap:12px;font-size:12px;color:var(--dark);line-height:1.6;}
+.regla::before{content:'—';color:var(--mid);flex-shrink:0;margin-top:1px;}
+
+/* PERSONA HEADER */
+.persona-header{padding:60px 48px 40px;background:var(--carbon);border-top:1px solid rgba(255,255,255,0.06);}
+.persona-header .container{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;}
+.p-num{font-family:'TradeGothic',sans-serif;font-size:clamp(80px,10vw,160px);color:rgba(255,255,255,0.07);line-height:1;font-weight:700;}
+.p-info{}
+.p-eyebrow{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:12px;}
+.p-name{font-family:'TradeGothic',sans-serif;font-size:clamp(32px,4vw,64px);text-transform:uppercase;color:#fff;line-height:.95;margin-bottom:16px;}
+.p-desc{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:560px;}
+.p-tags{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;}
+.p-tag{font-size:10px;padding:4px 12px;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;}
+
+/* DOLORES */
+.dolores{display:grid;grid-template-columns:1fr 1fr;background:var(--carbon);border-top:1px solid rgba(255,255,255,0.06);}
+.dolor{padding:28px 48px 32px;border-right:1px solid rgba(255,255,255,0.06);}
+.dolor:last-child{border-right:none;}
+.dolor-num{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:8px;}
+.dolor-text{font-family:'TradeGothic',sans-serif;font-size:18px;text-transform:uppercase;color:rgba(255,255,255,0.7);line-height:1.1;}
+
+/* BRIEFS GRID */
+.briefs-section{padding:0 48px 80px;background:var(--white);}
+.briefs-section.alt{background:var(--cream);}
+.briefs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--warm);padding-top:1px;}
+.brief-card{background:var(--white);padding:32px 28px;}
+.briefs-section.alt .brief-card{background:var(--cream);}
+.brief-id{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.brief-formato{display:inline-block;padding:3px 8px;background:var(--carbon);color:var(--cream);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;}
+.brief-angulo{font-size:11px;color:var(--dark);margin-bottom:16px;font-style:italic;}
+.brief-hook{font-family:'TradeGothic',sans-serif;font-size:20px;text-transform:uppercase;color:var(--carbon);line-height:1.05;margin-bottom:16px;}
+.brief-field{margin-bottom:12px;}
+.brief-field-label{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:5px;}
+.brief-field-text{font-size:12px;color:var(--dark);line-height:1.65;}
+.brief-cta{margin-top:16px;padding-top:16px;border-top:1px solid var(--warm);font-size:11px;color:var(--carbon);letter-spacing:0.06em;}
+.brief-cta strong{font-weight:600;}
+
+/* DOLOR DIVIDER inside briefs */
+.dolor-divider{padding:20px 0 0;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);border-top:1px solid var(--warm);margin-bottom:0;grid-column:1/-1;}
+
+/* MAPA DE PRODUCCIÓN */
+.mapa{padding:80px 48px;background:var(--carbon);}
+.mapa .section-eyebrow{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
+.mapa .section-title{font-family:'TradeGothic',sans-serif;font-size:clamp(28px,4vw,56px);text-transform:uppercase;color:#fff;margin-bottom:48px;line-height:1;}
+table{width:100%;border-collapse:collapse;}
+th{text-align:left;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);padding:0 16px 14px;border-bottom:1px solid rgba(255,255,255,0.08);}
+td{font-size:12px;color:rgba(255,255,255,0.55);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.05);vertical-align:top;line-height:1.5;}
+td:first-child{color:rgba(255,255,255,0.8);font-weight:500;}
+td:nth-child(3){font-family:'TradeGothic',sans-serif;font-size:14px;color:#fff;letter-spacing:0.05em;}
+tr:hover td{background:rgba(255,255,255,0.02);}
+.priority-row td{background:rgba(255,255,255,0.04);}
+.priority-badge{display:inline-block;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;padding:2px 7px;background:rgba(255,255,255,0.15);color:#fff;margin-left:8px;vertical-align:middle;}
+
+/* NOTA */
+.nota{padding:36px 48px;background:var(--carbon);border-top:1px solid rgba(255,255,255,0.06);}
+.nota-text{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:720px;}
+.nota-text strong{color:rgba(255,255,255,0.75);font-weight:500;}
+
+/* FOOTER */
+footer{background:var(--carbon);height:72px;display:flex;align-items:center;padding:0 48px;border-top:1px solid rgba(255,255,255,0.06);}
+footer .container{display:flex;align-items:center;justify-content:space-between;width:100%;}
+.ft-img{height:40px;opacity:.5;}
+.ft-note{font-size:11px;color:var(--dark);letter-spacing:.06em;}
+
+@media(max-width:900px){
+  .briefs-grid{grid-template-columns:1fr 1fr;}
+  .hero .container,.premisa .container{grid-template-columns:1fr;}
+  .dolores{grid-template-columns:1fr;}
+  .dolor{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06);}
+  .persona-header .container{grid-template-columns:1fr;}
+  .p-num{display:none;}
+}
+@media(max-width:600px){
+  .container{padding:0 24px;}
+  nav,.hero,.premisa,.persona-header,.briefs-section,.mapa,.nota,footer{padding-left:24px;padding-right:24px;}
+  .briefs-grid{grid-template-columns:1fr;}
+  .hero .container{gap:24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <a href="/" style="display:block;line-height:0;"><img src="assets/logo-negativo.png" alt="UNO × UNO"></a>
+    <span class="nav-label">Briefs de Ads · Meta</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div>
+      <p class="hero-eyebrow">04 — Creativos</p>
+      <h1>Briefs<br>de Ads</h1>
+    </div>
+    <div>
+      <div class="hero-divider"></div>
+      <p class="hero-sub">24 briefs listos para producción. 4 personas × 2 dolores × 3 formatos. En Meta, el creativo es el targeting — cada brief está calibrado para encontrar a su persona.</p>
+      <div class="hero-meta">
+        <span>Video · Imagen · UGC · Carrusel</span>
+        <span>Uso interno · Método Uno SRL · 2026</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PREMISA -->
+<div class="premisa">
+  <div class="container">
+    <div>
+      <p class="premisa-label">Marco estratégico</p>
+      <p class="premisa-title">Premisa</p>
+    </div>
+    <div>
+      <p class="premisa-body">En Meta, el creativo ES el targeting. El contenido del anuncio le indica al algoritmo a quién mostrárselo. Cada brief está diseñado para activar a una persona específica con un dolor específico — no para gustarle a todos.</p>
+      <div class="reglas">
+        <p class="regla">Sin urgencia artificial ni escasez falsa.</p>
+        <p class="regla">Sin descuentos. El precio es el precio.</p>
+        <p class="regla">Sin emojis en exceso. Sin lenguaje aspiracional vacío.</p>
+        <p class="regla">Tono sobrio, adulto, directo — transmite certeza, no presión.</p>
+        <p class="regla">Si la comunicación necesita exagerar para convencer, el producto no está listo. Si está listo, solo necesita describir.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PERSONA 1 ══════════════ -->
+<div class="persona-header">
+  <div class="container">
+    <div class="p-num">01</div>
+    <div class="p-info">
+      <p class="p-eyebrow">Buyer Persona 01</p>
+      <p class="p-name">El Ejecutivo<br>Saturado</p>
+      <p class="p-desc">Toma decisiones importantes todo el día. El tiempo es su recurso más escaso. Ya optimizó su agenda, su dieta, su rutina. La ropa todavía no.</p>
+      <div class="p-tags">
+        <span class="p-tag">38–48 años</span>
+        <span class="p-tag">CEO / Gerente / Socio</span>
+        <span class="p-tag">AMBA · ABC1</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dolores">
+  <div class="dolor">
+    <p class="dolor-num">Dolor 01</p>
+    <p class="dolor-text">Pierde energía mental decidiendo qué ponerse cada mañana</p>
+  </div>
+  <div class="dolor">
+    <p class="dolor-num">Dolor 02</p>
+    <p class="dolor-text">Sus remeras se deforman y tiene que recomprar cada temporada</p>
+  </div>
+</div>
+<div class="briefs-section">
+  <div class="briefs-grid">
+    <!-- D1 -->
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Video 0:15–0:30</span> C1</div>
+      <p class="brief-angulo">Ángulo: Problema → Sistema</p>
+      <p class="brief-hook">¿Cuántas decisiones tomás antes de las 9 AM?</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Un ejecutivo toma cientos de microdecisiones por día. La ropa no debería ser una de ellas. UNO × UNO es el pack de tres remeras que sacás de la ecuación: mismo calce, misma tela, mismo resultado — los 365 días del año.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> Conocé el pack → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Imagen estática</span> C2</div>
+      <p class="brief-angulo">Ángulo: Posicionamiento directo</p>
+      <p class="brief-hook">Tres remeras. La decisión de una vez.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Hay cosas que merecen tu atención. El martes a la mañana, la remera no es una de ellas. UNO × UNO: algodón peinado 100%, tres colores básicos, un pack que resuelve para siempre.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> El uniforme diario → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">UGC / Voz en off</span> C3</div>
+      <p class="brief-angulo">Ángulo: Testimonial funcional</p>
+      <p class="brief-hook">"Hace seis meses que no pienso en remeras."</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Narración primera persona: decidí resolver el tema ropa de una vez. Tres remeras iguales en calce, distintas en color. Las puse en el placard. Desde entonces no volví a pensar en eso. Eso vale más de lo que parece.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> Ver el pack → unoxuno.com</p>
+    </div>
+    <!-- D2 -->
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Video 0:20–0:35</span> C4</div>
+      <p class="brief-angulo">Ángulo: Comparación / Educativo</p>
+      <p class="brief-hook">La remera que compraste en marzo. La misma en julio.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Video: remera nueva vs misma remera después de 10 lavados — cuello abierto, tela finita, color apagado. El algodón peinado de UNO × UNO mantiene forma, peso y color lavado tras lavado. No se compra cada temporada. Se elige una vez.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> Ver cómo está hecha → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Carrusel</span> C5</div>
+      <p class="brief-angulo">Ángulo: Educativo / Producto</p>
+      <p class="brief-hook">Por qué las remeras que comprás siempre terminan igual.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Slide 1: cuello que se abre, tela que se achica. Slide 2: algodón cardado vs algodón peinado. Slide 3: gramaje y proceso de UNO × UNO. Slide 4: una remera que dura años, no temporadas. Slide 5: CTA.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> El pack que dura → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Imagen estática</span> C6</div>
+      <p class="brief-angulo">Ángulo: Posicionamiento / Anti-reciclaje</p>
+      <p class="brief-hook">No es una remera más. Es la última que tenés que evaluar.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Visual: pack bien doblado, limpio, permanente. Comprás una vez. No hay que volver a probar, evaluar, ni reemplazar. El algodón peinado 100% de UNO × UNO se mantiene temporada tras temporada.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> Conocé el pack → unoxuno.com</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PERSONA 2 ══════════════ -->
+<div class="persona-header">
+  <div class="container">
+    <div class="p-num">02</div>
+    <div class="p-info">
+      <p class="p-eyebrow">Buyer Persona 02</p>
+      <p class="p-name">El Que Viajó<br>y Probó</p>
+      <p class="p-desc">Conoce Uniqlo, H&M, Primark. Sabe exactamente lo que es una remera bien hecha porque la tuvo en la mano. Acá busca eso — sin tener que viajar para encontrarlo.</p>
+      <div class="p-tags">
+        <span class="p-tag">33–47 años</span>
+        <span class="p-tag">Viajó por trabajo o placer</span>
+        <span class="p-tag">AMBA · ABC1</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dolores">
+  <div class="dolor">
+    <p class="dolor-num">Dolor 01</p>
+    <p class="dolor-text">No encuentra en Argentina la calidad que conoce del exterior</p>
+  </div>
+  <div class="dolor">
+    <p class="dolor-num">Dolor 02</p>
+    <p class="dolor-text">Las marcas locales prometieron calidad premium y decepcionaron</p>
+  </div>
+</div>
+<div class="briefs-section alt">
+  <div class="briefs-grid">
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Video 0:20–0:30</span> C7</div>
+      <p class="brief-angulo">Ángulo: Problema → Solución</p>
+      <p class="brief-hook">¿Cuándo fue la última vez que trajiste remeras del exterior?</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Escena de valija, básicos traídos de afuera. Todos los que viajan saben lo que es una buena remera básica. Algodón con peso, calce que no cambia, cuello que no se abre. UNO × UNO es eso, hecho acá, disponible ahora.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> Sin esperar el próximo viaje → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Imagen estática</span> C8</div>
+      <p class="brief-angulo">Ángulo: Posicionamiento directo</p>
+      <p class="brief-hook">La calidad que conocés del exterior. Hecha acá.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Visual sobrio: remera sobre fondo neutro, detalle de tela. Algodón peinado 100%, mismo gramaje que los básicos que traés de afuera. Mismo calce. Sin esperar el próximo viaje.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> Conocé el pack → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Carrusel</span> C9</div>
+      <p class="brief-angulo">Ángulo: Educativo / Comparación</p>
+      <p class="brief-hook">Lo que diferencia una buena remera básica de una cualquiera.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Slide 1: Algodón cardado vs algodón peinado — la diferencia que se toca. Slide 2: El peso de la tela importa. Slide 3: El calce que no cambia con los lavados. Slide 4: UNO × UNO, local, en pack. Slide 5: CTA.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> Ver el pack → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Video 0:15–0:25</span> C10</div>
+      <p class="brief-angulo">Ángulo: Anti-competencia / Posicionamiento</p>
+      <p class="brief-hook">"La compré convencido. A los dos meses, ya no era la misma."</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Narración sin nombres: hay un patrón en las marcas básicas locales. Te muestran la remera perfecta. Pagás el precio. Cuando llega, está bien. Después del tercer lavado, ya no. UNO × UNO no es una promesa más — es garantía sin condiciones.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> Ver la garantía → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Imagen estática</span> C11</div>
+      <p class="brief-angulo">Ángulo: Posicionamiento / Confianza</p>
+      <p class="brief-hook">Sin sobrestock. Sin liquidación. Solo el precio.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Visual limpio. Si siempre hay una oferta, algo no cierra. El precio de UNO × UNO es el precio. Ninguna urgencia artificial. Ningún descuento permanente que no es descuento. Solo una remera que cuesta lo que vale.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> Conocé el pack → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">UGC / Voz en off</span> C12</div>
+      <p class="brief-angulo">Ángulo: Testimonial / Cambio de marca</p>
+      <p class="brief-hook">"Probé cuatro marcas locales. Esta fue la última búsqueda."</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Narración primera persona: describe el ciclo compra-decepción-recompra con otras marcas. Hasta que probó UNO × UNO. Cierra con: comprás el pack, terminó la búsqueda.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> La última remera que vas a evaluar → unoxuno.com</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PERSONA 3 ══════════════ -->
+<div class="persona-header">
+  <div class="container">
+    <div class="p-num">03</div>
+    <div class="p-info">
+      <p class="p-eyebrow">Buyer Persona 03</p>
+      <p class="p-name">El Minimalista<br>en Proceso</p>
+      <p class="p-desc">Ya simplificó su dieta, su espacio de trabajo, su teléfono. Lee sobre productividad y sistema de vida. La ropa es el área pendiente.</p>
+      <div class="p-tags">
+        <span class="p-tag">30–45 años</span>
+        <span class="p-tag">Profesional / Freelance</span>
+        <span class="p-tag">AMBA · ABC1</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dolores">
+  <div class="dolor">
+    <p class="dolor-num">Dolor 01</p>
+    <p class="dolor-text">Simplificó todo — la ropa es el área que todavía no tiene sistema</p>
+  </div>
+  <div class="dolor">
+    <p class="dolor-num">Dolor 02</p>
+    <p class="dolor-text">Tiene "mucha ropa" pero nunca tiene lo que necesita disponible</p>
+  </div>
+</div>
+<div class="briefs-section">
+  <div class="briefs-grid">
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Video 0:20–0:30</span> C13</div>
+      <p class="brief-angulo">Ángulo: Espejo / Identificación</p>
+      <p class="brief-hook">Simplificaste la alimentación. El trabajo. El teléfono. ¿Y la ropa?</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Hay un patrón en las personas que optimizan su vida. Resuelven una cosa por vez. La alimentación, el espacio de trabajo, el teléfono. La ropa suele quedar última. UNO × UNO es el sistema para cerrar ese capítulo.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> Cerrar el capítulo ropa → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Imagen estática</span> C14</div>
+      <p class="brief-angulo">Ángulo: Posicionamiento / Sistema</p>
+      <p class="brief-hook">Tres remeras. El sistema que te faltaba.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Visual: tres remeras perfectamente apiladas — negra, blanca, gris. No es una remera más. Es la decisión resuelta. El mismo sistema que aplicaste a todo lo demás, ahora en el placard.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> El uniforme diario → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">UGC / Voz en off</span> C15</div>
+      <p class="brief-angulo">Ángulo: Testimonial de proceso</p>
+      <p class="brief-hook">"Lo hice con la comida. Con el espacio. Con la ropa me costó más."</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Narración: describe el proceso de simplificación progresiva. La ropa siempre quedaba pendiente porque parecía más compleja. Hasta que entendió que no lo era. UNO × UNO: tres remeras, tres colores, fin de la conversación.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> Resolver la ropa de una vez → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Video 0:20–0:25</span> C16</div>
+      <p class="brief-angulo">Ángulo: Paradoja / Humor seco</p>
+      <p class="brief-hook">Placard lleno. Y sin remera para usar.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Visual: placard lleno de ropa en desorden. La paradoja de tener mucho y no encontrar nada. Diez remeras y ninguna que esté como querés. El problema no es cantidad — es sistema. UNO × UNO: tres que siempre están, siempre funcionan.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> El sistema que cierra → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Carrusel</span> C17</div>
+      <p class="brief-angulo">Ángulo: Educativo / Anti-acumulación</p>
+      <p class="brief-hook">Por qué tener más remeras no resuelve el problema.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Slide 1: El ciclo — comprás más, el problema persiste. Slide 2: Lo que buscás en cada compra nueva. Slide 3: No más remeras, mejor remera. Slide 4: El pack de tres que resuelve. Slide 5: CTA.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> El pack de tres → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Imagen estática</span> C18</div>
+      <p class="brief-angulo">Ángulo: Contraste visual / Posicionamiento</p>
+      <p class="brief-hook">Mucho placard. Poca decisión. Tres remeras lo resuelven.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Visual split: placard caótico vs tres remeras ordenadas. La diferencia no está en cuántas tenés. Está en cuáles son las correctas.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> Las tres correctas → unoxuno.com</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PERSONA 4 ══════════════ -->
+<div class="persona-header">
+  <div class="container">
+    <div class="p-num">04</div>
+    <div class="p-info">
+      <p class="p-eyebrow">Buyer Persona 04</p>
+      <p class="p-name">La Pareja<br>que Regala</p>
+      <p class="p-desc">Compra para su pareja masculina. No es el usuario final, pero sabe exactamente lo que él necesita. Quiere un regalo certero — no uno que quede guardado.</p>
+      <div class="p-tags">
+        <span class="p-tag">32–50 años</span>
+        <span class="p-tag">Mujer · Pareja del comprador</span>
+        <span class="p-tag">AMBA · ABC1</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dolores">
+  <div class="dolor">
+    <p class="dolor-num">Dolor 01</p>
+    <p class="dolor-text">No sabe qué regalarle — él dice que "no necesita nada"</p>
+  </div>
+  <div class="dolor">
+    <p class="dolor-num">Dolor 02</p>
+    <p class="dolor-text">Ya le regaló cosas que no usa — quiere algo que dure</p>
+  </div>
+</div>
+<div class="briefs-section alt">
+  <div class="briefs-grid">
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Video 0:20–0:30</span> C19</div>
+      <p class="brief-angulo">Ángulo: Humor seco / Reconocimiento</p>
+      <p class="brief-hook">"Dice que no necesita nada." Ya sé.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Escena cotidiana: ella pregunta qué quiere, él responde "nada". Los que dicen que no necesitan nada generalmente necesitan lo básico bien resuelto. UNO × UNO es el pack de tres remeras que él va a usar todos los días sin darse cuenta de que era exactamente lo que le faltaba.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> El regalo que sí usa → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Imagen estática</span> C20</div>
+      <p class="brief-angulo">Ángulo: Posicionamiento / Certeza</p>
+      <p class="brief-hook">El regalo que no termina en el cajón.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Visual: pack bien presentado. Si él siempre usa las mismas tres remeras, el regalo es tenerlas bien hechas. UNO × UNO: algodón peinado 100%, garantía de cambio sin condiciones, pack para elegir colores.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> El regalo certero → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">UGC / Voz femenina</span> C21</div>
+      <p class="brief-angulo">Ángulo: Testimonial / Identificación</p>
+      <p class="brief-hook">"Le regalé tres remeras. Cuatro meses después, sigue usándolas."</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Narración primera persona femenina: la dificultad de regalarle algo a alguien que dice no necesitar nada. Cómo llegó a UNO × UNO. Y cómo él, sin mucho drama, empezó a usar las tres remeras todos los días. Cierra: eso es lo que buscaba.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> El pack de tres → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Video 0:15–0:25</span> C22</div>
+      <p class="brief-angulo">Ángulo: Anti-desperdicio / Posicionamiento</p>
+      <p class="brief-hook">No vuelve al cajón. Vuelve a la pila.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Plano de remera que sale de la pila, se usa, se lava, vuelve a la pila. Hay ropa que se regala y ropa que se usa. La diferencia está en si resuelve algo real. UNO × UNO resuelve las remeras de todos los días — los 365.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> Regalo que se usa → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Carrusel</span> C23</div>
+      <p class="brief-angulo">Ángulo: Educativo / Por qué este regalo</p>
+      <p class="brief-hook">Por qué las remeras básicas son el mejor regalo para él.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Slide 1: Lo usa todos los días — al trabajo, en casa, el fin de semana. Slide 2: La calidad importa más de lo que parece. Slide 3: No hay talle difícil — hay guía de talles. Slide 4: Garantía de cambio sin condiciones. Slide 5: El pack y el CTA.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> Ver el pack → unoxuno.com</p>
+    </div>
+    <div class="brief-card">
+      <div class="brief-id"><span class="brief-formato">Imagen estática</span> C24</div>
+      <p class="brief-angulo">Ángulo: Emoción / Resultado</p>
+      <p class="brief-hook">El regalo que lo hace más simple.</p>
+      <div class="brief-field">
+        <p class="brief-field-label">Mensaje central</p>
+        <p class="brief-field-text">Visual cálido: remeras dobladas con packaging cuidado. No es solo una remera. Es la decisión resuelta para alguien que no disfruta comprar ropa. Tres básicos premium, garantía sin condiciones, envío a todo el país.</p>
+      </div>
+      <p class="brief-cta"><strong>CTA:</strong> Regalá el uniforme diario → unoxuno.com</p>
+    </div>
+  </div>
+</div>
+
+<!-- MAPA DE PRODUCCIÓN -->
+<div class="mapa">
+  <div class="container">
+    <p class="section-eyebrow">Mapa de producción</p>
+    <p class="section-title">24 creativos · Prioridad de lanzamiento</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Persona</th>
+          <th>Dolor activado</th>
+          <th>ID</th>
+          <th>Formato</th>
+          <th>Ángulo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="priority-row"><td>El Ejecutivo Saturado</td><td>Energía mental / decisión diaria</td><td>C1 <span class="priority-badge">Lanzar primero</span></td><td>Video 0:15–0:30</td><td>Problema → Sistema</td></tr>
+        <tr class="priority-row"><td>El Ejecutivo Saturado</td><td>Energía mental / decisión diaria</td><td>C2 <span class="priority-badge">Lanzar primero</span></td><td>Imagen estática</td><td>Posicionamiento directo</td></tr>
+        <tr><td>El Ejecutivo Saturado</td><td>Energía mental / decisión diaria</td><td>C3</td><td>UGC / Voz en off</td><td>Testimonial funcional</td></tr>
+        <tr><td>El Ejecutivo Saturado</td><td>Remeras que se deforman / recompra</td><td>C4</td><td>Video 0:20–0:35</td><td>Comparación / Educativo</td></tr>
+        <tr><td>El Ejecutivo Saturado</td><td>Remeras que se deforman / recompra</td><td>C5</td><td>Carrusel</td><td>Educativo / Producto</td></tr>
+        <tr><td>El Ejecutivo Saturado</td><td>Remeras que se deforman / recompra</td><td>C6</td><td>Imagen estática</td><td>Anti-reciclaje</td></tr>
+        <tr class="priority-row"><td>El Que Viajó y Probó</td><td>Calidad del exterior no disponible acá</td><td>C7 <span class="priority-badge">Lanzar primero</span></td><td>Video 0:20–0:30</td><td>Problema → Solución</td></tr>
+        <tr><td>El Que Viajó y Probó</td><td>Calidad del exterior no disponible acá</td><td>C8</td><td>Imagen estática</td><td>Posicionamiento directo</td></tr>
+        <tr><td>El Que Viajó y Probó</td><td>Calidad del exterior no disponible acá</td><td>C9</td><td>Carrusel</td><td>Educativo / Comparación</td></tr>
+        <tr><td>El Que Viajó y Probó</td><td>Marcas locales que decepcionaron</td><td>C10</td><td>Video 0:15–0:25</td><td>Anti-competencia</td></tr>
+        <tr><td>El Que Viajó y Probó</td><td>Marcas locales que decepcionaron</td><td>C11</td><td>Imagen estática</td><td>Posicionamiento / Confianza</td></tr>
+        <tr><td>El Que Viajó y Probó</td><td>Marcas locales que decepcionaron</td><td>C12</td><td>UGC / Voz en off</td><td>Cambio de marca</td></tr>
+        <tr class="priority-row"><td>El Minimalista en Proceso</td><td>Ropa sin sistema</td><td>C13 <span class="priority-badge">Lanzar primero</span></td><td>Video 0:20–0:30</td><td>Espejo / Identificación</td></tr>
+        <tr><td>El Minimalista en Proceso</td><td>Ropa sin sistema</td><td>C14</td><td>Imagen estática</td><td>Posicionamiento / Sistema</td></tr>
+        <tr><td>El Minimalista en Proceso</td><td>Ropa sin sistema</td><td>C15</td><td>UGC / Voz en off</td><td>Testimonial de proceso</td></tr>
+        <tr><td>El Minimalista en Proceso</td><td>Mucha ropa, nada disponible</td><td>C16</td><td>Video 0:20–0:25</td><td>Paradoja / Humor seco</td></tr>
+        <tr><td>El Minimalista en Proceso</td><td>Mucha ropa, nada disponible</td><td>C17</td><td>Carrusel</td><td>Anti-acumulación</td></tr>
+        <tr><td>El Minimalista en Proceso</td><td>Mucha ropa, nada disponible</td><td>C18</td><td>Imagen estática</td><td>Contraste visual</td></tr>
+        <tr class="priority-row"><td>La Pareja que Regala</td><td>"No necesita nada"</td><td>C19 <span class="priority-badge">Lanzar primero</span></td><td>Video 0:20–0:30</td><td>Humor seco / Reconocimiento</td></tr>
+        <tr><td>La Pareja que Regala</td><td>"No necesita nada"</td><td>C20</td><td>Imagen estática</td><td>Posicionamiento / Certeza</td></tr>
+        <tr><td>La Pareja que Regala</td><td>"No necesita nada"</td><td>C21</td><td>UGC / Voz femenina</td><td>Testimonial</td></tr>
+        <tr><td>La Pareja que Regala</td><td>Regalos que no se usan</td><td>C22</td><td>Video 0:15–0:25</td><td>Anti-desperdicio</td></tr>
+        <tr><td>La Pareja que Regala</td><td>Regalos que no se usan</td><td>C23</td><td>Carrusel</td><td>Educativo / Por qué este regalo</td></tr>
+        <tr><td>La Pareja que Regala</td><td>Regalos que no se usan</td><td>C24</td><td>Imagen estática</td><td>Emoción / Resultado</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="nota">
+  <div class="container">
+    <p class="nota-text"><strong>Lanzar primero:</strong> C1, C2, C7, C13, C19 — uno por persona, formato video o imagen. Dejar correr 7–10 días antes de tomar decisiones. El algoritmo necesita datos. El volumen bajo al inicio es esperado — el error es interrumpir antes de tiempo.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <img src="assets/logo-negativo.png" alt="UNO × UNO" class="ft-img">
+    <span class="ft-note">Briefs de Ads 2026 · Método Uno SRL</span>
+  </div>
+</footer>
+
+</body>
+</html>
