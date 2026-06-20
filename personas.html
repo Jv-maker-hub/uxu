@@ -41,10 +41,11 @@
     .site-header {
       background: var(--carbon);
       color: var(--cream);
-      padding: 48px 64px 44px;
+      padding: 0 48px;
+      height: 72px;
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
+      align-items: center;
     }
 
     .brand-mark {
@@ -435,7 +436,7 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 860px) {
-      .site-header { padding: 40px 28px 36px; flex-direction: column; align-items: flex-start; gap: 20px; }
+      .site-header { padding: 0 24px; flex-direction: row; height: 64px; }
       .doc-meta { text-align: left; }
       .intro { padding: 48px 28px; }
       .intro-grid { grid-template-columns: 1fr; gap: 28px; }
