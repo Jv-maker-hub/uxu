@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análisis Ad Library — Competidores DTC Básicos AR</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #fafafa;
+    --gray-100: #f5f5f5;
+    --gray-200: #e8e8e8;
+    --gray-400: #999;
+    --gray-600: #555;
+    --gray-800: #222;
+    --accent: #1a1a1a;
+    --tecla: #2563EB;
+    --valfort: #DC2626;
+    --umano: #16A34A;
+    --ser: #D97706;
+    --uxu: #7C3AED;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+  }
+  .header {
+    background: var(--black);
+    color: var(--white);
+    padding: 60px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+  .header-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.15;
+    max-width: 620px;
+    margin-bottom: 16px;
+  }
+  .header-meta { font-size: 13px; color: var(--gray-400); }
+  .header-badges { display: flex; gap: 8px; margin-top: 24px; flex-wrap: wrap; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.03em; }
+  .badge-tecla { background: rgba(37,99,235,0.2); color: #60a5fa; }
+  .badge-valfort { background: rgba(220,38,38,0.2); color: #f87171; }
+  .badge-umano { background: rgba(22,163,74,0.2); color: #4ade80; }
+  .badge-ser { background: rgba(217,119,6,0.2); color: #fbbf24; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+  section { padding: 56px 0; border-bottom: 1px solid var(--gray-200); }
+  section:last-child { border-bottom: none; }
+  .section-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 8px; }
+  .section-title { font-size: 24px; font-weight: 700; margin-bottom: 32px; color: var(--gray-800); }
+
+  .overview-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+  .overview-card { border: 1px solid var(--gray-200); border-radius: 12px; padding: 24px; position: relative; overflow: hidden; }
+  .overview-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .card-tecla::before { background: var(--tecla); }
+  .card-valfort::before { background: var(--valfort); }
+  .card-umano::before { background: var(--umano); }
+  .card-ser::before { background: var(--ser); }
+  .card-brand { font-size: 14px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot-tecla { background: var(--tecla); }
+  .dot-valfort { background: var(--valfort); }
+  .dot-umano { background: var(--umano); }
+  .dot-ser { background: var(--ser); }
+  .card-stat { margin-bottom: 10px; }
+  .stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); margin-bottom: 2px; }
+  .stat-value { font-size: 13px; font-weight: 500; color: var(--gray-800); }
+  .stat-big { font-size: 28px; font-weight: 700; color: var(--black); line-height: 1; }
+
+  .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .chart-box { background: var(--gray-100); border-radius: 12px; padding: 28px; }
+  .chart-title { font-size: 13px; font-weight: 600; margin-bottom: 20px; color: var(--gray-800); }
+  .chart-container { position: relative; height: 200px; }
+
+  .comparison-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 32px; }
+  .comparison-table th { text-align: left; padding: 10px 16px; background: var(--gray-100); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-400); border-bottom: 1px solid var(--gray-200); }
+  .comparison-table td { padding: 12px 16px; border-bottom: 1px solid var(--gray-200); color: var(--gray-800); vertical-align: top; }
+  .comparison-table tr:last-child td { border-bottom: none; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .tag-yes { background: #dcfce7; color: #166534; }
+  .tag-no { background: #fee2e2; color: #991b1b; }
+  .tag-mid { background: #fef9c3; color: #854d0e; }
+
+  .brand-section { margin-bottom: 48px; border: 1px solid var(--gray-200); border-radius: 16px; overflow: hidden; }
+  .brand-header { padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--gray-200); }
+  .brand-header-left { display: flex; align-items: center; gap: 12px; }
+  .brand-color-bar { width: 4px; height: 40px; border-radius: 2px; }
+  .brand-name { font-size: 20px; font-weight: 700; }
+  .brand-tagline { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
+  .brand-ad-count { font-size: 32px; font-weight: 700; }
+  .brand-ad-label { font-size: 11px; color: var(--gray-400); text-align: right; }
+  .brand-body { padding: 28px; }
+  .brand-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+  .brand-fact h4 { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); margin-bottom: 6px; }
+  .brand-fact p { font-size: 13px; color: var(--gray-800); line-height: 1.5; }
+  .brand-fact strong { color: var(--black); }
+
+  .messages-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .message-pill { padding: 5px 12px; background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 20px; font-size: 12px; color: var(--gray-800); }
+
+  .ads-examples { margin-top: 24px; }
+  .ads-examples h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); margin-bottom: 12px; }
+  .ad-card { background: var(--gray-100); border-radius: 10px; padding: 16px; margin-bottom: 10px; border-left: 3px solid transparent; }
+  .ad-card-tecla { border-left-color: var(--tecla); }
+  .ad-card-valfort { border-left-color: var(--valfort); }
+  .ad-card-umano { border-left-color: var(--umano); }
+  .ad-card-ser { border-left-color: var(--ser); }
+  .ad-card-meta { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .ad-card-format { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-400); }
+  .ad-card-date { font-size: 10px; color: var(--gray-400); }
+  .ad-card-copy { font-size: 12px; color: var(--gray-600); line-height: 1.5; font-style: italic; }
+  .ad-card-insight { font-size: 11px; color: var(--gray-400); margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--gray-200); }
+  .ad-card-insight strong { color: var(--gray-600); }
+
+  .longevity-section { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--gray-200); }
+  .longevity-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); margin-bottom: 12px; }
+  .longevity-bar-wrap { margin-bottom: 8px; }
+  .longevity-bar-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--gray-600); margin-bottom: 3px; }
+  .longevity-bar { height: 6px; background: var(--gray-200); border-radius: 3px; overflow: hidden; }
+  .longevity-fill { height: 100%; border-radius: 3px; }
+
+  .insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .insight-card { padding: 24px; border-radius: 12px; border: 1px solid var(--gray-200); }
+  .insight-card.opportunity { background: #f0fdf4; border-color: #bbf7d0; }
+  .insight-card.warning { background: #fff7ed; border-color: #fed7aa; }
+  .insight-card.neutral { background: var(--gray-100); border-color: var(--gray-200); }
+  .insight-icon { font-size: 20px; margin-bottom: 10px; }
+  .insight-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--black); }
+  .insight-text { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+
+  .conclusion-box { background: var(--black); color: var(--white); border-radius: 16px; padding: 40px; }
+  .conclusion-box h3 { font-size: 22px; font-weight: 700; margin-bottom: 20px; }
+  .conclusion-items { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .conclusion-items li { font-size: 14px; line-height: 1.6; color: var(--gray-400); padding-left: 16px; position: relative; }
+  .conclusion-items li::before { content: '→'; position: absolute; left: 0; color: var(--white); }
+  .conclusion-items li strong { color: var(--white); display: block; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="container">
+    <div class="header-label">UNO × UNO — Inteligencia Competitiva</div>
+    <h1>Análisis Ad Library<br>Básicos DTC Argentina</h1>
+    <div class="header-meta">Meta Ad Library · Anuncios activos · Junio 2026</div>
+    <div class="header-badges">
+      <span class="badge badge-tecla">Tecla ~170 ads</span>
+      <span class="badge badge-valfort">Valfort ~20 ads</span>
+      <span class="badge badge-umano">Umano ~37 ads</span>
+      <span class="badge badge-ser">SER Basics ~29 ads</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<section>
+  <div class="section-label">Vista General</div>
+  <div class="section-title">¿Cuánto están pautando?</div>
+  <div class="overview-grid">
+    <div class="overview-card card-tecla">
+      <div class="card-brand"><span class="dot dot-tecla"></span>Tecla</div>
+      <div class="card-stat"><div class="stat-label">Anuncios activos</div><div class="stat-big">~170</div></div>
+      <div class="card-stat"><div class="stat-label">Longevidad máx.</div><div class="stat-value">desde 9 mar 2026</div></div>
+      <div class="card-stat"><div class="stat-label">Creators</div><div class="stat-value">✓ Soy Ale Neyen</div></div>
+      <div class="card-stat"><div class="stat-label">Formato dominante</div><div class="stat-value">Video UGC</div></div>
+    </div>
+    <div class="overview-card card-valfort">
+      <div class="card-brand"><span class="dot dot-valfort"></span>Valfort</div>
+      <div class="card-stat"><div class="stat-label">Anuncios activos</div><div class="stat-big">~20</div></div>
+      <div class="card-stat"><div class="stat-label">Longevidad máx.</div><div class="stat-value">desde 16 jun 2026</div></div>
+      <div class="card-stat"><div class="stat-label">Creators</div><div class="stat-value">✗ Sin partnerships</div></div>
+      <div class="card-stat"><div class="stat-label">Formato dominante</div><div class="stat-value">Video + Imagen</div></div>
+    </div>
+    <div class="overview-card card-umano">
+      <div class="card-brand"><span class="dot dot-umano"></span>Umano</div>
+      <div class="card-stat"><div class="stat-label">Anuncios activos</div><div class="stat-big">~37</div></div>
+      <div class="card-stat"><div class="stat-label">Longevidad máx.</div><div class="stat-value">desde 11 may 2026</div></div>
+      <div class="card-stat"><div class="stat-label">Creators</div><div class="stat-value">✗ Sin partnerships</div></div>
+      <div class="card-stat"><div class="stat-label">Formato dominante</div><div class="stat-value">Carrusel + Video</div></div>
+    </div>
+    <div class="overview-card card-ser">
+      <div class="card-brand"><span class="dot dot-ser"></span>SER Basics</div>
+      <div class="card-stat"><div class="stat-label">Anuncios activos</div><div class="stat-big">~29</div></div>
+      <div class="card-stat"><div class="stat-label">Longevidad máx.</div><div class="stat-value">desde 13 mar 2026</div></div>
+      <div class="card-stat"><div class="stat-label">Creators</div><div class="stat-value">✗ Sin partnerships</div></div>
+      <div class="card-stat"><div class="stat-label">Formato dominante</div><div class="stat-value">Video corto</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Datos</div>
+  <div class="section-title">Distribución de pauta</div>
+  <div class="charts-grid">
+    <div class="chart-box">
+      <div class="chart-title">Volumen de anuncios activos</div>
+      <div class="chart-container"><canvas id="volumeChart"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Señales de inversión por marca</div>
+      <div class="chart-container"><canvas id="investChart"></canvas></div>
+    </div>
+  </div>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Marca</th><th>Descuentos</th><th>Urgencia artificial</th><th>Creator mktg</th><th>Precio comunicado</th><th>Cuotas sin interés</th><th>Envío gratis</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tecla</strong></td>
+        <td><span class="tag tag-yes">20% OFF + packs</span></td>
+        <td><span class="tag tag-yes">Siempre</span></td>
+        <td><span class="tag tag-mid">1 creator</span></td>
+        <td>Desde $36.075</td>
+        <td><span class="tag tag-yes">3 cuotas</span></td>
+        <td><span class="tag tag-no">No</span></td>
+      </tr>
+      <tr>
+        <td><strong>Valfort</strong></td>
+        <td><span class="tag tag-yes">62% OFF + regalo</span></td>
+        <td><span class="tag tag-yes">Siempre</span></td>
+        <td><span class="tag tag-no">No</span></td>
+        <td>No comunica</td>
+        <td><span class="tag tag-yes">3 cuotas</span></td>
+        <td><span class="tag tag-yes">Sí</span></td>
+      </tr>
+      <tr>
+        <td><strong>Umano</strong></td>
+        <td><span class="tag tag-yes">20% OFF transf.</span></td>
+        <td><span class="tag tag-mid">Moderada</span></td>
+        <td><span class="tag tag-no">No</span></td>
+        <td>$35k–$150k</td>
+        <td><span class="tag tag-yes">6 cuotas</span></td>
+        <td><span class="tag tag-yes">Sí</span></td>
+      </tr>
+      <tr>
+        <td><strong>SER Basics</strong></td>
+        <td><span class="tag tag-yes">Pack 3+1 gratis</span></td>
+        <td><span class="tag tag-mid">Estacional</span></td>
+        <td><span class="tag tag-no">No</span></td>
+        <td>~$30k remera</td>
+        <td><span class="tag tag-yes">6 cuotas</span></td>
+        <td><span class="tag tag-yes">Sí</span></td>
+      </tr>
+      <tr style="background: #faf5ff;">
+        <td><strong style="color: var(--uxu);">UNO × UNO</strong></td>
+        <td><span class="tag tag-no">Ninguno</span></td>
+        <td><span class="tag tag-no">Nunca</span></td>
+        <td><span class="tag tag-mid">Por definir</span></td>
+        <td>$40k/remera</td>
+        <td><span class="tag tag-mid">A definir</span></td>
+        <td><span class="tag tag-mid">A definir</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <div class="section-label">Análisis por marca</div>
+  <div class="section-title">Deep dive</div>
+
+  <!-- TECLA -->
+  <div class="brand-section">
+    <div class="brand-header">
+      <div class="brand-header-left">
+        <div class="brand-color-bar" style="background: var(--tecla);"></div>
+        <div><div class="brand-name">Tecla</div><div class="brand-tagline">estilotecla.com · La más activa del mercado</div></div>
+      </div>
+      <div><div class="brand-ad-count" style="color: var(--tecla);">~170</div><div class="brand-ad-label">anuncios activos</div></div>
+    </div>
+    <div class="brand-body">
+      <div class="brand-grid">
+        <div class="brand-fact"><h4>Propuesta central</h4><p><strong>"El Calce Tecla"</strong> — ajustado en hombros y brazos, suelto en la panza. Lo repiten en el 90% de sus ads.</p></div>
+        <div class="brand-fact"><h4>Mecánica de venta</h4><p>Packs progresivos: <strong>4x3 y 10x6</strong>. Urgencia permanente ("liquidación por sobrestock").</p></div>
+        <div class="brand-fact"><h4>Audiencias</h4><p>Hombres que buscan calce + <strong>mujeres para regalar</strong> ("la remera que él no sabe que necesita").</p></div>
+        <div class="brand-fact"><h4>Formato</h4><p>Video corto (<strong>0:12–0:46</strong>) dominante. Reviews reales de clientes. Un creator visible.</p></div>
+        <div class="brand-fact"><h4>Velocidad creativa</h4><p><strong>Alta</strong>. Mismo mensaje en múltiples versiones. Testeo sistemático y continuo.</p></div>
+        <div class="brand-fact"><h4>Canal offline</h4><p>Showroom en <strong>Acevedo 725, Villa Crespo</strong>. Único con presencia física entre los analizados.</p></div>
+      </div>
+      <div>
+        <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); margin-bottom: 8px;">Mensajes que más repiten</h4>
+        <div class="messages-list">
+          <span class="message-pill">El Calce Tecla</span>
+          <span class="message-pill">20% OFF con transferencia</span>
+          <span class="message-pill">Primer cambio gratis</span>
+          <span class="message-pill">Liquidación por sobrestock</span>
+          <span class="message-pill">3 cuotas sin interés</span>
+          <span class="message-pill">El guardarropa resuelto de una</span>
+          <span class="message-pill">Cocodrilo que se duerme...</span>
+        </div>
+      </div>
+      <div class="ads-examples">
+        <h4>Ads más longevos / destacados</h4>
+        <div class="ad-card ad-card-tecla">
+          <div class="ad-card-meta"><span class="ad-card-format">Video · En circulación desde 9 mar 2026</span><span class="ad-card-date">+100 días activo</span></div>
+          <div class="ad-card-copy">"¿Ya pasaste por el showroom de Tecla? Te esperamos en Acevedo 725, Villa Crespo. Remeras listas para el finde, para la oficina o para cuando quieras vestirte bien sin pensar tanto."</div>
+          <div class="ad-card-insight"><strong>Por qué funciona:</strong> Lugar físico = confianza. "Vestirte bien sin pensar tanto" roza el territorio de UNO × UNO.</div>
+        </div>
+        <div class="ad-card ad-card-tecla">
+          <div class="ad-card-meta"><span class="ad-card-format">Video UGC · Creator: Soy Ale Neyen</span><span class="ad-card-date">31 may 2026</span></div>
+          <div class="ad-card-copy">"Cuando una marca te funciona de verdad, cada cosa nueva que saca la querés probar. El Calce Tecla que ya conocés, ahora en manga larga. Si ya tenés las manga corta, este es el paso que sigue."</div>
+          <div class="ad-card-insight"><strong>Por qué funciona:</strong> Retención/upsell. Habla a clientes existentes. Tono de comunidad, no urgencia.</div>
+        </div>
+        <div class="ad-card ad-card-tecla">
+          <div class="ad-card-meta"><span class="ad-card-format">Video · Segmento femenino</span><span class="ad-card-date">3 jun 2026</span></div>
+          <div class="ad-card-copy">"Si tu novio pudiera elegir, seguiría usando camisetas de fútbol para todo. Pero vos podés elegir por él."</div>
+          <div class="ad-card-insight"><strong>Por qué funciona:</strong> Activa mujeres comprando para hombres con humor. Alto potencial en fechas especiales.</div>
+        </div>
+      </div>
+      <div class="longevity-section">
+        <div class="longevity-label">Longevidad de ads activos (estimado)</div>
+        <div class="longevity-bar-wrap"><div class="longevity-bar-label"><span>1-2 semanas</span><span>~60%</span></div><div class="longevity-bar"><div class="longevity-fill" style="width:60%; background: var(--tecla);"></div></div></div>
+        <div class="longevity-bar-wrap"><div class="longevity-bar-label"><span>1-3 meses</span><span>~35%</span></div><div class="longevity-bar"><div class="longevity-fill" style="width:35%; background: var(--tecla); opacity: 0.6;"></div></div></div>
+        <div class="longevity-bar-wrap"><div class="longevity-bar-label"><span>+3 meses</span><span>~5%</span></div><div class="longevity-bar"><div class="longevity-fill" style="width:5%; background: var(--tecla); opacity: 0.3;"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALFORT -->
+  <div class="brand-section">
+    <div class="brand-header">
+      <div class="brand-header-left">
+        <div class="brand-color-bar" style="background: var(--valfort);"></div>
+        <div><div class="brand-name">Valfort</div><div class="brand-tagline">valfort.site · El más agresivo en precio</div></div>
+      </div>
+      <div><div class="brand-ad-count" style="color: var(--valfort);">~20</div><div class="brand-ad-label">anuncios activos</div></div>
+    </div>
+    <div class="brand-body">
+      <div class="brand-grid">
+        <div class="brand-fact"><h4>Propuesta central</h4><p><strong>"No es tu cuerpo, es la remera que usás"</strong> — apelación directa a inseguridad corporal. El gancho más repetido.</p></div>
+        <div class="brand-fact"><h4>Mecánica de venta</h4><p><strong>62% OFF + remera extra de regalo</strong>. Precio real nunca comunicado. Descuento tan agresivo que puede generar desconfianza.</p></div>
+        <div class="brand-fact"><h4>Audiencias</h4><p>Hombres inseguros de su cuerpo. Segmento específico: <strong>flacos</strong> ("si sos flaco, el problema nunca fue tu cuerpo"). No apunta a mujeres.</p></div>
+        <div class="brand-fact"><h4>Formato</h4><p>Mix video + imagen estática. Ads recientes (<strong>15-20 jun</strong>) con bajo impresiones — en fase de testing intenso.</p></div>
+        <div class="brand-fact"><h4>Velocidad creativa</h4><p><strong>Media-alta</strong>. Mismo mensaje central con múltiples variaciones de copy. Testeo de microvariaciones.</p></div>
+        <div class="brand-fact"><h4>Señal de alerta</h4><p>Varios ads lanzados <strong>hoy (20 jun)</strong> con 0 impresiones — reactivando campaña o en test masivo.</p></div>
+      </div>
+      <div>
+        <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); margin-bottom: 8px;">Mensajes que más repiten</h4>
+        <div class="messages-list">
+          <span class="message-pill">NO ES TU CUERPO</span>
+          <span class="message-pill">62% OFF + remera de regalo</span>
+          <span class="message-pill">Moldería inteligente</span>
+          <span class="message-pill">100% Algodón Premium</span>
+          <span class="message-pill">Quedan pocas unidades</span>
+          <span class="message-pill">Últimas 48 hs</span>
+          <span class="message-pill">Oferta relámpago</span>
+        </div>
+      </div>
+      <div class="ads-examples">
+        <h4>Ads destacados</h4>
+        <div class="ad-card ad-card-valfort">
+          <div class="ad-card-meta"><span class="ad-card-format">Video · 17 jun 2026</span><span class="ad-card-date">Ad con más impresiones</span></div>
+          <div class="ad-card-copy">"⚠️ NO ES TU CUERPO, ES LA REMERA QUE USAS. Las marcas locales usan moldes genéricos con mangas grandes que te deforman el porte."</div>
+          <div class="ad-card-insight"><strong>Por qué funciona:</strong> Ataca el problema emocional antes que el producto. El ⚠️ genera detención de scroll. Culpa a la remera, no al cuerpo.</div>
+        </div>
+        <div class="ad-card ad-card-valfort">
+          <div class="ad-card-meta"><span class="ad-card-format">Video · 18 jun 2026</span><span class="ad-card-date">Segmento flacos</span></div>
+          <div class="ad-card-copy">"Si sos flaco, el problema nunca fue tu cuerpo. Fueron las remeras mal hechas. Mangas que cuelgan y te hacen ver el brazo más delgado todavía."</div>
+          <div class="ad-card-insight"><strong>Por qué funciona:</strong> Hiperspecificidad. Habla a UN tipo de cuerpo. Genera identificación fuerte y baja guardia.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UMANO -->
+  <div class="brand-section">
+    <div class="brand-header">
+      <div class="brand-header-left">
+        <div class="brand-color-bar" style="background: var(--umano);"></div>
+        <div><div class="brand-name">Umano</div><div class="brand-tagline">umano.com.ar · El más cercano en tono a UNO × UNO</div></div>
+      </div>
+      <div><div class="brand-ad-count" style="color: var(--umano);">~37</div><div class="brand-ad-label">anuncios activos</div></div>
+    </div>
+    <div class="brand-body">
+      <div class="brand-grid">
+        <div class="brand-fact"><h4>Propuesta central</h4><p><strong>"Mantenete simple. Mantenete Umano"</strong> — slogan claro y consistente. El más cercano al posicionamiento de sistema/simplificación.</p></div>
+        <div class="brand-fact"><h4>Mecánica de venta</h4><p>6 cuotas sin interés + 20% OFF transferencia. Precios reales comunicados: <strong>$35k remera, $90k pack x3</strong>. Más transparente que los demás.</p></div>
+        <div class="brand-fact"><h4>Audiencias</h4><p>Hombres que quieren simplificar. <strong>Social proof numérico: 5.500 clientes, 25.500 prendas</strong>. También mujeres para regalar.</p></div>
+        <div class="brand-fact"><h4>Formato</h4><p>Carruseles con múltiples versiones + video. Fuerte en invierno: buzos y hoodies — producto más amplio que solo remeras.</p></div>
+        <div class="brand-fact"><h4>Diferencial</h4><p><strong>Fabricación propia en Argentina</strong> — repetido en varios ads. "Sin intermediarios" como argumento precio-calidad.</p></div>
+        <div class="brand-fact"><h4>Debilidad</h4><p>Catálogo amplio (remeras, buzos, hoodies, mochilas). <strong>Pierde foco</strong> como marca de básicos puros. Intenta ser todo.</p></div>
+      </div>
+      <div>
+        <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); margin-bottom: 8px;">Mensajes que más repiten</h4>
+        <div class="messages-list">
+          <span class="message-pill">Mantenete simple</span>
+          <span class="message-pill">Fabricación propia en Argentina</span>
+          <span class="message-pill">6 cuotas sin interés</span>
+          <span class="message-pill">20% OFF transferencia</span>
+          <span class="message-pill">Envío sin cargo</span>
+          <span class="message-pill">Primer cambio gratis</span>
+          <span class="message-pill">5.500 clientes satisfechos</span>
+        </div>
+      </div>
+      <div class="ads-examples">
+        <h4>Ads destacados</h4>
+        <div class="ad-card ad-card-umano">
+          <div class="ad-card-meta"><span class="ad-card-format">Video · 16 jun 2026</span><span class="ad-card-date">⚠️ Más cercano al territorio de UNO × UNO</span></div>
+          <div class="ad-card-copy">"Blanca o negra. La pensás dos segundos… y volvés al mismo lugar. Las dos funcionan. Elegí una o llevate las dos y listo."</div>
+          <div class="ad-card-insight"><strong>Por qué importa:</strong> Es el ad más parecido al territorio de UNO × UNO en todo el mercado. Si Umano ya está parado ahí, UNO × UNO necesita ir más lejos y más profundo en ese mensaje.</div>
+        </div>
+        <div class="ad-card ad-card-umano">
+          <div class="ad-card-meta"><span class="ad-card-format">Carrusel · 11 may 2026</span><span class="ad-card-date">Longevo</span></div>
+          <div class="ad-card-copy">"Queremos hacértela fácil. Por eso armamos packs. Para que tengas lo que necesitás, sin perder tiempo eligiendo todos los días. Menos vueltas, más uso real."</div>
+          <div class="ad-card-insight"><strong>Por qué importa:</strong> Territorio muy similar al de UNO × UNO. La diferencia: ellos lo dicen genérico, UNO × UNO puede decirlo con convicción y producto exclusivo.</div>
+        </div>
+        <div class="ad-card ad-card-umano">
+          <div class="ad-card-meta"><span class="ad-card-format">Carrusel · 29 may 2026</span><span class="ad-card-date">Social proof</span></div>
+          <div class="ad-card-copy">"7 colores. 25.500 prendas fabricadas. Fabricación propia en Argentina. 5.500 clientes satisfechos."</div>
+          <div class="ad-card-insight"><strong>Por qué funciona:</strong> Números concretos = credibilidad. UNO × UNO puede hacer algo similar cuando tenga datos propios.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SER BASICS -->
+  <div class="brand-section">
+    <div class="brand-header">
+      <div class="brand-header-left">
+        <div class="brand-color-bar" style="background: var(--ser);"></div>
+        <div><div class="brand-name">SER Basics</div><div class="brand-tagline">serbasics.com · El más veterano del mercado (desde 2020)</div></div>
+      </div>
+      <div><div class="brand-ad-count" style="color: var(--ser);">~29</div><div class="brand-ad-label">anuncios activos</div></div>
+    </div>
+    <div class="brand-body">
+      <div class="brand-grid">
+        <div class="brand-fact"><h4>Propuesta central</h4><p><strong>"Los básicos que usás todos los días, pero mejores"</strong> — apunta a simplificación pero con catálogo amplio que lo diluye.</p></div>
+        <div class="brand-fact"><h4>Mecánica de venta</h4><p>Pack <strong>3+1 gratis</strong> como oferta flagship. Fuerte activación estacional: <strong>Mes del Padre</strong> en junio con múltiples ads dedicados.</p></div>
+        <div class="brand-fact"><h4>Audiencias</h4><p>Amplia: hombres + mujeres para regalar. <strong>WhatsApp para asesoramiento</strong> de talle — atención personalizada como diferencial.</p></div>
+        <div class="brand-fact"><h4>Formato</h4><p>Video corto (0:07–0:23) + carrusel. Ads de retargeting con testimonios ("si llegaste hasta acá, algo te gustó").</p></div>
+        <div class="brand-fact"><h4>Diferencial</h4><p><strong>Algodón orgánico premium</strong> — único del mercado que lo comunica. Especialistas en básicos masculinos desde 2020.</p></div>
+        <div class="brand-fact"><h4>Debilidad</h4><p>Mochilas, accesorios, buzos, sweaters. <strong>El catálogo diluye el mensaje</strong> de marca de básicos puros.</p></div>
+      </div>
+      <div>
+        <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); margin-bottom: 8px;">Mensajes que más repiten</h4>
+        <div class="messages-list">
+          <span class="message-pill">Pack 3+1 gratis</span>
+          <span class="message-pill">Algodón orgánico premium</span>
+          <span class="message-pill">6 cuotas sin interés</span>
+          <span class="message-pill">15% OFF transferencia</span>
+          <span class="message-pill">Envío gratis</span>
+          <span class="message-pill">Calidad argentina</span>
+          <span class="message-pill">Mes del Padre</span>
+        </div>
+      </div>
+      <div class="ads-examples">
+        <h4>Ads destacados</h4>
+        <div class="ad-card ad-card-ser">
+          <div class="ad-card-meta"><span class="ad-card-format">Imagen · Desde 13 mar 2026</span><span class="ad-card-date">+90 días activo — probablemente convirtiendo</span></div>
+          <div class="ad-card-copy">"Los mejores basicos los encontras en SERBASICS. Envíos a todo el país. 6 cuotas sin interés. Calidad y precio, a un solo clic."</div>
+          <div class="ad-card-insight"><strong>Por qué sigue activo:</strong> Simplicidad extrema. No intenta convencer de nada. Solo describe lo que son y funciona.</div>
+        </div>
+        <div class="ad-card ad-card-ser">
+          <div class="ad-card-meta"><span class="ad-card-format">Video · 18 jun 2026</span><span class="ad-card-date">Voz femenina / regalo</span></div>
+          <div class="ad-card-copy">"Mi papá es de esos que no complican nada. Le gustan las cosas simples, pero que estén bien hechas. Por eso le regalé SER BASICS."</div>
+          <div class="ad-card-insight"><strong>Por qué funciona:</strong> Narración personal, no producto. La voz femenina activa el segmento de mujeres comprando para hombres con naturalidad.</div>
+        </div>
+        <div class="ad-card ad-card-ser">
+          <div class="ad-card-meta"><span class="ad-card-format">Imagen · 26 mar 2026</span><span class="ad-card-date">Retargeting clásico</span></div>
+          <div class="ad-card-copy">"Si llegaste hasta acá… algo te gustó 👀 Aprovechá ahora: 3x2 en productos seleccionados, hasta 60% OFF."</div>
+          <div class="ad-card-insight"><strong>Por qué funciona:</strong> Reconoce explícitamente que el usuario ya vio el producto. Directísimo para retargeting. Funciona desde marzo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Para UNO × UNO</div>
+  <div class="section-title">Lo que esto significa</div>
+  <div class="insight-grid">
+    <div class="insight-card opportunity">
+      <div class="insight-icon">🎯</div>
+      <div class="insight-title">El territorio de sistema está desocupado</div>
+      <div class="insight-text">Umano toca el borde del posicionamiento de "simplificación diaria", pero con buzos y mochilas que lo diluyen. Nadie está parado en "elegís una vez, funciona todos los días" con convicción real. Es tierra de nadie para UNO × UNO.</div>
+    </div>
+    <div class="insight-card opportunity">
+      <div class="insight-icon">💬</div>
+      <div class="insight-title">El tono adulto y sobrio no existe en Meta AR</div>
+      <div class="insight-text">Todos usan emojis, urgencia artificial y descuentos permanentes. Un ad de UNO × UNO sin emoji, sin descuento y con una sola frase poderosa va a romper el patrón en el feed. El contraste es el diferencial visual más fácil de lograr.</div>
+    </div>
+    <div class="insight-card warning">
+      <div class="insight-icon">⚠️</div>
+      <div class="insight-title">El precio de $40k es el más alto del mercado</div>
+      <div class="insight-text">SER Basics y Umano están en $30–35k. Tecla desde $36k. UNO × UNO a $40k necesita que los ads justifiquen esa diferencia sin decirla explícitamente. El posicionamiento hace el trabajo — no la lista de beneficios.</div>
+    </div>
+    <div class="insight-card warning">
+      <div class="insight-icon">⚡</div>
+      <div class="insight-title">Tecla domina el volumen — y tiene ventaja de data</div>
+      <div class="insight-text">Con ~170 ads activos, Tecla tiene meses de aprendizaje del algoritmo que las demás no tienen. Arrancar con volumen bajo está bien, pero hay que llegar a punto de datos rápido. Recomendable: 5–8 ads con variaciones de mensaje desde el día 1.</div>
+    </div>
+    <div class="insight-card neutral">
+      <div class="insight-icon">👥</div>
+      <div class="insight-title">El segmento femenino es una oportunidad táctica</div>
+      <div class="insight-text">Tecla y SER Basics lo usan para regalos. UNO × UNO puede activarlo de forma más elegante: "el regalo que no vuelve al cajón" sin la condescendencia de "la remera que él no sabe que necesita".</div>
+    </div>
+    <div class="insight-card neutral">
+      <div class="insight-icon">📭</div>
+      <div class="insight-title">Elemental está fuera de pauta — señal importante</div>
+      <div class="insight-text">La marca más grande (293k en IG) no está corriendo ads activos. Viven de orgánico y comunidad. Hay un vacío de liderazgo en pauta que Tecla, Umano y SER están tratando de llenar ahora mismo.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Conclusión estratégica</div>
+  <div class="section-title">Lo que hace bien cada uno — y el gap de UNO × UNO</div>
+  <div class="conclusion-box">
+    <h3>Lo que está pasando y dónde entra UNO × UNO</h3>
+    <ul class="conclusion-items">
+      <li><strong>Tecla hace bien:</strong> tener una promesa clara ("El Calce Tecla") y repetirla hasta que se grabe. Alto volumen de testing y único con creator mínimo funcional.</li>
+      <li><strong>Valfort hace bien:</strong> atacar el problema emocional antes que el producto. "No es tu cuerpo" es un gancho de scroll poderoso aunque la ejecución sea ruidosa.</li>
+      <li><strong>Umano hace bien:</strong> comunicar precios reales y social proof concreto. "5.500 clientes" es más creíble que "62% OFF". El tono es el más sobrio del mercado.</li>
+      <li><strong>SER Basics hace bien:</strong> los ads de retargeting y la activación estacional (Día del Padre). Son los que mejor conocen su funnel de los cuatro.</li>
+      <li><strong>El gap que nadie llena:</strong> ninguno habla al hombre que no disfruta comprar ropa. Todos hablan de "quedar bien" o "ahorrar". Nadie dice "resolvé esto para siempre".</li>
+      <li><strong>El diferencial de UNO × UNO:</strong> precio fijo sin descuentos, tono adulto, y el único que vende la decisión resuelta — no una remera más. Eso no existe en Meta AR todavía.</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<script>
+const ctx1 = document.getElementById('volumeChart').getContext('2d');
+new Chart(ctx1, {
+  type: 'bar',
+  data: {
+    labels: ['Tecla', 'Umano', 'SER Basics', 'Valfort'],
+    datasets: [{
+      data: [170, 37, 29, 20],
+      backgroundColor: ['#2563EB', '#16A34A', '#D97706', '#DC2626'],
+      borderRadius: 6,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 12 } } },
+      y: { grid: { color: '#e8e8e8' }, ticks: { font: { size: 11 } }, beginAtZero: true }
+    }
+  }
+});
+
+const ctx2 = document.getElementById('investChart').getContext('2d');
+new Chart(ctx2, {
+  type: 'radar',
+  data: {
+    labels: ['Volumen ads', 'Creators', 'Longevidad', 'Testing', 'Tono premium'],
+    datasets: [
+      { label: 'Tecla', data: [95, 40, 85, 90, 30], borderColor: '#2563EB', backgroundColor: 'rgba(37,99,235,0.1)', borderWidth: 2, pointRadius: 3 },
+      { label: 'Umano', data: [30, 10, 50, 60, 65], borderColor: '#16A34A', backgroundColor: 'rgba(22,163,74,0.1)', borderWidth: 2, pointRadius: 3 },
+      { label: 'SER Basics', data: [25, 15, 80, 40, 35], borderColor: '#D97706', backgroundColor: 'rgba(217,119,6,0.1)', borderWidth: 2, pointRadius: 3 },
+      { label: 'Valfort', data: [20, 0, 15, 80, 25], borderColor: '#DC2626', backgroundColor: 'rgba(220,38,38,0.1)', borderWidth: 2, pointRadius: 3 }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, boxWidth: 12 } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 100,
+        ticks: { display: false },
+        grid: { color: '#e8e8e8' },
+        pointLabels: { font: { size: 11 } }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

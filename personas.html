@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNO × UNO — Buyer Personas 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --carbon:   #292A2E;
+      --dark:     #555152;
+      --mid:      #CCCBC8;
+      --warm:     #EBE8E3;
+      --cream:    #F6F4F1;
+      --white:    #FFFFFF;
+      --font-head: 'Barlow Condensed', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--carbon);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── HEADER ─── */
+    .site-header {
+      background: var(--carbon);
+      color: var(--cream);
+      padding: 48px 64px 44px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .brand-mark {
+      font-family: var(--font-head);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--cream);
+      text-transform: uppercase;
+    }
+
+    .doc-meta { text-align: right; }
+
+    .doc-title {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .doc-year {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--dark);
+      margin-top: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── INTRO ─── */
+    .intro {
+      background: var(--cream);
+      padding: 64px;
+      border-bottom: 1px solid var(--warm);
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      max-width: 1100px;
+    }
+
+    .intro-label {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 16px;
+    }
+
+    .intro-heading {
+      font-family: var(--font-head);
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--carbon);
+    }
+
+    .intro-body {
+      color: var(--dark);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .intro-body + .intro-body { margin-top: 16px; }
+
+    /* ─── NAV INDEX ─── */
+    .nav-index {
+      background: var(--white);
+      border-bottom: 1px solid var(--warm);
+      padding: 0 64px;
+      display: flex;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 32px 20px 0;
+      text-decoration: none;
+      color: var(--carbon);
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .nav-item:hover { border-bottom-color: var(--carbon); }
+
+    .nav-num {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--mid);
+    }
+
+    .nav-name {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── PERSONA SECTIONS ─── */
+    .persona {
+      padding: 80px 64px;
+      border-bottom: 1px solid var(--warm);
+    }
+
+    .persona:nth-child(odd)  { background: var(--white); }
+    .persona:nth-child(even) { background: var(--cream); }
+
+    .persona-inner { max-width: 1100px; }
+
+    /* top strip */
+    .persona-top {
+      display: grid;
+      grid-template-columns: 200px 1fr auto;
+      gap: 40px;
+      align-items: start;
+      margin-bottom: 48px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--warm);
+    }
+
+    /* persona photo */
+    .persona-photo {
+      width: 200px;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: var(--warm);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .persona-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .persona-photo .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--warm);
+    }
+
+    .persona-photo .photo-placeholder span {
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .persona-id {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      color: var(--mid);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .persona-name {
+      font-family: var(--font-head);
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--carbon);
+    }
+
+    .persona-tagline {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--dark);
+      margin-top: 12px;
+      max-width: 420px;
+    }
+
+    .persona-demo { text-align: right; }
+
+    .demo-item {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--dark);
+      letter-spacing: 0.03em;
+      line-height: 2;
+    }
+
+    .demo-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    /* quote */
+    .persona-quote {
+      background: var(--carbon);
+      color: var(--cream);
+      padding: 32px 40px;
+      margin-bottom: 48px;
+      position: relative;
+    }
+
+    .persona-quote::before {
+      content: '"';
+      font-family: Georgia, serif;
+      font-size: 80px;
+      line-height: 1;
+      color: var(--dark);
+      position: absolute;
+      top: 12px;
+      left: 32px;
+      opacity: 0.5;
+    }
+
+    .quote-text {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      padding-left: 40px;
+    }
+
+    /* body grid */
+    .persona-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .persona-col-label {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 14px;
+    }
+
+    .persona-col-text {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--dark);
+      line-height: 1.8;
+    }
+
+    /* pain points */
+    .pain-title {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 20px;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .pain-card {
+      border: 1px solid var(--warm);
+      padding: 24px 28px;
+    }
+
+    .persona:nth-child(odd) .pain-card  { background: var(--cream); }
+    .persona:nth-child(even) .pain-card { background: var(--white); }
+
+    .pain-num {
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--mid);
+      margin-bottom: 10px;
+    }
+
+    .pain-text {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--carbon);
+      margin-bottom: 10px;
+    }
+
+    .pain-sub {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    /* how we talk */
+    .persona-voice {
+      margin-top: 48px;
+      padding: 28px 36px;
+      border-left: 3px solid var(--carbon);
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .voice-label {
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--mid);
+      white-space: nowrap;
+      margin-top: 3px;
+      min-width: 120px;
+    }
+
+    .voice-text {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--dark);
+      line-height: 1.8;
+    }
+
+    .voice-claim {
+      font-family: var(--font-head);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--carbon);
+      margin-top: 10px;
+    }
+
+    /* ─── FOOTER ─── */
+    .site-footer {
+      background: var(--carbon);
+      padding: 40px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-brand {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--cream);
+    }
+
+    .footer-note {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--dark);
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 860px) {
+      .site-header { padding: 40px 28px 36px; flex-direction: column; align-items: flex-start; gap: 20px; }
+      .doc-meta { text-align: left; }
+      .intro { padding: 48px 28px; }
+      .intro-grid { grid-template-columns: 1fr; gap: 28px; }
+      .intro-heading { font-size: 30px; }
+      .nav-index { padding: 0 28px; overflow-x: auto; flex-wrap: nowrap; background: var(--white); }
+      .nav-item { white-space: nowrap; padding-right: 20px; }
+      .persona { padding: 56px 28px; }
+      .persona-top { grid-template-columns: 1fr; gap: 24px; }
+      .persona-photo { width: 100%; max-width: 260px; }
+      .persona-name { font-size: 38px; }
+      .persona-demo { text-align: left; }
+      .persona-body { grid-template-columns: 1fr; gap: 28px; }
+      .pain-grid { grid-template-columns: 1fr; }
+      .persona-voice { flex-direction: column; gap: 10px; }
+      .site-footer { padding: 32px 28px; flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="brand-mark">UNO × UNO</div>
+    <div class="doc-meta">
+      <div class="doc-title">Sistema de Comunicación — Buyer Personas</div>
+      <div class="doc-year">MÉTODO UNO SRL · 2026</div>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="intro-grid">
+      <div>
+        <p class="intro-label">Sobre este documento</p>
+        <h1 class="intro-heading">Quién compra UNO × UNO y por qué.</h1>
+      </div>
+      <div>
+        <p class="intro-body">Este documento describe los cuatro perfiles que compran UNO × UNO. No son segmentos demográficos: son modos de relacionarse con el problema que la marca resuelve.</p>
+        <p class="intro-body">Cada perfil tiene un dolor específico, un trigger de compra y una forma en que la marca le habla. El objetivo no es convencer a nadie de que necesita una remera. Es estar presente cuando ya lo sabe.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAV INDEX -->
+  <nav class="nav-index">
+    <a class="nav-item" href="#p1">
+      <span class="nav-num">01</span>
+      <span class="nav-name">El Ejecutivo Saturado</span>
+    </a>
+    <a class="nav-item" href="#p2">
+      <span class="nav-num">02</span>
+      <span class="nav-name">El Que Viajó y Probó</span>
+    </a>
+    <a class="nav-item" href="#p3">
+      <span class="nav-num">03</span>
+      <span class="nav-name">El Minimalista en Proceso</span>
+    </a>
+    <a class="nav-item" href="#p4">
+      <span class="nav-num">04</span>
+      <span class="nav-name">La Pareja que Regala</span>
+    </a>
+  </nav>
+
+  <!-- ──────────────────── PERSONA 1 ── -->
+  <section class="persona" id="p1">
+    <div class="persona-inner">
+
+      <div class="persona-top">
+        <div class="persona-photo">
+          <!-- Reemplazar src con la foto generada: persona-01-ejecutivo.jpg -->
+          <div class="photo-placeholder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="6" stroke="#CCCBC8" stroke-width="1.5"/><path d="M4 28c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#CCCBC8" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>Foto P01</span>
+          </div>
+        </div>
+        <div>
+          <p class="persona-id">01 — Perfil Principal</p>
+          <h2 class="persona-name">El Ejecutivo<br>Saturado</h2>
+          <p class="persona-tagline">Tiene plata, criterio y tiempo racionado. Comprar ropa es una distracción que preferiría no tener.</p>
+        </div>
+        <div class="persona-demo">
+          <p class="demo-label">Edad</p>
+          <p class="demo-item">38 – 52 años</p>
+          <p class="demo-label" style="margin-top:14px;">Perfil</p>
+          <p class="demo-item">CEO / Gerente / Socio / Director</p>
+          <p class="demo-label" style="margin-top:14px;">Zona</p>
+          <p class="demo-item">AMBA · ABC1</p>
+          <p class="demo-label" style="margin-top:14px;">Referencia anterior</p>
+          <p class="demo-item">Polo, Lacoste, alguna DTC local</p>
+        </div>
+      </div>
+
+      <div class="persona-quote">
+        <p class="quote-text">"Tengo ropa. No tengo tiempo<br>de pensar en ropa."</p>
+      </div>
+
+      <div class="persona-body">
+        <div>
+          <p class="persona-col-label">Quién es</p>
+          <p class="persona-col-text">Profesional con agenda permanentemente llena. La ropa no es una prioridad cognitiva — es un problema resuelto (o debería serlo). Tiene criterio: sabe la diferencia entre una remera de algodón bueno y una mala. Ha comprado Polo o Lacoste como básicas, pero le parecen caras para lo que son. Probó alguna DTC local; la calidad no estuvo a la altura.</p>
+        </div>
+        <div>
+          <p class="persona-col-label">Qué lo trae</p>
+          <p class="persona-col-text">Tiró tres remeras básicas deformadas en el mismo mes. O abrió el placard y no encontró lo que buscaba por décima vez. Buscó "remeras básicas calidad Argentina" y llegó. No quiere explorar opciones: quiere tomar una decisión y no volver a tomarla. El precio no es el obstáculo — la certeza sí.</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="pain-title">Los dos dolores que activan la compra</p>
+        <div class="pain-grid">
+          <div class="pain-card">
+            <p class="pain-num">DOLOR 01</p>
+            <p class="pain-text">Cada vez que abre el placard, pierde tiempo eligiendo</p>
+            <p class="pain-sub">No es que no tenga ropa. Es que ninguna es "la que siempre funciona". Elige entre opciones imperfectas. Eso es fricción que podría no existir.</p>
+          </div>
+          <div class="pain-card">
+            <p class="pain-num">DOLOR 02</p>
+            <p class="pain-text">Pagó por básicas que prometían calidad y decepcionaron</p>
+            <p class="pain-sub">Invirtió en una marca con buena pinta. La remera duró tres meses antes de deformarse. Ahora desconfía del mercado local y no sabe dónde poner la plata.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-voice">
+        <span class="voice-label">Cómo le habla<br>UNO × UNO</span>
+        <div>
+          <p class="voice-text">Sin entusiasmo forzado. Sin prometer más de lo que da. Describir la lógica del sistema: elegís una vez, funciona todos los días. Hacerlo sentir que tomar la decisión ahora es racional — no emocional.</p>
+          <p class="voice-claim">"Elegís una vez. Funciona todos los días."</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ──────────────────── PERSONA 2 ── -->
+  <section class="persona" id="p2">
+    <div class="persona-inner">
+
+      <div class="persona-top">
+        <div class="persona-photo">
+          <!-- Reemplazar src con la foto generada: persona-02-viajero.jpg -->
+          <div class="photo-placeholder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="6" stroke="#CCCBC8" stroke-width="1.5"/><path d="M4 28c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#CCCBC8" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>Foto P02</span>
+          </div>
+        </div>
+        <div>
+          <p class="persona-id">02 — Perfil Convertido</p>
+          <h2 class="persona-name">El Que Viajó<br>y Probó</h2>
+          <p class="persona-tagline">Conoce el estándar. Lo encontró afuera. Volvió y no lo consiguió acá — hasta ahora.</p>
+        </div>
+        <div class="persona-demo">
+          <p class="demo-label">Edad</p>
+          <p class="demo-item">32 – 48 años</p>
+          <p class="demo-label" style="margin-top:14px;">Perfil</p>
+          <p class="demo-item">Profesional / Emprendedor con viajes</p>
+          <p class="demo-label" style="margin-top:14px;">Zona</p>
+          <p class="demo-item">AMBA · ABC1</p>
+          <p class="demo-label" style="margin-top:14px;">Referencia</p>
+          <p class="demo-item">Uniqlo, H&M, Primark</p>
+        </div>
+      </div>
+
+      <div class="persona-quote">
+        <p class="quote-text">"Afuera encontré lo que busco.<br>Acá no lo encuentro."</p>
+      </div>
+
+      <div class="persona-body">
+        <div>
+          <p class="persona-col-label">Quién es</p>
+          <p class="persona-col-text">Viajó a Europa o EEUU y compró básicas en Uniqlo, H&M o Primark. No lo hizo porque son baratas — lo hizo porque tienen el calce justo, la tela correcta y no hay que pensarlas. Las trajo, las usó hasta gastarlas. Acá buscó el equivalente, probó algunas marcas, y la experiencia fue inconsistente. Conoce la diferencia y no está dispuesto a conformarse.</p>
+        </div>
+        <div>
+          <p class="persona-col-label">Qué lo trae</p>
+          <p class="persona-col-text">Se quedó sin las básicas que trajo del último viaje. El próximo viaje es en seis meses. No quiere depender del viaje para vestirse bien. Llega con criterio formado y una pregunta clara: ¿esto está a la altura de lo que conozco? Si la respuesta es sí, compra sin dudar.</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="pain-title">Los dos dolores que activan la compra</p>
+        <div class="pain-grid">
+          <div class="pain-card">
+            <p class="pain-num">DOLOR 01</p>
+            <p class="pain-text">Las básicas locales no tienen el calce ni la tela de las internacionales</p>
+            <p class="pain-sub">Probó. Compró. Decepcionó. La tela es distinta, el calce es impredecible, la consistencia no existe. No es prejuicio: es experiencia acumulada.</p>
+          </div>
+          <div class="pain-card">
+            <p class="pain-num">DOLOR 02</p>
+            <p class="pain-text">Tiene que viajar o pagar shipping caro para comprarse bien</p>
+            <p class="pain-sub">Stock out, espera, costos de importación. La solución que encontró afuera no debería requerir un vuelo. Quiere esa misma lógica disponible en Argentina.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-voice">
+        <span class="voice-label">Cómo le habla<br>UNO × UNO</span>
+        <div>
+          <p class="voice-text">Hablarle desde el conocimiento compartido. No explicarle qué es una buena remera — ya lo sabe. Mostrarle que UNO × UNO opera con la misma lógica: consistencia de calce, consistencia de tela, consistencia de resultado.</p>
+          <p class="voice-claim">"Mismo calce. Misma sensación. Mismo resultado."</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ──────────────────── PERSONA 3 ── -->
+  <section class="persona" id="p3">
+    <div class="persona-inner">
+
+      <div class="persona-top">
+        <div class="persona-photo">
+          <!-- Reemplazar src con la foto generada: persona-03-minimalista.jpg -->
+          <div class="photo-placeholder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="6" stroke="#CCCBC8" stroke-width="1.5"/><path d="M4 28c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#CCCBC8" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>Foto P03</span>
+          </div>
+        </div>
+        <div>
+          <p class="persona-id">03 — Perfil Emergente</p>
+          <h2 class="persona-name">El Minimalista<br>en Proceso</h2>
+          <p class="persona-tagline">Quiere simplificar su guardarropa pero no sabe por dónde empezar. Busca un punto de partida confiable.</p>
+        </div>
+        <div class="persona-demo">
+          <p class="demo-label">Edad</p>
+          <p class="demo-item">28 – 42 años</p>
+          <p class="demo-label" style="margin-top:14px;">Perfil</p>
+          <p class="demo-item">Profesional / Creativo / Técnico urbano</p>
+          <p class="demo-label" style="margin-top:14px;">Zona</p>
+          <p class="demo-item">AMBA · AB</p>
+          <p class="demo-label" style="margin-top:14px;">Influencia</p>
+          <p class="demo-item">Capsule wardrobe, contenido minimalista</p>
+        </div>
+      </div>
+
+      <div class="persona-quote">
+        <p class="quote-text">"Tengo el placard lleno<br>y nunca tengo qué ponerme."</p>
+      </div>
+
+      <div class="persona-body">
+        <div>
+          <p class="persona-col-label">Quién es</p>
+          <p class="persona-col-text">Leyó sobre capsule wardrobe o vio contenido sobre minimalismo. Se identificó. Tiene ropa acumulada de años: compras impulsivas, regalos, cosas que "eran baratas". Siempre termina usando las mismas 3 o 4 prendas. Quiere hacer una limpieza y reconstruir con cosas que realmente funcionen. Tiene claridad sobre el ideal — no tiene claridad sobre por dónde empezar.</p>
+        </div>
+        <div>
+          <p class="persona-col-label">Qué lo trae</p>
+          <p class="persona-col-text">Hizo o está por hacer una limpieza del placard. Decidió que quiere básicas de verdad como base. Llega receptivo — ya tomó la decisión de cambiar, solo necesita confiar en el producto. El contenido de Meta lo alcanzó cuando estaba en ese momento de decisión.</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="pain-title">Los dos dolores que activan la compra</p>
+        <div class="pain-grid">
+          <div class="pain-card">
+            <p class="pain-num">DOLOR 01</p>
+            <p class="pain-text">Tiene mucha ropa pero siempre termina usando lo mismo</p>
+            <p class="pain-sub">El placard tiene 40 prendas y él rota 5. Sabe que hay un problema pero lo postergó. La limpieza que está haciendo es el detonante de la compra.</p>
+          </div>
+          <div class="pain-card">
+            <p class="pain-num">DOLOR 02</p>
+            <p class="pain-text">Compró "básicas de calidad" antes y siempre quedó a medias</p>
+            <p class="pain-sub">Hay una capa de desconfianza. Compró "lo mejor de la tienda" en marcas locales y la promesa no se cumplió. Quiere creer que existe la básica perfecta pero tiene experiencias en contra.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-voice">
+        <span class="voice-label">Cómo le habla<br>UNO × UNO</span>
+        <div>
+          <p class="voice-text">Darle el sistema, no el producto. No venderle "una remera más" — eso es exactamente lo que no quiere. Mostrarle que UNO × UNO es la base desde la que construye. Tres colores. Sistema resuelto. Punto de partida sólido.</p>
+          <p class="voice-claim">"No es una remera más. Es la que no tenés que volver a evaluar."</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ──────────────────── PERSONA 4 ── -->
+  <section class="persona" id="p4">
+    <div class="persona-inner">
+
+      <div class="persona-top">
+        <div class="persona-photo">
+          <!-- Reemplazar src con la foto generada: persona-04-pareja.jpg -->
+          <div class="photo-placeholder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="6" stroke="#CCCBC8" stroke-width="1.5"/><path d="M4 28c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#CCCBC8" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>Foto P04</span>
+          </div>
+        </div>
+        <div>
+          <p class="persona-id">04 — Perfil Indirecto</p>
+          <h2 class="persona-name">La Pareja<br>que Regala</h2>
+          <p class="persona-tagline">No usa la remera. Pero sabe exactamente qué necesita su pareja — y quiere regalar algo que realmente se use.</p>
+        </div>
+        <div class="persona-demo">
+          <p class="demo-label">Edad</p>
+          <p class="demo-item">28 – 45 años</p>
+          <p class="demo-label" style="margin-top:14px;">Perfil</p>
+          <p class="demo-item">Pareja / esposa / novia del comprador</p>
+          <p class="demo-label" style="margin-top:14px;">Zona</p>
+          <p class="demo-item">AMBA · ABC1</p>
+          <p class="demo-label" style="margin-top:14px;">Ocasión</p>
+          <p class="demo-item">Cumpleaños, Navidad, sin ocasión</p>
+        </div>
+      </div>
+
+      <div class="persona-quote">
+        <p class="quote-text">"Quiero regalar algo que use,<br>no algo que agradezca y guarde."</p>
+      </div>
+
+      <div class="persona-body">
+        <div>
+          <p class="persona-col-label">Quién es</p>
+          <p class="persona-col-text">No es el usuario final. Pero conoce mejor que nadie el placard de su pareja. Ve que siempre usa las mismas básicas, que las tiene viejas o que se queja de no encontrar buenas remeras. No le interesa la moda masculina como tema, pero entiende de calidad. Quiere hacer un regalo que tenga impacto real — no uno que se guarde por educación.</p>
+        </div>
+        <div>
+          <p class="persona-col-label">Qué lo trae</p>
+          <p class="persona-col-text">Se acerca una fecha o simplemente quiere sorprender. Busca "regalo para hombre" o "remeras básicas calidad". Lo que la convierte: la claridad del producto (pack de 3, talles precisos, garantía de cambio) y la facilidad de la decisión. Si confía en la calidad y el riesgo de equivocarse en el talle está cubierto, compra.</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="pain-title">Los dos dolores que activan la compra</p>
+        <div class="pain-grid">
+          <div class="pain-card">
+            <p class="pain-num">DOLOR 01</p>
+            <p class="pain-text">No sabe si el talle le va a quedar bien</p>
+            <p class="pain-sub">El miedo al talle es el principal freno de compra de ropa como regalo. "Y si no le queda, ¿qué hago?" — la garantía de cambio de UNO × UNO resuelve esto directamente.</p>
+          </div>
+          <div class="pain-card">
+            <p class="pain-num">DOLOR 02</p>
+            <p class="pain-text">Quiere regalar algo útil, no algo decorativo</p>
+            <p class="pain-sub">Tiene experiencia con regalos que quedan en cajón. La lógica del uniforme diario — algo que se usa todos los días — es el argumento que convierte la duda en decisión.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-voice">
+        <span class="voice-label">Cómo le habla<br>UNO × UNO</span>
+        <div>
+          <p class="voice-text">Hablarle de utilidad, no de moda. No decirle que es "el regalo perfecto" — eso suena vacío. Mostrarle que es lo que su pareja más usa, que el cambio está garantizado y que la decisión es simple: pack de 3, tres colores, talle a elegir.</p>
+          <p class="voice-claim">"Si lo usás todos los días, es el mejor regalo."</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-brand">UNO × UNO</div>
+    <div class="footer-note">Sistema de Comunicación 2026 · Uso interno · Método Uno SRL</div>
+  </footer>
+
+</body>
+</html>
