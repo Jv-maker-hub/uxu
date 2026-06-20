@@ -24,7 +24,7 @@
       padding: 20px 48px;
       background: var(--carbon);
     }
-    .nav-logo { height: 28px; display: block; }
+    .nav-logo { height: 42px; display: block; }
     .nav-label { font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); font-weight: 400; }
 
     /* HERO */
@@ -32,18 +32,27 @@
       background: var(--carbon);
       padding: 64px 48px 80px;
       border-top: 1px solid rgba(255,255,255,0.06);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: end;
     }
+    .hero-left {}
     .hero-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); margin-bottom: 24px; font-weight: 400; }
     .hero h1 {
       font-family: 'TradeGothic', sans-serif;
-      font-size: clamp(48px, 7vw, 96px);
+      font-size: clamp(60px, 7vw, 140px);
       font-weight: 700;
       text-transform: uppercase;
       color: var(--white);
       line-height: 0.92;
       letter-spacing: -0.01em;
     }
-    .hero-sub { margin-top: 28px; font-size: 14px; color: var(--mid); max-width: 480px; line-height: 1.7; font-weight: 400; }
+    .hero-right { padding-bottom: 8px; }
+    .hero-sub { font-size: 14px; color: var(--mid); line-height: 1.8; font-weight: 400; max-width: 440px; }
+    .hero-divider { width: 32px; height: 1px; background: rgba(255,255,255,0.15); margin-bottom: 24px; }
+    .hero-meta { margin-top: 32px; display: flex; flex-direction: column; gap: 8px; }
+    .hero-meta-item { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.12em; text-transform: uppercase; }
 
     /* GRID */
     main { flex: 1; padding: 0; }
@@ -79,6 +88,8 @@
 
     @media (max-width: 640px) {
       nav, .hero, footer { padding-left: 24px; padding-right: 24px; }
+      .hero { grid-template-columns: 1fr; gap: 28px; }
+      .hero-right { padding-bottom: 0; }
       .doc-card { padding: 32px 24px; }
       .doc-grid { grid-template-columns: 1fr; }
     }
@@ -92,9 +103,18 @@
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow">Documentos de marca</p>
-  <h1>Sistema<br>de Marca</h1>
-  <p class="hero-sub">Recursos internos del sistema de comunicación de UNO × UNO. Uso exclusivo del equipo.</p>
+  <div class="hero-left">
+    <p class="hero-eyebrow">Documentos de marca</p>
+    <h1>Sistema<br>de Marca</h1>
+  </div>
+  <div class="hero-right">
+    <div class="hero-divider"></div>
+    <p class="hero-sub">Recursos internos del sistema de comunicación de UNO × UNO. Uso exclusivo del equipo.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">Método Uno SRL · 2026</span>
+      <span class="hero-meta-item">Uso interno · No distribuir</span>
+    </div>
+  </div>
 </div>
 
 <main>
@@ -133,7 +153,7 @@
 </main>
 
 <footer>
-  <span class="ft-brand">UNO × UNO · Método Uno SRL</span>
+  <img src="assets/logo-negativo.png" alt="UNO × UNO" style="height:32px;opacity:0.65;">
   <span class="ft-note">2026</span>
 </footer>
 
