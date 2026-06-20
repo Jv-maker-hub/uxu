@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNO × UNO — Optimización Ecommerce</title>
+<style>
+@font-face { font-family:'TradeGothic'; src:url('assets/fonts/TradeGothicCondBold.otf') format('opentype'); font-weight:700; }
+@font-face { font-family:'Inter'; src:url('assets/fonts/Inter-Regular.otf') format('opentype'); font-weight:400; }
+@font-face { font-family:'Inter'; src:url('assets/fonts/Inter-Medium.otf') format('opentype'); font-weight:500; }
+@font-face { font-family:'Inter'; src:url('assets/fonts/Inter-Bold.otf') format('opentype'); font-weight:700; }
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--carbon:#292A2E;--dark:#555152;--mid:#CCCBC8;--warm:#EBE8E3;--cream:#F6F4F1;--white:#fff;--red:#C0392B;--green:#27AE60;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--carbon);-webkit-font-smoothing:antialiased;font-size:15px;line-height:1.6;}
+.container{max-width:1320px;margin:0 auto;width:100%;padding:0 48px;}
+
+nav{background:var(--carbon);height:88px;display:flex;align-items:center;padding:0 48px;}
+nav .container{display:flex;align-items:center;justify-content:space-between;}
+nav img{height:56px;}
+.nav-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);}
+
+.hero{background:var(--carbon);padding:64px 48px 80px;border-top:1px solid rgba(255,255,255,0.06);}
+.hero .container{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;}
+.hero-eyebrow{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:20px;}
+.hero h1{font-family:'TradeGothic',sans-serif;font-size:clamp(48px,6vw,100px);text-transform:uppercase;color:#fff;line-height:.92;}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.8;margin-top:24px;}
+.hero-meta{margin-top:24px;display:flex;flex-wrap:wrap;gap:16px;}
+.hero-chip{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.45);}
+
+/* QUICK NAV */
+.quick-nav{background:rgba(41,42,46,0.96);border-bottom:1px solid rgba(255,255,255,0.06);padding:0 48px;overflow-x:auto;}
+.quick-nav .container{display:flex;gap:0;}
+.qn-link{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);text-decoration:none;border-right:1px solid rgba(255,255,255,0.06);white-space:nowrap;transition:color .2s;}
+.qn-link:hover{color:#fff;}
+
+/* ESTADO ACTUAL */
+.estado{background:var(--white);padding:56px 48px;border-bottom:1px solid var(--warm);}
+.estado .container{display:grid;grid-template-columns:280px 1fr;gap:64px;}
+.section-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:12px;}
+.section-title{font-family:'TradeGothic',sans-serif;font-size:28px;text-transform:uppercase;color:var(--carbon);line-height:1;}
+.section-sub{font-size:14px;color:var(--dark);line-height:1.75;margin-top:12px;}
+
+.status-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--warm);}
+.status-card{background:var(--white);padding:24px 22px;}
+.status-card.good{background:#f0faf5;}
+.status-card.bad{background:#fdf5f5;}
+.status-icon{font-size:11px;font-weight:700;letter-spacing:0.12em;margin-bottom:10px;}
+.status-card.good .status-icon{color:var(--green);}
+.status-card.bad .status-icon{color:var(--red);}
+.status-title{font-size:13px;font-weight:600;color:var(--carbon);margin-bottom:6px;line-height:1.4;}
+.status-desc{font-size:12px;color:var(--dark);line-height:1.6;}
+
+/* PRIORIDADES */
+.prioridades{padding:56px 48px;border-bottom:1px solid var(--warm);}
+.prioridades.bg-cream{background:var(--cream);}
+.prioridades.bg-white{background:var(--white);}
+.prioridades.bg-carbon{background:var(--carbon);}
+
+.prio-header{display:grid;grid-template-columns:280px 1fr;gap:64px;margin-bottom:40px;align-items:start;}
+.prio-badge{display:inline-flex;align-items:center;gap:8px;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;padding:5px 12px;margin-bottom:16px;font-weight:700;}
+.prio-badge.alta{background:var(--carbon);color:#fff;}
+.prio-badge.media{background:var(--warm);color:var(--carbon);}
+.prio-badge.baja{background:var(--cream);color:var(--dark);border:1px solid var(--mid);}
+.prio-badge.dark{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);}
+
+.prio-list{display:flex;flex-direction:column;gap:1px;}
+.prio-item{background:var(--white);padding:28px 28px;}
+.prioridades.bg-cream .prio-item{background:var(--cream);}
+.prioridades.bg-carbon .prio-item{background:rgba(255,255,255,0.04);}
+.prio-item-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:10px;}
+.prio-item-title{font-size:15px;font-weight:600;color:var(--carbon);line-height:1.35;}
+.prioridades.bg-carbon .prio-item-title{color:#fff;}
+.prio-item-tag{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--warm);color:var(--dark);white-space:nowrap;flex-shrink:0;}
+.prioridades.bg-carbon .prio-item-tag{border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.4);}
+.prio-item-desc{font-size:13px;color:var(--dark);line-height:1.7;}
+.prioridades.bg-carbon .prio-item-desc{color:rgba(255,255,255,0.5);}
+.prio-item-fix{margin-top:12px;padding:12px 14px;background:var(--cream);font-size:12px;color:var(--carbon);line-height:1.65;}
+.prio-item-fix strong{font-weight:600;display:block;margin-bottom:4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;}
+.prioridades.bg-cream .prio-item-fix{background:var(--white);}
+.prioridades.bg-carbon .prio-item-fix{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.65);}
+
+/* COPY SUGERIDO */
+.copy-section{background:var(--white);padding:56px 48px;border-bottom:1px solid var(--warm);}
+.copy-section .container{display:grid;grid-template-columns:280px 1fr;gap:64px;align-items:start;}
+.copy-blocks{display:flex;flex-direction:column;gap:1px;}
+.copy-block{background:var(--cream);padding:28px 28px;}
+.copy-block-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:14px;font-weight:700;}
+.copy-block-title{font-size:12px;font-weight:600;color:var(--dark);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em;}
+.copy-text{font-family:'TradeGothic',sans-serif;font-size:22px;text-transform:uppercase;color:var(--carbon);line-height:1.1;margin-bottom:8px;}
+.copy-body{font-size:14px;color:var(--dark);line-height:1.75;}
+.copy-note{font-size:11px;color:var(--mid);margin-top:10px;padding-top:10px;border-top:1px solid var(--warm);line-height:1.5;}
+
+/* NO HACER */
+.no-hacer{background:var(--carbon);padding:56px 48px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.no-hacer .container{display:grid;grid-template-columns:280px 1fr;gap:64px;align-items:start;}
+.no-list{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.06);}
+.no-item{background:rgba(255,255,255,0.02);padding:22px 22px;}
+.no-item-x{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:8px;font-weight:700;}
+.no-item-title{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.5;margin-bottom:6px;}
+.no-item-why{font-size:11px;color:rgba(255,255,255,0.3);line-height:1.55;}
+
+/* MOBILE */
+.mobile-section{background:var(--cream);padding:56px 48px;border-bottom:1px solid var(--warm);}
+.mobile-section .container{display:grid;grid-template-columns:280px 1fr;gap:64px;align-items:start;}
+.mobile-checks{display:flex;flex-direction:column;gap:1px;}
+.mobile-check{background:var(--white);padding:20px 22px;display:flex;gap:16px;align-items:flex-start;}
+.mc-status{font-size:10px;font-weight:700;width:48px;flex-shrink:0;margin-top:2px;}
+.mc-status.ok{color:var(--green);}
+.mc-status.fix{color:var(--red);}
+.mc-status.pend{color:var(--dark);}
+.mc-text{font-size:13px;color:var(--dark);line-height:1.6;}
+.mc-text strong{color:var(--carbon);font-weight:600;}
+
+/* PRODUCTO */
+.producto-section{background:var(--white);padding:56px 48px;border-bottom:1px solid var(--warm);}
+.producto-section .container{display:grid;grid-template-columns:280px 1fr;gap:64px;align-items:start;}
+.prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--warm);}
+.prod-col{background:var(--white);padding:28px 24px;}
+.prod-col-label{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:14px;font-weight:700;}
+.prod-item{font-size:13px;color:var(--dark);padding:7px 0;border-bottom:1px solid var(--warm);line-height:1.5;display:flex;gap:10px;}
+.prod-item::before{content:'→';color:var(--mid);flex-shrink:0;}
+.prod-item:last-child{border-bottom:none;}
+
+/* FLUJO */
+.flujo-section{background:var(--cream);padding:56px 48px;border-bottom:1px solid var(--warm);}
+.flujo-section .container{display:grid;grid-template-columns:280px 1fr;gap:64px;align-items:start;}
+.flujo-steps{display:flex;flex-direction:column;gap:1px;}
+.flujo-step{background:var(--white);padding:24px 24px;display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:start;}
+.flujo-num{font-family:'TradeGothic',sans-serif;font-size:32px;color:var(--mid);line-height:1;}
+.flujo-title{font-size:14px;font-weight:600;color:var(--carbon);margin-bottom:6px;}
+.flujo-desc{font-size:13px;color:var(--dark);line-height:1.65;}
+.flujo-copy{margin-top:10px;padding:10px 12px;background:var(--cream);font-size:12px;color:var(--dark);line-height:1.6;font-style:italic;}
+
+footer{background:var(--carbon);height:72px;display:flex;align-items:center;padding:0 48px;border-top:1px solid rgba(255,255,255,0.06);}
+footer .container{display:flex;align-items:center;justify-content:space-between;width:100%;}
+.ft-img{height:40px;opacity:.5;}
+.ft-note{font-size:11px;color:var(--dark);}
+
+#back-top{position:fixed;bottom:28px;right:28px;width:44px;height:44px;background:var(--carbon);border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:all .3s;z-index:200;}
+#back-top.visible{opacity:1;}
+#back-top svg{stroke:#fff;opacity:.7;}
+
+@media(max-width:900px){
+  .hero .container,.estado .container,.prio-header,.copy-section .container,.no-hacer .container,.mobile-section .container,.producto-section .container,.flujo-section .container{grid-template-columns:1fr;gap:32px;}
+  .status-grid,.no-list,.prod-grid{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .container{padding:0 20px;}
+  nav,.hero,.estado,.prioridades,.copy-section,.no-hacer,.mobile-section,.producto-section,.flujo-section,footer{padding-left:20px;padding-right:20px;}
+  .quick-nav{padding:0 12px;}
+}
+</style>
+</head>
+<body>
+
+<nav id="top">
+  <div class="container">
+    <a href="/" style="display:block;line-height:0;"><img src="assets/logo-negativo.png" alt="UNO × UNO"></a>
+    <span class="nav-label">05 — Ecommerce</span>
+  </div>
+</nav>
+
+<div class="quick-nav">
+  <div class="container" style="padding:0;">
+    <a class="qn-link" href="#estado">Estado actual</a>
+    <a class="qn-link" href="#alta">Prioridad alta</a>
+    <a class="qn-link" href="#media">Prioridad media</a>
+    <a class="qn-link" href="#baja">Prioridad baja</a>
+    <a class="qn-link" href="#copy">Copy sugerido</a>
+    <a class="qn-link" href="#mobile">Mobile</a>
+    <a class="qn-link" href="#producto">Página de producto</a>
+    <a class="qn-link" href="#flujo">Flujo post-compra</a>
+    <a class="qn-link" href="#no-hacer">Qué NO hacer</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="container">
+    <div>
+      <p class="hero-eyebrow">Documento de trabajo</p>
+      <h1>Optimización<br>Ecommerce</h1>
+    </div>
+    <div>
+      <p class="hero-sub">Diagnóstico y plan de acción para metodounoxuno.com.ar. Objetivo: vender desde Meta Ads sin perder el tono premium, sobrio y minimalista de UNO × UNO.</p>
+      <div class="hero-meta">
+        <span class="hero-chip">Tiendanube · Tema Recife</span>
+        <span class="hero-chip">Versión junio 2026</span>
+        <span class="hero-chip">Uso interno · Método Uno SRL</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ESTADO ACTUAL -->
+<div class="estado" id="estado">
+  <div class="container">
+    <div>
+      <p class="section-label">Diagnóstico</p>
+      <p class="section-title">Estado actual</p>
+      <p class="section-sub">Lo que ya funciona y lo que hay que resolver antes de lanzar pauta.</p>
+    </div>
+    <div>
+      <div class="status-grid">
+        <div class="status-card good">
+          <p class="status-icon">✓ BIEN</p>
+          <p class="status-title">Paleta de colores correcta</p>
+          <p class="status-desc">Carbon (#292A2E) y Cream (#F6F4F1) bien configurados en el tema. El sistema visual de marca está respetado.</p>
+        </div>
+        <div class="status-card good">
+          <p class="status-icon">✓ BIEN</p>
+          <p class="status-title">Facebook Pixel activo</p>
+          <p class="status-desc">Pixel 2483967292063308 instalado y funcionando. Base para retargeting y eventos de conversión.</p>
+        </div>
+        <div class="status-card good">
+          <p class="status-icon">✓ BIEN</p>
+          <p class="status-title">Copy de home con buena dirección</p>
+          <p class="status-desc">"Tenés remeras. Pero no tenés resuelto qué ponerte" y "Elegí tu pack" son mensajes sólidos. La lógica de la propuesta está bien planteada.</p>
+        </div>
+        <div class="status-card good">
+          <p class="status-icon">✓ BIEN</p>
+          <p class="status-title">Redes sociales conectadas</p>
+          <p class="status-desc">Facebook, Instagram, TikTok, Pinterest y YouTube configurados. La infraestructura social está lista.</p>
+        </div>
+        <div class="status-card bad">
+          <p class="status-icon">✗ RESOLVER</p>
+          <p class="status-title">Slider en el hero</p>
+          <p class="status-desc">El hero usa un swiper/slider con múltiples slides. En mobile fragmenta el mensaje y ralentiza la carga. El primer slide tiene que vender solo.</p>
+        </div>
+        <div class="status-card bad">
+          <p class="status-icon">✗ RESOLVER</p>
+          <p class="status-title">Título y meta desc genéricos</p>
+          <p class="status-desc">"Tienda Online de Uno x Uno" y la descripción default de Tiendanube no comunican nada de la marca. Impacta en SEO y en la percepción al compartir links.</p>
+        </div>
+        <div class="status-card bad">
+          <p class="status-icon">✗ RESOLVER</p>
+          <p class="status-title">Copy con promesas absolutas</p>
+          <p class="status-desc">"La decisión resuelta para siempre" y "Tres remeras que siempre quedan bien y siempre se sienten bien" son afirmaciones que suenan exageradas. Moderarlas.</p>
+        </div>
+        <div class="status-card bad">
+          <p class="status-icon">✗ RESOLVER</p>
+          <p class="status-title">Sin Google Analytics 4</p>
+          <p class="status-desc">El ga4_measurement_id está vacío. Sin GA4, no tenemos datos de comportamiento en la web: páginas vistas, scroll, tiempo en producto, embudo de compra.</p>
+        </div>
+        <div class="status-card bad">
+          <p class="status-icon">✗ RESOLVER</p>
+          <p class="status-title">Navegación demasiado escueta</p>
+          <p class="status-desc">Solo INICIO / PRODUCTOS / CONTACTO. Sin acceso directo a los packs desde el header. El usuario que llega de un ad necesita llegar al producto en un clic.</p>
+        </div>
+        <div class="status-card bad">
+          <p class="status-icon">✗ RESOLVER</p>
+          <p class="status-title">Tipografía inconsistente con la marca</p>
+          <p class="status-desc">El tema usa Oswald para titulares y Barlow Condensed para nav. La marca usa Trade Gothic. Tiendanube permite cargar fuentes custom — hay que alinearlas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRIORIDAD ALTA -->
+<div class="prioridades bg-white" id="alta">
+  <div class="container">
+    <div class="prio-header">
+      <div>
+        <span class="prio-badge alta">Prioridad alta</span>
+        <p class="section-title">Cambios que<br>impactan hoy</p>
+        <p class="section-sub">Sin estos, la pauta no puede funcionar bien. Son el mínimo viable para empezar a correr anuncios.</p>
+      </div>
+      <div></div>
+    </div>
+    <div class="prio-list">
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">Reemplazar el slider por un hero fijo de un solo slide</p>
+          <span class="prio-item-tag">Home · Hero</span>
+        </div>
+        <p class="prio-item-desc">El slider fragmenta el mensaje y penaliza la velocidad de carga en mobile. Si el primer slide no convierte, los siguientes tampoco. Dejar uno solo, con foto real del producto, headline fuerte y CTA directo. En Tiendanube: desactivar "mostrar múltiples slides" o eliminar los slides secundarios.</p>
+        <div class="prio-item-fix"><strong>Fix concreto</strong>Dejar un único slide. Foto: las tres remeras apiladas o en uso real. Headline: "El uniforme diario." Sub: "Pack de 3 remeras de algodón peinado. Mismo calce siempre." CTA: "Elegir mi pack" → link directo a /productos/.</div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">Corregir el título y la meta descripción</p>
+          <span class="prio-item-tag">SEO · Marca</span>
+        </div>
+        <p class="prio-item-desc">El título "Tienda Online de Uno x Uno" es la descripción default de Tiendanube. No comunica nada de la propuesta de valor. En Tiendanube: Configuración → SEO → Título de la tienda y Descripción.</p>
+        <div class="prio-item-fix"><strong>Título sugerido</strong>UNO × UNO — El uniforme diario. Pack de 3 remeras básicas premium.<br><br><strong>Descripción sugerida</strong>Pack de 3 remeras de algodón peinado 100%. Negro, blanco y gris. Mismo calce siempre. Envío a todo el país. Garantía de cambio.</div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">Configurar Google Analytics 4</p>
+          <span class="prio-item-tag">Analytics · Performance</span>
+        </div>
+        <p class="prio-item-desc">El ga4_measurement_id está vacío. Sin GA4 no podemos ver el embudo real de compra, ni medir scroll depth, ni saber en qué punto abandonan. Es el primer dato que necesitamos para optimizar.</p>
+        <div class="prio-item-fix"><strong>Fix concreto</strong>Crear propiedad en Google Analytics 4. Copiar el Measurement ID (G-XXXXXXXX). En Tiendanube: Configuración → Analítica → Google Analytics 4 → pegar el ID.</div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">Agregar acceso directo a packs en el header</p>
+          <span class="prio-item-tag">Navegación · UX</span>
+        </div>
+        <p class="prio-item-desc">El menú actual solo tiene INICIO / PRODUCTOS / CONTACTO. Quien llega de un ad y no encuentra el pack en 2 segundos, rebota. El header tiene que resolver la navegación sin necesidad de pensar.</p>
+        <div class="prio-item-fix"><strong>Nav sugerida</strong>PACKS → submenu: Pack Negro / Pack Blanco / Pack Gris / Pack Esencial / Ver todo · NOSOTROS (opcional) · CONTACTO</div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">Moderar el copy con promesas absolutas</p>
+          <span class="prio-item-tag">Copy · Confianza</span>
+        </div>
+        <p class="prio-item-desc">"Para siempre", "siempre quedan bien y siempre se sienten bien" suenan a exageración. La marca tiene que sonar segura, no exagerada. Ver sección de copy sugerido.</p>
+        <div class="prio-item-fix"><strong>Cambios inmediatos</strong>"La decisión resuelta para siempre" → "La decisión resuelta." · "Siempre quedan bien y siempre se sienten bien" → "Mismo calce. Misma sensación. Mismo resultado."</div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">Verificar que el CTA lleva directo al producto</p>
+          <span class="prio-item-tag">Conversión · UX</span>
+        </div>
+        <p class="prio-item-desc">Cuando alguien hace clic en un ad de un pack específico, debe llegar a la página de ese pack — no a la home ni a una categoría genérica. Revisar todos los UTMs y destinos de los ads. El tráfico frío puede ir a home. El tráfico de producto va directo al producto.</p>
+        <div class="prio-item-fix"><strong>Fix concreto</strong>Ads por pack → link directo a /productos/pack-negro/, /productos/pack-blanco/, etc. Ads de marca → home. Retargeting → producto que vieron.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRIORIDAD MEDIA -->
+<div class="prioridades bg-cream" id="media">
+  <div class="container">
+    <div class="prio-header">
+      <div>
+        <span class="prio-badge media">Prioridad media</span>
+        <p class="section-title">Confianza<br>y contenido</p>
+        <p class="section-sub">Cambios que mejoran la conversión de quien llegó pero todavía no compró.</p>
+      </div>
+      <div></div>
+    </div>
+    <div class="prio-list">
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">Expandir la página de producto</p>
+          <span class="prio-item-tag">Producto · Conversión</span>
+        </div>
+        <p class="prio-item-desc">La página de producto tiene que funcionar como una landing si alguien llega desde un anuncio sin haber visto nada antes. Hoy probablemente tiene foto, precio y talle. Necesita mucho más. Ver sección "Página de producto" para el detalle completo.</p>
+        <div class="prio-item-fix"><strong>Mínimo viable</strong>4 fotos del producto + tabla de talles visual + descripción en dos bloques (emocional + racional) + política de cambio en 2 líneas + tiempo de envío.</div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">Agregar señales de confianza sin inventar reviews</p>
+          <span class="prio-item-tag">Trust · Social proof</span>
+        </div>
+        <p class="prio-item-desc">No inventar reseñas. Pero sí mostrar: política de cambio visible en la home y en el producto, formas de pago con logos, tiempo de entrega claro, y una dirección o mail de contacto real. Todo eso reduce el miedo a comprar en una marca nueva.</p>
+        <div class="prio-item-fix"><strong>Bloque de confianza sugerido (home y producto)</strong>Garantía de cambio · Envío a todo el país · Pago seguro · +X packs vendidos (cuando sea un número real).</div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">Sistema para recolectar reviews reales</p>
+          <span class="prio-item-tag">Social proof · Post-compra</span>
+        </div>
+        <p class="prio-item-desc">Sin reviews reales no mostrar nada. Para recolectarlas: email automático a los 14 días post-compra con una sola pregunta. En Tiendanube hay integración nativa con apps de reseñas. Las primeras 20 reseñas reales son el objetivo inicial.</p>
+        <div class="prio-item-fix"><strong>Email sugerido (día 14)</strong>Asunto: "¿Cómo te quedaron las remeras?" · Cuerpo: "Hola [nombre], pasaron dos semanas desde que llegó tu pack. ¿Cómo estás usando las remeras? Nos interesa saber. Tres líneas alcanzan." + link a formulario.</div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">Captura de email sin descuento</p>
+          <span class="prio-item-tag">Leads · Email marketing</span>
+        </div>
+        <p class="prio-item-desc">No usar pop-up con descuento en el primer visit — rompe el posicionamiento. En cambio, proponer algo que tenga valor real para el visitante sin necesidad de bajar el precio.</p>
+        <div class="prio-item-fix"><strong>Opciones coherentes con la marca</strong>(a) Aviso cuando un talle/color se reponga. (b) Acceso antes que nadie a nuevos colores si se agregan. (c) Guía de talles descargable. Ninguna de estas requiere descuento y todas tienen utilidad real.</div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">Mostrar el precio por remera como dato de transparencia</p>
+          <span class="prio-item-tag">Pricing · Copy</span>
+        </div>
+        <p class="prio-item-desc">$119.990 el pack puede parecer mucho si el visitante no calcula. Mostrar "$40.000 por remera" no como descuento sino como dato de contexto. No usar precio tachado ni "antes / ahora".</p>
+        <div class="prio-item-fix"><strong>Copy sugerido en la página de producto</strong>"$119.990 el pack · $40.000 por remera · Algodón peinado 100% · Envío a todo el país."</div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">Tabla de talles visual y accesible en mobile</p>
+          <span class="prio-item-tag">UX · Mobile</span>
+        </div>
+        <p class="prio-item-desc">La duda de talle es una de las principales razones de abandono en ropa. Si la guía de talles requiere zoom o es un PDF, la fricción aumenta. Tiene que ser una tabla HTML simple, visible sin clic adicional en mobile.</p>
+        <div class="prio-item-fix"><strong>Fix concreto</strong>Tabla con columnas: Talle / Contorno de pecho / Largo / Contorno de cintura. Agregar nota: "¿Dudás entre dos talles? Recomendamos el más grande para mayor comodidad."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRIORIDAD BAJA -->
+<div class="prioridades bg-carbon" id="baja">
+  <div class="container">
+    <div class="prio-header">
+      <div>
+        <span class="prio-badge dark">Prioridad baja</span>
+        <p class="section-title" style="color:#fff;">Automatizaciones<br>y experimentos</p>
+        <p class="section-sub" style="color:rgba(255,255,255,0.45);">Para después del primer mes con tráfico real. No arrancar por acá.</p>
+      </div>
+      <div></div>
+    </div>
+    <div class="prio-list">
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">A/B test del headline del hero</p>
+          <span class="prio-item-tag" style="border-color:rgba(255,255,255,0.1);">Experimento</span>
+        </div>
+        <p class="prio-item-desc">Testear dos versiones del headline principal. Versión A: "El uniforme diario." Versión B: "Tres remeras. La decisión de una vez." Solo tiene sentido con tráfico consistente — mínimo 500 visitas por versión.</p>
+      </div>
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">Integrar Google Ads para Shopping</p>
+          <span class="prio-item-tag" style="border-color:rgba(255,255,255,0.1);">Performance</span>
+        </div>
+        <p class="prio-item-desc">Cuando haya historial de ventas y un catálogo bien configurado, Google Shopping puede capturar intención de compra directa ("pack remeras básicas Argentina"). Prioridad baja porque el foco inicial es Meta.</p>
+      </div>
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">Integrar UGC en la página de producto</p>
+          <span class="prio-item-tag" style="border-color:rgba(255,255,255,0.1);">Contenido</span>
+        </div>
+        <p class="prio-item-desc">Cuando haya videos reales de clientes usando las remeras, integrarlos en la página de producto. No antes. El UGC inventado o de baja calidad hace más daño que tener la sección vacía.</p>
+      </div>
+      <div class="prio-item">
+        <div class="prio-item-header">
+          <p class="prio-item-title">Personalizar la confirmación de compra</p>
+          <span class="prio-item-tag" style="border-color:rgba(255,255,255,0.1);">Post-compra</span>
+        </div>
+        <p class="prio-item-desc">El email de confirmación de Tiendanube es genérico. Reemplazarlo por uno con tono de marca: directo, sin frases hechas, con información útil (cuándo llega, qué hacer si hay un problema).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COPY SUGERIDO -->
+<div class="copy-section" id="copy">
+  <div class="container">
+    <div>
+      <p class="section-label">Copy de marca</p>
+      <p class="section-title">Textos<br>sugeridos</p>
+      <p class="section-sub">Copiar y usar directamente en Tiendanube. Coherentes con el tono de la marca: directo, adulto, sin exageración.</p>
+    </div>
+    <div class="copy-blocks">
+      <div class="copy-block">
+        <p class="copy-block-label">Hero · Home · Headline</p>
+        <p class="copy-text">El uniforme diario.</p>
+        <p class="copy-body">Pack de 3 remeras de algodón peinado 100%. Negro, blanco o gris — o uno de cada uno. Mismo calce siempre.</p>
+        <p class="copy-note">CTA: "Elegir mi pack" o "Ver los packs" — no "Ver más".</p>
+      </div>
+      <div class="copy-block">
+        <p class="copy-block-label">Home · Sección secundaria</p>
+        <p class="copy-text">Tenés remeras.<br>Pero no tenés<br>resuelto qué ponerte.</p>
+        <p class="copy-body">Tres básicas que siempre están listas. Mismo calce, misma sensación, mismo resultado — día a día.</p>
+        <p class="copy-note">Este texto ya está en la web y está bien. Mantenerlo. Solo moderar "para siempre" → "día a día".</p>
+      </div>
+      <div class="copy-block">
+        <p class="copy-block-label">Página de producto · Descripción emocional</p>
+        <p class="copy-text">Una decisión menos en el placard.</p>
+        <p class="copy-body">UNO × UNO no es una remera más. Es el pack que resuelve las remeras de todos los días. Mismo calce después del primer lavado, después del décimo, después del centésimo. Comprás el pack una vez. La búsqueda puede terminar acá.</p>
+        <p class="copy-note">Evitar "para siempre", "perfecta", "nunca falla". Decir lo que es sin prometer lo que no se puede garantizar.</p>
+      </div>
+      <div class="copy-block">
+        <p class="copy-block-label">Página de producto · Descripción racional</p>
+        <p class="copy-text">Lo que la hace diferente.</p>
+        <p class="copy-body">Algodón peinado 100% jersey · Calce regular · Gramaje ___g/m² · Cuello redondo reforzado · Costuras dobles · Negro, blanco y gris disponibles · Talles S a XXL.</p>
+        <p class="copy-note">Completar el gramaje cuando esté disponible. Esta sección es factual — no agregar adjetivos.</p>
+      </div>
+      <div class="copy-block">
+        <p class="copy-block-label">Garantía y cambios</p>
+        <p class="copy-text">Cambio simple.</p>
+        <p class="copy-body">Si no es lo que esperabas, la cambiamos. Aunque la hayas usado. Escribinos a [email o WhatsApp] y lo resolvemos.</p>
+        <p class="copy-note">Breve y claro. Sin "política de devolución" ni lenguaje legal. El tono es de confianza, no de contrato.</p>
+      </div>
+      <div class="copy-block">
+        <p class="copy-block-label">Envío</p>
+        <p class="copy-text">Envío a todo el país.</p>
+        <p class="copy-body">Despachamos en [X] días hábiles. Tiempo estimado de entrega: [X–X] días según destino. Te mandamos el tracking cuando sale.</p>
+        <p class="copy-note">Completar los tiempos reales. No prometer "entrega rápida" si no es garantizable.</p>
+      </div>
+      <div class="copy-block">
+        <p class="copy-block-label">Captura de email (sin descuento)</p>
+        <p class="copy-text">Te avisamos primero.</p>
+        <p class="copy-body">Si un talle o color se agota, sos el primero en saber cuando vuelve. Dejá tu mail.</p>
+        <p class="copy-note">Alternativa: "Cuando haya algo nuevo, te lo contamos antes." Sin descuento, sin newsletter genérico.</p>
+      </div>
+      <div class="copy-block">
+        <p class="copy-block-label">Preguntas frecuentes (FAQ) — selección</p>
+        <p class="copy-text">Lo que más nos preguntan.</p>
+        <p class="copy-body">¿Cómo elijo el talle? Ver la guía de talles — si dudás entre dos, tomá el más grande para mayor comodidad.<br><br>¿Puedo comprar remeras sueltas? No. Solo vendemos packs de 3. Es parte de la propuesta.<br><br>¿Qué pasa si no me queda bien? Lo cambiamos, aunque la hayas usado. Sin formulario complicado.<br><br>¿Cuánto tarda el envío? [X–X] días hábiles según destino. Te llegará el tracking cuando despachemos.</p>
+        <p class="copy-note">Agregar estas preguntas en una sección FAQ en la página de producto. No en una página separada.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MOBILE -->
+<div class="mobile-section" id="mobile">
+  <div class="container">
+    <div>
+      <p class="section-label">Mobile first</p>
+      <p class="section-title">Checklist<br>mobile</p>
+      <p class="section-sub">El 80%+ del tráfico de Meta llega en celular. Estas son las cosas a revisar en 390px de ancho.</p>
+    </div>
+    <div class="mobile-checks">
+      <div class="mobile-check">
+        <span class="mc-status fix">FIJAR</span>
+        <p class="mc-text"><strong>Hero: de slider a imagen fija.</strong> El swiper agrega peso de carga y fragmenta el mensaje. Un solo hero fijo carga más rápido y comunica mejor. Fix: eliminar slides secundarios en el editor de Tiendanube.</p>
+      </div>
+      <div class="mobile-check">
+        <span class="mc-status fix">FIJAR</span>
+        <p class="mc-text"><strong>CTA visible sin scroll.</strong> El botón "Elegir mi pack" tiene que verse completo sin hacer scroll en mobile. Revisar en iPhone SE (375px) y iPhone 14 (390px). Si no se ve, ajustar la altura del hero o el tamaño del texto.</p>
+      </div>
+      <div class="mobile-check">
+        <span class="mc-status fix">FIJAR</span>
+        <p class="mc-text"><strong>Tabla de talles sin zoom.</strong> La tabla de talles tiene que ser legible sin pellizcar la pantalla. Si está como imagen o PDF, reemplazar por tabla HTML dentro de la descripción del producto.</p>
+      </div>
+      <div class="mobile-check">
+        <span class="mc-status fix">FIJAR</span>
+        <p class="mc-text"><strong>Fotos del producto claras en mobile.</strong> La foto principal tiene que mostrar el producto con claridad en una pantalla pequeña. Evitar fotos muy oscuras o con mucho espacio vacío alrededor del producto.</p>
+      </div>
+      <div class="mobile-check">
+        <span class="mc-status pend">REVISAR</span>
+        <p class="mc-text"><strong>Velocidad de carga.</strong> Medir con Google PageSpeed Insights en versión mobile. Objetivo: LCP menor a 2.5 segundos. Si el hero tiene una imagen muy pesada, comprimirla a WebP.</p>
+      </div>
+      <div class="mobile-check">
+        <span class="mc-status pend">REVISAR</span>
+        <p class="mc-text"><strong>Tamaño de texto en cards de producto.</strong> El nombre del pack y el precio tienen que leerse sin esfuerzo. Mínimo 15px para cuerpo de texto, 13px para etiquetas.</p>
+      </div>
+      <div class="mobile-check">
+        <span class="mc-status ok">OK</span>
+        <p class="mc-text"><strong>Padding lateral adecuado.</strong> Tiendanube Recife maneja bien los márgenes en mobile. Verificar que no haya contenido que se corte en los bordes.</p>
+      </div>
+      <div class="mobile-check">
+        <span class="mc-status ok">OK</span>
+        <p class="mc-text"><strong>Carrito y checkout nativos de Tiendanube.</strong> El checkout de Tiendanube está optimizado para mobile. No tocar ni personalizar el flujo de compra a menos que sea estrictamente necesario.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PÁGINA DE PRODUCTO -->
+<div class="producto-section" id="producto">
+  <div class="container">
+    <div>
+      <p class="section-label">Conversión</p>
+      <p class="section-title">Página de<br>producto</p>
+      <p class="section-sub">Si viene tráfico directo de un ad a este producto, la página tiene que vender sola. Estructura sugerida.</p>
+    </div>
+    <div>
+      <div class="prod-grid">
+        <div class="prod-col">
+          <p class="prod-col-label">Contenido mínimo requerido</p>
+          <p class="prod-item">Foto 1: producto solo sobre fondo neutro (crema o carbón)</p>
+          <p class="prod-item">Foto 2: detalle de tela — cuello, costura, gramaje visible</p>
+          <p class="prod-item">Foto 3: remera en uso real (hombre real, no modelo de estudio)</p>
+          <p class="prod-item">Foto 4: los tres colores del pack apilados</p>
+          <p class="prod-item">Nombre del pack + precio + selector de talle</p>
+          <p class="prod-item">CTA "Agregar al carrito" visible en mobile sin scroll</p>
+          <p class="prod-item">Descripción emocional (qué resuelve)</p>
+          <p class="prod-item">Descripción racional (tela, calce, medidas, cuidados)</p>
+          <p class="prod-item">Tabla de talles visible sin zoom</p>
+          <p class="prod-item">Garantía de cambio en 2 líneas</p>
+          <p class="prod-item">Tiempo de envío claro</p>
+          <p class="prod-item">Preguntas frecuentes (talle, pack, cambio, envío)</p>
+        </div>
+        <div class="prod-col">
+          <p class="prod-col-label">Estructura de la descripción</p>
+          <p class="prod-item"><strong>Bloque 1 — Qué resuelve:</strong> Una decisión menos en el placard. El pack que cierra el capítulo ropa.</p>
+          <p class="prod-item"><strong>Bloque 2 — El producto:</strong> Algodón peinado 100%, gramaje, calce regular, costuras. Datos concretos, sin adjetivos.</p>
+          <p class="prod-item"><strong>Bloque 3 — Tabla de talles:</strong> Contorno pecho / Largo / Cintura. Con nota: "Si dudás entre dos, tomá el más grande."</p>
+          <p class="prod-item"><strong>Bloque 4 — Garantía + envío:</strong> "Lo cambiamos, aunque la hayas usado. [X–X] días de entrega según destino."</p>
+          <p class="prod-item"><strong>Bloque 5 — FAQ:</strong> 4–5 preguntas frecuentes. Inline en la página, no en un link externo.</p>
+          <p class="prod-col-label" style="margin-top:20px;">Para más adelante (cuando haya material)</p>
+          <p class="prod-item">Video o UGC real del producto en uso</p>
+          <p class="prod-item">Reseñas de compradores reales</p>
+          <p class="prod-item">Bloque de "productos relacionados" (otros packs)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLUJO POST-COMPRA -->
+<div class="flujo-section" id="flujo">
+  <div class="container">
+    <div>
+      <p class="section-label">Retención</p>
+      <p class="section-title">Flujo<br>post-compra</p>
+      <p class="section-sub">Tres emails. Sin urgencia falsa. Solo información útil en el momento correcto.</p>
+    </div>
+    <div class="flujo-steps">
+      <div class="flujo-step">
+        <div class="flujo-num">01</div>
+        <div>
+          <p class="flujo-title">Email de carrito abandonado — 1 hora después</p>
+          <p class="flujo-desc">Recordatorio simple. Sin urgencia, sin descuento, sin "¡Se acaba!" Tono: útil y directo.</p>
+          <div class="flujo-copy">Asunto: "Te quedaste a un paso." · Cuerpo: "Tu pack todavía está disponible. Si tenés dudas de talle, escribinos — lo resolvemos en el momento." → CTA: "Completar mi pedido"</div>
+        </div>
+      </div>
+      <div class="flujo-step">
+        <div class="flujo-num">02</div>
+        <div>
+          <p class="flujo-title">Email de carrito abandonado — 24 horas después</p>
+          <p class="flujo-desc">Resolver objeciones. Sin vender directamente. Responder las dudas más frecuentes.</p>
+          <div class="flujo-copy">Asunto: "Sobre el talle y el cambio." · Cuerpo: "Si dudás entre dos talles, tomá el más grande. Si cuando llegue no es lo que esperabas, lo cambiamos — aunque la hayas usado. Sin formulario, sin letra chica." → CTA: "Ver el pack"</div>
+        </div>
+      </div>
+      <div class="flujo-step">
+        <div class="flujo-num">03</div>
+        <div>
+          <p class="flujo-title">Email de carrito abandonado — 72 horas después</p>
+          <p class="flujo-desc">Cierre. Solo mencionar escasez si hay stock limitado real. Si no, cerrar con la propuesta de valor.</p>
+          <div class="flujo-copy">Asunto: "Una decisión menos en el placard." · Cuerpo: "El pack está disponible. Tres remeras que resuelven las remeras de todos los días. Mismo calce siempre." → CTA: "Elegir mi pack"</div>
+        </div>
+      </div>
+      <div class="flujo-step">
+        <div class="flujo-num">04</div>
+        <div>
+          <p class="flujo-title">Email de reseña — 14 días después de la compra</p>
+          <p class="flujo-desc">El momento en que ya usaron las remeras y tienen una opinión formada. Sin formulario largo.</p>
+          <div class="flujo-copy">Asunto: "¿Cómo te quedaron?" · Cuerpo: "Pasaron dos semanas desde que llegó tu pack. ¿Cómo te quedaron las remeras? Tres líneas alcanzan — nos ayuda a mejorar." → Link a formulario o respuesta directa por email.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUÉ NO HACER -->
+<div class="no-hacer" id="no-hacer">
+  <div class="container">
+    <div>
+      <p class="section-label" style="color:var(--mid);">Límites de marca</p>
+      <p class="section-title" style="color:#fff;">Qué NO hacer</p>
+      <p class="section-sub" style="color:rgba(255,255,255,0.45);">Cada una de estas cosas rompe el posicionamiento. Son tan importantes como lo que sí hay que hacer.</p>
+    </div>
+    <div class="no-list">
+      <div class="no-item">
+        <p class="no-item-x">✗ NO</p>
+        <p class="no-item-title">Pop-up con descuento en el primer visit</p>
+        <p class="no-item-why">Rompe el primer mensaje de marca. Si el primer contacto es un descuento, todo lo que decimos sobre "precio que vale lo que es" pierde credibilidad.</p>
+      </div>
+      <div class="no-item">
+        <p class="no-item-x">✗ NO</p>
+        <p class="no-item-title">Badges de urgencia falsa</p>
+        <p class="no-item-why">"¡Solo quedan 3!" o "Oferta por tiempo limitado" cuando no es verdad. Si hay urgencia real, sí. Si no hay, no.</p>
+      </div>
+      <div class="no-item">
+        <p class="no-item-x">✗ NO</p>
+        <p class="no-item-title">Countdown timer decorativo</p>
+        <p class="no-item-why">Un timer que siempre se reinicia o que no corresponde a ningún evento real destruye la confianza en cuanto el usuario lo nota.</p>
+      </div>
+      <div class="no-item">
+        <p class="no-item-x">✗ NO</p>
+        <p class="no-item-title">Reviews con fotos de avatares genéricos</p>
+        <p class="no-item-why">Las reviews inventadas o compradas se notan. Peor que no tener reviews es tener reviews que parecen falsas. Esperar a tener las reales.</p>
+      </div>
+      <div class="no-item">
+        <p class="no-item-x">✗ NO</p>
+        <p class="no-item-title">"Compraron X personas hoy"</p>
+        <p class="no-item-why">Social proof fabricado. Si la cifra no es real y actualizada en tiempo real, no ponerla.</p>
+      </div>
+      <div class="no-item">
+        <p class="no-item-x">✗ NO</p>
+        <p class="no-item-title">Describir el producto como "premium" en el copy</p>
+        <p class="no-item-why">El adjetivo "premium" lo abarata. Si el producto es bueno, lo describen los atributos concretos: algodón peinado, gramaje, calce que no cambia. No el adjetivo.</p>
+      </div>
+      <div class="no-item">
+        <p class="no-item-x">✗ NO</p>
+        <p class="no-item-title">Sección de outfits o "cómo combinarlo"</p>
+        <p class="no-item-why">UNO × UNO no es una marca de moda. Si se habla de outfits o combinaciones, el posicionamiento se mueve hacia donde no queremos ir.</p>
+      </div>
+      <div class="no-item">
+        <p class="no-item-x">✗ NO</p>
+        <p class="no-item-title">Descuento permanente como táctica de fondo</p>
+        <p class="no-item-why">Un descuento de lanzamiento puntual puede tener sentido. Un descuento siempre disponible dice que el precio real es el precio con descuento — y eso destruye el posicionamiento de precio.</p>
+      </div>
+      <div class="no-item">
+        <p class="no-item-x">✗ NO</p>
+        <p class="no-item-title">Precio tachado sin ser una rebaja real</p>
+        <p class="no-item-why">Si el precio "antes" es inventado, el comprador lo percibe. Solo usar precio tachado si hubo un precio anterior real y la rebaja es genuina.</p>
+      </div>
+      <div class="no-item">
+        <p class="no-item-x">✗ NO</p>
+        <p class="no-item-title">Comparaciones directas con marcas internacionales por nombre</p>
+        <p class="no-item-why">"Igual que Uniqlo" o "Como H&M pero local" posiciona a UNO × UNO como segundón. La marca tiene que sostenerse desde sus propios atributos.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</div>
+
+<footer>
+  <div class="container">
+    <img src="assets/logo-negativo.png" alt="UNO × UNO" class="ft-img">
+    <span class="ft-note">Optimización Ecommerce 2026 · Método Uno SRL</span>
+  </div>
+</footer>
+
+<script>
+const btn = document.getElementById('back-top');
+window.addEventListener('scroll', () => btn.classList.toggle('visible', window.scrollY > 400));
+</script>
+</body>
+</html>
