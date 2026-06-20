@@ -222,6 +222,55 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
   #back-top{bottom:16px;right:16px;}
   .hip-table{display:block;overflow-x:auto;}
 }
+
+/* ===== BIBLIOTECA FOTOGRÁFICA ===== */
+.foto-header{background:var(--carbon);border-top:1px solid rgba(255,255,255,0.06);padding:56px 48px 64px;}
+.foto-header .container{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start;}
+.foto-header-eyebrow{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
+.foto-header-title{font-family:'TradeGothic',sans-serif;font-size:clamp(40px,5vw,88px);text-transform:uppercase;color:#fff;line-height:.92;}
+.foto-header-body{font-size:15px;color:rgba(255,255,255,0.6);line-height:1.8;max-width:480px;}
+.foto-header-nota{margin-top:24px;padding:16px 20px;border-left:2px solid rgba(255,255,255,0.15);font-size:13px;color:rgba(255,255,255,0.4);line-height:1.65;}
+
+.foto-serie{padding:64px 48px;border-bottom:1px solid var(--warm);}
+.foto-serie.bg-white{background:var(--white);}
+.foto-serie.bg-cream{background:var(--cream);}
+.foto-serie.bg-dark{background:var(--carbon);}
+.foto-serie-header{display:grid;grid-template-columns:1fr 3fr;gap:64px;align-items:start;margin-bottom:40px;}
+.foto-serie-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:12px;}
+.foto-serie-label.light{color:rgba(255,255,255,0.35);}
+.foto-serie-title{font-family:'TradeGothic',sans-serif;font-size:32px;text-transform:uppercase;color:var(--carbon);}
+.foto-serie-title.light{color:#fff;}
+.foto-serie-sub{font-size:14px;color:var(--dark);line-height:1.75;margin-top:8px;}
+.foto-serie-sub.light{color:rgba(255,255,255,0.5);}
+.foto-serie-count{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);margin-top:16px;}
+.foto-serie-count.light{color:rgba(255,255,255,0.2);}
+
+.foto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--warm);}
+.foto-grid.dark-bg{background:rgba(255,255,255,0.08);}
+.foto-card{background:var(--white);padding:28px 24px;position:relative;}
+.foto-card.dark{background:rgba(255,255,255,0.03);}
+.foto-card-id{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:14px;font-weight:700;}
+.foto-card-id.light{color:rgba(255,255,255,0.2);}
+.foto-card-angulo{font-family:'TradeGothic',sans-serif;font-size:17px;text-transform:uppercase;color:var(--carbon);line-height:1.1;margin-bottom:10px;}
+.foto-card-angulo.light{color:#fff;}
+.foto-card-instruccion{font-size:13px;color:var(--dark);line-height:1.7;margin-bottom:12px;}
+.foto-card-instruccion.light{color:rgba(255,255,255,0.5);}
+.foto-card-meta{display:flex;flex-direction:column;gap:6px;padding-top:12px;border-top:1px solid var(--warm);}
+.foto-card-meta.dark-border{border-top-color:rgba(255,255,255,0.06);}
+.foto-meta-row{display:flex;align-items:baseline;gap:8px;}
+.foto-meta-key{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);flex-shrink:0;min-width:52px;}
+.foto-meta-key.light{color:rgba(255,255,255,0.2);}
+.foto-meta-val{font-size:12px;color:var(--dark);line-height:1.5;}
+.foto-meta-val.light{color:rgba(255,255,255,0.55);}
+.foto-copy-tag{display:inline-block;margin-top:3px;padding:2px 7px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;background:var(--warm);color:var(--carbon);}
+.foto-copy-tag.dark{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);}
+@media(max-width:900px){
+  .foto-grid{grid-template-columns:repeat(2,1fr);}
+  .foto-serie-header{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .foto-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
@@ -245,6 +294,9 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
     <a class="qn-link" href="#persona-4"><span class="qn-dot"></span>La Pareja</a>
     <a class="qn-link" href="#hipotesis"><span class="qn-dot"></span>Hipótesis</a>
     <a class="qn-link priority" href="#mapa"><span class="qn-dot"></span>Mapa de producción</a>
+    <a class="qn-link" href="#foto-serie"><span class="qn-dot"></span>Foto Solo</a>
+    <a class="qn-link" href="#modelo-serie"><span class="qn-dot"></span>Modelo</a>
+    <a class="qn-link" href="#tsf-serie"><span class="qn-dot"></span>Texto sobre foto</a>
   </div>
 </div>
 
@@ -1094,6 +1146,458 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
     <p class="nota-text"><strong>No evaluar antes de 7–10 días</strong> salvo problema técnico evidente (CTR 0%, error de entrega, pieza rechazada). El algoritmo necesita datos para optimizar. El volumen bajo al inicio es esperado. <strong>La señal positiva no es el "me gusta"</strong> — es la combinación de CTR, CPC y calidad de los clics (tiempo en la landing, scroll, intención de compra).</p>
   </div>
 </div>
+
+
+<!-- ===== BIBLIOTECA FOTOGRÁFICA ===== -->
+<div class="foto-header" id="foto-briefs">
+  <div class="container">
+    <div>
+      <p class="foto-header-eyebrow">Biblioteca fotográfica</p>
+      <p class="foto-header-title">35<br>foto-briefs</p>
+    </div>
+    <div>
+      <p class="foto-header-body">Los briefs C-series son para piezas hero — video, guion, actuación. Esta biblioteca es para lo que se puede producir fácil y rápido: producto solo, modelo en plano, texto sobre foto.<br><br>Cada brief es una unidad de producción independiente. La mayoría se puede fotografiar en una sesión de 2 horas y generar 2–3 variantes de copy por pieza.</p>
+      <p class="foto-header-nota">Diferencia clave vs competencia: ninguna pieza lleva urgencia visual (starburst, badge OFERTA, descuentos). Foto limpia, texto pequeño, sin decoración. La marca habla por la imagen.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PS SERIE -->
+<div class="foto-serie bg-white" id="foto-serie">
+  <div class="container">
+    <div class="foto-serie-header">
+      <div>
+        <p class="foto-serie-label">Serie PS</p>
+        <p class="foto-serie-title">Producto<br>Solo</p>
+        <p class="foto-serie-count">12 briefs</p>
+      </div>
+      <p class="foto-serie-sub">Remeras sin modelo. Fondos neutros. El objetivo es mostrar calidad de tela, calce del corte y la coherencia visual de los tres colores. No necesita cara, no necesita historia — la pieza convierte por claridad.</p>
+    </div>
+    <div class="foto-grid">
+
+      <div class="foto-card">
+        <p class="foto-card-id">PS-01</p>
+        <p class="foto-card-angulo">Frente — Blanca</p>
+        <p class="foto-card-instruccion">Remera blanca colgada en percha o sobre maniquí invisible. Fondo blanco puro o crema. Iluminación plana, sin sombras duras. Mostrar que no transparenta.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Blanco / #fff o crema</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">3 remeras. Una decisión.</span> <span class="foto-copy-tag">Pack Blanco → metodounoxuno.com.ar</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">1:1 + 4:5</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">PS-02</p>
+        <p class="foto-card-angulo">Frente — Negra</p>
+        <p class="foto-card-instruccion">Remera negra sobre fondo carbón oscuro o gris profundo. Iluminación lateral suave para que se distinga la textura del algodón. Mismo encuadre que PS-01 para coherencia visual.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Carbón / #1a1a1a</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">El uniforme diario.</span> <span class="foto-copy-tag">Pack Negro — 3 remeras, una compra.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">1:1 + 4:5</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">PS-03</p>
+        <p class="foto-card-angulo">Frente — Gris</p>
+        <p class="foto-card-instruccion">Remera gris sobre fondo medio-claro (gris claro o blanco hueso). Cuidado con que el gris de la remera se distinga del fondo. Mismo encuadre que PS-01 y PS-02.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Gris claro / #e8e8e8</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Mismo calce. Misma sensación.</span> <span class="foto-copy-tag">Pack Gris — disponible en metodounoxuno.com.ar</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">1:1 + 4:5</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">PS-04</p>
+        <p class="foto-card-angulo">Stack cenital — 3 colores</p>
+        <p class="foto-card-instruccion">Vista desde arriba. Las tres remeras dobladas y apiladas en fila: negra, gris, blanca (o en abanico superpuesto). Superficie madera clara o mármol blanco. Luz natural si es posible.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Madera / mármol / superficie neutra</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Elegís una vez. Funciona todos los días.</span> <span class="foto-copy-tag">Pack Esencial — 1 de cada color.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">1:1 + 9:16 (recortada en cuadro)</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">PS-05</p>
+        <p class="foto-card-angulo">Detalle tela — primer plano</p>
+        <p class="foto-card-instruccion">Macro del tejido del algodón peinado. Remera extendida sobre superficie plana. El punto del jersey tiene que ser visible. Sin texto en la foto — la tela habla sola.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">La propia tela ocupa el frame</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Algodón peinado 100%. Se nota.</span> <span class="foto-copy-tag">La diferencia está en la fibra.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">1:1</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">PS-06</p>
+        <p class="foto-card-angulo">Detalle cuello — estructura</p>
+        <p class="foto-card-instruccion">Primer plano del cuello redondo. Que se vea cómo asienta, el grosor de la costura, cómo no se abre. Si es posible, comparar mentalmente con un cuello deformado — sin mostrarlo, solo el buen cuello en cuadro.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-key">Neutro, la remera en foco</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">El cuello que no se abre.</span> <span class="foto-copy-tag">Después de 30 lavados, igual.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">1:1</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">PS-07</p>
+        <p class="foto-card-angulo">Doblada en fila — 3 unidades</p>
+        <p class="foto-card-instruccion">Las tres remeras del pack dobladas con prolijidad y alineadas en horizontal sobre superficie plana. Vista frontal. Pliegues prolijos. Muestra que es un sistema, no una remera suelta.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Blanco / madera / sábana</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Un pack. Tres colores. Resuelto.</span> <span class="foto-copy-tag">$119.990 — metodounoxuno.com.ar</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">16:9 + 4:5</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">PS-08</p>
+        <p class="foto-card-angulo">Sobre superficie madera</p>
+        <p class="foto-card-instruccion">Remera blanca o gris doblada sobre tabla de madera clara. Composición lifestyle minimalista. Puede ir con un vaso de agua o anteojos al costado — objeto neutro, sin marca. Luz natural.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Madera, luz natural</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">La remera que no tenés que volver a evaluar.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">1:1 + 4:5</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">PS-09</p>
+        <p class="foto-card-angulo">Colgada — percha minimalista</p>
+        <p class="foto-card-instruccion">Remera negra en percha de madera o metal fino, colgada en pared blanca o puerta. Plano frontal limpio. Sombra suave si la luz natural lo genera. No forzar iluminación de estudio.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Pared blanca / cemento claro</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Sin pensar. Sin dudar. La de siempre.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">4:5 + 9:16</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">PS-10</p>
+        <p class="foto-card-angulo">Etiqueta interior</p>
+        <p class="foto-card-instruccion">Primer plano de la etiqueta interna o costura del cuello. Que se vea "Método Uno SRL" o el branding interior. Muestra que hay una marca real detrás, no un genérico.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">La tela del interior</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Una marca detrás de cada costura.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">1:1</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">PS-11</p>
+        <p class="foto-card-angulo">Pack completo — vista packaging</p>
+        <p class="foto-card-instruccion">Las 3 remeras del pack con su packaging (bolsa, caja o presentación de envío). Muestra el producto terminado como se recibe. Genera confianza en la compra online.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Neutro / superficie mate</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Así llega. Sin excusas.</span> <span class="foto-copy-tag">Envío a todo el país.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">1:1 + 4:5</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">PS-12</p>
+        <p class="foto-card-angulo">Tríada de colores — vista lateral</p>
+        <p class="foto-card-instruccion">Las tres remeras en percha o dobladas, una detrás de la otra en perspectiva, que se vean los tres colores en secuencia. Fondo neutro. Muestra el sistema completo en una imagen.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Blanco / pared clara</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Negro. Gris. Blanco. Listo.</span> <span class="foto-copy-tag">El sistema completo en un pack.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">16:9 + 4:5</span></div>
+        </div>
+      </div>
+
+    </div><!-- /foto-grid -->
+  </div>
+</div>
+
+<!-- M SERIE -->
+<div class="foto-serie bg-cream" id="modelo-serie">
+  <div class="container">
+    <div class="foto-serie-header">
+      <div>
+        <p class="foto-serie-label">Serie M</p>
+        <p class="foto-serie-title">Modelo</p>
+        <p class="foto-serie-count">15 briefs</p>
+      </div>
+      <p class="foto-serie-sub">Fotos con modelo masculino 30–45 años, físico estándar (no fitness). El objetivo no es mostrar un cuerpo — es mostrar cómo cae la remera en un cuerpo real. Mayoría de los planos pueden ser sin cara para facilitar crop y reutilización.</p>
+    </div>
+    <div class="foto-grid">
+
+      <div class="foto-card">
+        <p class="foto-card-id">M-01</p>
+        <p class="foto-card-angulo">Plano medio — Blanca</p>
+        <p class="foto-card-instruccion">Modelo de frente, remera blanca, fondo blanco o crema. Brazos caídos, postura natural. Mostrar cómo cae en hombros y torso. Cara puede quedar dentro o recortada según uso.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Blanco / crema</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Primero el cuerpo. Después la prenda.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">4:5 + 9:16</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">M-02</p>
+        <p class="foto-card-angulo">Plano medio — Negra</p>
+        <p class="foto-card-instruccion">Mismo encuadre que M-01 pero remera negra. Fondo carbón o gris oscuro. Contraste bajo entre remera y fondo — la silueta y el calce son el foco, no el color.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Gris oscuro / carbón</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">El uniforme diario.</span> <span class="foto-copy-tag">Sin decidir. Sin improvisar.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">4:5 + 9:16</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">M-03</p>
+        <p class="foto-card-angulo">Plano medio — Gris</p>
+        <p class="foto-card-instruccion">Mismo encuadre, remera gris. Fondo neutro claro. Este es el color que más dudas genera en compra online — mostrar bien cómo se ve puesto es clave para conversión.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Blanco hueso / #f0f0f0</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">El gris que sí funciona.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">4:5 + 9:16</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">M-04</p>
+        <p class="foto-card-angulo">Detalle hombro — calce</p>
+        <p class="foto-card-instruccion">Primer plano del hombro y parte del torso. Sin cara. Mostrar que la costura de hombro asienta justo donde debe, que no cae hacia adentro ni hacia afuera. La clave del calce diferencial.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Neutro, el modelo en foco</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Calce pensado para el hombro real.</span> <span class="foto-copy-tag">No para el maniquí.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">1:1 + 4:5</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">M-05</p>
+        <p class="foto-card-angulo">Detalle torso — tela cayendo</p>
+        <p class="foto-card-instruccion">Plano del torso frontal, abdomen incluido. Mostrar que la tela cae recta sin adherirse al cuerpo (holgura justa). El punto donde muchas marcas locales fallan — esta remera tiene el peso correcto.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Neutro</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Suelta donde tiene que ser suelta.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">4:5</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">M-06</p>
+        <p class="foto-card-angulo">Perfil — hombros y cuello</p>
+        <p class="foto-card-instruccion">Modelo de perfil, 90°. Sin cara o cara cortada en el borde. Se ve cómo queda la remera de costado — largo, vuelo, cómo cae en la espalda baja. Composición limpia.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Liso, un solo color</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Mismo resultado desde cualquier ángulo.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">4:5 + 9:16</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">M-07</p>
+        <p class="foto-card-angulo">Espalda — plano entero</p>
+        <p class="foto-card-instruccion">Modelo de espaldas, remera blanca o gris. Sin logos visibles en la espalda. Mostrar el corte posterior, el largo y que la tela no se engancha ni sube. Postura natural, de pie.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Neutro liso</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">De frente o de espaldas, la misma remera.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">4:5</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">M-08</p>
+        <p class="foto-card-angulo">Plano americano — caminando</p>
+        <p class="foto-card-instruccion">Modelo caminando de frente o en 3/4, encuadre desde rodilla hasta cuello. Capturar movimiento natural. Mostrar que la remera no se desarregla al moverse. Fondo urbano neutro o estudio.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Calle / estudio / pared</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">En movimiento, igual.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">4:5 + 9:16</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">M-09</p>
+        <p class="foto-card-angulo">Sentado — escritorio</p>
+        <p class="foto-card-instruccion">Modelo sentado en escritorio o mesa, vista frontal. Remera negra o gris. Contexto de trabajo. Brazo apoyado, postura relajada. Muestra que la remera funciona en ambiente profesional-casual.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Escritorio minimalista</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Lo que te ponés antes de pensar en qué ponerte.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">1:1 + 4:5</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">M-10</p>
+        <p class="foto-card-angulo">Close-up cuello — puesta</p>
+        <p class="foto-card-instruccion">Primer plano del cuello redondo puesto en el modelo. Que se vea cómo asienta sobre la clavícula, que no jala ni se abre. Foco en la zona cuello-hombro. Sin cara.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">El cuerpo, fondo desenfocado</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Un cuello que aguanta.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">1:1</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">M-11</p>
+        <p class="foto-card-angulo">Secuencia tríada — 3 fotos</p>
+        <p class="foto-card-instruccion">Tres tomas encuadradas igual: mismo modelo, misma postura, mismo fondo. Una foto por color (negro, gris, blanco). Sirven como set de 3 imágenes para carrusel o triptyco en feed.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Idéntico en las 3 fotos</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Negro. Gris. Blanco. Los tres, resueltos.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">1:1 cada una (carrusel)</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">M-12</p>
+        <p class="foto-card-angulo">Luz natural — interior</p>
+        <p class="foto-card-instruccion">Modelo junto a ventana, luz lateral natural. Remera blanca preferentemente. Fondo interior neutro (pared, cortina). No es foto de catálogo — es imagen aspiracional sin esfuerzo. Sin flash.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Interior, ventana, luz suave</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">La misma sensación, todos los días.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">4:5 + 9:16</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">M-13</p>
+        <p class="foto-card-angulo">Detalle manga — largo</p>
+        <p class="foto-card-instruccion">Primer plano del borde de la manga y el brazo. Mostrar que el largo es exacto — ni muy corto ni muy largo para un adulto de 30-45 años. Detalle que diferencia una remera bien cortada de una genérica.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">El cuerpo en foco</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">Cortada para el adulto, no para el adolescente.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">1:1</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">M-14</p>
+        <p class="foto-card-angulo">Torso de espaldas — remera gris</p>
+        <p class="foto-card-instruccion">Plano del torso posterior, remera gris. Mostrar el corte de espalda, que no se abre ni transparenta. Composición limpia, sin accesorios. Plano medio-alto desde cintura hasta hombros.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Neutro claro</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">El mismo resultado que el del frente.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">4:5</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card">
+        <p class="foto-card-id">M-15</p>
+        <p class="foto-card-angulo">Plano general — exterior neutro</p>
+        <p class="foto-card-instruccion">Modelo de cuerpo entero en exterior urbano neutro (pared, escalera, veredón). Remera negra con pantalón oscuro. No fashion, no posado. Natural. La remera es el objeto, el entorno es contexto.</p>
+        <div class="foto-card-meta">
+          <div class="foto-meta-row"><span class="foto-meta-key">Fondo</span><span class="foto-meta-val">Urbano neutro / arquitectura limpia</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Copy</span><span class="foto-meta-val"><span class="foto-copy-tag">La base de cualquier día.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key">Formato</span><span class="foto-meta-val">4:5 + 9:16</span></div>
+        </div>
+      </div>
+
+    </div><!-- /foto-grid -->
+  </div>
+</div>
+
+<!-- TSF SERIE -->
+<div class="foto-serie bg-dark" id="tsf-serie">
+  <div class="container">
+    <div class="foto-serie-header">
+      <div>
+        <p class="foto-serie-label light">Serie TSF</p>
+        <p class="foto-serie-title light">Texto<br>sobre foto</p>
+        <p class="foto-serie-count light">8 briefs</p>
+      </div>
+      <p class="foto-serie-sub light">Las 4 frases clave de la marca + 4 adicionales, aplicadas sobre la foto correcta. Texto chico, tipografía de marca, sin fondo ni caja. El estilo "primero el cuerpo / después la prenda" aplicado como sistema.</p>
+    </div>
+    <div class="foto-grid dark-bg">
+
+      <div class="foto-card dark">
+        <p class="foto-card-id light">TSF-01</p>
+        <p class="foto-card-angulo light">El uniforme diario</p>
+        <p class="foto-card-instruccion light">Sobre foto M-01 o M-02 (plano medio). Texto en esquina inferior izquierda. Tipografía TradeGothic uppercase o Inter Medium. Texto blanco sobre foto oscura, texto carbon sobre foto clara.</p>
+        <div class="foto-card-meta dark-border">
+          <div class="foto-meta-row"><span class="foto-meta-key light">Foto base</span><span class="foto-meta-val light">M-01 (blanca) o M-02 (negra)</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Copy</span><span class="foto-meta-val light"><span class="foto-copy-tag dark">El uniforme diario.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Tamaño texto</span><span class="foto-meta-val light">16–18px — pequeño, no dominante</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card dark">
+        <p class="foto-card-id light">TSF-02</p>
+        <p class="foto-card-angulo light">Elegís una vez</p>
+        <p class="foto-card-instruccion light">Sobre foto PS-04 (stack cenital) o PS-07 (dobladas en fila). Texto centrado o inferior izquierdo. La imagen ya dice sistema — el texto lo confirma sin repetir lo visual.</p>
+        <div class="foto-card-meta dark-border">
+          <div class="foto-meta-row"><span class="foto-meta-key light">Foto base</span><span class="foto-meta-val light">PS-04 o PS-07</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Copy</span><span class="foto-meta-val light"><span class="foto-copy-tag dark">Elegís una vez. Funciona todos los días.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Tamaño texto</span><span class="foto-meta-val light">Dos líneas separadas, misma fuente</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card dark">
+        <p class="foto-card-id light">TSF-03</p>
+        <p class="foto-card-angulo light">Primero el cuerpo</p>
+        <p class="foto-card-instruccion light">Réplica del asset original con remera negra y gris. Sobre foto M-04 (detalle hombro) o M-05 (torso). Texto en dos líneas: "primero el cuerpo" en bold, "después la prenda" en light. Posición inferior izquierda.</p>
+        <div class="foto-card-meta dark-border">
+          <div class="foto-meta-row"><span class="foto-meta-key light">Foto base</span><span class="foto-meta-val light">M-04, M-05 o M-07 (negra o gris)</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Copy</span><span class="foto-meta-val light"><span class="foto-copy-tag dark">primero el cuerpo / después la prenda</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Nota</span><span class="foto-meta-val light">Minúscula, misma tipografía que el original</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card dark">
+        <p class="foto-card-id light">TSF-04</p>
+        <p class="foto-card-angulo light">Mismo calce. Misma sensación.</p>
+        <p class="foto-card-instruccion light">Sobre foto M-11 (secuencia tríada) o PS-12 (tríada colores). El texto refuerza la consistencia que la imagen ya muestra visualmente. Una frase, una línea, tamaño pequeño.</p>
+        <div class="foto-card-meta dark-border">
+          <div class="foto-meta-row"><span class="foto-meta-key light">Foto base</span><span class="foto-meta-val light">M-11 o PS-12</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Copy</span><span class="foto-meta-val light"><span class="foto-copy-tag dark">Mismo calce. Misma sensación. Mismo resultado.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Formato</span><span class="foto-meta-val light">1:1 — carrusel con variante por color</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card dark">
+        <p class="foto-card-id light">TSF-05</p>
+        <p class="foto-card-angulo light">La búsqueda puede terminar acá</p>
+        <p class="foto-card-instruccion light">Sobre foto M-08 (caminando) o M-15 (exterior). El copy activa el estado mental de búsqueda sin prometer "para siempre". Texto en zona inferior, dos líneas si es necesario para no comprimir.</p>
+        <div class="foto-card-meta dark-border">
+          <div class="foto-meta-row"><span class="foto-meta-key light">Foto base</span><span class="foto-meta-val light">M-08 o M-15</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Copy</span><span class="foto-meta-val light"><span class="foto-copy-tag dark">La búsqueda puede terminar acá.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Tono</span><span class="foto-meta-val light">Certeza, no urgencia</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card dark">
+        <p class="foto-card-id light">TSF-06</p>
+        <p class="foto-card-angulo light">$40.000 por remera</p>
+        <p class="foto-card-instruccion light">Sobre foto PS-05 o PS-06 (detalle tela o cuello). El precio funciona como argumento cuando la imagen muestra calidad. No es "barato" ni "caro" — es justo para lo que se ve. Texto pequeño, inferior derecho.</p>
+        <div class="foto-card-meta dark-border">
+          <div class="foto-meta-row"><span class="foto-meta-key light">Foto base</span><span class="foto-meta-val light">PS-05 (tela) o PS-06 (cuello)</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Copy</span><span class="foto-meta-val light"><span class="foto-copy-tag dark">$40.000 por remera. Un pack de tres.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Nota</span><span class="foto-meta-val light">No incluir "precio especial" ni "oferta"</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card dark">
+        <p class="foto-card-id light">TSF-07</p>
+        <p class="foto-card-angulo light">Sin pensar. Sin dudar.</p>
+        <p class="foto-card-instruccion light">Sobre foto M-09 (sentado, escritorio). Contexto laboral cotidiano. El copy activa el "automático" de vestirse. No es aspiracional — es funcional. Una frase corta basta.</p>
+        <div class="foto-card-meta dark-border">
+          <div class="foto-meta-row"><span class="foto-meta-key light">Foto base</span><span class="foto-meta-val light">M-09</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Copy</span><span class="foto-meta-val light"><span class="foto-copy-tag dark">Sin pensar. Sin dudar. La de siempre.</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Formato</span><span class="foto-meta-val light">1:1 + 4:5</span></div>
+        </div>
+      </div>
+
+      <div class="foto-card dark">
+        <p class="foto-card-id light">TSF-08</p>
+        <p class="foto-card-angulo light">Pregunta — versión reflexiva</p>
+        <p class="foto-card-instruccion light">Sobre foto M-12 (luz natural) o M-15 (exterior). Una pregunta que activa el dolor de la pérdida de tiempo en decidir qué ponerse. Sin respuesta en el copy — la imagen y el CTA son la respuesta.</p>
+        <div class="foto-card-meta dark-border">
+          <div class="foto-meta-row"><span class="foto-meta-key light">Foto base</span><span class="foto-meta-val light">M-12 o M-15</span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Copy</span><span class="foto-meta-val light"><span class="foto-copy-tag dark">¿Cuándo fue la última vez que no pensaste en qué ponerte?</span></span></div>
+          <div class="foto-meta-row"><span class="foto-meta-key light">Tono</span><span class="foto-meta-val light">Reflexivo, no acusatorio</span></div>
+        </div>
+      </div>
+
+    </div><!-- /foto-grid -->
+  </div>
+</div>
+
 
 <!-- BACK TO TOP -->
 <div id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
