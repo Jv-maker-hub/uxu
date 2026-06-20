@@ -4,9 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UNO × UNO — Buyer Personas 2026</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @font-face { font-family: 'TradeGothic'; src: url('assets/fonts/TradeGothicCondBold.otf') format('opentype'); font-weight: 700; }
+    @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter-Thin-BETA.otf') format('opentype'); font-weight: 100; }
+    @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter-Regular.otf') format('opentype'); font-weight: 400; }
+    @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter-Medium.otf') format('opentype'); font-weight: 500; }
+    @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter-Bold.otf') format('opentype'); font-weight: 700; }
+  </style>
   <style>
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -18,7 +22,7 @@
       --warm:     #EBE8E3;
       --cream:    #F6F4F1;
       --white:    #FFFFFF;
-      --font-head: 'Barlow Condensed', sans-serif;
+      --font-head: 'TradeGothic', sans-serif;
       --font-body: 'Inter', sans-serif;
     }
 
@@ -455,7 +459,13 @@
 
   <!-- HEADER -->
   <header class="site-header">
-    <div class="brand-mark">UNO × UNO</div>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="/" style="display:flex;align-items:center;gap:8px;padding:8px 14px 8px 8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#CCCBC8;text-decoration:none;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+        Volver
+      </a>
+      <img src="assets/logo-negativo.png" alt="UNO × UNO" style="height:26px;">
+    </div>
     <div class="doc-meta">
       <div class="doc-title">Sistema de Comunicación — Buyer Personas</div>
       <div class="doc-year">MÉTODO UNO SRL · 2026</div>
@@ -766,7 +776,7 @@
 
   <!-- FOOTER -->
   <footer class="site-footer">
-    <div class="footer-brand">UNO × UNO</div>
+    <img src="assets/logo-negativo.png" alt="UNO × UNO" style="height:20px;opacity:0.6;">
     <div class="footer-note">Sistema de Comunicación 2026 · Uso interno · Método Uno SRL</div>
   </footer>
 

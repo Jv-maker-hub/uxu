@@ -3,79 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UNO × UNO — Documentos de Marca</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>UNO × UNO — Sistema de Marca</title>
   <style>
+    @font-face { font-family: 'TradeGothic'; src: url('assets/fonts/TradeGothicCondBold.otf') format('opentype'); font-weight: 700; }
+    @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter-Thin-BETA.otf') format('opentype'); font-weight: 100; }
+    @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter-Regular.otf') format('opentype'); font-weight: 400; }
+    @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter-Medium.otf') format('opentype'); font-weight: 500; }
+    @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter-Bold.otf') format('opentype'); font-weight: 700; }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --carbon: #292A2E; --dark: #555152; --mid: #CCCBC8;
-      --warm: #EBE8E3; --cream: #F6F4F1;
-      --font-head: 'Barlow Condensed', sans-serif;
-      --font-body: 'Inter', sans-serif;
+      --warm: #EBE8E3; --cream: #F6F4F1; --white: #fff;
     }
-    body { font-family: var(--font-body); background: var(--cream); color: var(--carbon); min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
-    header { background: var(--carbon); padding: 48px 64px 40px; }
-    .brand { font-family: var(--font-head); font-size: 24px; font-weight: 700; letter-spacing: 0.2em; color: var(--cream); }
-    h1 { font-family: var(--font-head); font-size: clamp(40px, 6vw, 72px); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--white, #fff); margin-top: 32px; line-height: 0.95; }
-    .subtitle { color: var(--mid); font-size: 13px; margin-top: 16px; max-width: 520px; line-height: 1.6; }
-    main { flex: 1; padding: 56px 64px; }
-    .doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; margin-top: 0; }
-    .doc-card { display: block; background: var(--white, #fff); padding: 40px 36px; text-decoration: none; color: var(--carbon); border-left: 3px solid transparent; transition: border-color 0.2s, background 0.2s; }
-    .doc-card:hover { border-left-color: var(--carbon); background: var(--warm); }
-    .doc-card.disabled { opacity: 0.4; pointer-events: none; }
-    .doc-num { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); margin-bottom: 16px; font-weight: 500; }
-    .doc-title { font-family: var(--font-head); font-size: 28px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 12px; line-height: 1; }
-    .doc-desc { font-size: 13px; color: var(--dark); line-height: 1.6; }
-    footer { background: var(--carbon); padding: 28px 64px; display: flex; justify-content: space-between; align-items: center; }
-    .footer-brand { font-family: var(--font-head); font-size: 16px; font-weight: 700; letter-spacing: 0.15em; color: var(--mid); }
-    .footer-note { font-size: 12px; color: var(--dark); letter-spacing: 0.08em; }
-    @media (max-width: 720px) {
-      header, main, footer { padding-left: 24px; padding-right: 24px; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--carbon); -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* NAV */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      background: var(--carbon);
+    }
+    .nav-logo { height: 28px; display: block; }
+    .nav-label { font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); font-weight: 400; }
+
+    /* HERO */
+    .hero {
+      background: var(--carbon);
+      padding: 64px 48px 80px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .hero-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); margin-bottom: 24px; font-weight: 400; }
+    .hero h1 {
+      font-family: 'TradeGothic', sans-serif;
+      font-size: clamp(48px, 7vw, 96px);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--white);
+      line-height: 0.92;
+      letter-spacing: -0.01em;
+    }
+    .hero-sub { margin-top: 28px; font-size: 14px; color: var(--mid); max-width: 480px; line-height: 1.7; font-weight: 400; }
+
+    /* GRID */
+    main { flex: 1; padding: 0; }
+    .doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; background: var(--warm); }
+
+    .doc-card {
+      display: block; padding: 44px 40px;
+      background: var(--white);
+      text-decoration: none; color: var(--carbon);
+      border-left: 3px solid transparent;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .doc-card:hover { border-left-color: var(--carbon); background: var(--cream); }
+    .doc-card.disabled { opacity: 0.35; pointer-events: none; background: var(--cream); }
+
+    .doc-num { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); margin-bottom: 20px; font-weight: 500; }
+    .doc-title {
+      font-family: 'TradeGothic', sans-serif;
+      font-size: 30px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.02em;
+      margin-bottom: 14px; line-height: 1;
+    }
+    .doc-desc { font-size: 13px; color: var(--dark); line-height: 1.65; font-weight: 400; }
+
+    /* FOOTER */
+    footer {
+      background: var(--carbon);
+      padding: 24px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .ft-brand { font-family: 'TradeGothic', sans-serif; font-size: 13px; letter-spacing: 0.15em; color: var(--mid); }
+    .ft-note { font-size: 11px; color: var(--dark); letter-spacing: 0.06em; }
+
+    @media (max-width: 640px) {
+      nav, .hero, footer { padding-left: 24px; padding-right: 24px; }
+      .doc-card { padding: 32px 24px; }
       .doc-grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: 8px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="brand">UNO × UNO</div>
-    <h1>Documentos<br>de Marca</h1>
-    <p class="subtitle">Recursos internos del sistema de comunicación de UNO × UNO. Uso exclusivo del equipo.</p>
-  </header>
-  <main>
-    <div class="doc-grid">
-      <a class="doc-card" href="/personas">
-        <p class="doc-num">01 — ESTRATEGIA</p>
-        <p class="doc-title">Buyer Personas</p>
-        <p class="doc-desc">Los cuatro perfiles que compran UNO × UNO. Quiénes son, qué los trae y cómo les hablamos.</p>
-      </a>
-      <a class="doc-card" href="/competidores">
-        <p class="doc-num">02 — INTELIGENCIA</p>
-        <p class="doc-title">Análisis Competidores</p>
-        <p class="doc-desc">Ad Library de Tecla, Valfort, UMANO y SER Basics. Insights y oportunidades para UNO × UNO.</p>
-      </a>
-      <a class="doc-card" href="/manual">
-        <p class="doc-num">03 — IDENTIDAD</p>
-        <p class="doc-title">Manual de Marca</p>
-        <p class="doc-desc">Sistema de identidad visual 2026. Logotipo, paleta, tipografía, tono y criterios de aplicación.</p>
-      </a>
-      <a class="doc-card disabled" href="#">
-        <p class="doc-num">04 — CREATIVOS</p>
-        <p class="doc-title">Briefs de Ads</p>
-        <p class="doc-desc">24 briefs listos para producción. 4 personas × 2 dolores × 3 formatos. Próximamente.</p>
-      </a>
-      <a class="doc-card disabled" href="#">
-        <p class="doc-num">05 — COPY</p>
-        <p class="doc-title">Landing & Copy</p>
-        <p class="doc-desc">Copy de la landing, estructura de conversión y textos de producto. Próximamente.</p>
-      </a>
-    </div>
-  </main>
-  <footer>
-    <div class="footer-brand">UNO × UNO · Método Uno SRL</div>
-    <div class="footer-note">2026</div>
-  </footer>
+
+<nav>
+  <img src="assets/logo-negativo.png" alt="UNO × UNO" class="nav-logo">
+  <span class="nav-label">Sistema de Marca · Uso Interno</span>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Documentos de marca</p>
+  <h1>Sistema<br>de Marca</h1>
+  <p class="hero-sub">Recursos internos del sistema de comunicación de UNO × UNO. Uso exclusivo del equipo.</p>
+</div>
+
+<main>
+  <div class="doc-grid">
+    <a class="doc-card" href="/personas">
+      <p class="doc-num">01 — Estrategia</p>
+      <p class="doc-title">Buyer Personas</p>
+      <p class="doc-desc">Los cuatro perfiles que compran UNO × UNO. Quiénes son, qué los trae y cómo les hablamos.</p>
+    </a>
+    <a class="doc-card" href="/competidores">
+      <p class="doc-num">02 — Inteligencia</p>
+      <p class="doc-title">Análisis Competidores</p>
+      <p class="doc-desc">Ad Library de Tecla, Valfort, UMANO y SER Basics. Insights y oportunidades para UNO × UNO.</p>
+    </a>
+    <a class="doc-card" href="/manual">
+      <p class="doc-num">03 — Identidad</p>
+      <p class="doc-title">Manual de Marca</p>
+      <p class="doc-desc">Sistema de identidad visual 2026. Logotipo, paleta, tipografía, tono y criterios de aplicación.</p>
+      <p style="margin-top:20px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);">También: <a href="/tipografias" style="color:var(--carbon);text-decoration:underline;text-underline-offset:3px;" onclick="event.stopPropagation()">Descargar tipografías →</a></p>
+    </a>
+    <a class="doc-card disabled" href="#">
+      <p class="doc-num">04 — Creativos</p>
+      <p class="doc-title">Briefs de Ads</p>
+      <p class="doc-desc">24 briefs listos para producción. 4 personas × 2 dolores × 3 formatos. Próximamente.</p>
+    </a>
+    <a class="doc-card disabled" href="#">
+      <p class="doc-num">05 — Copy</p>
+      <p class="doc-title">Landing & Copy</p>
+      <p class="doc-desc">Copy de la landing, estructura de conversión y textos de producto. Próximamente.</p>
+    </a>
+  </div>
+</main>
+
+<footer>
+  <span class="ft-brand">UNO × UNO · Método Uno SRL</span>
+  <span class="ft-note">2026</span>
+</footer>
+
 </body>
 </html>

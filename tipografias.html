@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNO × UNO — Tipografías del Sistema</title>
+  <style>
+    @font-face { font-family: 'TradeGothic'; src: url('assets/fonts/TradeGothicCondBold.otf') format('opentype'); font-weight: 700; }
+    @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter-Thin-BETA.otf') format('opentype'); font-weight: 100; }
+    @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter-Regular.otf') format('opentype'); font-weight: 400; }
+    @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter-Medium.otf') format('opentype'); font-weight: 500; }
+    @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter-Bold.otf') format('opentype'); font-weight: 700; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --carbon:#292A2E; --dark:#555152; --mid:#CCCBC8; --warm:#EBE8E3; --cream:#F6F4F1; --white:#fff; }
+    body { font-family:'Inter',sans-serif; background:var(--cream); color:var(--carbon); -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; flex-direction:column; }
+
+    nav {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:20px 48px; background:var(--carbon);
+    }
+    nav img { height:26px; }
+    .btn-back {
+      display:flex; align-items:center; gap:8px;
+      padding:8px 14px 8px 8px;
+      background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:6px;
+      color:#ccc; text-decoration:none; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; font-weight:500;
+      transition:background 0.15s;
+    }
+    .btn-back:hover { background:rgba(255,255,255,0.13); color:#fff; }
+
+    .hero { background:var(--carbon); padding:56px 48px 64px; border-top:1px solid rgba(255,255,255,0.06); }
+    .hero-eyebrow { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--mid); margin-bottom:20px; }
+    .hero h1 { font-family:'TradeGothic',sans-serif; font-size:clamp(40px,6vw,80px); text-transform:uppercase; color:#fff; line-height:0.92; }
+    .hero p { margin-top:20px; font-size:13px; color:var(--mid); max-width:440px; line-height:1.7; }
+
+    main { flex:1; padding:64px 48px; max-width:960px; }
+
+    /* TYPE CARD */
+    .type-card { background:var(--white); border:1px solid var(--warm); margin-bottom:2px; }
+    .type-header { padding:40px 44px 32px; border-bottom:1px solid var(--warm); }
+    .type-role { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--mid); margin-bottom:16px; }
+    .type-name-display { line-height:1; margin-bottom:16px; }
+    .type-meta { font-size:12px; color:var(--dark); display:flex; gap:24px; flex-wrap:wrap; }
+    .type-meta span::before { content:''; display:inline-block; width:4px; height:4px; background:var(--mid); border-radius:50%; margin-right:8px; vertical-align:middle; }
+
+    .type-specimens { padding:36px 44px; display:grid; gap:24px; }
+    .specimen { }
+    .specimen-label { font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--mid); margin-bottom:8px; }
+
+    /* Trade Gothic specimens */
+    .tg-xl { font-family:'TradeGothic',sans-serif; font-size:clamp(40px,6vw,72px); text-transform:uppercase; line-height:0.95; letter-spacing:0.01em; color:var(--carbon); }
+    .tg-md { font-family:'TradeGothic',sans-serif; font-size:32px; text-transform:uppercase; line-height:1; letter-spacing:0.02em; color:var(--carbon); }
+    .tg-sm { font-family:'TradeGothic',sans-serif; font-size:18px; text-transform:uppercase; letter-spacing:0.04em; color:var(--carbon); }
+
+    /* Inter specimens */
+    .it-100 { font-family:'Inter',sans-serif; font-weight:100; font-size:28px; color:var(--carbon); line-height:1.4; }
+    .it-400 { font-family:'Inter',sans-serif; font-weight:400; font-size:16px; color:var(--dark); line-height:1.8; max-width:600px; }
+    .it-500 { font-family:'Inter',sans-serif; font-weight:500; font-size:13px; letter-spacing:0.04em; color:var(--carbon); }
+    .it-700 { font-family:'Inter',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; color:var(--carbon); }
+
+    /* DOWNLOAD SECTION */
+    .dl-section { margin-top:2px; background:var(--white); border:1px solid var(--warm); padding:40px 44px; }
+    .dl-title { font-family:'TradeGothic',sans-serif; font-size:20px; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px; }
+    .dl-desc { font-size:13px; color:var(--dark); margin-bottom:32px; line-height:1.6; }
+    .dl-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+    .dl-item {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 16px;
+      border:1px solid var(--warm); background:var(--cream);
+      text-decoration:none; color:var(--carbon);
+      border-radius:4px;
+      transition:border-color 0.15s, background 0.15s;
+    }
+    .dl-item:hover { border-color:var(--carbon); background:var(--white); }
+    .dl-item-name { font-size:12px; font-weight:500; }
+    .dl-item-type { font-size:10px; color:var(--mid); letter-spacing:0.06em; text-transform:uppercase; margin-top:2px; }
+    .dl-icon { color:var(--mid); }
+
+    footer { background:var(--carbon); padding:24px 48px; display:flex; justify-content:space-between; align-items:center; margin-top:auto; }
+    .ft-img { height:20px; opacity:0.5; }
+    .ft-note { font-size:11px; color:var(--dark); letter-spacing:0.06em; }
+
+    @media(max-width:640px){
+      nav,main,footer,.hero,.dl-section { padding-left:24px; padding-right:24px; }
+      .type-header,.type-specimens,.dl-section { padding-left:24px; padding-right:24px; }
+      main { padding:32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="btn-back" href="/">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+    Volver
+  </a>
+  <img src="assets/logo-negativo.png" alt="UNO × UNO">
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Sistema de identidad · Tipografías</p>
+  <h1>Las<br>Tipografías</h1>
+  <p>El sistema tipográfico de UNO × UNO usa dos familias. Trade Gothic Condensed Bold para títulos e identidad. Inter para texto y comunicación.</p>
+</div>
+
+<main>
+
+  <!-- TRADE GOTHIC -->
+  <div class="type-card">
+    <div class="type-header">
+      <p class="type-role">Tipografía de Marca — Titulares</p>
+      <div class="type-name-display">
+        <span style="font-family:'TradeGothic',sans-serif;font-size:48px;text-transform:uppercase;letter-spacing:0.02em;color:var(--carbon);font-weight:700;">Trade Gothic Condensed Bold</span>
+      </div>
+      <div class="type-meta">
+        <span>Familia: Trade Gothic LT Std</span>
+        <span>Peso: Bold Condensed No. 20</span>
+        <span>Uso: Logotipo, titulares, claims</span>
+      </div>
+    </div>
+    <div class="type-specimens">
+      <div class="specimen">
+        <p class="specimen-label">Tamaño grande — Claims</p>
+        <p class="tg-xl">El uniforme<br>diario.</p>
+      </div>
+      <div class="specimen">
+        <p class="specimen-label">Tamaño medio — Secciones</p>
+        <p class="tg-md">Elegís una vez. Funciona todos los días.</p>
+      </div>
+      <div class="specimen">
+        <p class="specimen-label">Tamaño chico — Labels</p>
+        <p class="tg-sm">Pack de 3 remeras · Algodón peinado 100% · $119.990</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTER -->
+  <div class="type-card" style="margin-top:2px;">
+    <div class="type-header">
+      <p class="type-role">Tipografía de Texto — Cuerpo y UI</p>
+      <div class="type-name-display" style="margin-bottom:8px;">
+        <span style="font-family:'Inter',sans-serif;font-size:42px;font-weight:400;color:var(--carbon);">Inter</span>
+      </div>
+      <div class="type-meta">
+        <span>Familia: Inter Variable</span>
+        <span>Pesos: Thin (100) · Regular (400) · Medium (500) · Bold (700)</span>
+        <span>Uso: Cuerpo, descripciones, UI</span>
+      </div>
+    </div>
+    <div class="type-specimens">
+      <div class="specimen">
+        <p class="specimen-label">Thin 100 — Subtítulos grandes</p>
+        <p class="it-100">No es una remera más. Es la que no tenés que volver a evaluar.</p>
+      </div>
+      <div class="specimen">
+        <p class="specimen-label">Regular 400 — Cuerpo de texto</p>
+        <p class="it-400">UNO × UNO es un pack de tres remeras de algodón peinado 100% jersey. Un negro, un blanco, un gris. El mismo calce, la misma sensación, el mismo resultado — todos los días.</p>
+      </div>
+      <div class="specimen">
+        <p class="specimen-label">Medium 500 — Interfaz</p>
+        <p class="it-500">Ver colores · Talles disponibles · Cambio sin condiciones</p>
+      </div>
+      <div class="specimen">
+        <p class="specimen-label">Bold 700 uppercase — Labels y etiquetas</p>
+        <p class="it-700">Pack Negro · Pack Blanco · Pack Gris · Pack Esencial</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOWNLOADS -->
+  <div class="dl-section">
+    <p class="dl-title">Descargar archivos</p>
+    <p class="dl-desc">Archivos OTF para instalar en cualquier sistema operativo. Doble clic sobre el archivo descargado para instalar.</p>
+    <div class="dl-grid">
+      <a class="dl-item" href="assets/fonts/TradeGothicCondBold.otf" download="TradeGothicCondBold.otf">
+        <div>
+          <p class="dl-item-name">Trade Gothic Cond Bold</p>
+          <p class="dl-item-type">OTF · Titulares</p>
+        </div>
+        <svg class="dl-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </a>
+      <a class="dl-item" href="assets/fonts/TradeGothic.otf" download="TradeGothic.otf">
+        <div>
+          <p class="dl-item-name">Trade Gothic LT Std</p>
+          <p class="dl-item-type">OTF · Variante regular</p>
+        </div>
+        <svg class="dl-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </a>
+      <a class="dl-item" href="assets/fonts/Inter-Thin-BETA.otf" download="Inter-Thin.otf">
+        <div>
+          <p class="dl-item-name">Inter Thin</p>
+          <p class="dl-item-type">OTF · Peso 100</p>
+        </div>
+        <svg class="dl-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </a>
+      <a class="dl-item" href="assets/fonts/Inter-Regular.otf" download="Inter-Regular.otf">
+        <div>
+          <p class="dl-item-name">Inter Regular</p>
+          <p class="dl-item-type">OTF · Peso 400</p>
+        </div>
+        <svg class="dl-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </a>
+      <a class="dl-item" href="assets/fonts/Inter-Medium.otf" download="Inter-Medium.otf">
+        <div>
+          <p class="dl-item-name">Inter Medium</p>
+          <p class="dl-item-type">OTF · Peso 500</p>
+        </div>
+        <svg class="dl-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </a>
+      <a class="dl-item" href="assets/fonts/Inter-Bold.otf" download="Inter-Bold.otf">
+        <div>
+          <p class="dl-item-name">Inter Bold</p>
+          <p class="dl-item-type">OTF · Peso 700</p>
+        </div>
+        <svg class="dl-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <img src="assets/logo-negativo.png" alt="UNO × UNO" class="ft-img">
+  <span class="ft-note">Sistema de Identidad 2026 · Método Uno SRL</span>
+</footer>
+
+</body>
+</html>
