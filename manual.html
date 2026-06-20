@@ -3,1072 +3,223 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UNO × UNO — Sistema de Identidad 2026</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>UNO × UNO — Sistema de Identidad Visual</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; background: #111; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
 
-    :root {
-      --carbon:  #292A2E;
-      --dark:    #555152;
-      --mid:     #CCCBC8;
-      --warm:    #EBE8E3;
-      --cream:   #F6F4F1;
-      --white:   #FFFFFF;
-      --font-head: 'Barlow Condensed', sans-serif;
-      --font-body: 'Inter', sans-serif;
+    /* ── HEADER ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 48px;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #222;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px;
+    }
+    .h-brand { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #777; font-weight: 500; }
+    .h-title { font-size: 11px; letter-spacing: 0.08em; color: #555; }
+    .h-counter { font-size: 11px; color: #444; font-variant-numeric: tabular-nums; min-width: 48px; text-align: right; }
+
+    /* ── VIEWER ── */
+    .viewer {
+      position: fixed; top: 48px; bottom: 44px; left: 0; right: 0;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px 64px;
     }
 
-    html { scroll-behavior: smooth; }
+    .slides-wrap { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
 
-    body {
-      font-family: var(--font-body);
-      background: var(--white);
-      color: var(--carbon);
-      font-size: 15px;
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ─── NAV ─── */
-    .site-nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--carbon);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 48px;
-      height: 52px;
-    }
-    .nav-brand {
-      font-family: var(--font-head);
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      color: var(--cream);
-      text-decoration: none;
-    }
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--mid);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--cream); }
-
-    /* ─── HERO ─── */
-    .hero {
-      background: var(--carbon);
-      color: var(--white);
-      padding: 96px 64px 80px;
-      border-left: 3px solid var(--dark);
-    }
-    .hero-label {
-      font-size: 11px;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 24px;
-    }
-    .hero h1 {
-      font-family: var(--font-head);
-      font-size: clamp(56px, 8vw, 100px);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      line-height: 0.92;
-      text-transform: uppercase;
-      color: var(--white);
-      max-width: 900px;
-    }
-    .hero-meta {
-      margin-top: 48px;
-      display: flex;
-      gap: 64px;
-      color: var(--mid);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-    }
-    .hero-meta strong {
+    .slide { display: none; width: 100%; height: 100%; }
+    .slide.active { display: flex; align-items: center; justify-content: center; }
+    .slide img {
+      max-width: 100%; max-height: 100%;
+      object-fit: contain;
       display: block;
-      color: var(--cream);
-      font-size: 13px;
-      margin-bottom: 4px;
-      font-weight: 600;
+      box-shadow: 0 12px 60px rgba(0,0,0,0.6);
     }
 
-    /* ─── INTRO RULE ─── */
-    .intro-rule {
-      background: var(--cream);
-      padding: 40px 64px;
-      border-left: 3px solid var(--carbon);
+    /* ── NAV ARROWS ── */
+    .btn-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      cursor: pointer; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, opacity 0.15s;
+      z-index: 10;
     }
-    .intro-rule p {
-      font-style: italic;
-      color: var(--dark);
-      font-size: 15px;
-      max-width: 680px;
-    }
+    .btn-nav:hover:not(:disabled) { background: rgba(255,255,255,0.14); }
+    .btn-nav:disabled { opacity: 0.15; cursor: default; }
+    .btn-prev { left: 12px; }
+    .btn-next { right: 12px; }
 
-    /* ─── CHAPTER HEADER ─── */
-    .chapter {
-      background: var(--carbon);
-      color: var(--white);
-      padding: 56px 64px 48px;
-      display: flex;
-      align-items: flex-end;
-      gap: 32px;
-      border-left: 3px solid var(--dark);
+    /* ── FOOTER / DOTS ── */
+    footer {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      height: 44px;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid #222;
+      display: flex; align-items: center; justify-content: center;
+      gap: 5px;
     }
-    .chapter-num {
-      font-family: var(--font-head);
-      font-size: 96px;
-      font-weight: 700;
-      color: var(--dark);
-      line-height: 1;
+    .dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #333; border: none; cursor: pointer;
+      padding: 0; transition: background 0.15s, transform 0.15s;
     }
-    .chapter-title {
-      font-family: var(--font-head);
-      font-size: 52px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      line-height: 1;
-    }
+    .dot:hover { background: #666; }
+    .dot.active { background: #aaa; transform: scale(1.3); }
 
-    /* ─── SECTION ─── */
-    .section {
-      padding: 64px 64px 56px;
-      border-bottom: 1px solid var(--warm);
-    }
-    .section:last-child { border-bottom: none; }
-    .section-title {
-      font-family: var(--font-head);
-      font-size: 36px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 32px;
-      color: var(--carbon);
-    }
-    .section-body p {
-      max-width: 680px;
-      margin-bottom: 16px;
-      color: var(--carbon);
-    }
-    .section-body p:last-child { margin-bottom: 0; }
-    .section-body strong { font-weight: 600; }
-    .section-note {
-      font-style: italic;
-      color: var(--dark);
-      font-size: 13px;
-      border-top: 1px solid var(--mid);
-      padding-top: 20px;
-      margin-top: 32px;
-      max-width: 600px;
-    }
-
-    /* ─── TWO-COL LAYOUT ─── */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      margin-top: 40px;
-    }
-    .col-block {}
-    .col-block h3 {
-      font-family: var(--font-head);
-      font-size: 28px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 16px;
-    }
-
-    /* ─── VOICE GRID ─── */
-    .voice-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      margin-top: 32px;
-    }
-    .voice-card {
-      background: var(--cream);
-      padding: 32px 36px;
-    }
-    .voice-card h4 {
-      font-family: var(--font-head);
-      font-size: 24px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 8px;
-    }
-    .voice-card p {
-      font-size: 13px;
-      color: var(--dark);
-      line-height: 1.55;
-    }
-
-    /* ─── LOGO DISPLAY ─── */
-    .logo-display {
-      margin-top: 40px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-    }
-    .logo-block {
-      padding: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 24px;
-    }
-    .logo-block.light { background: var(--cream); }
-    .logo-block.dark  { background: var(--carbon); }
-    .logo-block.warm  { background: var(--warm); }
-    .logo-block.mid   { background: var(--mid); }
-    .logo-text {
-      font-family: var(--font-head);
-      font-size: 52px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      line-height: 1;
-    }
-    .logo-text.on-dark  { color: var(--white); }
-    .logo-text.on-light { color: var(--carbon); }
-    .logo-caption {
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--mid);
-      font-weight: 500;
-    }
-    .logo-caption.on-dark { color: var(--dark); }
-
-    /* ─── LOGO STACKED ─── */
-    .logo-stacked {
-      font-family: var(--font-head);
-      font-size: 42px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      line-height: 1.05;
-      text-align: center;
-    }
-
-    /* ─── SIZES TABLE ─── */
-    .sizes-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      margin-top: 32px;
-    }
-    .size-card {
-      background: var(--cream);
-      padding: 32px 36px;
-    }
-    .size-card h4 {
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 16px;
-    }
-    .size-value {
-      font-family: var(--font-head);
-      font-size: 48px;
-      font-weight: 700;
-      color: var(--carbon);
-      line-height: 1;
-    }
-    .size-sub {
-      font-size: 12px;
-      color: var(--dark);
-      margin-top: 4px;
-    }
-
-    /* ─── INCORRECT USES ─── */
-    .incorrect-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2px;
-      margin-top: 32px;
-    }
-    .incorrect-card {
-      background: var(--cream);
-      padding: 28px 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .incorrect-logo-demo {
-      font-family: var(--font-head);
-      font-size: 20px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    .demo-deform    { transform: scaleY(0.6); display: inline-block; }
-    .demo-shadow    { text-shadow: 3px 3px 6px rgba(0,0,0,0.5); }
-    .demo-round     { border-radius: 8px; font-style: italic; }
-    .demo-gradient  { background: linear-gradient(90deg,#999,#333); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-    .demo-outline   { -webkit-text-stroke: 1.5px var(--carbon); color: transparent; }
-    .demo-color     { color: #c0392b; }
-    .demo-opacity   { opacity: 0.35; }
-    .demo-rotate    { transform: rotate(-15deg); display: inline-block; }
-    .incorrect-label {
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--dark);
-      font-weight: 500;
-    }
-
-    /* ─── COLOR PALETTE ─── */
-    .palette {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      margin-top: 32px;
-    }
-    .swatch {
-      aspect-ratio: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 20px;
-    }
-    .swatch-hex {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-    }
-    .swatch-name {
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .swatch-values {
-      font-size: 10px;
-      line-height: 1.7;
-      opacity: 0.7;
-    }
-    .swatch.s-carbon  { background: #292A2E; color: var(--cream); }
-    .swatch.s-dark    { background: #555152; color: var(--cream); }
-    .swatch.s-mid     { background: #CCCBC8; color: var(--carbon); }
-    .swatch.s-warm    { background: #EBE8E3; color: var(--carbon); }
-    .swatch.s-cream   { background: #F6F4F1; color: var(--carbon); border: 1px solid var(--warm); }
-
-    /* ─── TYPOGRAPHY DEMO ─── */
-    .type-demo {
-      margin-top: 40px;
-      border-left: 3px solid var(--warm);
-      padding-left: 32px;
-    }
-    .type-label {
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 16px;
-    }
-    .type-family-name {
-      font-family: var(--font-head);
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--dark);
-      margin-bottom: 24px;
-    }
-    .type-specimen-h {
-      font-family: var(--font-head);
-      font-size: clamp(40px, 5vw, 64px);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      line-height: 1;
-      color: var(--carbon);
-    }
-    .type-weights {
-      display: flex;
-      gap: 32px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-    .type-weight-item {
-      font-family: var(--font-body);
-      font-size: 13px;
-      color: var(--dark);
-    }
-
-    /* ─── USE COLOR GRID ─── */
-    .color-use-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 32px;
-    }
-    .color-use-card {
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .color-use-card .logo-text { font-size: 28px; }
-    .cu-caption {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-
-    /* ─── PHOTO RULES ─── */
-    .photo-rules {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      margin-top: 32px;
-    }
-    .photo-rule-card {
-      background: var(--cream);
-      padding: 32px 36px;
-    }
-    .photo-rule-card h4 {
-      font-family: var(--font-head);
-      font-size: 20px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 12px;
-    }
-    .photo-rule-card p {
-      font-size: 13px;
-      color: var(--dark);
-      line-height: 1.55;
-    }
-    .photo-rule-card.do  { border-left: 3px solid var(--carbon); }
-    .photo-rule-card.dont { border-left: 3px solid var(--mid); }
-
-    /* ─── APP CARDS ─── */
-    .app-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      margin-top: 32px;
-    }
-    .app-card {
-      background: var(--cream);
-      padding: 36px;
-    }
-    .app-card h3 {
-      font-family: var(--font-head);
-      font-size: 24px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 16px;
-    }
-    .app-card ul {
-      list-style: none;
-      padding: 0;
-    }
-    .app-card ul li {
-      font-size: 13px;
-      color: var(--dark);
-      padding: 8px 0;
-      border-bottom: 1px solid var(--warm);
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-    .app-card ul li:last-child { border-bottom: none; }
-    .app-card ul li::before {
-      content: '—';
-      color: var(--mid);
-      flex-shrink: 0;
-    }
-
-    /* ─── HIGHLIGHT STRIP ─── */
-    .highlight-strip {
-      background: var(--carbon);
-      color: var(--cream);
-      padding: 32px 64px;
-      font-family: var(--font-head);
-      font-size: clamp(22px, 3vw, 36px);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    /* ─── FOOTER ─── */
-    .site-footer {
-      background: var(--carbon);
-      color: var(--mid);
-      padding: 40px 64px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-    }
-    .site-footer .brand {
-      font-family: var(--font-head);
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      color: var(--cream);
-    }
-
-    /* ─── BACK LINK ─── */
+    /* ── BACK LINK ── */
     .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--mid);
-      text-decoration: none;
-      margin-bottom: 0;
+      position: fixed; top: 0; left: 0;
+      height: 48px; padding: 0 16px;
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none; color: #555;
+      font-size: 11px; letter-spacing: 0.1em;
+      transition: color 0.15s;
+      z-index: 200;
     }
-    .back-link:hover { color: var(--cream); }
+    .back-link:hover { color: #aaa; }
 
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 860px) {
-      .site-nav { padding: 0 24px; }
-      .nav-links { display: none; }
-      .hero { padding: 64px 24px 48px; }
-      .intro-rule, .section, .highlight-strip { padding-left: 24px; padding-right: 24px; }
-      .chapter { padding: 40px 24px 32px; }
-      .two-col, .voice-grid, .logo-display, .sizes-grid,
-      .photo-rules, .color-use-grid, .app-cards,
-      .incorrect-grid { grid-template-columns: 1fr; }
-      .palette { grid-template-columns: repeat(3, 1fr); }
-      .hero-meta { flex-direction: column; gap: 24px; }
-      .site-footer { flex-direction: column; gap: 16px; text-align: center; }
+    /* ── FULLSCREEN BTN ── */
+    .btn-fs {
+      position: fixed; top: 0; right: 0;
+      height: 48px; padding: 0 16px;
+      display: flex; align-items: center;
+      background: none; border: none; cursor: pointer; color: #444;
+      transition: color 0.15s; z-index: 200;
+    }
+    .btn-fs:hover { color: #aaa; }
+
+    /* ── KEYBOARD HINT ── */
+    .hint {
+      position: fixed; bottom: 52px; right: 16px;
+      font-size: 10px; color: #333; letter-spacing: 0.06em;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="site-nav">
-  <a href="/" class="nav-brand">UNO × UNO</a>
-  <ul class="nav-links">
-    <li><a href="#marca">Marca</a></li>
-    <li><a href="#identidad">Identidad</a></li>
-    <li><a href="#sistema">Sistema</a></li>
-    <li><a href="#aplicaciones">Aplicaciones</a></li>
-    <li><a href="/personas.html">Buyer Personas</a></li>
-  </ul>
-</nav>
+<a class="back-link" href="/">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+  INICIO
+</a>
 
-<!-- HERO -->
-<header class="hero">
-  <p class="hero-label">Documento interno — Uso exclusivo del equipo</p>
-  <h1>Sistema de<br>Identidad</h1>
-  <div class="hero-meta">
-    <div><strong>Versión</strong>2026</div>
-    <div><strong>Marca</strong>UNO × UNO</div>
-    <div><strong>Razón social</strong>Método Uno SRL</div>
-  </div>
+<header>
+  <span class="h-brand">UNO × UNO</span>
+  <span class="h-title">Sistema de Identidad Visual · 2026</span>
+  <span class="h-counter" id="counter">1 / 37</span>
 </header>
 
-<!-- INTRO RULE -->
-<div class="intro-rule">
-  <p>Este manual no propone opciones: define criterios. Su correcta aplicación preserva el carácter sobrio, funcional y previsible del sistema, evitando interpretaciones o usos que lo desvirtúen.</p>
+<div class="viewer">
+  <button class="btn-nav btn-prev" id="prev" disabled>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+  </button>
+  <div class="slides-wrap" id="slides"></div>
+  <button class="btn-nav btn-next" id="next">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,6 15,12 9,18"/></svg>
+  </button>
 </div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 01. MARCA -->
-<!-- ═══════════════════════════════════════════ -->
-<section id="marca">
-  <div class="chapter">
-    <div class="chapter-num">01</div>
-    <div class="chapter-title">Marca</div>
-  </div>
+<footer id="dots"></footer>
 
-  <!-- Quiénes somos -->
-  <div class="section">
-    <h2 class="section-title">Quiénes somos</h2>
-    <div class="section-body">
-      <p>UNO × UNO es un uniforme diario premium. Un <strong>sistema simple, atemporal y consistente</strong> para vestirse todos los días sin pensar.</p>
-      <p>No es moda. No es tendencia. No busca parecer.</p>
-      <p><strong>Es orden. Es criterio. Es decisión.</strong></p>
-      <p>Reducimos opciones para mejorar la elección. Elegir una vez. Elegir bien.</p>
-      <p>La marca se apoya en la sobriedad y la calidad silenciosa. No busca impresionar. Busca funcionar.</p>
-    </div>
-    <p class="section-note">En UNO × UNO, el producto siempre manda. Todo lo demás acompaña.</p>
-  </div>
+<button class="btn-fs" id="fsBtn" title="Pantalla completa">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+</button>
 
-  <!-- Misión y Visión -->
-  <div class="section">
-    <h2 class="section-title">Misión y Visión</h2>
-    <div class="two-col">
-      <div class="col-block">
-        <h3>Misión</h3>
-        <p>Eliminar la fricción de vestirse todos los días mediante un sistema de remeras que siempre funcionan.</p>
-        <p>Diseñar prendas consistentes en calce, tela y durabilidad, para que el usuario no tenga que buscar, comparar ni volver a elegir.</p>
-      </div>
-      <div class="col-block">
-        <h3>Visión</h3>
-        <p>Convertirse en el estándar de remera diaria para hombres que priorizan practicidad y consistencia.</p>
-        <p>Que vestirse deje de ser una decisión y pase a ser un hábito.</p>
-      </div>
-    </div>
-  </div>
+<span class="hint">← → navegar · F pantalla completa</span>
 
-  <!-- Tono de voz -->
-  <div class="section">
-    <h2 class="section-title">Tono de voz</h2>
-    <div class="section-body">
-      <p>La comunicación de la marca responde a cuatro atributos constantes. Nunca se los viola por conveniencia ni urgencia de venta.</p>
-    </div>
-    <div class="voice-grid">
-      <div class="voice-card">
-        <h4>Claro</h4>
-        <p>Frases directas. Sin rodeos. Sin sobreexplicación.</p>
-      </div>
-      <div class="voice-card">
-        <h4>Sobrio</h4>
-        <p>Sin exageraciones ni recursos emocionales forzados.</p>
-      </div>
-      <div class="voice-card">
-        <h4>Seguro</h4>
-        <p>Comunica desde la convicción. No necesita justificar.</p>
-      </div>
-      <div class="voice-card">
-        <h4>Racional</h4>
-        <p>Prioriza la funcionalidad por sobre lo aspiracional.</p>
-      </div>
-    </div>
-  </div>
-</section>
+<script>
+  const TOTAL = 37;
+  let current = 0;
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 02. IDENTIDAD VISUAL -->
-<!-- ═══════════════════════════════════════════ -->
-<section id="identidad">
-  <div class="chapter">
-    <div class="chapter-num">02</div>
-    <div class="chapter-title">Identidad Visual</div>
-  </div>
+  const slidesEl = document.getElementById('slides');
+  const dotsEl = document.getElementById('dots');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const counter = document.getElementById('counter');
 
-  <!-- Logotipo -->
-  <div class="section">
-    <h2 class="section-title">Logotipo</h2>
-    <div class="section-body">
-      <p>El logotipo se desarrolla a partir de <strong>Trade Gothic Condensed Bold</strong>, utilizada como punto de partida para definir proporciones, ritmo y estructura. A partir de esta base tipográfica se realizaron ajustes para construir un logotipo propio, coherente y consistente.</p>
-      <p>Su diseño prioriza la claridad, el equilibrio y la repetición, reforzando el concepto de sistema y uniformidad. La "×" funciona como elemento central: representa el cruce, la repetición y la consistencia en el uso diario. <strong>No es un recurso decorativo. Es una pieza funcional que articula la marca.</strong></p>
-    </div>
-    <div class="logo-display">
-      <div class="logo-block light">
-        <span class="logo-caption">POSITIVO — SOBRE FONDO CLARO</span>
-        <span class="logo-text on-light">UNO × UNO</span>
-      </div>
-      <div class="logo-block dark">
-        <span class="logo-caption on-dark">NEGATIVO — SOBRE FONDO OSCURO</span>
-        <span class="logo-text on-dark">UNO × UNO</span>
-      </div>
-      <div class="logo-block warm">
-        <span class="logo-caption">POSITIVO — SOBRE FONDO WARM</span>
-        <span class="logo-text on-light">UNO × UNO</span>
-      </div>
-      <div class="logo-block" style="background:var(--mid);">
-        <span class="logo-caption">POSITIVO — SOBRE FONDO MID</span>
-        <span class="logo-text on-light">UNO × UNO</span>
-      </div>
-    </div>
-    <p class="section-note">El logotipo no busca expresividad, sino precisión. No interpreta: se aplica.</p>
-  </div>
+  // Build slides
+  for (let i = 1; i <= TOTAL; i++) {
+    const div = document.createElement('div');
+    div.className = 'slide' + (i === 1 ? ' active' : '');
+    div.id = 's' + i;
+    const img = document.createElement('img');
+    img.src = `manual-pages/page_${String(i).padStart(2,'0')}.jpg`;
+    img.alt = 'Página ' + i;
+    // Preload next page
+    if (i === 1) {
+      const preload = new Image();
+      preload.src = `manual-pages/page_02.jpg`;
+    }
+    div.appendChild(img);
+    slidesEl.appendChild(div);
+  }
 
-  <!-- Variante apilada -->
-  <div class="section">
-    <h2 class="section-title">Variante</h2>
-    <div class="section-body">
-      <p>Se define una versión apilada del logotipo para su uso en formatos verticales o espacios reducidos. Su aplicación es <strong>excepcional</strong> y debe utilizarse únicamente cuando el formato no permita el uso del logotipo principal.</p>
-      <p>El logotipo principal es siempre la versión prioritaria.</p>
-    </div>
-    <div style="margin-top:32px; display:flex; gap:48px; align-items:flex-start;">
-      <div style="background:var(--cream); padding:40px 48px; display:inline-block;">
-        <div class="logo-stacked" style="color:var(--carbon);">UNO<br>×<br>UNO</div>
-      </div>
-      <div style="background:var(--carbon); padding:40px 48px; display:inline-block;">
-        <div class="logo-stacked" style="color:var(--white);">UNO<br>×<br>UNO</div>
-      </div>
-    </div>
-    <p class="section-note">La marca no cambia: se adapta.</p>
-  </div>
+  // Build dots
+  for (let i = 0; i < TOTAL; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'dot' + (i === 0 ? ' active' : '');
+    btn.title = 'Página ' + (i + 1);
+    btn.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(btn);
+  }
 
-  <!-- Tamaños mínimos -->
-  <div class="section">
-    <h2 class="section-title">Tamaños mínimos</h2>
-    <div class="section-body">
-      <p>Para garantizar la correcta legibilidad del logotipo, se establecen tamaños mínimos de reproducción según el soporte.</p>
-    </div>
-    <div class="sizes-grid">
-      <div class="size-card">
-        <h4>Logotipo principal — Digital</h4>
-        <div class="size-value">120 px</div>
-        <div class="size-sub">Ancho mínimo</div>
-      </div>
-      <div class="size-card">
-        <h4>Logotipo principal — Impreso</h4>
-        <div class="size-value">32 mm</div>
-        <div class="size-sub">Ancho mínimo</div>
-      </div>
-      <div class="size-card">
-        <h4>Variante apilada — Digital</h4>
-        <div class="size-value">90 px</div>
-        <div class="size-sub">Alto mínimo</div>
-      </div>
-      <div class="size-card">
-        <h4>Variante apilada — Impreso</h4>
-        <div class="size-value">25 mm</div>
-        <div class="size-sub">Alto mínimo</div>
-      </div>
-    </div>
-    <p class="section-note">Área de seguridad: mantener 2× (el módulo X del logotipo) libre de cualquier elemento alrededor.</p>
-  </div>
+  function goTo(n) {
+    if (n < 0 || n >= TOTAL) return;
+    document.getElementById('s' + (current + 1)).classList.remove('active');
+    dotsEl.children[current].classList.remove('active');
+    current = n;
+    const slide = document.getElementById('s' + (current + 1));
+    slide.classList.add('active');
+    dotsEl.children[current].classList.add('active');
+    counter.textContent = (current + 1) + ' / ' + TOTAL;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === TOTAL - 1;
+    // Preload adjacent
+    const preNext = new Image();
+    preNext.src = `manual-pages/page_${String(current + 2).padStart(2,'0')}.jpg`;
+    const prePrev = new Image();
+    prePrev.src = `manual-pages/page_${String(current).padStart(2,'0')}.jpg`;
+    // Scroll dot into view
+    dotsEl.children[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
 
-  <!-- Usos incorrectos -->
-  <div class="section">
-    <h2 class="section-title">Usos incorrectos</h2>
-    <div class="section-body">
-      <p>El logotipo no debe ser alterado bajo ninguna circunstancia. El respeto por estas reglas garantiza la consistencia del sistema de marca.</p>
-    </div>
-    <div class="incorrect-grid">
-      <div class="incorrect-card">
-        <span class="incorrect-logo-demo"><span class="demo-deform">UNO×UNO</span></span>
-        <span class="incorrect-label">No deformar</span>
-      </div>
-      <div class="incorrect-card">
-        <span class="incorrect-logo-demo"><span class="demo-shadow">UNO×UNO</span></span>
-        <span class="incorrect-label">No sombras</span>
-      </div>
-      <div class="incorrect-card">
-        <span class="incorrect-logo-demo" style="font-style:italic;">UNO×UNO</span>
-        <span class="incorrect-label">No redondear / modificar</span>
-      </div>
-      <div class="incorrect-card">
-        <span class="incorrect-logo-demo"><span class="demo-gradient">UNO×UNO</span></span>
-        <span class="incorrect-label">No degradados</span>
-      </div>
-      <div class="incorrect-card">
-        <span class="incorrect-logo-demo"><span class="demo-outline">UNO×UNO</span></span>
-        <span class="incorrect-label">No contornos</span>
-      </div>
-      <div class="incorrect-card">
-        <span class="incorrect-logo-demo"><span class="demo-color">UNO×UNO</span></span>
-        <span class="incorrect-label">No cambiar color</span>
-      </div>
-      <div class="incorrect-card">
-        <span class="incorrect-logo-demo"><span class="demo-opacity">UNO×UNO</span></span>
-        <span class="incorrect-label">No bajar opacidad</span>
-      </div>
-      <div class="incorrect-card">
-        <span class="incorrect-logo-demo"><span class="demo-rotate">UNO×UNO</span></span>
-        <span class="incorrect-label">No rotar</span>
-      </div>
-    </div>
-  </div>
-</section>
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 03. SISTEMA GRÁFICO -->
-<!-- ═══════════════════════════════════════════ -->
-<section id="sistema">
-  <div class="chapter">
-    <div class="chapter-num">03</div>
-    <div class="chapter-title">Sistema Gráfico</div>
-  </div>
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goTo(current - 1);
+    if (e.key === 'f' || e.key === 'F') toggleFS();
+    if (e.key === 'Home') goTo(0);
+    if (e.key === 'End') goTo(TOTAL - 1);
+  });
 
-  <!-- Tipografía principal -->
-  <div class="section">
-    <h2 class="section-title">Tipografía principal</h2>
-    <div class="section-body">
-      <p>Se utiliza en títulos y elementos de mayor jerarquía. Refuerza el carácter claro, directo y consistente del sistema.</p>
-    </div>
-    <div class="type-demo">
-      <p class="type-label">Tipografía principal</p>
-      <p class="type-family-name">Trade Gothic Condensed Bold</p>
-      <div class="type-specimen-h">UNA REMERA.<br>SIEMPRE LA MISMA.</div>
-    </div>
-  </div>
+  // Touch swipe
+  let touchX = null;
+  document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+    touchX = null;
+  }, { passive: true });
 
-  <!-- Tipografía secundaria -->
-  <div class="section">
-    <h2 class="section-title">Tipografía secundaria</h2>
-    <div class="section-body">
-      <p>Se utiliza en textos informativos y contenidos de soporte. Prioriza la legibilidad sin competir con el logotipo.</p>
-    </div>
-    <div class="type-demo">
-      <p class="type-label">Tipografía secundaria</p>
-      <p class="type-family-name">Inter</p>
-      <div style="display:flex; flex-direction:column; gap:12px; margin-top:8px;">
-        <p style="font-weight:300; font-size:20px; color:var(--carbon);">Diseñada para usarse todos los días.</p>
-        <p style="font-weight:400; font-size:20px; color:var(--carbon);">Mismo calce, misma tela, mismo resultado.</p>
-        <p style="font-weight:700; font-size:20px; color:var(--carbon);">No tenés que pensar.</p>
-      </div>
-      <div class="type-weights" style="margin-top:24px;">
-        <span class="type-weight-item">Inter Thin — 100</span>
-        <span class="type-weight-item">Inter Regular — 400</span>
-        <span class="type-weight-item"><strong>Inter Bold — 700</strong></span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Color principal -->
-  <div class="section">
-    <h2 class="section-title">Color principal</h2>
-    <div class="section-body">
-      <p>El <strong>gris carbón (#292A2E)</strong> es el color principal de la marca y debe utilizarse prioritariamente en el logotipo y elementos de identificación.</p>
-      <p>Se optó por un gris carbón —y no negro puro— para lograr una presencia más equilibrada y atemporal. Convive mejor con blancos y neutros, permite jerarquías más sutiles, y no cansa en repetición.</p>
-    </div>
-    <p class="section-note">Negro pleno solo en casos técnicos (por ejemplo, impresión en una tinta muy limitada).</p>
-  </div>
-
-  <!-- Paleta -->
-  <div class="section">
-    <h2 class="section-title">Paleta de colores</h2>
-    <div class="section-body">
-      <p>El sistema cromático se resuelve con cinco tonos neutros. Se debe asegurar siempre contraste suficiente con el fondo para garantizar correcta lectura.</p>
-    </div>
-    <div class="palette">
-      <div class="swatch s-carbon">
-        <span class="swatch-name">Gris Carbón</span>
-        <span class="swatch-hex">#292A2E</span>
-        <span class="swatch-values">R:41 G:42 B:46<br>C:76 M:65 Y:56 K:69</span>
-      </div>
-      <div class="swatch s-dark">
-        <span class="swatch-name">Dark</span>
-        <span class="swatch-hex">#555152</span>
-        <span class="swatch-values">R:85 G:81 B:82<br>C:59 M:52 Y:49 K:44</span>
-      </div>
-      <div class="swatch s-mid">
-        <span class="swatch-name">Mid</span>
-        <span class="swatch-hex">#CCCBC8</span>
-        <span class="swatch-values">R:204 G:203 B:200<br>C:23 M:17 Y:20 K:1</span>
-      </div>
-      <div class="swatch s-warm">
-        <span class="swatch-name">Warm</span>
-        <span class="swatch-hex">#EBE8E3</span>
-        <span class="swatch-values">R:235 G:232 B:227<br>C:9 M:8 Y:11 K:0</span>
-      </div>
-      <div class="swatch s-cream">
-        <span class="swatch-name">Cream</span>
-        <span class="swatch-hex">#F6F4F1</span>
-        <span class="swatch-values">R:246 G:244 B:241<br>C:4 M:3 Y:5 K:0</span>
-      </div>
-    </div>
-    <p class="section-note">El color no busca destacar. Busca sostener el sistema.</p>
-  </div>
-
-  <!-- Tono visual -->
-  <div class="section">
-    <h2 class="section-title">Tono visual</h2>
-    <div class="section-body">
-      <p>La marca se construye desde la sobriedad y la claridad. Evita el impacto visual y prioriza el orden, la repetición y la funcionalidad. No busca llamar la atención. Busca sostener el sistema.</p>
-    </div>
-    <p class="section-note">La marca evita el impacto visual y prioriza la claridad y el orden.</p>
-  </div>
-
-  <!-- Estilo fotográfico -->
-  <div class="section">
-    <h2 class="section-title">Estilo fotográfico</h2>
-    <div class="section-body">
-      <p>La fotografía sostiene el sistema visual con los mismos criterios que el resto de la marca: claridad, neutralidad y funcionalidad.</p>
-    </div>
-    <div class="photo-rules">
-      <div class="photo-rule-card do">
-        <h4>Sí</h4>
-        <p>Luz neutra y realista. Sin dramatización ni contrastes duros.</p>
-        <p style="margin-top:12px;">Colores fieles al algodón. Sin filtros ni efectos editoriales.</p>
-        <p style="margin-top:12px;">Contexto urbano sobrio y natural. Sin estilización excesiva.</p>
-        <p style="margin-top:12px;">Consistencia visual en todas las piezas (misma luz, fondo y tratamiento).</p>
-      </div>
-      <div class="photo-rule-card dont">
-        <h4>No</h4>
-        <p>Recursos forzados, poses artificiales o situaciones irreales.</p>
-        <p style="margin-top:12px;">Filtros, efectos editoriales, contrastes dramáticos.</p>
-        <p style="margin-top:12px;">Construcción de personaje o aspiracionalidad visual.</p>
-        <p style="margin-top:12px;">Planos excesivamente abiertos o composiciones recargadas.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Contenido visual -->
-  <div class="section">
-    <h2 class="section-title">Contenido visual</h2>
-    <div class="section-body">
-      <p>El contenido muestra el producto en uso real, en situaciones simples y cotidianas. Se prioriza la claridad sobre la estética y la repetición sobre la variedad.</p>
-      <p>El foco está en la prenda: su calce, su material y su uso. La actitud es neutra, sin construcción de personaje ni intención de impacto.</p>
-    </div>
-    <p class="section-note">Encuadres medios y cercanos. El producto debe ser siempre legible. El foco está en la prenda y su uso, no en la escena.</p>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- 04. APLICACIONES -->
-<!-- ═══════════════════════════════════════════ -->
-<section id="aplicaciones">
-  <div class="chapter">
-    <div class="chapter-num">04</div>
-    <div class="chapter-title">Aplicaciones</div>
-  </div>
-
-  <!-- Producto -->
-  <div class="section">
-    <h2 class="section-title">Producto</h2>
-    <div class="app-cards">
-      <div class="app-card">
-        <h3>Etiqueta interior</h3>
-        <ul>
-          <li>Forma parte del sistema de marca. Se resuelve simple y funcional.</li>
-          <li>La información se presenta de forma directa, sin elementos innecesarios.</li>
-          <li>Prioriza comodidad y claridad en la lectura.</li>
-        </ul>
-        <p class="section-note" style="margin-top:24px;">No es un espacio de comunicación. Es parte del producto.</p>
-      </div>
-      <div class="app-card">
-        <h3>Etiqueta cuello</h3>
-        <ul>
-          <li>Se aplica directamente sobre la prenda, eliminando elementos innecesarios.</li>
-          <li>El logotipo se utiliza en una sola tinta.</li>
-          <li>Prendas claras: estampa oscura. Prendas oscuras: estampa clara.</li>
-        </ul>
-        <p class="section-note" style="margin-top:24px;">El logotipo acompaña. No invade.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Packaging -->
-  <div class="section">
-    <h2 class="section-title">Packaging</h2>
-    <div class="section-body">
-      <p>El packaging refleja el sistema de la marca: claridad, simplicidad y funcionalidad. Se resuelve con una estructura limpia, donde el producto es protagonista. Se utilizan pocos elementos gráficos, organizados con aire y jerarquía clara.</p>
-      <p>El logotipo se aplica de forma directa y la comunicación se reduce a una única frase.</p>
-    </div>
-    <div class="app-cards" style="margin-top:32px;">
-      <div class="app-card">
-        <h3>Caja</h3>
-        <ul>
-          <li>Color cream. Ventana para visualizar el producto.</li>
-          <li>Logotipo positivo + única frase de comunicación.</li>
-          <li>Sin mensajes promocionales ni urgencias.</li>
-        </ul>
-      </div>
-      <div class="app-card">
-        <h3>Bolsa de envío</h3>
-        <ul>
-          <li>Bolsa tipo courier en color Gris Carbón (#292A2E).</li>
-          <li>Impresa a una tinta. Logotipo + frase breve.</li>
-          <li>Sin recursos comerciales ni mensajes forzados.</li>
-        </ul>
-      </div>
-    </div>
-    <div style="margin-top:2px;">
-      <div class="app-card" style="background:var(--cream);">
-        <h3>Sticker de talle</h3>
-        <ul>
-          <li>Función informativa dentro del packaging.</li>
-          <li>Prioriza claridad y lectura inmediata sin abrir el producto.</li>
-          <li>Información organizada en niveles: material → origen → talle.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Digital -->
-  <div class="section">
-    <h2 class="section-title">Comunicación digital</h2>
-    <div class="app-cards">
-      <div class="app-card">
-        <h3>Instagram feed</h3>
-        <ul>
-          <li>Estética consistente y repetitiva. Claridad sobre variedad.</li>
-          <li>Producto en uso real. Sin intervención ni construcción de personaje.</li>
-          <li>Historias destacadas: 3 categorías — Producto / Guía / Envíos.</li>
-          <li>Portadas: fondos limpios con texto mínimo.</li>
-        </ul>
-        <p class="section-note" style="margin-top:24px;">La marca no busca impacto. Busca reconocimiento.</p>
-      </div>
-      <div class="app-card">
-        <h3>Anuncios digitales</h3>
-        <ul>
-          <li>Mismo sistema visual que el resto de la marca.</li>
-          <li>Claridad y lectura inmediata. Sin sobrecarga de información.</li>
-          <li>El producto es el foco principal + mensajes breves y directos.</li>
-          <li>Sin recursos agresivos ni mensajes forzados.</li>
-        </ul>
-        <p class="section-note" style="margin-top:24px;">No se incorporan urgencias artificiales ni tácticas de presión.</p>
-      </div>
-    </div>
-    <div style="margin-top:2px;">
-      <div class="app-card" style="background:var(--cream);">
-        <h3>Sitio web</h3>
-        <ul>
-          <li>Organiza el sistema y concentra la experiencia de compra.</li>
-          <li>Claridad estructural, jerarquía tipográfica y uso controlado del color.</li>
-          <li>Sin recursos estridentes ni urgencias artificiales.</li>
-          <li>La consistencia visual y verbal fortalece la percepción de criterio, control y calidad.</li>
-        </ul>
-        <p class="section-note" style="margin-top:24px;">Su función es facilitar la decisión y sostener coherencia con el sistema general.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CIERRE -->
-<div class="highlight-strip">
-  El uniforme diario. Elegís una vez. Funciona todos los días.
-</div>
-
-<!-- MENSAJES CLAVE -->
-<div class="section" style="background:var(--cream);">
-  <h2 class="section-title">Los 4 mensajes clave</h2>
-  <div class="section-body">
-    <p>Estos son los únicos mensajes que la marca comunica. No se reemplazan, no se alteran, no se complementan con otros claims.</p>
-  </div>
-  <div class="voice-grid" style="margin-top:32px;">
-    <div class="voice-card" style="background:var(--white);">
-      <h4>01</h4>
-      <p style="font-size:15px; color:var(--carbon);">Elegís una vez. Funciona todos los días.</p>
-    </div>
-    <div class="voice-card" style="background:var(--white);">
-      <h4>02</h4>
-      <p style="font-size:15px; color:var(--carbon);">Mismo calce. Misma sensación. Mismo resultado.</p>
-    </div>
-    <div class="voice-card" style="background:var(--white);">
-      <h4>03</h4>
-      <p style="font-size:15px; color:var(--carbon);">No es una remera más. Es la que no tenés que volver a evaluar.</p>
-    </div>
-    <div class="voice-card" style="background:var(--white);">
-      <h4>04</h4>
-      <p style="font-size:15px; color:var(--carbon);">El uniforme diario.</p>
-    </div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer class="site-footer">
-  <span class="brand">UNO × UNO</span>
-  <span>Sistema de Identidad 2026 — Método Uno SRL — Documento interno</span>
-</footer>
+  // Fullscreen
+  function toggleFS() {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+    else document.exitFullscreen?.();
+  }
+  document.getElementById('fsBtn').addEventListener('click', toggleFS);
+</script>
 
 </body>
 </html>
