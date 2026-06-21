@@ -319,13 +319,36 @@
       .doc-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 680px) {
-      nav, footer { padding-left: 24px; padding-right: 24px; }
-      .container { padding: 0 24px; }
-      .hero-overlay { grid-template-columns: 1fr; gap: 24px; padding: 0 24px 32px; }
+      /* NAV */
+      nav, footer { padding-left: 20px; padding-right: 20px; }
+      nav img[style*="height:150px"] { height: 32px !important; }
+      .container { padding: 0 20px; }
+
+      /* HERO */
+      .hero-photo {
+        height: 420px;
+        object-position: center 48%;
+      }
+      .hero-overlay {
+        padding: 0 20px 28px;
+        max-width: 100%;
+      }
+      .hero h1 { font-size: 36px; line-height: 1; }
+      .hero-eyebrow { font-size: 10px; margin-bottom: 12px; }
+      .hero-sub { font-size: 14px; }
+      .hero-divider { margin-bottom: 12px; }
+      .hero-meta { margin-top: 16px; }
+
+      /* CARDS */
       .doc-grid { grid-template-columns: 1fr; }
-      .doc-card { padding: 36px 24px; }
+      .doc-card { padding: 32px 20px; }
+      .doc-title { font-size: 24px; }
+
+      /* VOCAB */
       .vocab .container { grid-template-columns: 1fr; gap: 32px; }
       .vocab-cols { grid-template-columns: 1fr; }
+
+      /* INTRO */
       .intro-strip .container { flex-direction: column; gap: 8px; }
     }
   </style>
