@@ -14,7 +14,10 @@ const SUPA_KEY     = process.env.SUPABASE_SERVICE_KEY;
 const DRY_RUN      = process.argv.includes('--dry-run');
 const API_VERSION  = 'v19.0';
 
-const supabase = createClient(SUPA_URL, SUPA_KEY);
+const WebSocket = require('ws');
+const supabase = createClient(SUPA_URL, SUPA_KEY, {
+  global: { WebSocket },
+});
 
 // ── Competidores con page IDs reales ──────────────────────────────────────
 // Elemental tiene dos páginas: marca + la que usa para pautar (El Calce Argentino)
