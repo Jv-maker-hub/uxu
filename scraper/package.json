@@ -1,0 +1,17 @@
+{
+  "name": "uxu-competitor-scraper",
+  "version": "1.0.0",
+  "description": "Scraper de ads de competidores para UNO x UNO",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dry-run": "node index.js --dry-run"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "node-fetch": "^2.7.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
