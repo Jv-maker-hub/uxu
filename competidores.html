@@ -559,6 +559,438 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
   </div>
 </div>
 
+
+
+<!-- ADS EN VIVO (auto-generado por scraper) -->
+<div class="container">
+<!--
+  ============================================================
+  UNO x UNO â Snippet para /competidores
+
+  CÃMO AGREGAR A TU PÃGINA:
+  1. ReemplazÃ¡ las dos constantes del bloque <script> al final:
+       SUPABASE_URL  â tu URL de Supabase (https://xxx.supabase.co)
+       SUPABASE_ANON_KEY â tu anon/public key (Settings â API en Supabase)
+  2. PegÃ¡ el bloque <style> en tu CSS o dentro de <head>
+  3. PegÃ¡ los bloques HTML donde quieras que aparezcan
+  4. PegÃ¡ el <script> al final del <body>
+  ============================================================
+-->
+
+<!-- ââ ESTILOS âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<style>
+  /* SecciÃ³n de creativos en vivo */
+  .live-ads-section {
+    margin: 4rem 0;
+  }
+  .live-ads-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .live-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #fff;
+    background: #1a1a1a;
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+  }
+  .live-badge::before {
+    content: 'â ';
+    color: #4ade80;
+    animation: blink 2s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* Grid de competidores */
+  .competitor-live-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  .competitor-live-card {
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .competitor-live-card-header {
+    padding: 1rem 1.25rem;
+    background: #fafafa;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .competitor-live-card-header h3 {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .ads-count-badge {
+    font-size: 0.75rem;
+    color: #666;
+  }
+
+  /* Carrusel de imÃ¡genes de ads */
+  .ads-carousel {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ads-carousel::-webkit-scrollbar { height: 4px; }
+  .ads-carousel::-webkit-scrollbar-track { background: #f1f1f1; }
+  .ads-carousel::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+
+  .ad-card {
+    flex: 0 0 180px;
+    scroll-snap-align: start;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow 0.15s;
+  }
+  .ad-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+  .ad-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    background: #f5f5f5;
+  }
+  .ad-card-body {
+    padding: 0.6rem 0.75rem;
+  }
+  .ad-card-copy {
+    font-size: 0.72rem;
+    color: #444;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0 0 0.4rem;
+  }
+  .ad-card-meta {
+    font-size: 0.65rem;
+    color: #999;
+  }
+  .ad-card-link {
+    display: block;
+    font-size: 0.68rem;
+    color: #1a1a1a;
+    text-decoration: none;
+    margin-top: 0.4rem;
+    font-weight: 600;
+  }
+  .ad-card-link:hover { text-decoration: underline; }
+
+  .ad-no-image {
+    width: 100%;
+    height: 180px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: #999;
+  }
+  .ad-new-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+    margin-bottom: 0.3rem;
+  }
+
+  /* GrÃ¡fico histÃ³rico */
+  .history-section {
+    margin: 3rem 0;
+  }
+  .history-chart-wrap {
+    position: relative;
+    height: 220px;
+    margin-top: 1.5rem;
+  }
+
+  /* Estado de carga/error */
+  .live-status {
+    padding: 1rem;
+    font-size: 0.8rem;
+    color: #999;
+    text-align: center;
+  }
+  .live-error {
+    color: #dc2626;
+  }
+  .last-updated {
+    font-size: 0.7rem;
+    color: #bbb;
+    text-align: right;
+    margin-top: 0.5rem;
+  }
+</style>
+
+
+<!-- ââ HTML: SecciÃ³n de creativos en vivo ââââââââââââââââââââââââââââââââââââ -->
+<section class="live-ads-section">
+  <div class="live-ads-header">
+    <h2>CREATIVOS EN VIVO</h2>
+    <span class="live-badge">LIVE</span>
+  </div>
+  <p style="font-size:0.85rem;color:#666;margin-bottom:2rem;">
+    Anuncios activos ahora mismo en Meta Ads Library. Se actualiza automÃ¡ticamente cada dÃ­a.
+  </p>
+
+  <div id="live-ads-grid" class="competitor-live-grid">
+    <div class="live-status">Cargando creativos...</div>
+  </div>
+  <p class="last-updated" id="last-updated-label"></p>
+</section>
+
+<!-- ââ HTML: GrÃ¡fico histÃ³rico de volumen de ads âââââââââââââââââââââââââââââ -->
+<section class="history-section">
+  <h2>EVOLUCIÃÎ HISTÃRICA</h2>
+  <p style="font-size:0.85rem;color:#666;margin-bottom:1rem;">
+    Anuncios activos por competidor â Ãºltimos 30 dÃ­as.
+  </p>
+  <div class="history-chart-wrap">
+    <canvas id="history-chart"></canvas>
+  </div>
+</section>
+
+
+<!-- ââ SCRIPT: fetch desde Supabase + render âââââââââââââââââââââââââââââââââ -->
+<script>
+(function () {
+  // ââ CONFIGURACIÃN â reemplazÃ¡ estos dos valores ââââââââââââââââââââââââââ
+  const SUPABASE_URL      = 'https://jsvnuylvqclqhjkotwvk.supabase.co';  // <-- cambiar
+  const SUPABASE_ANON_KEY = 'sb_publishable_aiXuJmB_bZe8clxZ2r4LqQ_5oRBfiui';                 // <-- cambiar
+  // ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+
+  const COLORS = {
+    tecla:       '#1a1a1a',
+    valfort:     '#4b5563',
+    umano:       '#6b7280',
+    'ser-basics':'#9ca3af',
+  };
+
+  const COMPETITORS = ['tecla', 'valfort', 'umano', 'ser-basics'];
+
+  /** Fetch genÃ©rico a la API REST de Supabase */
+  async function supaFetch(path, params = {}) {
+    const url = new URL(`${SUPABASE_URL}/rest/v1/${path}`);
+    Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
+    const res = await fetch(url.toString(), {
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        Prefer: 'return=representation',
+      },
+    });
+    if (!res.ok) throw new Error(`Supabase error ${res.status}`);
+    return res.json();
+  }
+
+  /** Formatea una fecha ISO como "15 jun" */
+  function fmtDate(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    return d.toLocaleDateString('es-AR', { day: 'numeric', month: 'short' });
+  }
+
+  /** Construye la card de un anuncio */
+  function buildAdCard(ad) {
+    const isNew = new Date(ad.first_seen_at) > new Date(Date.now() - 48 * 60 * 60 * 1000);
+    const card = document.createElement('div');
+    card.className = 'ad-card';
+
+    const imgHtml = ad.image_url
+      ? `<img src="${ad.image_url}" alt="Creativo" loading="lazy">`
+      : `<div class="ad-no-image">Sin imagen disponible</div>`;
+
+    const copyShort = (ad.ad_copy || '').slice(0, 120);
+
+    card.innerHTML = `
+      ${imgHtml}
+      <div class="ad-card-body">
+        ${isNew ? '<span class="ad-new-badge">NUEVO</span>' : ''}
+        <p class="ad-card-copy">${copyShort || 'Sin copy disponible'}</p>
+        <span class="ad-card-meta">Desde ${fmtDate(ad.delivery_start_date)}</span>
+        ${ad.ad_snapshot_url
+          ? `<a class="ad-card-link" href="${ad.ad_snapshot_url}" target="_blank" rel="noopener">Ver en Meta â</a>`
+          : ''}
+      </div>`;
+    return card;
+  }
+
+  /** Construye la secciÃ³n de un competidor con su carrusel de ads */
+  function buildCompetitorCard(competitor, ads) {
+    const div = document.createElement('div');
+    div.className = 'competitor-live-card';
+
+    const activeCount = ads.length;
+    const newCount = ads.filter(a =>
+      new Date(a.first_seen_at) > new Date(Date.now() - 48 * 60 * 60 * 1000)
+    ).length;
+
+    div.innerHTML = `
+      <div class="competitor-live-card-header">
+        <h3>${competitor.name}</h3>
+        <span class="ads-count-badge">
+          ${activeCount} ads activos${newCount > 0 ? ` Â· <strong>+${newCount} nuevos</strong>` : ''}
+        </span>
+      </div>`;
+
+    const carousel = document.createElement('div');
+    carousel.className = 'ads-carousel';
+
+    if (ads.length === 0) {
+      carousel.innerHTML = '<p class="live-status">No hay ads activos en este momento</p>';
+    } else {
+      ads.forEach(ad => carousel.appendChild(buildAdCard(ad)));
+    }
+
+    div.appendChild(carousel);
+    return div;
+  }
+
+  /** Renderiza el grÃ¡fico histÃ³rico con Chart.js */
+  async function renderHistoryChart(competitorMap) {
+    // Obtener snapshots Ãºltimos 30 dÃ­as
+    const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    const snapshots = await supaFetch('ad_snapshots', {
+      select: 'snapshot_date,active_ads_count,competitor_id,competitors(slug,name)',
+      snapshot_date: `gte.${since}`,
+      order: 'snapshot_date.asc',
+    });
+
+    // Agrupar por competidor
+    const byCompetitor = {};
+    const allDates = [...new Set(snapshots.map(s => s.snapshot_date))].sort();
+
+    snapshots.forEach(s => {
+      const slug = s.competitors?.slug;
+      if (!slug) return;
+      if (!byCompetitor[slug]) byCompetitor[slug] = {};
+      byCompetitor[slug][s.snapshot_date] = s.active_ads_count;
+    });
+
+    const datasets = COMPETITORS
+      .filter(slug => byCompetitor[slug])
+      .map(slug => ({
+        label: competitorMap[slug]?.name || slug.toUpperCase(),
+        data: allDates.map(d => byCompetitor[slug]?.[d] ?? null),
+        borderColor: COLORS[slug],
+        backgroundColor: COLORS[slug] + '20',
+        borderWidth: 2,
+        pointRadius: 3,
+        tension: 0.3,
+        spanGaps: true,
+      }));
+
+    if (typeof Chart === 'undefined') {
+      console.warn('Chart.js no estÃ¡ cargado');
+      return;
+    }
+
+    const ctx = document.getElementById('history-chart');
+    if (!ctx) return;
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: allDates.map(d => new Date(d).toLocaleDateString('es-AR', { day: 'numeric', month: 'short' })),
+        datasets,
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { font: { size: 11 }, boxWidth: 12 } },
+          tooltip: { mode: 'index', intersect: false },
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: 'Ads activos', font: { size: 11 } },
+            grid: { color: '#f0f0f0' },
+          },
+          x: { grid: { display: false } },
+        },
+      },
+    });
+  }
+
+  /** Punto de entrada principal */
+  async function init() {
+    const grid = document.getElementById('live-ads-grid');
+    const label = document.getElementById('last-updated-label');
+
+    try {
+      // 1. Obtener competidores
+      const competitors = await supaFetch('competitors', { select: 'id,name,slug,anon_library_url', order: 'name.asc' });
+      const competitorMap = Object.fromEntries(competitors.map(c => [c.slug, c]));
+
+      // 2. Para cada competidor, obtener sus ads activos (mÃ¡x 12 para el carrusel)
+      grid.innerHTML = '';
+      for (const slug of COMPETITORS) {
+        const comp = competitorMap[slug];
+        if (!comp) continue;
+
+        const ads = await supaFetch('ads',{
+          select: 'id,ad_copy,image_url,ad_snapshot_url,delivery_start_date,first_seen_at',
+          competitor_id: `eq.${comp.id}`,
+          is_active: 'eq.true',
+          order: 'first_seen_at.desc',
+          limit: '12',
+        });
+
+        grid.appendChild(buildCompetitorCard(comp, ads));
+      }
+
+      // 3. GrÃ¡fico histÃ³rico
+      await renderHistoryChart(competitorMap);
+
+      // 4. Label de Ãºltima actualizaciÃ³n
+      const latestSnap = await supaFetch('ad_snapshots', {
+        select: 'snapshot_date',
+        order: 'snapshot_date.desc',
+        limit: '1',
+      });
+      if (latestSnap[0]) {
+        label.textContent = `Ãltima actualizaciÃ³n: ${fmtDate(latestSnap[0].snapshot_date)}`;
+      }
+
+    } catch (err) {
+      console.error('Error cargando datos live:', err);
+      grid.innerHTML = `<p class="live-status live-error">Error cargando datos: ${err.message}</p>`;
+    }
+  }
+
+  // Esperar a que el DOM estÃ© listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="container">
