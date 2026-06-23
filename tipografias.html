@@ -19,7 +19,7 @@
       display:flex; align-items:center; justify-content:space-between;
       padding:20px 48px; background:var(--carbon);
     }
-    nav img { height:26px; }
+    nav img { height:40px; }
     .btn-back {
       display:flex; align-items:center; gap:8px;
       padding:8px 14px 8px 8px;
@@ -78,7 +78,7 @@
     .dl-icon { color:var(--mid); }
 
     footer { background:var(--carbon); padding:24px 48px; display:flex; justify-content:space-between; align-items:center; margin-top:auto; }
-    .ft-img { height:20px; opacity:0.5; }
+    .ft-img { height:40px; opacity:0.5; }
     .ft-note { font-size:11px; color:var(--dark); letter-spacing:0.06em; }
 
     @media(max-width:640px){
@@ -90,12 +90,16 @@
 </head>
 <body>
 
-<nav>
-  <a class="btn-back" href="/">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
-    Volver
+<nav style="background:#292A2E;display:flex;align-items:center;padding:0 24px;">
+  <a href="index.html" style="display:block;line-height:0;padding-right:24px;border-right:1px solid rgba(255,255,255,.08);">
+    <img src="assets/logo-negativo.png" alt="UNO × UNO" style="height:28px;">
   </a>
-  <img src="assets/logo-negativo.png" alt="UNO × UNO">
+  <div class="nav-links" style="display:flex;margin-left:auto;">
+    <a href="index.html" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;padding:0 14px;border-right:1px solid rgba(255,255,255,.06);line-height:48px;white-space:nowrap;">Home</a>
+    <a href="competidores.html" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;padding:0 14px;border-right:1px solid rgba(255,255,255,.06);line-height:48px;white-space:nowrap;">Competidores</a>
+    <a href="briefs.html" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;padding:0 14px;border-right:1px solid rgba(255,255,255,.06);line-height:48px;white-space:nowrap;">Briefs</a>
+    <a href="ads-builder.html" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;padding:0 14px;line-height:48px;white-space:nowrap;">Crear Ads</a>
+  </div>
 </nav>
 
 <div class="hero">

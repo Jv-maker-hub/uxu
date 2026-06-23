@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNO × UNO — Crear Ads</title>
+<style>
+@font-face { font-family:'TradeGothic'; src:url('assets/fonts/TradeGothicCondBold.otf') format('opentype'); font-weight:700; }
+@font-face { font-family:'Inter'; src:url('assets/fonts/Inter-Regular.otf') format('opentype'); font-weight:400; }
+@font-face { font-family:'Inter'; src:url('assets/fonts/Inter-Medium.otf') format('opentype'); font-weight:500; }
+@font-face { font-family:'Inter'; src:url('assets/fonts/Inter-Bold.otf') format('opentype'); font-weight:700; }
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --carbon:#292A2E; --dark:#555152; --mid:#CCCBC8;
+  --warm:#EBE8E3; --cream:#F6F4F1; --white:#fff;
+  --green:#16a34a; --blue:#2563eb;
+}
+html,body{height:100%;}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--carbon);-webkit-font-smoothing:antialiased;font-size:14px;display:flex;flex-direction:column;}
+
+/* NAV */
+nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shrink:0;}
+.nav-logo{padding:0 24px;border-right:1px solid rgba(255,255,255,.08);height:48px;display:flex;align-items:center;}
+.nav-logo img{height:32px;}
+.nav-links{display:flex;}
+.nav-links a{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;padding:0 16px;border-right:1px solid rgba(255,255,255,.06);height:48px;display:flex;align-items:center;transition:color .15s;}
+.nav-links a:hover,.nav-links a.active{color:rgba(255,255,255,.8);}
+.nav-links a.active{color:#fff;}
+
+/* LAYOUT: 3 columns */
+.workspace{display:grid;grid-template-columns:280px 1fr 320px;height:calc(100vh - 48px);overflow:hidden;}
+
+/* LEFT PANEL — referencia de competidores */
+.panel-left{background:var(--carbon);overflow-y:auto;display:flex;flex-direction:column;}
+.panel-left::-webkit-scrollbar{width:4px;}
+.panel-left::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);}
+.panel-title{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);padding:20px 20px 12px;border-bottom:1px solid rgba(255,255,255,.06);}
+.ref-filter{display:flex;padding:12px 12px 0;gap:4px;flex-wrap:wrap;}
+.ref-filter-btn{font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;background:transparent;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.35);cursor:pointer;border-radius:2px;transition:all .15s;}
+.ref-filter-btn:hover{border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.6);}
+.ref-filter-btn.active{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);color:#fff;}
+.ref-ads-list{padding:12px;display:flex;flex-direction:column;gap:8px;}
+.ref-ad-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:12px 14px;border-radius:2px;cursor:pointer;transition:background .15s;}
+.ref-ad-card:hover{background:rgba(255,255,255,.08);}
+.ref-ad-brand{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px;}
+.ref-ad-type{display:inline-block;font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:1px 6px;border-radius:1px;margin-bottom:6px;}
+.ref-ad-type.video{background:rgba(255,255,255,.15);color:#fff;}
+.ref-ad-type.photo{background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);}
+.ref-ad-type.carousel{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.ref-ad-copy{font-size:12px;color:rgba(255,255,255,.55);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.ref-ad-card.using{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);}
+.ref-empty{padding:24px;text-align:center;font-size:12px;color:rgba(255,255,255,.25);line-height:1.6;}
+
+/* CENTER PANEL — canvas de creación */
+.panel-center{overflow-y:auto;display:flex;flex-direction:column;}
+.panel-center::-webkit-scrollbar{width:4px;}
+.panel-center::-webkit-scrollbar-thumb{background:var(--mid);}
+.builder-header{background:var(--white);border-bottom:1px solid var(--warm);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.builder-header-left h2{font-family:'TradeGothic',sans-serif;font-size:20px;text-transform:uppercase;color:var(--carbon);}
+.builder-header-left p{font-size:12px;color:var(--mid);margin-top:2px;}
+.builder-actions{display:flex;gap:8px;}
+.btn{padding:8px 18px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;border-radius:2px;transition:all .15s;font-family:'Inter',sans-serif;}
+.btn-secondary{background:var(--cream);color:var(--dark);border:1px solid var(--warm);}
+.btn-secondary:hover{border-color:var(--dark);}
+.btn-primary{background:var(--carbon);color:#fff;}
+.btn-primary:hover{background:#1a1a1e;}
+.btn-green{background:#dcfce7;color:#15803d;border:1px solid #bbf7d0;}
+.btn-green:hover{background:#bbf7d0;}
+
+/* FORMATO SELECTOR */
+.format-selector{background:var(--white);border-bottom:1px solid var(--warm);padding:12px 24px;display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0;}
+.format-btn{display:flex;align-items:center;gap:8px;padding:8px 16px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:var(--cream);border:1px solid var(--warm);color:var(--dark);cursor:pointer;border-radius:2px;transition:all .15s;}
+.format-btn:hover{border-color:var(--dark);}
+.format-btn.active{background:var(--carbon);color:#fff;border-color:var(--carbon);}
+.format-icon{font-size:14px;}
+
+/* CANVAS */
+.builder-canvas{padding:24px;flex:1;}
+
+/* BRIEF DE REFERENCIA */
+.ref-brief{background:var(--carbon);border-radius:4px;padding:16px 20px;margin-bottom:16px;display:none;}
+.ref-brief.visible{display:block;}
+.ref-brief-label{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px;}
+.ref-brief-text{font-size:13px;color:rgba(255,255,255,.7);line-height:1.55;font-style:italic;}
+.ref-brief-brand{font-size:10px;color:rgba(255,255,255,.25);margin-top:8px;}
+
+/* SECCIONES DEL AD */
+.ad-section{background:var(--white);border:1px solid var(--warm);border-radius:4px;margin-bottom:12px;overflow:hidden;}
+.ad-section-header{padding:10px 16px;background:var(--cream);border-bottom:1px solid var(--warm);display:flex;align-items:center;justify-content:space-between;}
+.ad-section-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);font-weight:700;}
+.ad-section-meta{font-size:10px;color:var(--mid);}
+.ad-section textarea{width:100%;border:none;outline:none;padding:14px 16px;font-family:'Inter',sans-serif;font-size:14px;color:var(--carbon);line-height:1.6;resize:vertical;background:var(--white);}
+.ad-section textarea::placeholder{color:var(--mid);}
+.ad-section-hint{padding:8px 16px 10px;font-size:11px;color:var(--mid);line-height:1.5;border-top:1px solid var(--warm);background:var(--cream);}
+
+/* PREVIEW */
+.ad-preview{background:var(--white);border:1px solid var(--warm);border-radius:4px;margin-bottom:12px;}
+.preview-header{padding:10px 16px;background:var(--cream);border-bottom:1px solid var(--warm);display:flex;align-items:center;gap:8px;}
+.preview-header span{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);font-weight:700;}
+.preview-body{padding:16px;}
+.preview-copy{font-size:14px;color:var(--carbon);line-height:1.65;white-space:pre-wrap;}
+.preview-copy em{color:var(--dark);font-style:normal;}
+
+/* UPLOAD AREA */
+.upload-area{border:2px dashed var(--warm);border-radius:4px;padding:32px;text-align:center;cursor:pointer;transition:all .15s;background:var(--cream);}
+.upload-area:hover,.upload-area.dragover{border-color:var(--carbon);background:var(--warm);}
+.upload-area-icon{font-size:28px;margin-bottom:8px;}
+.upload-area-text{font-size:13px;color:var(--dark);line-height:1.6;}
+.upload-area-sub{font-size:11px;color:var(--mid);margin-top:4px;}
+.upload-preview{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.upload-thumb{position:relative;width:80px;height:80px;border-radius:2px;overflow:hidden;border:1px solid var(--warm);background:var(--cream);}
+.upload-thumb img{width:100%;height:100%;object-fit:cover;}
+.upload-thumb video{width:100%;height:100%;object-fit:cover;}
+.upload-thumb .del{position:absolute;top:2px;right:2px;width:18px;height:18px;background:rgba(0,0,0,.6);color:#fff;border:none;cursor:pointer;border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center;z-index:2;}
+.upload-thumb .upload-progress{position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(0,0,0,.15);}
+.upload-thumb .upload-progress-bar{height:100%;background:#4CAF50;transition:width .2s;}
+.upload-thumb .upload-status{position:absolute;bottom:4px;left:0;right:0;text-align:center;font-size:9px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.8);}
+.upload-thumb .upload-url{display:none;}
+.upload-thumb.uploaded{border-color:#4CAF50;}
+.upload-thumb.error{border-color:#e53935;}
+.drive-input{margin-top:12px;display:flex;gap:8px;}
+.drive-input input{flex:1;padding:8px 12px;border:1px solid var(--warm);border-radius:2px;font-size:12px;font-family:'Inter',sans-serif;outline:none;}
+.drive-input input:focus{border-color:var(--carbon);}
+.upload-urls{margin-top:8px;font-size:10px;color:var(--dark);line-height:1.8;}
+.upload-urls a{color:var(--carbon);word-break:break-all;}
+
+/* STORAGE CONFIG MODAL */
+.config-modal-bg{display:none;position:fixed;inset:0;background:rgba(41,42,46,.55);z-index:200;align-items:center;justify-content:center;}
+.config-modal-bg.visible{display:flex;}
+.config-modal{background:#fff;border-radius:4px;padding:32px;width:480px;max-width:90vw;box-shadow:0 8px 32px rgba(0,0,0,.18);}
+.config-modal h3{font-family:'TradeGothicCondBold',sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:.08em;margin:0 0 8px;}
+.config-modal p{font-size:12px;color:var(--dark);line-height:1.7;margin:0 0 16px;}
+.config-modal input{width:100%;padding:10px 12px;border:1px solid var(--warm);border-radius:2px;font-size:12px;font-family:'Inter',sans-serif;box-sizing:border-box;outline:none;}
+.config-modal input:focus{border-color:var(--carbon);}
+.config-modal .hint{font-size:10px;color:var(--mid);margin-top:6px;}
+.config-modal .actions{display:flex;gap:8px;margin-top:20px;justify-content:flex-end;}
+.config-sk-status{font-size:10px;margin-top:4px;}
+.config-sk-status.ok{color:#388e3c;}
+.config-sk-status.missing{color:#e53935;}
+
+/* RIGHT PANEL — decisiones y análisis */
+.panel-right{background:var(--white);border-left:1px solid var(--warm);overflow-y:auto;display:flex;flex-direction:column;}
+.panel-right::-webkit-scrollbar{width:4px;}
+.panel-right::-webkit-scrollbar-thumb{background:var(--mid);}
+.panel-right-section{padding:20px;border-bottom:1px solid var(--warm);}
+.panel-right-title{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:14px;font-weight:700;}
+
+/* REGLAS DE COPY */
+.rule-card{background:var(--cream);border-radius:2px;padding:10px 12px;margin-bottom:6px;}
+.rule-card-title{font-size:11px;font-weight:600;color:var(--carbon);margin-bottom:4px;}
+.rule-card-text{font-size:12px;color:var(--dark);line-height:1.5;}
+.rule-card.warning{background:#fef9c3;border-left:3px solid #eab308;}
+.rule-card.warning .rule-card-title{color:#713f12;}
+
+/* ANÁLISIS EN TIEMPO REAL */
+.analysis-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--warm);}
+.analysis-item:last-child{border-bottom:none;}
+.analysis-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.analysis-dot.ok{background:var(--green);}
+.analysis-dot.warn{background:#eab308;}
+.analysis-dot.bad{background:#ef4444;}
+.analysis-dot.neutral{background:var(--mid);}
+.analysis-text{font-size:12px;color:var(--dark);line-height:1.45;}
+.analysis-text strong{font-weight:600;color:var(--carbon);}
+
+/* MENSAJES CLAVE */
+.key-message{padding:10px 12px;border:1px solid var(--warm);border-radius:2px;margin-bottom:6px;cursor:pointer;transition:background .15s;}
+.key-message:hover{background:var(--cream);}
+.key-message-text{font-size:12px;color:var(--carbon);line-height:1.5;}
+.key-message small{font-size:10px;color:var(--mid);display:block;margin-top:3px;}
+
+/* SCORE */
+.score-ring{width:64px;height:64px;border-radius:50%;background:conic-gradient(var(--carbon) 0% var(--pct, 0%), var(--warm) var(--pct, 0%) 100%);display:flex;align-items:center;justify-content:center;position:relative;}
+.score-ring::before{content:'';position:absolute;width:48px;height:48px;border-radius:50%;background:var(--white);}
+.score-num{font-family:'TradeGothic',sans-serif;font-size:18px;position:relative;z-index:1;}
+.score-label{font-size:10px;color:var(--mid);margin-top:6px;text-align:center;}
+.score-wrap{display:flex;flex-direction:column;align-items:center;padding:16px 0;}
+
+/* SAVED ADS */
+.saved-ad{background:var(--cream);border-radius:2px;padding:10px 12px;margin-bottom:6px;display:flex;align-items:flex-start;gap:8px;}
+.saved-ad-copy{font-size:12px;color:var(--dark);line-height:1.4;flex:1;}
+.saved-ad-actions{display:flex;gap:4px;flex-shrink:0;}
+.saved-ad-btn{padding:3px 8px;font-size:10px;background:transparent;border:1px solid var(--warm);cursor:pointer;border-radius:1px;color:var(--dark);transition:all .15s;}
+.saved-ad-btn:hover{border-color:var(--carbon);color:var(--carbon);}
+
+@media(max-width:1100px){
+  .workspace{grid-template-columns:240px 1fr 280px;}
+}
+@media(max-width:900px){
+  .workspace{grid-template-columns:1fr;height:auto;overflow:visible;}
+  .panel-left{max-height:300px;}
+  .panel-right{max-height:400px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <a href="index.html" style="line-height:0;"><img src="assets/logo-negativo.png" alt="UNO × UNO"></a>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Estrategia</a>
+    <a href="competidores.html">Competidores</a>
+    <a href="briefs.html">Briefs</a>
+    <a href="ads-builder.html" class="active">Crear Ads</a>
+    <button onclick="showStorageConfig()" title="Configurar upload" id="config-btn"
+      style="background:none;border:none;color:rgba(255,255,255,.3);font-size:16px;cursor:pointer;padding:0 16px;height:48px;border-left:1px solid rgba(255,255,255,.06);transition:color .15s;"
+      onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.3)'">⚙</button>
+  </div>
+</nav>
+
+<!-- MODAL: configuración de Supabase Storage key -->
+<div class="config-modal-bg" id="config-modal-bg" onclick="if(event.target===this)closeStorageConfig()">
+  <div class="config-modal">
+    <h3>Configuración de upload</h3>
+    <p>Para subir piezas creativas a Supabase Storage, pegá el <strong>Service Key</strong> de tu proyecto. Se guarda solo en este navegador (localStorage) — nunca va al código fuente.</p>
+    <input type="password" id="sk-input" placeholder="sb_secret_..." autocomplete="off">
+    <div class="config-sk-status" id="sk-status"></div>
+    <p class="hint" style="margin-top:10px;">Lo encontrás en: supabase.com → proyecto → Settings → API → <em>service_role (secret)</em></p>
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="closeStorageConfig()">Cancelar</button>
+      <button class="btn" onclick="saveStorageKey()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- WORKSPACE -->
+<div class="workspace">
+
+  <!-- ── LEFT: Referencias de competidores ─────────────────────── -->
+  <div class="panel-left">
+    <p class="panel-title">Referencias — competidores</p>
+    <div class="ref-filter" id="ref-filter">
+      <button class="ref-filter-btn active" data-filter="all">Todos</button>
+      <button class="ref-filter-btn" data-filter="tecla">Tecla</button>
+      <button class="ref-filter-btn" data-filter="umano">Umano</button>
+      <button class="ref-filter-btn" data-filter="ser-basics">SER</button>
+      <button class="ref-filter-btn" data-filter="elemental">Elemental</button>
+      <button class="ref-filter-btn" data-filter="club-basico">Club</button>
+    </div>
+    <div class="ref-filter" id="ref-type-filter" style="padding-top:8px;">
+      <button class="ref-filter-btn active" data-type="all">Todos</button>
+      <button class="ref-filter-btn" data-type="video">Video</button>
+      <button class="ref-filter-btn" data-type="photo">Foto</button>
+      <button class="ref-filter-btn" data-type="carousel">Carrusel</button>
+    </div>
+    <div class="ref-ads-list" id="ref-ads-list">
+      <div class="ref-empty">Cargando ads de referencia...</div>
+    </div>
+  </div>
+
+  <!-- ── CENTER: Builder ──────────────────────────────────────── -->
+  <div class="panel-center">
+    <!-- Header -->
+    <div class="builder-header">
+      <div class="builder-header-left">
+        <h2>Crear Ad</h2>
+        <p id="format-desc">Seleccioná el formato para empezar</p>
+      </div>
+      <div class="builder-actions">
+        <button class="btn btn-secondary" onclick="clearAll()">Limpiar</button>
+        <button class="btn btn-green" onclick="saveAd()">Guardar variante</button>
+        <button class="btn btn-primary" onclick="exportAd()">Exportar</button>
+      </div>
+    </div>
+
+    <!-- Formato selector -->
+    <div class="format-selector">
+      <button class="format-btn active" data-format="reel" onclick="selectFormat(this,'Reel / Video','Vertical 9:16 · 15-30 seg · Habla directamente a la cámara')">
+        <span class="format-icon">▶</span> Reel / Video
+      </button>
+      <button class="format-btn" data-format="foto" onclick="selectFormat(this,'Foto estática','Imagen 1:1 o 4:5 · Headline fuerte · Copy debajo')">
+        <span class="format-icon">◻</span> Foto
+      </button>
+      <button class="format-btn" data-format="carrusel" onclick="selectFormat(this,'Carrusel','3-5 tarjetas · Cada una tiene su propio headline · Historia progresiva')">
+        <span class="format-icon">▤</span> Carrusel
+      </button>
+      <button class="format-btn" data-format="ugc" onclick="selectFormat(this,'UGC / Testimonial','Usuario real · Tono conversacional · "La compré porque..."')">
+        <span class="format-icon">◎</span> UGC
+      </button>
+    </div>
+
+    <!-- Canvas -->
+    <div class="builder-canvas">
+
+      <!-- Referencia seleccionada -->
+      <div class="ref-brief" id="ref-brief">
+        <div class="ref-brief-label">Ad de referencia</div>
+        <p class="ref-brief-text" id="ref-brief-text"></p>
+        <p class="ref-brief-brand" id="ref-brief-brand"></p>
+      </div>
+
+      <!-- HOOK -->
+      <div class="ad-section">
+        <div class="ad-section-header">
+          <span class="ad-section-label">Hook — Primera línea</span>
+          <span class="ad-section-meta" id="hook-count">0 / 80</span>
+        </div>
+        <textarea id="hook" rows="2" maxlength="200"
+          placeholder="La frase que para el scroll. Sin preguntas retóricas. Sin emojis."
+          oninput="updateCount(this,'hook-count',80);updatePreview();analyzeAd()"></textarea>
+        <div class="ad-section-hint">→ Debe funcionar sin imagen. Si necesita contexto visual para entenderse, reescribilo.</div>
+      </div>
+
+      <!-- COPY PRINCIPAL -->
+      <div class="ad-section">
+        <div class="ad-section-header">
+          <span class="ad-section-label">Copy principal</span>
+          <span class="ad-section-meta" id="copy-count">0 / 300</span>
+        </div>
+        <textarea id="copy-main" rows="5" maxlength="600"
+          placeholder="El cuerpo del mensaje. Conciso, en párrafos cortos. Describí, no exageres."
+          oninput="updateCount(this,'copy-count',300);updatePreview();analyzeAd()"></textarea>
+        <div class="ad-section-hint">→ Sin "el mejor", "premium", "imperdible". Si la remera es buena, la descripción alcanza.</div>
+      </div>
+
+      <!-- HEADLINE -->
+      <div class="ad-section">
+        <div class="ad-section-header">
+          <span class="ad-section-label">Headline (debajo de la imagen)</span>
+          <span class="ad-section-meta" id="hl-count">0 / 40</span>
+        </div>
+        <textarea id="headline" rows="1" maxlength="80"
+          placeholder="El uniforme diario."
+          style="min-height:48px;"
+          oninput="updateCount(this,'hl-count',40);updatePreview();analyzeAd()"></textarea>
+        <div class="ad-section-hint">→ El claim de la marca o el mensaje concreto del pack. Sin puntos de exclamación.</div>
+      </div>
+
+      <!-- CTA -->
+      <div class="ad-section">
+        <div class="ad-section-header">
+          <span class="ad-section-label">CTA / Descripción del link</span>
+          <span class="ad-section-meta" id="cta-count">0 / 30</span>
+        </div>
+        <textarea id="cta" rows="1" maxlength="60"
+          placeholder="Pack de 3 remeras — $119.990"
+          style="min-height:48px;"
+          oninput="updateCount(this,'cta-count',30);updatePreview();analyzeAd()"></textarea>
+        <div class="ad-section-hint">→ El botón dice "Comprar" — esta línea describe QUÉ se compra y a qué precio.</div>
+      </div>
+
+      <!-- PIEZAS / UPLOAD -->
+      <div class="ad-section">
+        <div class="ad-section-header">
+          <span class="ad-section-label">Pieza creativa</span>
+          <span class="ad-section-meta">Imagen o video</span>
+        </div>
+        <div style="padding:14px 16px;">
+          <div class="upload-area" id="upload-area"
+            ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)"
+            onclick="document.getElementById('file-input').click()">
+            <div class="upload-area-icon">⬆</div>
+            <div class="upload-area-text">Arrastrá la imagen o video acá</div>
+            <div class="upload-area-sub">JPG, PNG, MP4 · o pegá un link de Drive abajo</div>
+            <input type="file" id="file-input" accept="image/*,video/*" multiple style="display:none" onchange="handleFileSelect(event)">
+          </div>
+          <div class="upload-preview" id="upload-preview"></div>
+          <div class="upload-urls" id="upload-urls"></div>
+          <div class="drive-input">
+            <input type="url" id="drive-url" placeholder="https://drive.google.com/file/d/... (link de Drive)" oninput="handleDriveUrl(this.value)">
+            <button class="btn btn-secondary" onclick="addDriveLink()">Agregar link</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PREVIEW -->
+      <div class="ad-preview">
+        <div class="preview-header">
+          <span>Preview del ad</span>
+          <span id="preview-format" style="font-size:10px;color:var(--mid);letter-spacing:.1em;text-transform:uppercase;margin-left:auto;">REEL / VIDEO</span>
+        </div>
+        <div class="preview-body">
+          <div class="preview-copy" id="preview-text" style="color:var(--mid);font-style:italic;">El copy aparece acá mientras escribís...</div>
+        </div>
+      </div>
+
+    </div><!-- /canvas -->
+  </div><!-- /panel-center -->
+
+  <!-- ── RIGHT: Análisis y decisiones ─────────────────────── -->
+  <div class="panel-right">
+
+    <!-- Score -->
+    <div class="panel-right-section" style="text-align:center;">
+      <p class="panel-right-title">Score del ad</p>
+      <div class="score-wrap">
+        <div class="score-ring" id="score-ring" style="--pct:0%">
+          <span class="score-num" id="score-num">—</span>
+        </div>
+        <p class="score-label" id="score-label">Empezá a escribir</p>
+      </div>
+    </div>
+
+    <!-- Análisis en tiempo real -->
+    <div class="panel-right-section">
+      <p class="panel-right-title">Análisis en tiempo real</p>
+      <div id="analysis-list">
+        <div class="analysis-item">
+          <div class="analysis-dot neutral"></div>
+          <p class="analysis-text">El análisis aparece mientras escribís el copy.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensajes clave de la marca -->
+    <div class="panel-right-section">
+      <p class="panel-right-title">Mensajes de marca — usá uno</p>
+      <div id="key-messages">
+        <div class="key-message" onclick="insertMessage(this)">
+          <p class="key-message-text">Elegís una vez. Funciona todos los días.</p>
+          <small>Claim 01</small>
+        </div>
+        <div class="key-message" onclick="insertMessage(this)">
+          <p class="key-message-text">Mismo calce. Misma sensación. Mismo resultado.</p>
+          <small>Claim 02</small>
+        </div>
+        <div class="key-message" onclick="insertMessage(this)">
+          <p class="key-message-text">No es una remera más. Es la que no tenés que volver a evaluar.</p>
+          <small>Claim 03</small>
+        </div>
+        <div class="key-message" onclick="insertMessage(this)">
+          <p class="key-message-text">El uniforme diario.</p>
+          <small>Claim 04 — cierre principal</small>
+        </div>
+        <div class="key-message" onclick="insertMessage(this)">
+          <p class="key-message-text">Pack de 3 remeras. $119.990. Garantía de calidad o cambio sin preguntas.</p>
+          <small>Descripción de producto</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reglas de copy UxU -->
+    <div class="panel-right-section">
+      <p class="panel-right-title">Reglas de copy</p>
+      <div class="rule-card warning">
+        <p class="rule-card-title">❌ No usar nunca</p>
+        <p class="rule-card-text">Descuentos · "3+1 gratis" · Urgencia artificial · "No te pierdas" · "Imperdible" · "Premium" sin describir · Emojis en exceso</p>
+      </div>
+      <div class="rule-card">
+        <p class="rule-card-title">✓ El tono correcto</p>
+        <p class="rule-card-text">Frases cortas. Certeza, no urgencia. Describí, no exageres. Adulto. Directo. Sin artificios.</p>
+      </div>
+      <div class="rule-card">
+        <p class="rule-card-title">✓ El precio va solo si agrega claridad</p>
+        <p class="rule-card-text">$119.990 el pack — $40.000 por remera. Si no suma, no va en el copy del ad.</p>
+      </div>
+    </div>
+
+    <!-- Variantes guardadas -->
+    <div class="panel-right-section">
+      <p class="panel-right-title">Variantes guardadas</p>
+      <div id="saved-ads">
+        <p style="font-size:12px;color:var(--mid);">Las variantes que guardes aparecen acá.</p>
+      </div>
+    </div>
+
+  </div><!-- /panel-right -->
+</div><!-- /workspace -->
+
+<script>
+// ── Configuración Supabase ─────────────────────────────────────────────────
+const SB_URL    = 'https://jsvnuylvqclqhjkotwvk.supabase.co';
+const SB_ANON   = 'sb_publishable_aiXuJmB_bZe8clxZ2r4LqQ_5oRBfiui';
+// SB_SK se guarda en localStorage (no en código fuente). Ver botón ⚙ arriba a la derecha.
+function getSBSK() { return localStorage.getItem('uxu_sb_sk') || ''; }
+const COMP_SLUGS = ['tecla','valfort','umano','ser-basics','elemental','club-basico'];
+const TYPE_LABELS = { video:'Video', photo:'Foto', carousel:'Carrusel' };
+
+// Palabras prohibidas para el análisis
+const BANNED_WORDS = ['descuento','promo','oferta','gratis','imperdible','urgente','últimas unidades','no te pierdas','aprovechá','liquidación','super','increíble','asombroso'];
+const URGENCY_WORDS = ['últimas','solo hoy','termina','agotando','quedan','pocas'];
+
+let currentFormat = 'reel';
+let savedAds = [];
+let allRefAds = [];
+let activeRefSlug = 'all';
+let activeRefType = 'all';
+let uploadedFiles = [];
+let driveLinks = [];
+
+async function supaFetch(path, params = {}) {
+  const url = new URL(`${SB_URL}/rest/v1/${path}`);
+  Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
+  const res = await fetch(url.toString(), {
+    headers: { apikey: SB_ANON, Authorization: `Bearer ${SB_ANON}` },
+  });
+  return res.json();
+}
+
+// ── Cargar ads de referencia ───────────────────────────────────────────────
+async function loadRefAds() {
+  try {
+    const comps = await supaFetch('competitors', { select: 'id,name,slug' });
+    const allAds = [];
+    for (const comp of comps) {
+      if (!COMP_SLUGS.includes(comp.slug)) continue;
+      const ads = await supaFetch('ads', {
+        select: 'id,meta_ad_id,ad_copy,creative_type,delivery_start_date,competitor_id',
+        competitor_id: `eq.${comp.id}`,
+        is_active: 'eq.true',
+        order: 'first_seen_at.desc',
+        limit: '50',
+      });
+      ads.forEach(ad => allAds.push({ ...ad, slug: comp.slug, brandName: comp.name }));
+    }
+    allRefAds = allAds;
+    renderRefAds();
+  } catch(e) {
+    document.getElementById('ref-ads-list').innerHTML = '<div class="ref-empty">Error cargando referencias</div>';
+  }
+}
+
+function renderRefAds() {
+  const list = document.getElementById('ref-ads-list');
+  let filtered = allRefAds.filter(ad => {
+    const matchSlug = activeRefSlug === 'all' || ad.slug === activeRefSlug;
+    const matchType = activeRefType === 'all' || (ad.creative_type||'photo') === activeRefType;
+    return matchSlug && matchType && ad.ad_copy;
+  });
+
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="ref-empty">Sin ads para este filtro</div>';
+    return;
+  }
+
+  list.innerHTML = '';
+  filtered.slice(0, 60).forEach(ad => {
+    const type = ad.creative_type || 'photo';
+    const div = document.createElement('div');
+    div.className = 'ref-ad-card';
+    div.innerHTML = `
+      <p class="ref-ad-brand">${ad.brandName}</p>
+      <span class="ref-ad-type ${type}">${TYPE_LABELS[type]||type}</span>
+      <p class="ref-ad-copy">${(ad.ad_copy||'').slice(0,140)}</p>`;
+    div.onclick = () => selectRefAd(ad, div);
+    list.appendChild(div);
+  });
+}
+
+function selectRefAd(ad, el) {
+  document.querySelectorAll('.ref-ad-card').forEach(c => c.classList.remove('using'));
+  el.classList.add('using');
+  const brief = document.getElementById('ref-brief');
+  brief.classList.add('visible');
+  document.getElementById('ref-brief-text').textContent = (ad.ad_copy||'').slice(0, 300) + (ad.ad_copy?.length > 300 ? '…' : '');
+  document.getElementById('ref-brief-brand').textContent = ad.brandName + ' — ' + (TYPE_LABELS[ad.creative_type||'photo']);
+}
+
+// Filtros de referencia
+document.getElementById('ref-filter').addEventListener('click', e => {
+  const btn = e.target.closest('[data-filter]');
+  if (!btn) return;
+  document.querySelectorAll('#ref-filter .ref-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeRefSlug = btn.dataset.filter;
+  renderRefAds();
+});
+document.getElementById('ref-type-filter').addEventListener('click', e => {
+  const btn = e.target.closest('[data-type]');
+  if (!btn) return;
+  document.querySelectorAll('#ref-type-filter .ref-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeRefType = btn.dataset.type;
+  renderRefAds();
+});
+
+// ── Formato ────────────────────────────────────────────────────────────────
+function selectFormat(el, name, desc) {
+  document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  currentFormat = el.dataset.format;
+  document.getElementById('format-desc').textContent = desc;
+  document.getElementById('preview-format').textContent = name.toUpperCase();
+  analyzeAd();
+}
+
+// ── Contador de caracteres ─────────────────────────────────────────────────
+function updateCount(el, countId, limit) {
+  const len = el.value.length;
+  const counter = document.getElementById(countId);
+  counter.textContent = `${len} / ${limit}`;
+  counter.style.color = len > limit ? '#ef4444' : len > limit * 0.85 ? '#eab308' : '';
+}
+
+// ── Preview ────────────────────────────────────────────────────────────────
+function updatePreview() {
+  const hook = document.getElementById('hook').value.trim();
+  const copy = document.getElementById('copy-main').value.trim();
+  const hl   = document.getElementById('headline').value.trim();
+  const cta  = document.getElementById('cta').value.trim();
+
+  const parts = [hook, copy, hl && `\n${hl}`, cta && `\n${cta}`].filter(Boolean);
+  const preview = document.getElementById('preview-text');
+  if (parts.length === 0) {
+    preview.innerHTML = '<span style="color:var(--mid);font-style:italic;">El copy aparece acá mientras escribís...</span>';
+  } else {
+    preview.textContent = parts.join('\n\n');
+  }
+}
+
+// ── Análisis ───────────────────────────────────────────────────────────────
+function analyzeAd() {
+  const hook = document.getElementById('hook').value.trim();
+  const copy = document.getElementById('copy-main').value.trim();
+  const hl   = document.getElementById('headline').value.trim();
+  const full = `${hook} ${copy} ${hl}`.toLowerCase();
+
+  const checks = [];
+  let score = 0;
+
+  // Hook
+  if (hook.length === 0) {
+    checks.push({ type: 'neutral', text: 'Falta el hook — la primera línea es lo más importante.' });
+  } else if (hook.length < 20) {
+    checks.push({ type: 'warn', text: `<strong>Hook muy corto</strong> (${hook.length} chars). Expandilo para que pare el scroll.` });
+    score += 10;
+  } else {
+    checks.push({ type: 'ok', text: `<strong>Hook presente</strong> (${hook.length} chars).` });
+    score += 25;
+  }
+
+  // Palabras prohibidas
+  const bannedFound = BANNED_WORDS.filter(w => full.includes(w));
+  if (bannedFound.length > 0) {
+    checks.push({ type: 'bad', text: `<strong>Palabras prohibidas:</strong> ${bannedFound.join(', ')}. El tono de UxU no usa estas palabras.` });
+  } else {
+    score += 20;
+    checks.push({ type: 'ok', text: 'Sin palabras prohibidas. Tono OK.' });
+  }
+
+  // Urgencia artificial
+  const urgencyFound = URGENCY_WORDS.filter(w => full.includes(w));
+  if (urgencyFound.length > 0) {
+    checks.push({ type: 'bad', text: `<strong>Urgencia artificial detectada:</strong> "${urgencyFound[0]}". UxU transmite certeza, no urgencia.` });
+  } else {
+    score += 15;
+  }
+
+  // Copy
+  if (copy.length > 0) {
+    score += 20;
+    if (copy.length > 400) {
+      checks.push({ type: 'warn', text: `<strong>Copy largo</strong> (${copy.length} chars). Los ads en Meta se cortan. Considerá acortar.` });
+    } else {
+      checks.push({ type: 'ok', text: `<strong>Copy</strong>: ${copy.length} caracteres. Longitud adecuada.` });
+    }
+  } else {
+    checks.push({ type: 'neutral', text: 'Falta el copy principal.' });
+  }
+
+  // Headline
+  if (hl.length > 0) {
+    score += 10;
+    checks.push({ type: 'ok', text: `<strong>Headline presente.</strong>` });
+  } else {
+    checks.push({ type: 'neutral', text: 'Headline vacío (el claim va debajo de la imagen).' });
+  }
+
+  // Precio
+  if (full.includes('119.990') || full.includes('40.000') || full.includes('$')) {
+    checks.push({ type: 'ok', text: 'Precio mencionado — asegurate que sea $119.990 el pack.' });
+    score += 10;
+  }
+
+  // Pregunta retórica al inicio
+  if (hook.startsWith('¿') || hook.startsWith('¿') || hook.match(/^¿/)) {
+    checks.push({ type: 'warn', text: '<strong>Hook empieza con pregunta retórica.</strong> El tono UxU prefiere afirmaciones directas.' });
+    score = Math.max(0, score - 10);
+  }
+
+  // Emojis
+  const emojiCount = (full.match(/[\u{1F300}-\u{1FFFF}]/gu)||[]).length;
+  if (emojiCount > 3) {
+    checks.push({ type: 'warn', text: `<strong>${emojiCount} emojis.</strong> Menos es más. El tono UxU es adulto y sobrio.` });
+    score = Math.max(0, score - 10);
+  }
+
+  // Render
+  const list = document.getElementById('analysis-list');
+  list.innerHTML = checks.map(c => `
+    <div class="analysis-item">
+      <div class="analysis-dot ${c.type}"></div>
+      <p class="analysis-text">${c.text}</p>
+    </div>`).join('');
+
+  // Score
+  score = Math.min(100, Math.max(0, score));
+  const pct = `${score}%`;
+  document.getElementById('score-ring').style.setProperty('--pct', pct);
+  document.getElementById('score-num').textContent = score;
+  document.getElementById('score-label').textContent =
+    score >= 80 ? 'Listo para testear' :
+    score >= 55 ? 'Revisá los avisos' :
+    score >= 30 ? 'Necesita trabajo' :
+    'Empezá a escribir';
+}
+
+// ── Mensajes clave ─────────────────────────────────────────────────────────
+function insertMessage(el) {
+  const text = el.querySelector('.key-message-text').textContent;
+  const target = document.getElementById('copy-main');
+  const val = target.value;
+  target.value = val ? `${val}\n\n${text}` : text;
+  updateCount(target, 'copy-count', 300);
+  updatePreview();
+  analyzeAd();
+  target.focus();
+}
+
+// ── Guardar variante ───────────────────────────────────────────────────────
+function saveAd() {
+  const hook = document.getElementById('hook').value.trim();
+  const copy = document.getElementById('copy-main').value.trim();
+  const hl   = document.getElementById('headline').value.trim();
+  const cta  = document.getElementById('cta').value.trim();
+  if (!hook && !copy) { alert('Escribí algo antes de guardar.'); return; }
+
+  const ad = { hook, copy, hl, cta, format: currentFormat, savedAt: new Date().toLocaleDateString('es-AR') };
+  savedAds.unshift(ad);
+
+  const container = document.getElementById('saved-ads');
+  const div = document.createElement('div');
+  div.className = 'saved-ad';
+  const preview = [hook, copy].filter(Boolean).join(' ').slice(0, 100);
+  div.innerHTML = `
+    <p class="saved-ad-copy">${preview}...</p>
+    <div class="saved-ad-actions">
+      <button class="saved-ad-btn" onclick="loadSavedAd(${savedAds.length-1})">Cargar</button>
+      <button class="saved-ad-btn" onclick="copyToClipboard(${savedAds.length-1})">Copiar</button>
+    </div>`;
+  const placeholder = container.querySelector('p');
+  if (placeholder) placeholder.remove();
+  container.insertBefore(div, container.firstChild);
+}
+
+function loadSavedAd(idx) {
+  const ad = savedAds[idx];
+  if (!ad) return;
+  document.getElementById('hook').value = ad.hook;
+  document.getElementById('copy-main').value = ad.copy;
+  document.getElementById('headline').value = ad.hl;
+  document.getElementById('cta').value = ad.cta;
+  updatePreview();
+  analyzeAd();
+}
+
+function copyToClipboard(idx) {
+  const ad = savedAds[idx];
+  const text = [ad.hook, ad.copy, ad.hl, ad.cta].filter(Boolean).join('\n\n');
+  navigator.clipboard.writeText(text).then(() => alert('Copy copiado al clipboard.'));
+}
+
+// ── Exportar ───────────────────────────────────────────────────────────────
+function exportAd() {
+  const hook = document.getElementById('hook').value.trim();
+  const copy = document.getElementById('copy-main').value.trim();
+  const hl   = document.getElementById('headline').value.trim();
+  const cta  = document.getElementById('cta').value.trim();
+  const format = currentFormat.toUpperCase();
+
+  const text = `UNO × UNO — Ad Brief
+Formato: ${format}
+Fecha: ${new Date().toLocaleDateString('es-AR')}
+
+HOOK:
+${hook}
+
+COPY:
+${copy}
+
+HEADLINE:
+${hl}
+
+CTA / DESCRIPCIÓN:
+${cta}
+
+${driveLinks.length > 0 ? '\nPIEZAS:\n' + driveLinks.join('\n') : ''}`;
+
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = `uxu-ad-brief-${Date.now()}.txt`;
+  a.click(); URL.revokeObjectURL(url);
+}
+
+// ── Limpiar ─────────────────────────────────────────────────────────────────
+function clearAll() {
+  ['hook','copy-main','headline','cta'].forEach(id => { document.getElementById(id).value = ''; });
+  document.getElementById('ref-brief').classList.remove('visible');
+  document.querySelectorAll('.ref-ad-card').forEach(c => c.classList.remove('using'));
+  uploadedFiles = []; driveLinks = [];
+  document.getElementById('upload-preview').innerHTML = '';
+  document.getElementById('upload-urls').innerHTML = '';
+  document.getElementById('drive-url').value = '';
+  updatePreview(); analyzeAd();
+}
+
+// ── Upload ─────────────────────────────────────────────────────────────────
+const STORAGE_BUCKET = 'creatives';
+
+function handleDragOver(e) { e.preventDefault(); document.getElementById('upload-area').classList.add('dragover'); }
+function handleDragLeave()  { document.getElementById('upload-area').classList.remove('dragover'); }
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('upload-area').classList.remove('dragover');
+  [...(e.dataTransfer?.files||[])].forEach(addFile);
+}
+function handleFileSelect(e) { [...e.target.files].forEach(addFile); }
+
+function uniqueFilename(name) {
+  const ts = Date.now();
+  const clean = name.replace(/[^a-zA-Z0-9._-]/g, '_');
+  return `${ts}_${clean}`;
+}
+
+function addFile(file) {
+  if (!file.type.startsWith('image/') && !file.type.startsWith('video/')) return;
+  uploadedFiles.push({ file, url: null });
+
+  const preview = document.getElementById('upload-preview');
+  const div = document.createElement('div');
+  div.className = 'upload-thumb';
+  const idx = uploadedFiles.length - 1;
+  div.dataset.idx = idx;
+
+  if (file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      div.innerHTML = `<img src="${ev.target.result}" title="${file.name}">
+        <button class="del" onclick="removeUpload(${idx},this.closest('.upload-thumb'))">×</button>
+        <div class="upload-progress"><div class="upload-progress-bar" id="bar-${idx}" style="width:0%"></div></div>
+        <div class="upload-status" id="status-${idx}">subiendo…</div>`;
+    };
+    reader.readAsDataURL(file);
+  } else {
+    div.innerHTML = `<div style="width:100%;height:100%;background:var(--carbon);display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;text-align:center;padding:4px;">${file.name.slice(0,18)}</div>
+      <button class="del" onclick="removeUpload(${idx},this.closest('.upload-thumb'))">×</button>
+      <div class="upload-progress"><div class="upload-progress-bar" id="bar-${idx}" style="width:0%"></div></div>
+      <div class="upload-status" id="status-${idx}">subiendo…</div>`;
+  }
+  preview.appendChild(div);
+
+  // Upload to Supabase Storage
+  uploadToSupabase(file, idx, div);
+}
+
+async function uploadToSupabase(file, idx, thumbEl) {
+  const filename  = uniqueFilename(file.name);
+  const barEl     = document.getElementById(`bar-${idx}`);
+  const statusEl  = document.getElementById(`status-${idx}`);
+
+  const sk = getSBSK();
+  if (!sk) {
+    thumbEl.classList.add('error');
+    if (statusEl) statusEl.textContent = '⚙ config';
+    showStorageConfig();
+    return;
+  }
+
+  try {
+    // Paso 1: obtener signed upload URL (válida 2 horas)
+    const signRes = await fetch(
+      `${SB_URL}/storage/v1/object/upload/sign/${STORAGE_BUCKET}/${filename}`,
+      { method: 'POST', headers: { Authorization: `Bearer ${sk}`, apikey: sk }, body: '{}' }
+    );
+    if (!signRes.ok) throw new Error(`sign ${signRes.status}`);
+    const { token } = await signRes.json();
+
+    // Paso 2: subir con XHR para barra de progreso (sin auth extra)
+    await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('PUT', `${SB_URL}/storage/v1/object/upload/sign/${STORAGE_BUCKET}/${filename}?token=${token}`);
+      xhr.setRequestHeader('Content-Type', file.type);
+
+      xhr.upload.onprogress = e => {
+        if (e.lengthComputable && barEl)
+          barEl.style.width = Math.round(e.loaded / e.total * 100) + '%';
+      };
+      xhr.onload  = () => xhr.status < 300 ? resolve() : reject(new Error(`${xhr.status}: ${xhr.responseText?.slice(0,100)}`));
+      xhr.onerror = () => reject(new Error('Network error'));
+      xhr.send(file);
+    });
+
+    // Paso 3: URL pública permanente
+    const publicUrl = `${SB_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${filename}`;
+    uploadedFiles[idx].url = publicUrl;
+    thumbEl.classList.add('uploaded');
+    if (barEl)    barEl.style.width = '100%';
+    if (statusEl) statusEl.textContent = '✓';
+    renderUploadUrls();
+
+  } catch (err) {
+    console.error('Upload error:', err);
+    thumbEl.classList.add('error');
+    if (barEl)    { barEl.style.background = '#e53935'; barEl.style.width = '100%'; }
+    if (statusEl) statusEl.textContent = '✗';
+  }
+}
+
+function removeUpload(idx, thumbEl) {
+  uploadedFiles[idx] = null;
+  thumbEl?.remove();
+  renderUploadUrls();
+}
+
+function renderUploadUrls() {
+  const urls = uploadedFiles.filter(f => f?.url).map(f => f.url);
+  const el = document.getElementById('upload-urls');
+  if (!el) return;
+  if (!urls.length) { el.innerHTML = ''; return; }
+  el.innerHTML = '<strong style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--mid);">URLs subidas:</strong><br>' +
+    urls.map(u => `<a href="${u}" target="_blank">${u.split('/').pop()}</a>`).join('<br>');
+}
+
+function handleDriveUrl(url) { /* live validation */ }
+function addDriveLink() {
+  const input = document.getElementById('drive-url');
+  const url = input.value.trim();
+  if (!url) return;
+  driveLinks.push(url);
+  // Show as thumb
+  const preview = document.getElementById('upload-preview');
+  const div = document.createElement('div');
+  div.className = 'upload-thumb uploaded';
+  div.innerHTML = `<div style="width:100%;height:100%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-size:9px;color:#2e7d32;text-align:center;padding:4px;">Drive link</div>
+    <button class="del" onclick="this.closest('.upload-thumb').remove()">×</button>`;
+  preview.appendChild(div);
+  // Also show in URLs
+  const urlsEl = document.getElementById('upload-urls');
+  if (urlsEl) {
+    urlsEl.innerHTML += `<br><a href="${url}" target="_blank">Drive: ${url.slice(30,60)}…</a>`;
+  }
+  input.value = '';
+}
+
+// ── Storage config modal ────────────────────────────────────────────────────
+function showStorageConfig() {
+  const bg = document.getElementById('config-modal-bg');
+  const input = document.getElementById('sk-input');
+  const status = document.getElementById('sk-status');
+  const existing = getSBSK();
+  if (existing) {
+    input.value = existing;
+    status.className = 'config-sk-status ok';
+    status.textContent = '✓ Key guardada';
+  } else {
+    input.value = '';
+    status.className = 'config-sk-status missing';
+    status.textContent = '⚠ Sin key — el upload no va a funcionar hasta que la configures';
+  }
+  bg.classList.add('visible');
+  setTimeout(() => input.focus(), 50);
+}
+
+function closeStorageConfig() {
+  document.getElementById('config-modal-bg').classList.remove('visible');
+}
+
+function saveStorageKey() {
+  const val = document.getElementById('sk-input').value.trim();
+  if (!val) {
+    document.getElementById('sk-status').textContent = 'Pegá el service key primero';
+    return;
+  }
+  localStorage.setItem('uxu_sb_sk', val);
+  document.getElementById('sk-status').className = 'config-sk-status ok';
+  document.getElementById('sk-status').textContent = '✓ Guardado';
+  // Update config button to show key is set
+  const btn = document.getElementById('config-btn');
+  if (btn) btn.style.color = 'rgba(100,220,100,.6)';
+  setTimeout(closeStorageConfig, 800);
+}
+
+function initStorageStatus() {
+  const btn = document.getElementById('config-btn');
+  if (!btn) return;
+  if (getSBSK()) {
+    btn.style.color = 'rgba(100,220,100,.5)';
+    btn.title = 'Upload configurado ✓';
+  } else {
+    btn.title = 'Configurar upload de piezas creativas';
+  }
+}
+
+// ── Init ────────────────────────────────────────────────────────────────────
+loadRefAds();
+analyzeAd();
+initStorageStatus();
+</script>
+</body>
+</html>

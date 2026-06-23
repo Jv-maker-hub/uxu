@@ -1,7 +1,7 @@
 {
   "name": "uxu-competitor-scraper",
-  "version": "1.0.0",
-  "description": "Scraper de ads de competidores para UNO x UNO",
+  "version": "2.0.0",
+  "description": "Scraper de ads competidores con Playwright — UNO x UNO",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,8 +9,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
-    "node-fetch": "^2.7.0",
-    "ws": "^8.16.0"
+    "playwright": "^1.44.0"
   },
   "engines": {
     "node": ">=18"
