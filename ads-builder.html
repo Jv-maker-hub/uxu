@@ -109,12 +109,35 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 .upload-area-text{font-size:13px;color:var(--dark);line-height:1.6;}
 .upload-area-sub{font-size:11px;color:var(--mid);margin-top:4px;}
 .upload-preview{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
-.upload-thumb{position:relative;width:80px;height:80px;border-radius:2px;overflow:hidden;border:1px solid var(--warm);}
+.upload-thumb{position:relative;width:80px;height:80px;border-radius:2px;overflow:hidden;border:1px solid var(--warm);background:var(--cream);}
 .upload-thumb img{width:100%;height:100%;object-fit:cover;}
-.upload-thumb .del{position:absolute;top:2px;right:2px;width:18px;height:18px;background:rgba(0,0,0,.6);color:#fff;border:none;cursor:pointer;border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center;}
+.upload-thumb video{width:100%;height:100%;object-fit:cover;}
+.upload-thumb .del{position:absolute;top:2px;right:2px;width:18px;height:18px;background:rgba(0,0,0,.6);color:#fff;border:none;cursor:pointer;border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center;z-index:2;}
+.upload-thumb .upload-progress{position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(0,0,0,.15);}
+.upload-thumb .upload-progress-bar{height:100%;background:#4CAF50;transition:width .2s;}
+.upload-thumb .upload-status{position:absolute;bottom:4px;left:0;right:0;text-align:center;font-size:9px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.8);}
+.upload-thumb .upload-url{display:none;}
+.upload-thumb.uploaded{border-color:#4CAF50;}
+.upload-thumb.error{border-color:#e53935;}
 .drive-input{margin-top:12px;display:flex;gap:8px;}
 .drive-input input{flex:1;padding:8px 12px;border:1px solid var(--warm);border-radius:2px;font-size:12px;font-family:'Inter',sans-serif;outline:none;}
 .drive-input input:focus{border-color:var(--carbon);}
+.upload-urls{margin-top:8px;font-size:10px;color:var(--dark);line-height:1.8;}
+.upload-urls a{color:var(--carbon);word-break:break-all;}
+
+/* STORAGE CONFIG MODAL */
+.config-modal-bg{display:none;position:fixed;inset:0;background:rgba(41,42,46,.55);z-index:200;align-items:center;justify-content:center;}
+.config-modal-bg.visible{display:flex;}
+.config-modal{background:#fff;border-radius:4px;padding:32px;width:480px;max-width:90vw;box-shadow:0 8px 32px rgba(0,0,0,.18);}
+.config-modal h3{font-family:'TradeGothicCondBold',sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:.08em;margin:0 0 8px;}
+.config-modal p{font-size:12px;color:var(--dark);line-height:1.7;margin:0 0 16px;}
+.config-modal input{width:100%;padding:10px 12px;border:1px solid var(--warm);border-radius:2px;font-size:12px;font-family:'Inter',sans-serif;box-sizing:border-box;outline:none;}
+.config-modal input:focus{border-color:var(--carbon);}
+.config-modal .hint{font-size:10px;color:var(--mid);margin-top:6px;}
+.config-modal .actions{display:flex;gap:8px;margin-top:20px;justify-content:flex-end;}
+.config-sk-status{font-size:10px;margin-top:4px;}
+.config-sk-status.ok{color:#388e3c;}
+.config-sk-status.missing{color:#e53935;}
 
 /* RIGHT PANEL — decisiones y análisis */
 .panel-right{background:var(--white);border-left:1px solid var(--warm);overflow-y:auto;display:flex;flex-direction:column;}
@@ -183,8 +206,26 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
     <a href="competidores.html">Competidores</a>
     <a href="briefs.html">Briefs</a>
     <a href="ads-builder.html" class="active">Crear Ads</a>
+    <button onclick="showStorageConfig()" title="Configurar upload" id="config-btn"
+      style="background:none;border:none;color:rgba(255,255,255,.3);font-size:16px;cursor:pointer;padding:0 16px;height:48px;border-left:1px solid rgba(255,255,255,.06);transition:color .15s;"
+      onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.3)'">⚙</button>
   </div>
 </nav>
+
+<!-- MODAL: configuración de Supabase Storage key -->
+<div class="config-modal-bg" id="config-modal-bg" onclick="if(event.target===this)closeStorageConfig()">
+  <div class="config-modal">
+    <h3>Configuración de upload</h3>
+    <p>Para subir piezas creativas a Supabase Storage, pegá el <strong>Service Key</strong> de tu proyecto. Se guarda solo en este navegador (localStorage) — nunca va al código fuente.</p>
+    <input type="password" id="sk-input" placeholder="sb_secret_..." autocomplete="off">
+    <div class="config-sk-status" id="sk-status"></div>
+    <p class="hint" style="margin-top:10px;">Lo encontrás en: supabase.com → proyecto → Settings → API → <em>service_role (secret)</em></p>
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="closeStorageConfig()">Cancelar</button>
+      <button class="btn" onclick="saveStorageKey()">Guardar</button>
+    </div>
+  </div>
+</div>
 
 <!-- WORKSPACE -->
 <div class="workspace">
@@ -318,9 +359,10 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
             <input type="file" id="file-input" accept="image/*,video/*" multiple style="display:none" onchange="handleFileSelect(event)">
           </div>
           <div class="upload-preview" id="upload-preview"></div>
+          <div class="upload-urls" id="upload-urls"></div>
           <div class="drive-input">
             <input type="url" id="drive-url" placeholder="https://drive.google.com/file/d/... (link de Drive)" oninput="handleDriveUrl(this.value)">
-            <button class="btn btn-secondary" onclick="addDriveLink()">Agregar</button>
+            <button class="btn btn-secondary" onclick="addDriveLink()">Agregar link</button>
           </div>
         </div>
       </div>
@@ -421,8 +463,10 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 
 <script>
 // ── Configuración Supabase ─────────────────────────────────────────────────
-const SB_URL  = 'https://jsvnuylvqclqhjkotwvk.supabase.co';
-const SB_ANON = 'sb_publishable_aiXuJmB_bZe8clxZ2r4LqQ_5oRBfiui';
+const SB_URL    = 'https://jsvnuylvqclqhjkotwvk.supabase.co';
+const SB_ANON   = 'sb_publishable_aiXuJmB_bZe8clxZ2r4LqQ_5oRBfiui';
+// SB_SK se guarda en localStorage (no en código fuente). Ver botón ⚙ arriba a la derecha.
+function getSBSK() { return localStorage.getItem('uxu_sb_sk') || ''; }
 const COMP_SLUGS = ['tecla','valfort','umano','ser-basics','elemental','club-basico'];
 const TYPE_LABELS = { video:'Video', photo:'Foto', carousel:'Carrusel' };
 
@@ -750,11 +794,14 @@ function clearAll() {
   document.querySelectorAll('.ref-ad-card').forEach(c => c.classList.remove('using'));
   uploadedFiles = []; driveLinks = [];
   document.getElementById('upload-preview').innerHTML = '';
+  document.getElementById('upload-urls').innerHTML = '';
   document.getElementById('drive-url').value = '';
   updatePreview(); analyzeAd();
 }
 
 // ── Upload ─────────────────────────────────────────────────────────────────
+const STORAGE_BUCKET = 'creatives';
+
 function handleDragOver(e) { e.preventDefault(); document.getElementById('upload-area').classList.add('dragover'); }
 function handleDragLeave()  { document.getElementById('upload-area').classList.remove('dragover'); }
 function handleDrop(e) {
@@ -764,26 +811,109 @@ function handleDrop(e) {
 }
 function handleFileSelect(e) { [...e.target.files].forEach(addFile); }
 
-function addFile(file) {
-  if (!file.type.startsWith('image/') && !file.type.startsWith('video/')) return;
-  uploadedFiles.push(file);
-  if (file.type.startsWith('image/')) {
-    const reader = new FileReader();
-    reader.onload = ev => addThumb(ev.target.result, file.name);
-    reader.readAsDataURL(file);
-  } else {
-    addThumb(null, file.name);
-  }
+function uniqueFilename(name) {
+  const ts = Date.now();
+  const clean = name.replace(/[^a-zA-Z0-9._-]/g, '_');
+  return `${ts}_${clean}`;
 }
 
-function addThumb(src, name) {
+function addFile(file) {
+  if (!file.type.startsWith('image/') && !file.type.startsWith('video/')) return;
+  uploadedFiles.push({ file, url: null });
+
   const preview = document.getElementById('upload-preview');
   const div = document.createElement('div');
   div.className = 'upload-thumb';
-  div.innerHTML = src
-    ? `<img src="${src}" title="${name}"><button class="del" onclick="this.parentElement.remove()">×</button>`
-    : `<div style="width:100%;height:100%;background:var(--carbon);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;text-align:center;padding:4px;">${name.slice(0,20)}</div><button class="del" onclick="this.parentElement.remove()">×</button>`;
+  const idx = uploadedFiles.length - 1;
+  div.dataset.idx = idx;
+
+  if (file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      div.innerHTML = `<img src="${ev.target.result}" title="${file.name}">
+        <button class="del" onclick="removeUpload(${idx},this.closest('.upload-thumb'))">×</button>
+        <div class="upload-progress"><div class="upload-progress-bar" id="bar-${idx}" style="width:0%"></div></div>
+        <div class="upload-status" id="status-${idx}">subiendo…</div>`;
+    };
+    reader.readAsDataURL(file);
+  } else {
+    div.innerHTML = `<div style="width:100%;height:100%;background:var(--carbon);display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;text-align:center;padding:4px;">${file.name.slice(0,18)}</div>
+      <button class="del" onclick="removeUpload(${idx},this.closest('.upload-thumb'))">×</button>
+      <div class="upload-progress"><div class="upload-progress-bar" id="bar-${idx}" style="width:0%"></div></div>
+      <div class="upload-status" id="status-${idx}">subiendo…</div>`;
+  }
   preview.appendChild(div);
+
+  // Upload to Supabase Storage
+  uploadToSupabase(file, idx, div);
+}
+
+async function uploadToSupabase(file, idx, thumbEl) {
+  const filename  = uniqueFilename(file.name);
+  const barEl     = document.getElementById(`bar-${idx}`);
+  const statusEl  = document.getElementById(`status-${idx}`);
+
+  const sk = getSBSK();
+  if (!sk) {
+    thumbEl.classList.add('error');
+    if (statusEl) statusEl.textContent = '⚙ config';
+    showStorageConfig();
+    return;
+  }
+
+  try {
+    // Paso 1: obtener signed upload URL (válida 2 horas)
+    const signRes = await fetch(
+      `${SB_URL}/storage/v1/object/upload/sign/${STORAGE_BUCKET}/${filename}`,
+      { method: 'POST', headers: { Authorization: `Bearer ${sk}`, apikey: sk }, body: '{}' }
+    );
+    if (!signRes.ok) throw new Error(`sign ${signRes.status}`);
+    const { token } = await signRes.json();
+
+    // Paso 2: subir con XHR para barra de progreso (sin auth extra)
+    await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('PUT', `${SB_URL}/storage/v1/object/upload/sign/${STORAGE_BUCKET}/${filename}?token=${token}`);
+      xhr.setRequestHeader('Content-Type', file.type);
+
+      xhr.upload.onprogress = e => {
+        if (e.lengthComputable && barEl)
+          barEl.style.width = Math.round(e.loaded / e.total * 100) + '%';
+      };
+      xhr.onload  = () => xhr.status < 300 ? resolve() : reject(new Error(`${xhr.status}: ${xhr.responseText?.slice(0,100)}`));
+      xhr.onerror = () => reject(new Error('Network error'));
+      xhr.send(file);
+    });
+
+    // Paso 3: URL pública permanente
+    const publicUrl = `${SB_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${filename}`;
+    uploadedFiles[idx].url = publicUrl;
+    thumbEl.classList.add('uploaded');
+    if (barEl)    barEl.style.width = '100%';
+    if (statusEl) statusEl.textContent = '✓';
+    renderUploadUrls();
+
+  } catch (err) {
+    console.error('Upload error:', err);
+    thumbEl.classList.add('error');
+    if (barEl)    { barEl.style.background = '#e53935'; barEl.style.width = '100%'; }
+    if (statusEl) statusEl.textContent = '✗';
+  }
+}
+
+function removeUpload(idx, thumbEl) {
+  uploadedFiles[idx] = null;
+  thumbEl?.remove();
+  renderUploadUrls();
+}
+
+function renderUploadUrls() {
+  const urls = uploadedFiles.filter(f => f?.url).map(f => f.url);
+  const el = document.getElementById('upload-urls');
+  if (!el) return;
+  if (!urls.length) { el.innerHTML = ''; return; }
+  el.innerHTML = '<strong style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--mid);">URLs subidas:</strong><br>' +
+    urls.map(u => `<a href="${u}" target="_blank">${u.split('/').pop()}</a>`).join('<br>');
 }
 
 function handleDriveUrl(url) { /* live validation */ }
@@ -792,13 +922,74 @@ function addDriveLink() {
   const url = input.value.trim();
   if (!url) return;
   driveLinks.push(url);
-  addThumb(null, 'Drive: ' + url.slice(0, 30));
+  // Show as thumb
+  const preview = document.getElementById('upload-preview');
+  const div = document.createElement('div');
+  div.className = 'upload-thumb uploaded';
+  div.innerHTML = `<div style="width:100%;height:100%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-size:9px;color:#2e7d32;text-align:center;padding:4px;">Drive link</div>
+    <button class="del" onclick="this.closest('.upload-thumb').remove()">×</button>`;
+  preview.appendChild(div);
+  // Also show in URLs
+  const urlsEl = document.getElementById('upload-urls');
+  if (urlsEl) {
+    urlsEl.innerHTML += `<br><a href="${url}" target="_blank">Drive: ${url.slice(30,60)}…</a>`;
+  }
   input.value = '';
+}
+
+// ── Storage config modal ────────────────────────────────────────────────────
+function showStorageConfig() {
+  const bg = document.getElementById('config-modal-bg');
+  const input = document.getElementById('sk-input');
+  const status = document.getElementById('sk-status');
+  const existing = getSBSK();
+  if (existing) {
+    input.value = existing;
+    status.className = 'config-sk-status ok';
+    status.textContent = '✓ Key guardada';
+  } else {
+    input.value = '';
+    status.className = 'config-sk-status missing';
+    status.textContent = '⚠ Sin key — el upload no va a funcionar hasta que la configures';
+  }
+  bg.classList.add('visible');
+  setTimeout(() => input.focus(), 50);
+}
+
+function closeStorageConfig() {
+  document.getElementById('config-modal-bg').classList.remove('visible');
+}
+
+function saveStorageKey() {
+  const val = document.getElementById('sk-input').value.trim();
+  if (!val) {
+    document.getElementById('sk-status').textContent = 'Pegá el service key primero';
+    return;
+  }
+  localStorage.setItem('uxu_sb_sk', val);
+  document.getElementById('sk-status').className = 'config-sk-status ok';
+  document.getElementById('sk-status').textContent = '✓ Guardado';
+  // Update config button to show key is set
+  const btn = document.getElementById('config-btn');
+  if (btn) btn.style.color = 'rgba(100,220,100,.6)';
+  setTimeout(closeStorageConfig, 800);
+}
+
+function initStorageStatus() {
+  const btn = document.getElementById('config-btn');
+  if (!btn) return;
+  if (getSBSK()) {
+    btn.style.color = 'rgba(100,220,100,.5)';
+    btn.title = 'Upload configurado ✓';
+  } else {
+    btn.title = 'Configurar upload de piezas creativas';
+  }
 }
 
 // ── Init ────────────────────────────────────────────────────────────────────
 loadRefAds();
 analyzeAd();
+initStorageStatus();
 </script>
 </body>
 </html>
