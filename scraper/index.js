@@ -20,7 +20,6 @@ const supabase = createClient(SUPA_URL, SUPA_KEY, {
 });
 
 // ── Competidores con page IDs reales ──────────────────────────────────────
-// Elemental tiene dos páginas: marca + la que usa para pautar (El Calce Argentino)
 const COMPETITORS = [
   {
     slug:        'tecla',
@@ -53,6 +52,13 @@ const COMPETITORS = [
     name:        'ELEMENTAL OUTFIT',
     pageIds:     ['421257577744593', '1035888372948586'],
     libraryUrl:  'https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=421257577744593',
+  },
+  {
+    // Club Básico — vende con dominio todoimportado.store
+    slug:        'club-basico',
+    name:        'CLUB BÁSICO',
+    pageIds:     ['156367830894050'],
+    libraryUrl:  'https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=156367830894050',
   },
 ];
 
@@ -125,11 +131,6 @@ async function downloadImage(url, slug, adId) {
     console.warn(`    Image download failed: ${e.message}`);
     return null;
   }
-}
-
-function extractImageUrl(ad) {
-  if (ad.ad_snapshot_url) return ad.ad_snapshot_url;
-  return null;
 }
 
 function extractCopy(ad) {
