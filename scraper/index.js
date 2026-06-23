@@ -50,10 +50,11 @@ const COMPETITORS = [
   {
     slug: 'elemental',
     urls: [
-      // El Calce Argentino (página desde la que Elemental pauta)
-      'https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=61588727292745',
-      // Keyword como fallback
-      'https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&q=elemental+outfit+remera&search_type=keyword_unordered',
+      // El Calce Argentino — page ID correcto (verificado Jun 2026)
+      'https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=1035888372948586',
+      // Keywords como fallback
+      'https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&q=elemental+outfit&search_type=keyword_unordered',
+      'https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&q=El+Calce+Argentino&search_type=keyword_unordered',
     ],
     filterNames: null,
   },
