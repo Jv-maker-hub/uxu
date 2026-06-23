@@ -192,6 +192,30 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
   .panel-left{max-height:300px;}
   .panel-right{max-height:400px;}
 }
+
+/* BRIEF SELECTOR */
+.brief-selector-bar{background:var(--cream);border-bottom:1px solid var(--warm);padding:10px 24px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.brief-selector-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);white-space:nowrap;}
+.brief-selector-select{flex:1;max-width:280px;padding:7px 10px;border:1px solid var(--warm);border-radius:2px;font-size:12px;font-family:'Inter',sans-serif;color:var(--carbon);background:var(--white);outline:none;cursor:pointer;}
+.brief-selector-select:focus{border-color:var(--carbon);}
+.brief-link-btns{display:flex;gap:8px;margin-left:auto;}
+.brief-link-btn{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:6px 12px;border:1px solid var(--warm);border-radius:2px;transition:all .12s;white-space:nowrap;}
+.brief-link-btn:hover{border-color:var(--carbon);color:var(--carbon);}
+
+/* BRIEF SUMMARY PANEL */
+.brief-summary{background:var(--carbon);border-radius:4px;padding:14px 18px;margin-bottom:14px;display:none;}
+.brief-summary.visible{display:block;}
+.brief-summary-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.brief-summary-id{font-family:'TradeGothic',sans-serif;font-size:18px;color:#fff;text-transform:uppercase;}
+.brief-summary-formato{font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;background:rgba(255,255,255,.12);color:rgba(255,255,255,.7);}
+.brief-summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.brief-summary-field{padding:8px 10px;background:rgba(255,255,255,.04);border-radius:2px;}
+.brief-summary-key{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px;}
+.brief-summary-val{font-size:12px;color:rgba(255,255,255,.7);line-height:1.45;}
+.brief-summary-evitar{margin-top:8px;padding:8px 10px;background:rgba(239,68,68,.08);border-left:2px solid rgba(239,68,68,.4);border-radius:2px;}
+.brief-summary-evitar .brief-summary-key{color:rgba(239,68,68,.6);}
+.brief-summary-evitar .brief-summary-val{color:rgba(255,255,255,.5);font-size:11px;}
+
 </style>
 </head>
 <body>
@@ -199,33 +223,18 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <a href="index.html" style="line-height:0;"><img src="assets/logo-negativo.png" alt="UNO × UNO"></a>
+    <a href="index.html" style="line-height:0;"><img src="assets/logo-negativo.png" alt="UNO × UNO" style="height:32px;display:block;"></a>
   </div>
   <div class="nav-links">
     <a href="index.html">Estrategia</a>
     <a href="competidores.html">Competidores</a>
     <a href="briefs.html">Briefs</a>
     <a href="ads-builder.html" class="active">Crear Ads</a>
-    <button onclick="showStorageConfig()" title="Configurar upload" id="config-btn"
-      style="background:none;border:none;color:rgba(255,255,255,.3);font-size:16px;cursor:pointer;padding:0 16px;height:48px;border-left:1px solid rgba(255,255,255,.06);transition:color .15s;"
-      onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.3)'">⚙</button>
+
   </div>
 </nav>
 
-<!-- MODAL: configuración de Supabase Storage key -->
-<div class="config-modal-bg" id="config-modal-bg" onclick="if(event.target===this)closeStorageConfig()">
-  <div class="config-modal">
-    <h3>Configuración de upload</h3>
-    <p>Para subir piezas creativas a Supabase Storage, pegá el <strong>Service Key</strong> de tu proyecto. Se guarda solo en este navegador (localStorage) — nunca va al código fuente.</p>
-    <input type="password" id="sk-input" placeholder="sb_secret_..." autocomplete="off">
-    <div class="config-sk-status" id="sk-status"></div>
-    <p class="hint" style="margin-top:10px;">Lo encontrás en: supabase.com → proyecto → Settings → API → <em>service_role (secret)</em></p>
-    <div class="actions">
-      <button class="btn btn-secondary" onclick="closeStorageConfig()">Cancelar</button>
-      <button class="btn" onclick="saveStorageKey()">Guardar</button>
-    </div>
-  </div>
-</div>
+<!-- Upload usa anon key + RLS — no se requiere service_role en el navegador -->
 
 <!-- WORKSPACE -->
 <div class="workspace">
@@ -267,6 +276,51 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
       </div>
     </div>
 
+
+    <!-- Brief selector -->
+    <div class="brief-selector-bar" id="brief-selector-bar">
+      <span class="brief-selector-label">Partir de un brief</span>
+      <select class="brief-selector-select" id="brief-select" onchange="selectBrief(this.value)">
+        <option value="">Crear desde cero</option>
+        <optgroup label="Ejecutivo Saturado">
+          <option value="C1">C1 — Video · Problema → Sistema (Lanzar primero)</option>
+          <option value="C2">C2 — Imagen · Posicionamiento directo (Lanzar primero)</option>
+          <option value="C3">C3 — UGC · Testimonial funcional</option>
+          <option value="C4">C4 — Video · Comparación / Educativo</option>
+          <option value="C5">C5 — Carrusel · Educativo / Producto</option>
+          <option value="C6">C6 — Imagen · Anti-reciclaje</option>
+        </optgroup>
+        <optgroup label="El Que Viajó y Probó">
+          <option value="C7">C7 — Video · Problema → Solución (Lanzar primero)</option>
+          <option value="C8">C8 — Imagen · Posicionamiento directo</option>
+          <option value="C9">C9 — Carrusel · Educativo / Comparación</option>
+          <option value="C10">C10 — Video · Anti-competencia</option>
+          <option value="C11">C11 — Imagen · Posicionamiento / Confianza</option>
+          <option value="C12">C12 — UGC · Cambio de marca</option>
+        </optgroup>
+        <optgroup label="Minimalista en Proceso">
+          <option value="C13">C13 — Video · Espejo / Identificación (Lanzar primero)</option>
+          <option value="C14">C14 — Imagen · Posicionamiento / Sistema</option>
+          <option value="C15">C15 — UGC · Testimonial de proceso</option>
+          <option value="C16">C16 — Video · Paradoja / Humor seco</option>
+          <option value="C17">C17 — Carrusel · Anti-acumulación</option>
+          <option value="C18">C18 — Imagen · Contraste visual</option>
+        </optgroup>
+        <optgroup label="La Pareja que Regala">
+          <option value="C19">C19 — Video · Humor seco / Reconocimiento (Lanzar primero)</option>
+          <option value="C20">C20 — Imagen · Posicionamiento / Certeza</option>
+          <option value="C21">C21 — UGC · Testimonial femenino</option>
+          <option value="C22">C22 — Video · Anti-desperdicio</option>
+          <option value="C23">C23 — Carrusel · Por qué este regalo</option>
+          <option value="C24">C24 — Imagen · Emoción / Resultado</option>
+        </optgroup>
+      </select>
+      <div class="brief-link-btns">
+        <a href="briefs.html" class="brief-link-btn" id="ver-brief-link" style="display:none" target="_blank">Ver brief original</a>
+        <a href="briefs.html" class="brief-link-btn">← Volver a briefs</a>
+      </div>
+    </div>
+
     <!-- Formato selector -->
     <div class="format-selector">
       <button class="format-btn active" data-format="reel" onclick="selectFormat(this,'Reel / Video','Vertical 9:16 · 15-30 seg · Habla directamente a la cámara')">
@@ -285,6 +339,37 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 
     <!-- Canvas -->
     <div class="builder-canvas">
+
+
+      <!-- Brief summary -->
+      <div class="brief-summary" id="brief-summary">
+        <div class="brief-summary-header">
+          <span class="brief-summary-id" id="bs-id">C1</span>
+          <span class="brief-summary-formato" id="bs-formato"></span>
+        </div>
+        <div class="brief-summary-grid">
+          <div class="brief-summary-field">
+            <div class="brief-summary-key">Persona</div>
+            <div class="brief-summary-val" id="bs-persona"></div>
+          </div>
+          <div class="brief-summary-field">
+            <div class="brief-summary-key">Dolor activado</div>
+            <div class="brief-summary-val" id="bs-dolor"></div>
+          </div>
+          <div class="brief-summary-field">
+            <div class="brief-summary-key">Hipótesis</div>
+            <div class="brief-summary-val" id="bs-hipotesis"></div>
+          </div>
+          <div class="brief-summary-field">
+            <div class="brief-summary-key">Ángulo creativo</div>
+            <div class="brief-summary-val" id="bs-angulo"></div>
+          </div>
+        </div>
+        <div class="brief-summary-evitar">
+          <div class="brief-summary-key">Qué evitar</div>
+          <div class="brief-summary-val" id="bs-evitar"></div>
+        </div>
+      </div>
 
       <!-- Referencia seleccionada -->
       <div class="ref-brief" id="ref-brief">
@@ -462,11 +547,41 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 </div><!-- /workspace -->
 
 <script>
+
+// ── Brief data ─────────────────────────────────────────────────────────────────
+const BRIEFS = {
+  C1:  { persona:'Ejecutivo Saturado', dolor:'Energía mental / decisión diaria', formato:'reel', formatoLabel:'Video 0:15–0:30', angulo:'Problema → Sistema', hook:'¿Cuántas decisiones tomás antes de las 9 AM?', mensajeCentral:'La mente de quien maneja un equipo no puede estar gestionando también si la remera de hoy "va". El sistema UNO × UNO elimina esa micro-decisión para siempre. Tres básicos de calidad. Uno por color. Sin recompra frecuente.', cta:'Conocé el pack → metodounoxuno.com.ar', hipotesis:'Simplificar la elección diaria activa un pain point real en el hombre 35-50 que gestiona muchas decisiones de mayor peso.', productoObligatorio:'Las tres remeras apiladas — el "sistema" tiene que ser visual.', queEvitar:'No usar retórica del tipo "¿te preguntaste alguna vez...". No mencionar minimalismo ni moda. No hablar de precio en el hook.', priority:true },
+  C2:  { persona:'Ejecutivo Saturado', dolor:'Energía mental / decisión diaria', formato:'foto', formatoLabel:'Imagen estática', angulo:'Posicionamiento directo', hook:'La decisión de una vez.', mensajeCentral:'No necesitás evaluar cada mañana. El pack de tres remeras básicas de algodón peinado — negro, blanco, gris — es la respuesta definitiva. Lo comprás una vez, lo usás todos los días.', cta:'El uniforme diario → metodounoxuno.com.ar', hipotesis:'El posicionamiento directo sin storytelling puede generar CTR suficiente solo.', productoObligatorio:'Imagen limpia del pack de tres. Mínimo texto.', queEvitar:'No agregar storytelling ni narración — el claim tiene que funcionar solo.', priority:true },
+  C3:  { persona:'Ejecutivo Saturado', dolor:'Energía mental / decisión diaria', formato:'ugc', formatoLabel:'UGC / Voz en off', angulo:'Testimonial funcional', hook:'"Las compré hace seis meses. Todavía las uso."', mensajeCentral:'Narración en primera persona: el hartazgo de comprar remeras que al tercer lavado ya no son lo que eran. El descubrimiento de UNO × UNO. La diferencia que se nota en la tela y el calce.', cta:'El mismo pack → metodounoxuno.com.ar', hipotesis:'El testimonial funcional sin exageración convierte mejor que el aspiracional.', productoObligatorio:'La remera puesta, en uso cotidiano.', queEvitar:'No sonar publicitario. No exagerar. No entusiasmo forzado.', priority:false },
+  C4:  { persona:'Ejecutivo Saturado', dolor:'Remeras que se deforman / recompra', formato:'reel', formatoLabel:'Video 0:20–0:35', angulo:'Comparación / Educativo', hook:'Lo lavaste tres veces y ya no es la misma remera.', mensajeCentral:'Un cuello que se abre después de dos lavados no es un accidente — es el resultado de algodón sin peinar y corte sin cuidado. El algodón peinado 100% mantiene la estructura.', cta:'Garantía sin condiciones → metodounoxuno.com.ar', hipotesis:'El argumento de durabilidad funciona con quienes ya tuvieron la mala experiencia.', productoObligatorio:'Comparación de tela o cuello — mostrar calidad.', queEvitar:'No mostrar marca competidora. No usar tono agresivo.', priority:false },
+  C5:  { persona:'Ejecutivo Saturado', dolor:'Remeras que se deforman / recompra', formato:'carrusel', formatoLabel:'Carrusel', angulo:'Educativo / Producto', hook:'Por qué una remera básica no dura (y qué cambia con la nuestra).', mensajeCentral:'5 slides: el problema de la recompra, el algodón peinado, el corte, la garantía, el pack.', cta:'Ver el pack → metodounoxuno.com.ar', hipotesis:'El educativo en carrusel funciona con audiencias ya calentadas.', productoObligatorio:'Pack completo en slide final.', queEvitar:'Sin slides redundantes. Slide 1 debe funcionar solo.', priority:false },
+  C6:  { persona:'Ejecutivo Saturado', dolor:'Remeras que se deforman / recompra', formato:'foto', formatoLabel:'Imagen estática', angulo:'Anti-reciclaje', hook:'Dejaste de usar esa remera antes de gastarla.', mensajeCentral:'La compraste, la lavaste, perdió forma antes de tiempo. Seguís comprando. UNO × UNO existe para que no tengas que volver a ese ciclo.', cta:'El pack de las que sí duran → metodounoxuno.com.ar', hipotesis:'El anti-desperdicio activa culpa productiva que lleva a la compra racional.', productoObligatorio:'Remera en uso real, no estudio.', queEvitar:'Sin starburst ni badge de oferta. Foto limpia.', priority:false },
+  C7:  { persona:'El Que Viajó y Probó', dolor:'Calidad exterior no disponible acá', formato:'reel', formatoLabel:'Video 0:20–0:30', angulo:'Problema → Solución', hook:'En Europa las comprás sin pensarlo. Acá no encontrás lo mismo.', mensajeCentral:'Si viajaste y compraste básicas afuera — en H&M, Uniqlo, Primark — sabés lo que es una remera que calza bien y dura. Acá eso no estaba disponible. UNO × UNO es el pack de tres básicas en algodón peinado 100%.', cta:'Las básicas que no conseguías acá → metodounoxuno.com.ar', hipotesis:'La comparación tácita con marcas internacionales genera confianza en quienes tienen ese marco de referencia.', productoObligatorio:'Remera en plano que muestre calidad de tela y calce.', queEvitar:'No mencionar marcas extranjeras por nombre. No prometer "igual a". No copy aspiracional.', priority:true },
+  C8:  { persona:'El Que Viajó y Probó', dolor:'Calidad exterior no disponible acá', formato:'foto', formatoLabel:'Imagen estática', angulo:'Posicionamiento directo', hook:'El estándar de afuera, sin esperar el próximo viaje.', mensajeCentral:'Algodón peinado 100%. Corte que asienta. Sin logo visible. Lo que buscabas cuando comprabas básicas en el exterior. Disponible en pack de tres con garantía de cambio.', cta:'El pack → metodounoxuno.com.ar', hipotesis:'El claim de equivalencia funciona sin storytelling.', productoObligatorio:'Foto de producto con tela visible.', queEvitar:'Sin referencias directas a marcas externas.', priority:false },
+  C9:  { persona:'El Que Viajó y Probó', dolor:'Calidad exterior no disponible acá', formato:'carrusel', formatoLabel:'Carrusel', angulo:'Educativo / Comparación', hook:'Qué hace que una remera básica sea buena (y cómo reconocerla).', mensajeCentral:'5 slides: tela, corte, durabilidad, garantía, pack.', cta:'Ver el pack → metodounoxuno.com.ar', hipotesis:'El educativo en formato carrusel valida la compra para quienes investigan.', productoObligatorio:'Detalles de tela y calce en slides intermedios.', queEvitar:'Sin comparaciones directas con marcas.', priority:false },
+  C10: { persona:'El Que Viajó y Probó', dolor:'Marcas locales que decepcionaron', formato:'reel', formatoLabel:'Video 0:15–0:25', angulo:'Anti-competencia', hook:'La compraste porque la publicidad te convenció. La tiraste porque no duró.', mensajeCentral:'La pauta agresiva no es sinónimo de calidad. Muchas marcas locales invierten en adquisición, no en producto. UNO × UNO no necesita prometerte más de lo que puede cumplir.', cta:'El producto que se describe solo → metodounoxuno.com.ar', hipotesis:'El anti-competencia indirecto convierte al escéptico que ya fue quemado.', productoObligatorio:'Remera en uso real, sin set armado.', queEvitar:'No nombrar marcas. No sonar resentido. Tono: calma y certeza.', priority:false },
+  C11: { persona:'El Que Viajó y Probó', dolor:'Marcas locales que decepcionaron', formato:'foto', formatoLabel:'Imagen estática', angulo:'Posicionamiento / Confianza', hook:'Sin promesas que no podemos cumplir.', mensajeCentral:'Algodón peinado 100%. Corte auditado por uso real. Garantía de cambio aunque la hayas usado — sin condiciones.', cta:'Garantía real → metodounoxuno.com.ar', hipotesis:'La garantía como diferenciador funciona para el escéptico local.', productoObligatorio:'Pack o detalle de tela.', queEvitar:'Sin exclamaciones ni urgencia.', priority:false },
+  C12: { persona:'El Que Viajó y Probó', dolor:'Marcas locales que decepcionaron', formato:'ugc', formatoLabel:'UGC / Voz en off', angulo:'Cambio de marca', hook:'"Probé todas las que pautan fuerte. Esta es la que me quedé."', mensajeCentral:'Narración primera persona: experiencia de básicas locales que decepcionan, escepticismo ante nueva marca, decisión de probar UNO × UNO. Resultado: no tuvo que volver a buscar.', cta:'El pack que dura → metodounoxuno.com.ar', hipotesis:'El testimonial de conversión desde la decepción es el más creíble.', productoObligatorio:'Remera en uso cotidiano.', queEvitar:'No entusiasmo exagerado. Tono conversacional real.', priority:false },
+  C13: { persona:'Minimalista en Proceso', dolor:'Ropa sin sistema', formato:'reel', formatoLabel:'Video 0:20–0:30', angulo:'Espejo / Identificación', hook:'Organizaste todo. El placard todavía no.', mensajeCentral:'Hay personas que ya simplificaron la alimentación, el trabajo, los hábitos. Pero la ropa sigue siendo el caos del domingo a la noche. No es falta de voluntad — es falta de sistema. UNO × UNO es el punto de partida.', cta:'El sistema para la ropa → metodounoxuno.com.ar', hipotesis:'El lenguaje de sistema conecta con quienes ya aplicaron esa lógica en otras áreas.', productoObligatorio:'Las tres remeras apiladas — el "sistema" tiene que ser visual.', queEvitar:'No usar términos como "cápsula" o "uniforme de Steve Jobs". No sonar predicador sobre minimalismo.', priority:true },
+  C14: { persona:'Minimalista en Proceso', dolor:'Ropa sin sistema', formato:'foto', formatoLabel:'Imagen estática', angulo:'Posicionamiento / Sistema', hook:'La ropa como sistema. No como decisión diaria.', mensajeCentral:'No es acumulación de básicos — es un sistema. Tres colores, mismo calce, misma tela. Lo comprás una vez, lo cerrás para siempre.', cta:'El sistema → metodounoxuno.com.ar', hipotesis:'El claim de sistema funciona sin storytelling para el minimalista.', productoObligatorio:'Pack de tres bien presentado.', queEvitar:'Sin referencias a minimalismo radical o tendencias.', priority:false },
+  C15: { persona:'Minimalista en Proceso', dolor:'Ropa sin sistema', formato:'ugc', formatoLabel:'UGC / Voz en off', angulo:'Testimonial de proceso', hook:'"Me quedé con tres remeras. Y nunca más pensé en qué ponerme."', mensajeCentral:'Narración del proceso de simplificación. No extremo — solo el momento en que decidió que las básicas tenían que estar resueltas. Cómo UNO × UNO cerró ese capítulo.', cta:'Tres remeras. Resuelto. → metodounoxuno.com.ar', hipotesis:'El testimonial de proceso es el más creíble para el minimalista en transición.', productoObligatorio:'Remera puesta en contexto cotidiano.', queEvitar:'Sin referencias a estética minimalista forzada.', priority:false },
+  C16: { persona:'Minimalista en Proceso', dolor:'Mucha ropa, nada disponible', formato:'reel', formatoLabel:'Video 0:20–0:25', angulo:'Paradoja / Humor seco', hook:'Placard lleno. Nada para ponerse.', mensajeCentral:'La paradoja: placard lleno pero siempre sin qué ponerse. No es un problema de cantidad — es un problema de calidad y sistema. Cuatro remeras malas no hacen una buena.', cta:'Cerrar el tema de las remeras → metodounoxuno.com.ar', hipotesis:'La paradoja del placard lleno es un dolor reconocible que genera identificación inmediata.', productoObligatorio:'Tres remeras apiladas — contraste con el placard lleno.', queEvitar:'Sin humor forzado. Seco y directo.', priority:false },
+  C17: { persona:'Minimalista en Proceso', dolor:'Mucha ropa, nada disponible', formato:'carrusel', formatoLabel:'Carrusel', angulo:'Anti-acumulación', hook:'Cuánto gastaste en remeras que ya no usás.', mensajeCentral:'5 slides: costo real de recompra, lógica de comprar bien una vez, tres básicas que resuelven el 80%, garantía, pack y precio.', cta:'Una compra. Resuelto. → metodounoxuno.com.ar', hipotesis:'El argumento de costo acumulado racionaliza la compra del pack.', productoObligatorio:'Pack en slide final con precio visible.', queEvitar:'Sin números inventados. Sin comparaciones de precio agresivas.', priority:false },
+  C18: { persona:'Minimalista en Proceso', dolor:'Mucha ropa, nada disponible', formato:'foto', formatoLabel:'Imagen estática', angulo:'Contraste visual', hook:'La ropa acumulada versus las tres que usás.', mensajeCentral:'Visual de contraste: placard lleno versus tres remeras bien dobladas. Copy mínimo: "El sistema empieza acá."', cta:'El uniforme diario → metodounoxuno.com.ar', hipotesis:'El contraste visual dice más que el copy — la imagen hace el trabajo.', productoObligatorio:'Tres remeras dobladas, limpias, apiladas.', queEvitar:'Sin texto excesivo — la imagen hace el trabajo.', priority:false },
+  C19: { persona:'La Pareja que Regala', dolor:'"No necesita nada"', formato:'reel', formatoLabel:'Video 0:20–0:30', angulo:'Humor seco / Reconocimiento', hook:'"Dice que no necesita nada." Ya sé.', mensajeCentral:'Escena cotidiana: ella pregunta qué quiere, él responde "nada". Los que dicen que no necesitan nada generalmente necesitan lo básico bien resuelto. UNO × UNO es el pack que él va a usar todos los días.', cta:'El regalo que sí usa → metodounoxuno.com.ar', hipotesis:'"Él dice que no necesita nada" activa identificación inmediata y abre un canal de compra regalo.', productoObligatorio:'Pack bien presentado. La remera puesta en contexto real.', queEvitar:'No condescendiente con él. No estética de regalo genérico. No "el regalo perfecto".', priority:true },
+  C20: { persona:'La Pareja que Regala', dolor:'"No necesita nada"', formato:'foto', formatoLabel:'Imagen estática', angulo:'Posicionamiento / Certeza', hook:'El regalo que no termina en el cajón.', mensajeCentral:'Pack bien presentado. Si él siempre usa las mismas tres remeras, el regalo es tenerlas bien hechas. UNO × UNO: algodón peinado 100%, garantía de cambio.', cta:'El regalo certero → metodounoxuno.com.ar', hipotesis:'El claim de "no va al cajón" resuelve la ansiedad del regalo desperdiciado.', productoObligatorio:'Pack con packaging cuidado.', queEvitar:'Sin lenguaje de moda masculina. Sin "regalo perfecto".', priority:false },
+  C21: { persona:'La Pareja que Regala', dolor:'"No necesita nada"', formato:'ugc', formatoLabel:'UGC / Voz femenina', angulo:'Testimonial / Identificación', hook:'"Le regalé tres remeras. Cuatro meses después, sigue usándolas."', mensajeCentral:'Narración primera persona femenina: la dificultad de regalarle algo a alguien que dice no necesitar nada. Cómo llegó a UNO × UNO. Y cómo él empezó a usarlas todos los días.', cta:'El pack de tres → metodounoxuno.com.ar', hipotesis:'El testimonial femenino conecta directamente con la audiencia objetivo de este brief.', productoObligatorio:'Remera puesta en contexto cotidiano.', queEvitar:'Sin entusiasmo exagerado. Cotidiano y creíble.', priority:false },
+  C22: { persona:'La Pareja que Regala', dolor:'Regalos que no se usan', formato:'reel', formatoLabel:'Video 0:15–0:25', angulo:'Anti-desperdicio', hook:'No vuelve al cajón. Vuelve a la pila.', mensajeCentral:'Plano de remera que sale de la pila, se usa, se lava, vuelve a la pila. Hay ropa que se regala y ropa que se usa. La diferencia está en si resuelve algo real.', cta:'Regalo que se usa → metodounoxuno.com.ar', hipotesis:'El anti-desperdicio activa la memoria de regalos anteriores que no se usaron.', productoObligatorio:'Remera en ciclo uso-lavado-pila.', queEvitar:'Sin estética de regalo exagerada.', priority:false },
+  C23: { persona:'La Pareja que Regala', dolor:'Regalos que no se usan', formato:'carrusel', formatoLabel:'Carrusel', angulo:'Educativo / Por qué este regalo', hook:'Por qué las remeras básicas son el mejor regalo para él.', mensajeCentral:'Slides: uso diario, calidad importa, guía de talles, garantía, pack y CTA.', cta:'Ver el pack → metodounoxuno.com.ar', hipotesis:'El educativo de carrusel convierte la duda de la compradora en certeza.', productoObligatorio:'Pack en slide final.', queEvitar:'Sin "regalo perfecto" ni lenguaje de moda.', priority:false },
+  C24: { persona:'La Pareja que Regala', dolor:'Regalos que no se usan', formato:'foto', formatoLabel:'Imagen estática', angulo:'Emoción / Resultado', hook:'El regalo que lo hace más simple.', mensajeCentral:'Visual cálido: remeras dobladas con packaging cuidado. No es solo una remera. Es una decisión menos para alguien que no disfruta comprar ropa.', cta:'Regalá el uniforme diario → metodounoxuno.com.ar', hipotesis:'El ángulo emocional funciona en imagen estática para la audiencia femenina.', productoObligatorio:'Packaging cuidado, presentación cálida.', queEvitar:'Sin ostentación. Sin exceso de texto.', priority:false },
+};
+
+let currentBriefId = null;
+
 // ── Configuración Supabase ─────────────────────────────────────────────────
 const SB_URL    = 'https://jsvnuylvqclqhjkotwvk.supabase.co';
 const SB_ANON   = 'sb_publishable_aiXuJmB_bZe8clxZ2r4LqQ_5oRBfiui';
-// SB_SK se guarda en localStorage (no en código fuente). Ver botón ⚙ arriba a la derecha.
-function getSBSK() { return localStorage.getItem('uxu_sb_sk') || ''; }
+// Upload usa anon key + RLS — sin service_role en el navegador.
 const COMP_SLUGS = ['tecla','valfort','umano','ser-basics','elemental','club-basico'];
 const TYPE_LABELS = { video:'Video', photo:'Foto', carousel:'Carrusel' };
 
@@ -711,6 +826,92 @@ function insertMessage(el) {
   target.focus();
 }
 
+
+// ── Brief selector ─────────────────────────────────────────────────────────────
+function selectBrief(id) {
+  currentBriefId = id || null;
+  const summary = document.getElementById('brief-summary');
+  const verLink = document.getElementById('ver-brief-link');
+
+  if (!id) {
+    if (summary) summary.classList.remove('visible');
+    if (verLink) verLink.style.display = 'none';
+    return;
+  }
+
+  const b = BRIEFS[id];
+  if (!b) return;
+
+  // Show brief summary
+  document.getElementById('bs-id').textContent       = id;
+  document.getElementById('bs-formato').textContent  = b.formatoLabel;
+  document.getElementById('bs-persona').textContent  = b.persona;
+  document.getElementById('bs-dolor').textContent    = b.dolor;
+  document.getElementById('bs-hipotesis').textContent= b.hipotesis;
+  document.getElementById('bs-angulo').textContent   = b.angulo;
+  document.getElementById('bs-evitar').textContent   = b.queEvitar;
+  if (summary) summary.classList.add('visible');
+
+  // Show ver brief link
+  if (verLink) {
+    verLink.href = `briefs.html#${id}`;
+    verLink.style.display = '';
+  }
+
+  // Auto-fill hook
+  const hookEl = document.getElementById('hook');
+  if (hookEl && !hookEl.value) {
+    hookEl.value = b.hook;
+    updateCount(hookEl, 'hook-count', 80);
+  }
+
+  // Auto-fill copy main
+  const copyEl = document.getElementById('copy-main');
+  if (copyEl && !copyEl.value) {
+    copyEl.value = b.mensajeCentral;
+    updateCount(copyEl, 'copy-count', 300);
+  }
+
+  // Auto-fill CTA
+  const ctaEl = document.getElementById('cta');
+  if (ctaEl && !ctaEl.value) {
+    ctaEl.value = b.cta;
+    updateCount(ctaEl, 'cta-count', 30);
+  }
+
+  // Auto-select format
+  const formatMap = { reel:'reel', foto:'foto', carrusel:'carrusel', ugc:'ugc' };
+  const fmtKey = formatMap[b.formato] || 'reel';
+  const fmtBtn = document.querySelector(`.format-btn[data-format="${fmtKey}"]`);
+  if (fmtBtn) fmtBtn.click();
+
+  updatePreview();
+  analyzeAd();
+}
+
+// ── Read ?brief= URL param on load ────────────────────────────────────────────
+function initFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const briefId = params.get('brief');
+  if (briefId && BRIEFS[briefId]) {
+    const sel = document.getElementById('brief-select');
+    if (sel) sel.value = briefId;
+    selectBrief(briefId);
+  }
+}
+
+// ── Update variant status in localStorage ─────────────────────────────────────
+function updateVariantStatus(briefId, status) {
+  if (!briefId) return;
+  try {
+    const variants = JSON.parse(localStorage.getItem('uxu_variants') || '{}');
+    if (!variants[briefId]) variants[briefId] = { count: 0 };
+    variants[briefId].status = status;
+    variants[briefId].count  = (variants[briefId].count || 0) + 1;
+    localStorage.setItem('uxu_variants', JSON.stringify(variants));
+  } catch(e) {}
+}
+
 // ── Guardar variante ───────────────────────────────────────────────────────
 function saveAd() {
   const hook = document.getElementById('hook').value.trim();
@@ -719,14 +920,17 @@ function saveAd() {
   const cta  = document.getElementById('cta').value.trim();
   if (!hook && !copy) { alert('Escribí algo antes de guardar.'); return; }
 
-  const ad = { hook, copy, hl, cta, format: currentFormat, savedAt: new Date().toLocaleDateString('es-AR') };
+  const ad = { hook, copy, hl, cta, format: currentFormat, briefId: currentBriefId, savedAt: new Date().toLocaleDateString('es-AR') };
   savedAds.unshift(ad);
+  if (currentBriefId) updateVariantStatus(currentBriefId, 'borrador');
 
   const container = document.getElementById('saved-ads');
   const div = document.createElement('div');
   div.className = 'saved-ad';
   const preview = [hook, copy].filter(Boolean).join(' ').slice(0, 100);
+  const briefTag = currentBriefId ? `<span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);">${currentBriefId}</span>` : '';
   div.innerHTML = `
+    ${briefTag}
     <p class="saved-ad-copy">${preview}...</p>
     <div class="saved-ad-actions">
       <button class="saved-ad-btn" onclick="loadSavedAd(${savedAds.length-1})">Cargar</button>
@@ -762,8 +966,10 @@ function exportAd() {
   const cta  = document.getElementById('cta').value.trim();
   const format = currentFormat.toUpperCase();
 
+  const briefInfo = currentBriefId && BRIEFS[currentBriefId]
+    ? `\nBrief: ${currentBriefId} — ${BRIEFS[currentBriefId].angulo} (${BRIEFS[currentBriefId].persona})` : '';
   const text = `UNO × UNO — Ad Brief
-Formato: ${format}
+Formato: ${format}${briefInfo}
 Fecha: ${new Date().toLocaleDateString('es-AR')}
 
 HOOK:
@@ -792,6 +998,10 @@ function clearAll() {
   ['hook','copy-main','headline','cta'].forEach(id => { document.getElementById(id).value = ''; });
   document.getElementById('ref-brief').classList.remove('visible');
   document.querySelectorAll('.ref-ad-card').forEach(c => c.classList.remove('using'));
+  // Reset brief
+  const sel = document.getElementById('brief-select');
+  if (sel) sel.value = '';
+  selectBrief('');
   uploadedFiles = []; driveLinks = [];
   document.getElementById('upload-preview').innerHTML = '';
   document.getElementById('upload-urls').innerHTML = '';
@@ -849,55 +1059,37 @@ function addFile(file) {
 }
 
 async function uploadToSupabase(file, idx, thumbEl) {
-  const filename  = uniqueFilename(file.name);
-  const barEl     = document.getElementById(`bar-${idx}`);
-  const statusEl  = document.getElementById(`status-${idx}`);
-
-  const sk = getSBSK();
-  if (!sk) {
-    thumbEl.classList.add('error');
-    if (statusEl) statusEl.textContent = '⚙ config';
-    showStorageConfig();
-    return;
-  }
+  // Usa anon key — el bucket 'creatives' debe tener política INSERT para anon en Supabase Storage.
+  const filename = uniqueFilename(file.name);
+  const barEl    = document.getElementById(`bar-${idx}`);
+  const statusEl = document.getElementById(`status-${idx}`);
 
   try {
-    // Paso 1: obtener signed upload URL (válida 2 horas)
-    const signRes = await fetch(
-      `${SB_URL}/storage/v1/object/upload/sign/${STORAGE_BUCKET}/${filename}`,
-      { method: 'POST', headers: { Authorization: `Bearer ${sk}`, apikey: sk }, body: '{}' }
-    );
-    if (!signRes.ok) throw new Error(`sign ${signRes.status}`);
-    const { token } = await signRes.json();
-
-    // Paso 2: subir con XHR para barra de progreso (sin auth extra)
     await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open('PUT', `${SB_URL}/storage/v1/object/upload/sign/${STORAGE_BUCKET}/${filename}?token=${token}`);
+      xhr.open('POST', `${SB_URL}/storage/v1/object/${STORAGE_BUCKET}/${filename}`);
+      xhr.setRequestHeader('apikey', SB_ANON);
+      xhr.setRequestHeader('Authorization', `Bearer ${SB_ANON}`);
       xhr.setRequestHeader('Content-Type', file.type);
-
       xhr.upload.onprogress = e => {
         if (e.lengthComputable && barEl)
           barEl.style.width = Math.round(e.loaded / e.total * 100) + '%';
       };
-      xhr.onload  = () => xhr.status < 300 ? resolve() : reject(new Error(`${xhr.status}: ${xhr.responseText?.slice(0,100)}`));
+      xhr.onload  = () => xhr.status < 300 ? resolve() : reject(new Error(`${xhr.status}`));
       xhr.onerror = () => reject(new Error('Network error'));
       xhr.send(file);
     });
-
-    // Paso 3: URL pública permanente
     const publicUrl = `${SB_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${filename}`;
     uploadedFiles[idx].url = publicUrl;
     thumbEl.classList.add('uploaded');
     if (barEl)    barEl.style.width = '100%';
     if (statusEl) statusEl.textContent = '✓';
     renderUploadUrls();
-
   } catch (err) {
     console.error('Upload error:', err);
     thumbEl.classList.add('error');
     if (barEl)    { barEl.style.background = '#e53935'; barEl.style.width = '100%'; }
-    if (statusEl) statusEl.textContent = '✗';
+    if (statusEl) statusEl.textContent = '✗ Verificá que el bucket permite uploads con anon key';
   }
 }
 
@@ -937,59 +1129,14 @@ function addDriveLink() {
   input.value = '';
 }
 
-// ── Storage config modal ────────────────────────────────────────────────────
-function showStorageConfig() {
-  const bg = document.getElementById('config-modal-bg');
-  const input = document.getElementById('sk-input');
-  const status = document.getElementById('sk-status');
-  const existing = getSBSK();
-  if (existing) {
-    input.value = existing;
-    status.className = 'config-sk-status ok';
-    status.textContent = '✓ Key guardada';
-  } else {
-    input.value = '';
-    status.className = 'config-sk-status missing';
-    status.textContent = '⚠ Sin key — el upload no va a funcionar hasta que la configures';
-  }
-  bg.classList.add('visible');
-  setTimeout(() => input.focus(), 50);
-}
-
-function closeStorageConfig() {
-  document.getElementById('config-modal-bg').classList.remove('visible');
-}
-
-function saveStorageKey() {
-  const val = document.getElementById('sk-input').value.trim();
-  if (!val) {
-    document.getElementById('sk-status').textContent = 'Pegá el service key primero';
-    return;
-  }
-  localStorage.setItem('uxu_sb_sk', val);
-  document.getElementById('sk-status').className = 'config-sk-status ok';
-  document.getElementById('sk-status').textContent = '✓ Guardado';
-  // Update config button to show key is set
-  const btn = document.getElementById('config-btn');
-  if (btn) btn.style.color = 'rgba(100,220,100,.6)';
-  setTimeout(closeStorageConfig, 800);
-}
-
-function initStorageStatus() {
-  const btn = document.getElementById('config-btn');
-  if (!btn) return;
-  if (getSBSK()) {
-    btn.style.color = 'rgba(100,220,100,.5)';
-    btn.title = 'Upload configurado ✓';
-  } else {
-    btn.title = 'Configurar upload de piezas creativas';
-  }
-}
+// ── Upload usa anon key + RLS (sin service_role en browser) ──────────────────
+function initStorageStatus() { /* anon key — no config necesaria */ }
 
 // ── Init ────────────────────────────────────────────────────────────────────
 loadRefAds();
 analyzeAd();
 initStorageStatus();
+initFromURL();
 </script>
 </body>
 </html>

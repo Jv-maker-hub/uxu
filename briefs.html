@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UNO × UNO — Briefs de Ads</title>
+<title>UNO × UNO — Estrategia Creativa</title>
 <style>
 @font-face { font-family:'TradeGothic'; src:url('assets/fonts/TradeGothicCondBold.otf') format('opentype'); font-weight:700; }
 @font-face { font-family:'Inter'; src:url('assets/fonts/Inter-Regular.otf') format('opentype'); font-weight:400; }
@@ -298,6 +298,58 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
 .cr-slot.ready .cr-slot-status{color:var(--dark);}
 .cr-add-btn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);border:1px solid var(--warm);padding:6px 12px;text-decoration:none;}
 .cr-add-btn:hover{color:var(--carbon);border-color:var(--carbon);}
+
+/* ── FILTER BAR ── */
+.briefs-filter-bar{background:var(--white);border-bottom:1px solid var(--warm);padding:16px 48px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;position:sticky;top:0;z-index:90;}
+.bf-group{display:flex;gap:4px;flex-wrap:wrap;align-items:center;}
+.bf-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);padding-right:4px;white-space:nowrap;}
+.bf-btn{font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--warm);background:transparent;color:var(--dark);cursor:pointer;border-radius:2px;transition:all .12s;font-family:'Inter',sans-serif;}
+.bf-btn:hover{border-color:var(--carbon);color:var(--carbon);}
+.bf-btn.active{background:var(--carbon);color:#fff;border-color:var(--carbon);}
+.bf-sep{width:1px;height:20px;background:var(--warm);margin:0 4px;flex-shrink:0;}
+.bf-priority-btn{border-color:var(--carbon);color:var(--carbon);}
+.bf-priority-btn.active{background:var(--carbon);color:#fff;}
+.bf-count{font-size:10px;color:var(--mid);margin-left:auto;white-space:nowrap;}
+
+/* ── BRIEF COMPACT META ── */
+.brief-compact-meta{font-size:11px;color:var(--mid);margin-bottom:10px;display:flex;flex-wrap:wrap;gap:4px;align-items:center;line-height:1.4;}
+.brief-compact-meta .bm-sep{color:var(--warm);margin:0 2px;}
+.brief-compact-meta .bm-persona{color:var(--dark);font-weight:500;}
+
+/* ── BRIEF CARD ACTIONS ── */
+.brief-card-actions{display:flex;gap:6px;margin-top:14px;padding-top:12px;border-top:1px solid var(--warm);}
+.brief-btn-expand{flex:1;padding:7px 10px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--warm);background:transparent;color:var(--dark);cursor:pointer;border-radius:2px;transition:all .12s;font-family:'Inter',sans-serif;text-align:center;}
+.brief-btn-expand:hover{border-color:var(--dark);color:var(--carbon);}
+.brief-btn-expand.expanded{background:var(--cream);border-color:var(--dark);}
+.brief-btn-crear{flex:1;padding:7px 10px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:var(--carbon);color:#fff;cursor:pointer;border-radius:2px;transition:background .12s;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;border:1px solid transparent;}
+.brief-btn-crear:hover{background:#1a1a1e;}
+
+/* ── BRIEF COLLAPSED ── */
+.brief-collapsible{display:none;}
+.brief-collapsible.open{display:block;}
+
+/* ── STATUS BADGES ── */
+.brief-status-badge{font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:2px;font-weight:600;}
+.status-pendiente{background:var(--warm);color:var(--dark);}
+.status-produccion{background:#fef9c3;color:#713f12;}
+.status-borrador{background:#dbeafe;color:#1e40af;}
+.status-revision{background:#fde68a;color:#92400e;}
+.status-aprobado{background:#dcfce7;color:#166534;}
+.status-lanzado{background:var(--carbon);color:#fff;}
+
+/* ── VARIANT COUNT ── */
+.brief-variant-count{font-size:11px;color:var(--mid);margin-top:6px;}
+.brief-variant-count.has-variants{color:var(--dark);}
+
+/* ── WORKFLOW BAR ── */
+.workflow-bar{background:var(--cream);border-bottom:1px solid var(--warm);padding:14px 48px;overflow-x:auto;}
+.workflow-steps{display:flex;align-items:center;gap:0;white-space:nowrap;}
+.wf-step{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:0 16px;}
+.wf-step.active{color:var(--carbon);font-weight:700;}
+.wf-step a{color:inherit;text-decoration:none;}
+.wf-step a:hover{color:var(--carbon);}
+.wf-arrow{color:var(--warm);font-size:12px;flex-shrink:0;}
+
 </style>
 </head>
 <body>
@@ -305,8 +357,8 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
 <!-- NAV -->
 <nav id="top">
   <div class="container">
-    <a href="index.html" style="display:block;line-height:0;"><img src="assets/logo-negativo.png" alt="UNO × UNO"></a>
-    <span class="nav-label" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);">Briefs de Ads</span>
+    <a href="index.html" style="display:block;line-height:0;"><img src="assets/logo-negativo.png" alt="UNO × UNO" style="height:32px;display:block;"></a>
+    <span class="nav-label" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);">Estrategia Creativa</span>
     <div class="nav-links" style="display:flex;margin-left:auto;">
     <a href="index.html" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;padding:0 14px;border-right:1px solid rgba(255,255,255,.06);line-height:48px;white-space:nowrap;">Home</a>
     <a href="competidores.html" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;padding:0 14px;border-right:1px solid rgba(255,255,255,.06);line-height:48px;white-space:nowrap;">Competidores</a>
@@ -339,11 +391,11 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
   <div class="container">
     <div>
       <p class="hero-eyebrow">04 — Creativos</p>
-      <h1>Briefs<br>de Ads</h1>
+      <h1>Estrategia<br>Creativa</h1>
     </div>
     <div>
       <div class="hero-divider"></div>
-      <p class="hero-sub">24 briefs listos para producción. 4 personas × 2 dolores × 3 formatos. En Meta, el creativo es el targeting — cada brief está calibrado para encontrar a su persona.</p>
+      <p class="hero-sub">Biblioteca de briefs por persona, dolor y formato. 24 creativos para testear en Meta — desde la hipótesis hasta la pieza lista para producir.</p>
       <div class="hero-meta">
         <span>Video · Imagen · UGC · Carrusel</span>
         <span>Uso interno · Método Uno SRL · 2026</span>
@@ -426,6 +478,48 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
       </div>
     </div>
   </div>
+</div>
+
+
+<!-- WORKFLOW BAR -->
+<div class="workflow-bar">
+  <div class="workflow-steps">
+    <span class="wf-step"><a href="personas.html">Buyer Personas</a></span>
+    <span class="wf-arrow">→</span>
+    <span class="wf-step active">Estrategia Creativa</span>
+    <span class="wf-arrow">→</span>
+    <span class="wf-step"><a href="ads-builder.html">Crear Ad</a></span>
+    <span class="wf-arrow">→</span>
+    <span class="wf-step">Guardar Variante</span>
+    <span class="wf-arrow">→</span>
+    <span class="wf-step">Exportar / Aprobar</span>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="briefs-filter-bar" id="briefs-filter-bar">
+  <div class="bf-group">
+    <span class="bf-label">Persona</span>
+    <button class="bf-btn active" data-filter-persona="all" onclick="filterBriefs(this,'persona')">Todos</button>
+    <button class="bf-btn" data-filter-persona="ejecutivo" onclick="filterBriefs(this,'persona')">Ejecutivo</button>
+    <button class="bf-btn" data-filter-persona="viajo" onclick="filterBriefs(this,'persona')">Viajó y Probó</button>
+    <button class="bf-btn" data-filter-persona="minimalista" onclick="filterBriefs(this,'persona')">Minimalista</button>
+    <button class="bf-btn" data-filter-persona="pareja" onclick="filterBriefs(this,'persona')">La Pareja</button>
+  </div>
+  <div class="bf-sep"></div>
+  <div class="bf-group">
+    <span class="bf-label">Formato</span>
+    <button class="bf-btn active" data-filter-formato="all" onclick="filterBriefs(this,'formato')">Todos</button>
+    <button class="bf-btn" data-filter-formato="video" onclick="filterBriefs(this,'formato')">Video</button>
+    <button class="bf-btn" data-filter-formato="imagen" onclick="filterBriefs(this,'formato')">Imagen</button>
+    <button class="bf-btn" data-filter-formato="carrusel" onclick="filterBriefs(this,'formato')">Carrusel</button>
+    <button class="bf-btn" data-filter-formato="ugc" onclick="filterBriefs(this,'formato')">UGC</button>
+  </div>
+  <div class="bf-sep"></div>
+  <div class="bf-group">
+    <button class="bf-btn bf-priority-btn" data-filter-priority="true" onclick="filterPriority(this)">⬤ Ver solo lanzar primero</button>
+  </div>
+  <span class="bf-count" id="bf-count">24 briefs</span>
 </div>
 
 <!-- ══════════════ PERSONA 1 ══════════════ -->
@@ -1747,25 +1841,218 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
 </footer>
 
 <script>
-// Back to top button
+// ── Brief data (para filtros y botones) ─────────────────────────────────────
+const BRIEF_META = {
+  C1:  { persona:'ejecutivo', personaLabel:'Ejecutivo Saturado', dolor:'Energía mental / decisión diaria', formato:'video', priority:true },
+  C2:  { persona:'ejecutivo', personaLabel:'Ejecutivo Saturado', dolor:'Energía mental / decisión diaria', formato:'imagen', priority:true },
+  C3:  { persona:'ejecutivo', personaLabel:'Ejecutivo Saturado', dolor:'Energía mental / decisión diaria', formato:'ugc', priority:false },
+  C4:  { persona:'ejecutivo', personaLabel:'Ejecutivo Saturado', dolor:'Remeras que se deforman', formato:'video', priority:false },
+  C5:  { persona:'ejecutivo', personaLabel:'Ejecutivo Saturado', dolor:'Remeras que se deforman', formato:'carrusel', priority:false },
+  C6:  { persona:'ejecutivo', personaLabel:'Ejecutivo Saturado', dolor:'Remeras que se deforman', formato:'imagen', priority:false },
+  C7:  { persona:'viajo', personaLabel:'El Que Viajó y Probó', dolor:'Calidad exterior no disponible acá', formato:'video', priority:true },
+  C8:  { persona:'viajo', personaLabel:'El Que Viajó y Probó', dolor:'Calidad exterior no disponible acá', formato:'imagen', priority:false },
+  C9:  { persona:'viajo', personaLabel:'El Que Viajó y Probó', dolor:'Calidad exterior no disponible acá', formato:'carrusel', priority:false },
+  C10: { persona:'viajo', personaLabel:'El Que Viajó y Probó', dolor:'Marcas locales que decepcionaron', formato:'video', priority:false },
+  C11: { persona:'viajo', personaLabel:'El Que Viajó y Probó', dolor:'Marcas locales que decepcionaron', formato:'imagen', priority:false },
+  C12: { persona:'viajo', personaLabel:'El Que Viajó y Probó', dolor:'Marcas locales que decepcionaron', formato:'ugc', priority:false },
+  C13: { persona:'minimalista', personaLabel:'Minimalista en Proceso', dolor:'Ropa sin sistema', formato:'video', priority:true },
+  C14: { persona:'minimalista', personaLabel:'Minimalista en Proceso', dolor:'Ropa sin sistema', formato:'imagen', priority:false },
+  C15: { persona:'minimalista', personaLabel:'Minimalista en Proceso', dolor:'Ropa sin sistema', formato:'ugc', priority:false },
+  C16: { persona:'minimalista', personaLabel:'Minimalista en Proceso', dolor:'Mucha ropa, nada disponible', formato:'video', priority:false },
+  C17: { persona:'minimalista', personaLabel:'Minimalista en Proceso', dolor:'Mucha ropa, nada disponible', formato:'carrusel', priority:false },
+  C18: { persona:'minimalista', personaLabel:'Minimalista en Proceso', dolor:'Mucha ropa, nada disponible', formato:'imagen', priority:false },
+  C19: { persona:'pareja', personaLabel:'La Pareja que Regala', dolor:'"No necesita nada"', formato:'video', priority:true },
+  C20: { persona:'pareja', personaLabel:'La Pareja que Regala', dolor:'"No necesita nada"', formato:'imagen', priority:false },
+  C21: { persona:'pareja', personaLabel:'La Pareja que Regala', dolor:'"No necesita nada"', formato:'ugc', priority:false },
+  C22: { persona:'pareja', personaLabel:'La Pareja que Regala', dolor:'Regalos que no se usan', formato:'video', priority:false },
+  C23: { persona:'pareja', personaLabel:'La Pareja que Regala', dolor:'Regalos que no se usan', formato:'carrusel', priority:false },
+  C24: { persona:'pareja', personaLabel:'La Pareja que Regala', dolor:'Regalos que no se usan', formato:'imagen', priority:false },
+};
+
+// Status from localStorage
+const STATUS_LABELS = {
+  pendiente:  { label:'Pendiente',           cls:'status-pendiente' },
+  produccion: { label:'En producción',        cls:'status-produccion' },
+  borrador:   { label:'Borrador',            cls:'status-borrador' },
+  revision:   { label:'Listo para revisión', cls:'status-revision' },
+  aprobado:   { label:'Aprobado',            cls:'status-aprobado' },
+  lanzado:    { label:'Lanzado',             cls:'status-lanzado' },
+};
+function getVariantData(id) {
+  try { return JSON.parse(localStorage.getItem('uxu_variants') || '{}')[id] || {}; } catch(e) { return {}; }
+}
+
+// ── Init cards ────────────────────────────────────────────────────────────────
+function initBriefCards() {
+  document.querySelectorAll('.brief-card').forEach(card => {
+    const idEl = card.querySelector('.brief-id-code');
+    if (!idEl) return;
+    const id = idEl.textContent.trim();
+    const meta = BRIEF_META[id];
+    if (!meta) return;
+
+    // Store data on element
+    card.dataset.briefId   = id;
+    card.dataset.persona   = meta.persona;
+    card.dataset.formato   = meta.formato;
+    card.dataset.priority  = meta.priority ? 'true' : 'false';
+
+    // Add compact meta (persona + dolor) before hook
+    const hookEl = card.querySelector('.brief-hook');
+    if (hookEl && !card.querySelector('.brief-compact-meta')) {
+      const metaDiv = document.createElement('div');
+      metaDiv.className = 'brief-compact-meta';
+      metaDiv.innerHTML = `<span class="bm-persona">${meta.personaLabel}</span><span class="bm-sep">·</span><span>${meta.dolor}</span>`;
+      hookEl.before(metaDiv);
+    }
+
+    // Wrap collapsible content (angulo, brief-field, brief-cta) in a collapsible div
+    const colEl = card.querySelector('.brief-angulo');
+    const fieldEls = [...card.querySelectorAll('.brief-field, .brief-cta')];
+    const targets = colEl ? [colEl, ...fieldEls] : fieldEls;
+    if (targets.length && !card.querySelector('.brief-collapsible')) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'brief-collapsible';
+      wrapper.id = 'expand-' + id;
+      targets.forEach(el => wrapper.appendChild(el));
+      // insert after hook
+      const hookEl2 = card.querySelector('.brief-hook');
+      if (hookEl2) hookEl2.after(wrapper);
+      else card.insertBefore(wrapper, card.querySelector('.brief-card-actions'));
+    }
+
+    // Add status badge to id-row
+    const idRow = card.querySelector('.brief-id-row');
+    if (idRow && !idRow.querySelector('.brief-status-badge')) {
+      const vd = getVariantData(id);
+      const st = STATUS_LABELS[vd.status || 'pendiente'];
+      const badge = document.createElement('span');
+      badge.className = 'brief-status-badge ' + st.cls;
+      badge.textContent = st.label;
+      badge.id = 'status-' + id;
+      idRow.appendChild(badge);
+    }
+
+    // Add variant count
+    const vd2 = getVariantData(id);
+    if (!card.querySelector('.brief-variant-count')) {
+      const vc = document.createElement('div');
+      vc.className = 'brief-variant-count' + (vd2.count ? ' has-variants' : '');
+      vc.id = 'variants-' + id;
+      vc.textContent = vd2.count
+        ? (vd2.count + ' variante' + (vd2.count > 1 ? 's' : '') + ' guardada' + (vd2.count > 1 ? 's' : ''))
+        : '';
+      const actions = card.querySelector('.brief-card-actions');
+      if (actions) actions.before(vc);
+      else card.appendChild(vc);
+    }
+
+    // Add action buttons if not already there
+    if (!card.querySelector('.brief-card-actions')) {
+      const actions = document.createElement('div');
+      actions.className = 'brief-card-actions';
+      actions.innerHTML = `
+        <button class="brief-btn-expand" id="btn-${id}" onclick="toggleBrief('${id}')">Ver brief</button>
+        <a class="brief-btn-crear" href="ads-builder.html?brief=${id}">Crear este ad</a>`;
+      card.appendChild(actions);
+    }
+  });
+  updateCount();
+}
+
+function toggleBrief(id) {
+  const wrap = document.getElementById('expand-' + id);
+  const btn  = document.getElementById('btn-' + id);
+  if (!wrap) return;
+  const isOpen = wrap.classList.contains('open');
+  wrap.classList.toggle('open', !isOpen);
+  if (btn) {
+    btn.textContent = isOpen ? 'Ver brief' : 'Cerrar brief';
+    btn.classList.toggle('expanded', !isOpen);
+  }
+}
+
+// ── Filter logic ──────────────────────────────────────────────────────────────
+let activePersona  = 'all';
+let activeFormato  = 'all';
+let activePriority = false;
+
+function filterBriefs(btn, type) {
+  const group = btn.closest('.bf-group');
+  group.querySelectorAll('.bf-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (type === 'persona')  activePersona  = btn.dataset.filterPersona;
+  if (type === 'formato')  activeFormato  = btn.dataset.filterFormato;
+  applyFilters();
+}
+
+function filterPriority(btn) {
+  activePriority = !activePriority;
+  btn.classList.toggle('active', activePriority);
+  applyFilters();
+}
+
+function applyFilters() {
+  let visible = 0;
+  document.querySelectorAll('.brief-card').forEach(card => {
+    const p  = card.dataset.persona   || '';
+    const f  = card.dataset.formato   || '';
+    const pr = card.dataset.priority  === 'true';
+    const show =
+      (activePersona  === 'all' || p === activePersona) &&
+      (activeFormato  === 'all' || f === activeFormato) &&
+      (!activePriority || pr);
+    card.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  updateCount(visible);
+  // Show/hide persona sections based on visible cards
+  document.querySelectorAll('.briefs-section').forEach(sec => {
+    const anyVisible = [...sec.querySelectorAll('.brief-card')].some(c => c.style.display !== 'none');
+    sec.style.display = anyVisible ? '' : 'none';
+    const prev = sec.previousElementSibling;
+    // hide persona-header and dolores if section hidden
+    ['persona-header','dolores'].forEach(cls => {
+      let el = sec;
+      while ((el = el.previousElementSibling)) {
+        if (el.classList.contains(cls)) { el.style.display = anyVisible ? '' : 'none'; break; }
+        if (el.classList.contains('persona-header') || el.classList.contains('formatos')) break;
+      }
+    });
+  });
+}
+
+function updateCount(n) {
+  const el = document.getElementById('bf-count');
+  if (!el) return;
+  if (n === undefined) {
+    n = [...document.querySelectorAll('.brief-card')].filter(c => c.style.display !== 'none').length;
+  }
+  el.textContent = n + ' brief' + (n !== 1 ? 's' : '');
+}
+
+// ── Back to top ───────────────────────────────────────────────────────────────
 const btn = document.getElementById('back-top');
 window.addEventListener('scroll', () => {
-  btn.classList.toggle('visible', window.scrollY > 400);
+  if (btn) btn.classList.toggle('visible', window.scrollY > 400);
 });
 
-// Table filter
+// ── Table filter (mapa de producción) ────────────────────────────────────────
 function filterTable(el, filter) {
   document.querySelectorAll('.mf-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   const rows = document.querySelectorAll('#prod-table tbody tr');
   rows.forEach(row => {
-    const p = row.getAttribute('data-p') || '';
+    const p  = row.getAttribute('data-p') || '';
     const pr = row.getAttribute('data-pr') || '';
-    if (filter === 'all') row.style.display = '';
+    if (filter === 'all')      row.style.display = '';
     else if (filter === 'priority') row.style.display = pr === 'true' ? '' : 'none';
     else row.style.display = p === filter ? '' : 'none';
   });
 }
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', initBriefCards);
 </script>
 </body>
 </html>
