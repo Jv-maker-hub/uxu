@@ -13,28 +13,38 @@
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --carbon:#292A2E; --dark:#555152; --mid:#CCCBC8;
-  --warm:#EBE8E3; --cream:#F6F4F1; --white:#fff;
+  --carbon:#1a1b1e;
+  --dark:#444240;
+  --mid:#888680;
+  --warm:#E8E5E0;
+  --cream:#F5F3F0;
+  --white:#fff;
 }
-body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--carbon);-webkit-font-smoothing:antialiased;}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--carbon);-webkit-font-smoothing:antialiased;font-size:16px;line-height:1.6;}
 .container{max-width:1320px;margin:0 auto;width:100%;padding:0 48px;}
 
 /* NAV */
-nav{background:var(--carbon);padding:4px 48px;display:flex;align-items:center;justify-content:space-between;}
+nav{background:var(--carbon);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:52px;}
 nav .container{display:flex;align-items:center;justify-content:space-between;}
-nav img{height:40px;}
-.nav-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);}
+nav img{height:32px;display:block;}
+.nav-links{display:flex;gap:0;}
+.nav-links a{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;padding:0 16px;border-right:1px solid rgba(255,255,255,.06);line-height:52px;white-space:nowrap;transition:color .15s;}
+.nav-links a:last-child{border-right:none;}
+.nav-links a:hover,.nav-links a.active{color:rgba(255,255,255,.8);}
 
 /* HERO */
-.hero{background:var(--carbon);border-top:1px solid rgba(255,255,255,0.06);padding:64px 48px 80px;}
+.hero{background:var(--carbon);border-top:1px solid rgba(255,255,255,0.06);padding:60px 48px 72px;}
 .hero .container{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;}
 .hero-eyebrow{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:20px;}
-.hero h1{font-family:'TradeGothic',sans-serif;font-size:clamp(60px,7vw,140px);text-transform:uppercase;color:#fff;line-height:.92;}
-.hero-right{padding-bottom:8px;}
+.hero h1{font-family:'TradeGothic',sans-serif;font-size:clamp(56px,6.5vw,120px);text-transform:uppercase;color:#fff;line-height:.92;}
+.hero-right{padding-bottom:6px;}
 .hero-divider{width:32px;height:1px;background:rgba(255,255,255,0.15);margin-bottom:24px;}
-.hero-sub{font-size:14px;color:var(--mid);line-height:1.8;max-width:400px;}
-.hero-meta{margin-top:28px;display:flex;flex-direction:column;gap:8px;}
-.hero-meta span{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:0.12em;text-transform:uppercase;}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.55);line-height:1.75;max-width:400px;}
+.hero-meta{margin-top:20px;display:flex;flex-direction:column;gap:6px;}
+.hero-meta span{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:0.1em;text-transform:uppercase;}
+.update-badge{display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:7px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:2px;}
+.update-badge::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:#4ade80;flex-shrink:0;}
+.update-badge span{font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.06em;}
 
 /* SUMMARY STRIP */
 .summary{background:var(--white);border-bottom:1px solid var(--warm);}
@@ -44,46 +54,91 @@ nav img{height:40px;}
 .s-brand{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;}
 .s-count{font-family:'TradeGothic',sans-serif;font-size:44px;text-transform:uppercase;color:var(--carbon);line-height:1;}
 .s-label{font-size:12px;color:var(--dark);margin-top:5px;}
-.s-tag{display:inline-block;margin-top:10px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--warm);color:var(--dark);border-radius:2px;}
+.s-tag{display:inline-block;margin-top:10px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--warm);color:var(--mid);border-radius:2px;}
+
+/* DATO / LECTURA / HIPÓTESIS */
+.dlh-label{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px;display:inline-block;}
+.dlh-label.dato{color:#1d4ed8;}
+.dlh-label.lectura{color:#6d28d9;}
+.dlh-label.hipotesis{color:#065f46;}
+
+/* TABLA COMPARATIVA */
+.tabla-section{background:var(--white);padding:72px 48px;border-bottom:1px solid var(--warm);}
+.tabla-eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:14px;}
+.tabla-title{font-family:'TradeGothic',sans-serif;font-size:clamp(28px,3.5vw,52px);text-transform:uppercase;color:var(--carbon);margin-bottom:8px;line-height:1;}
+.tabla-sub{font-size:14px;color:var(--mid);margin-bottom:40px;line-height:1.65;}
+.tabla-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.tabla-comp{width:100%;border-collapse:collapse;font-size:13px;}
+.tabla-comp th{background:var(--carbon);color:#fff;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:12px 16px;text-align:left;white-space:nowrap;font-weight:600;}
+.tabla-comp th.uxu-col{background:#0f1015;}
+.tabla-comp td{padding:12px 16px;border-bottom:1px solid var(--warm);color:var(--dark);vertical-align:top;line-height:1.5;}
+.tabla-comp td.row-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);background:var(--cream);white-space:nowrap;}
+.tabla-comp td.uxu-col{background:#f0f4ff;color:var(--carbon);font-weight:600;}
+.tabla-comp tr:hover td:not(.row-label){background:var(--cream);}
+.tabla-comp tr:hover td.uxu-col{background:#e8eeff;}
+.tabla-nd{color:#bbb;font-style:italic;font-size:12px;}
+.tabla-check{color:#059669;font-weight:700;}
+.tabla-cross{color:#dc2626;}
+.tabla-note{font-size:11px;color:var(--mid);margin-top:16px;line-height:1.65;}
 
 /* BRAND SECTIONS */
 .brand-section{padding:80px 48px;border-bottom:1px solid var(--warm);}
 .brand-section:nth-child(odd){background:var(--white);}
 .brand-section:nth-child(even){background:var(--cream);}
-
-.brand-header{display:grid;grid-template-columns:1fr auto;align-items:start;gap:32px;margin-bottom:56px;}
+.brand-header{display:grid;grid-template-columns:1fr auto;align-items:start;gap:32px;margin-bottom:48px;}
 .brand-num{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
-.brand-name{font-family:'TradeGothic',sans-serif;font-size:clamp(36px,5vw,72px);text-transform:uppercase;color:var(--carbon);line-height:1;}
-.brand-url{font-size:13px;color:var(--dark);margin-top:8px;}
+.brand-name{font-family:'TradeGothic',sans-serif;font-size:clamp(36px,4.5vw,68px);text-transform:uppercase;color:var(--carbon);line-height:1;}
+.brand-tagline{font-size:14px;color:var(--mid);margin-top:8px;line-height:1.5;}
 .brand-count-block{text-align:right;}
-.brand-big-num{font-family:'TradeGothic',sans-serif;font-size:80px;color:var(--carbon);line-height:1;opacity:.12;}
-.brand-ads-label{font-size:12px;color:var(--mid);letter-spacing:0.1em;text-transform:uppercase;}
+.brand-big-num{font-family:'TradeGothic',sans-serif;font-size:72px;color:var(--carbon);line-height:1;opacity:.08;}
+.brand-ads-label{font-size:12px;color:var(--mid);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;}
 
-/* FACTS GRID */
-.facts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--warm);margin-bottom:48px;}
-.fact{background:var(--white);padding:28px 24px;}
-.brand-section:nth-child(even) .fact{background:var(--cream);}
-.fact-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;}
-.fact-text{font-size:14px;color:var(--carbon);line-height:1.6;}
-.fact-text strong{font-weight:700;}
+/* AD LIBRARY LINK */
+.adlib-link{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:8px 16px;border:1px solid var(--warm);color:var(--dark);text-decoration:none;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;transition:border-color .2s,color .2s,background .2s;border-radius:2px;}
+.adlib-link:hover{border-color:var(--carbon);color:var(--carbon);}
+.adlib-link svg{flex-shrink:0;opacity:0.4;}
 
-/* AD COPIES */
-.copies-title{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:20px;}
-.copies-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:48px;}
-.copy-card{background:var(--white);border:1px solid var(--warm);padding:24px;border-radius:2px;}
+/* ANÁLISIS GRID */
+.analisis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--warm);margin-bottom:48px;}
+.analisis-col{padding:28px 24px;}
+.brand-section:nth-child(odd) .analisis-col{background:var(--white);}
+.brand-section:nth-child(even) .analisis-col{background:var(--cream);}
+.analisis-col p{font-size:15px;color:var(--dark);line-height:1.75;}
+.analisis-col p strong{color:var(--carbon);font-weight:600;}
+.analisis-col p em{font-style:italic;color:var(--mid);}
+
+/* COPIES */
+.copies-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:18px;}
+.copies-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:48px;}
+.copy-card{padding:22px 24px;border-radius:2px;border-left:3px solid var(--warm);}
+.brand-section:nth-child(odd) .copy-card{background:var(--cream);}
 .brand-section:nth-child(even) .copy-card{background:var(--white);}
-.copy-text{font-size:14px;color:var(--dark);line-height:1.7;font-style:italic;}
-.copy-insight{margin-top:12px;padding-top:12px;border-top:1px solid var(--warm);font-size:13px;color:var(--carbon);line-height:1.6;}
-.copy-insight strong{font-weight:700;}
+.copy-text{font-size:14px;color:var(--dark);line-height:1.75;font-style:italic;}
+.copy-insight{margin-top:12px;padding-top:12px;border-top:1px solid var(--warm);font-size:13px;color:var(--carbon);line-height:1.65;}
+.copy-insight strong{font-weight:600;}
 
 /* KEY MESSAGES */
-.messages-title{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
-.messages-list{display:flex;flex-wrap:wrap;gap:8px;}
-.msg-pill{font-size:11px;padding:6px 14px;background:var(--carbon);color:var(--cream);letter-spacing:0.06em;}
+.messages-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:14px;}
+.messages-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;}
+.msg-pill{font-size:11px;padding:5px 12px;background:var(--carbon);color:var(--cream);letter-spacing:0.06em;}
+
+/* BRECHA INLINE */
+.brecha-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--warm);}
+.brecha-col{padding:22px 24px;}
+.brand-section:nth-child(odd) .brecha-col{background:var(--white);}
+.brand-section:nth-child(even) .brecha-col{background:var(--cream);}
+.brecha-col.oportunidad{background:var(--carbon) !important;}
+.brecha-col.oportunidad p{color:rgba(255,255,255,.65);}
+.brecha-col.oportunidad p strong{color:#fff;}
+.brecha-label{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;display:block;}
+.brecha-label.bien{color:#059669;}
+.brecha-label.op{color:rgba(255,255,255,.4);}
+.brecha-col p{font-size:14px;color:var(--dark);line-height:1.7;}
+.brecha-col p strong{color:var(--carbon);font-weight:600;}
 
 /* CHARTS */
 .charts-section{padding:80px 48px;background:var(--carbon);border-bottom:1px solid rgba(255,255,255,0.06);}
-.section-eyebrow{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
+.section-eyebrow{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:14px;}
 .section-title{font-family:'TradeGothic',sans-serif;font-size:clamp(28px,4vw,56px);text-transform:uppercase;color:#fff;margin-bottom:48px;line-height:1;}
 .charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
 .chart-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:32px;}
@@ -94,129 +149,95 @@ nav img{height:40px;}
 .insights-section{padding:80px 48px;background:var(--white);}
 .insights-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--warm);margin-top:48px;}
 .insight-card{background:var(--white);padding:36px 32px;}
-.insight-num{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
-.insight-title{font-family:'TradeGothic',sans-serif;font-size:22px;text-transform:uppercase;color:var(--carbon);margin-bottom:14px;line-height:1.1;}
-.insight-body{font-size:14px;color:var(--dark);line-height:1.75;}
+.insight-num{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:14px;}
+.insight-title{font-family:'TradeGothic',sans-serif;font-size:20px;text-transform:uppercase;color:var(--carbon);margin-bottom:14px;line-height:1.1;}
+.insight-body{font-size:15px;color:var(--dark);line-height:1.8;}
+.insight-body strong{color:var(--carbon);font-weight:600;}
 
-/* OPORTUNIDAD */
-.oportunidad-section{padding:80px 48px;background:var(--carbon);}
-.oportunidad-section .section-title{margin-bottom:32px;}
-.op-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);}
-.op-card{background:rgba(255,255,255,0.03);padding:32px 28px;}
-.op-brand{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:12px;}
-.op-text{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.7;}
-.op-text strong{color:#fff;font-weight:500;}
-
-/* FOOTER */
-footer{background:var(--carbon);padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.06);}
-footer .container{display:flex;align-items:center;justify-content:space-between;width:100%;}
-.ft-img{height:40px;opacity:.5;}
-.ft-note{font-size:11px;color:var(--dark);letter-spacing:.06em;}
-
-/* AD LIBRARY LINKS */
-.adlib-link{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:8px 16px;border:1px solid var(--warm);color:var(--dark);text-decoration:none;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;transition:border-color .2s,color .2s;}
-.adlib-link:hover{border-color:var(--carbon);color:var(--carbon);}
-.adlib-link svg{flex-shrink:0;opacity:0.5;}
-
-/* CREATIVE PLACEHOLDERS */
-.creativos-section{padding:64px 48px;background:var(--cream);border-bottom:1px solid var(--warm);}
-.creativos-intro{font-size:14px;color:var(--dark);line-height:1.75;margin-top:12px;max-width:640px;}
-.creativos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:40px;}
-.creativo-card{background:var(--white);border:1px solid var(--warm);padding:24px;}
-.creativo-brand{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:8px;font-weight:700;}
-.creativo-title{font-size:14px;font-weight:600;color:var(--carbon);margin-bottom:10px;line-height:1.3;}
-.creativo-placeholder{height:80px;background:var(--warm);display:flex;align-items:center;justify-content:center;margin-top:14px;}
-.creativo-placeholder span{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);}
+/* SÍNTESIS ACCIONABLE */
+.sintesis-section{padding:80px 48px;background:var(--carbon);}
+.sintesis-section .section-title{font-size:clamp(32px,4.5vw,64px);}
+.sintesis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.08);margin-top:48px;}
+.sintesis-col{padding:36px 32px;}
+.sintesis-col:nth-child(1){background:rgba(255,255,255,0.04);}
+.sintesis-col:nth-child(2){background:rgba(255,255,255,0.02);}
+.sintesis-col:nth-child(3){background:rgba(255,255,255,0.07);}
+.sintesis-col-title{font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:24px;display:block;}
+.sintesis-col-title.copy{color:#4ade80;}
+.sintesis-col-title.avoid{color:#f87171;}
+.sintesis-col-title.distinto{color:#60a5fa;}
+.sintesis-item{font-size:14px;line-height:1.65;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.sintesis-item:last-child{border-bottom:none;}
+.sintesis-col:nth-child(1) .sintesis-item,.sintesis-col:nth-child(2) .sintesis-item{color:rgba(255,255,255,.6);}
+.sintesis-col:nth-child(3) .sintesis-item{color:rgba(255,255,255,.85);font-weight:500;}
 
 /* LIVE ADS */
-.live-ads-section{margin:4rem 0;}
-.live-ads-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:2rem;}
-.live-badge{font-size:.65rem;font-weight:700;letter-spacing:.1em;color:#fff;background:#1a1a1a;padding:.25rem .6rem;border-radius:2px;}
+.live-ads-section-wrap{padding:72px 48px 80px;background:var(--cream);border-top:1px solid var(--warm);}
+.live-ads-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:8px;}
+.live-badge{font-size:.65rem;font-weight:700;letter-spacing:.1em;color:#fff;background:var(--carbon);padding:.25rem .6rem;border-radius:2px;}
 .live-badge::before{content:'● ';color:#4ade80;animation:blink 2s infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.competitor-live-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;}
-.competitor-live-card{border:1px solid #e5e5e5;border-radius:4px;overflow:hidden;}
-.competitor-live-card-header{padding:1rem 1.25rem;background:#fafafa;border-bottom:1px solid #e5e5e5;display:flex;justify-content:space-between;align-items:center;}
-.competitor-live-card-header h3{margin:0;font-size:.85rem;font-weight:700;letter-spacing:.05em;}
-.ads-count-badge{font-size:.75rem;color:#666;}
-.ads-carousel{display:flex;gap:.75rem;padding:1rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;}
-.ads-carousel::-webkit-scrollbar{height:4px;}
-.ads-carousel::-webkit-scrollbar-track{background:#f1f1f1;}
-.ads-carousel::-webkit-scrollbar-thumb{background:#ccc;border-radius:2px;}
-.ad-card{flex:0 0 180px;scroll-snap-align:start;border:1px solid #e5e5e5;border-radius:4px;overflow:hidden;cursor:pointer;transition:box-shadow .15s;}
-.ad-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.1);}
-.ad-card img{width:100%;height:180px;object-fit:cover;display:block;background:#f5f5f5;}
-.ad-card-body{padding:.6rem .75rem;}
-.ad-card-copy{font-size:.72rem;color:#444;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin:0 0 .4rem;}
-.ad-card-meta{font-size:.65rem;color:#999;}
-.ad-card-link{display:block;font-size:.68rem;color:#1a1a1a;text-decoration:none;margin-top:.4rem;font-weight:600;}
-.ad-no-image{width:100%;height:180px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#999;}
-.ad-new-badge{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.05em;background:#1a1a1a;color:#fff;padding:.15rem .4rem;border-radius:2px;margin-bottom:.3rem;}
-.history-section{margin:3rem 0;}
-.history-chart-wrap{position:relative;height:220px;margin-top:1.5rem;}
-.live-status{padding:1rem;font-size:.8rem;color:#999;text-align:center;}
-.live-error{color:#dc2626;}
-.last-updated{font-size:.7rem;color:#bbb;text-align:right;margin-top:.5rem;}
-
-@media(max-width:1100px){
-  .summary .container{grid-template-columns:repeat(3,1fr);}
-}
-@media(max-width:900px){
-  .charts-grid,.insights-grid,.op-grid,.facts-grid{grid-template-columns:1fr;}
-  .hero .container{grid-template-columns:1fr;}
-  .summary .container{grid-template-columns:repeat(2,1fr);}
-}
-@media(max-width:600px){
-  .container{padding:0 16px;}
-  nav{padding:0 16px;}
-  .hero,.brand-section,.charts-section,.insights-section,.oportunidad-section,.creativos-section{padding-left:16px;padding-right:16px;}
-  #live-ads-container{padding:0;}
-  .summary-item{padding:20px;}
-  .summary .container{grid-template-columns:1fr 1fr;}
-}
-
-/* ── NEW: Brand ads sections con tabs por tipo creativo ──────────────────── */
 .brand-ads-section{padding:40px 0;border-bottom:1px solid var(--warm);}
 .brand-ads-section:last-child{border-bottom:none;}
 .brand-ads-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:20px;}
 .brand-ads-name{font-family:'TradeGothic',sans-serif;font-size:22px;text-transform:uppercase;color:var(--carbon);margin-bottom:8px;}
 .brand-ads-type-pills{display:flex;flex-wrap:wrap;gap:6px;}
-.type-pill{font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:2px;font-weight:600;}
+.type-pill{font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:2px;font-weight:700;}
 .type-pill.type-video{background:var(--carbon);color:#fff;}
 .type-pill.type-photo{background:var(--dark);color:#fff;}
 .type-pill.type-carousel{background:var(--mid);color:var(--carbon);}
-.type-pill.type-new{background:var(--warm);color:var(--dark);}
+.type-pill.type-new{background:#d1fae5;color:#065f46;}
 .brand-ads-type-tabs{display:flex;gap:4px;flex-wrap:wrap;}
 .type-tab{padding:6px 14px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:transparent;border:1px solid var(--warm);color:var(--dark);cursor:pointer;transition:all .15s;border-radius:2px;}
-.type-tab:hover{border-color:var(--dark);color:var(--carbon);}
+.type-tab:hover{border-color:var(--dark);}
 .type-tab.active{background:var(--carbon);color:#fff;border-color:var(--carbon);}
 .brand-ads-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
 .ad-card-v2{background:var(--white);border:1px solid var(--warm);padding:16px 18px;border-radius:2px;display:flex;flex-direction:column;gap:10px;transition:border-color .15s;}
 .ad-card-v2:hover{border-color:var(--dark);}
 .ad-v2-type{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .ad-new-badge{font-size:9px;font-weight:700;letter-spacing:.1em;background:var(--carbon);color:#fff;padding:2px 7px;border-radius:2px;text-transform:uppercase;}
-.ad-type-badge{font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;border-radius:2px;font-weight:600;}
+.ad-type-badge{font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;border-radius:2px;font-weight:700;}
 .ad-type-badge.type-video{background:var(--carbon);color:#fff;}
 .ad-type-badge.type-photo{background:var(--cream);color:var(--dark);border:1px solid var(--warm);}
 .ad-type-badge.type-carousel{background:var(--dark);color:#fff;}
 .ad-v2-copy{font-size:13px;color:var(--dark);line-height:1.65;flex:1;}
 .ad-v2-footer{display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid var(--warm);}
 .ad-v2-date{font-size:11px;color:var(--mid);}
-.ad-v2-link{font-size:11px;color:var(--carbon);font-weight:600;text-decoration:none;letter-spacing:.06em;}
+.ad-v2-link{font-size:11px;color:var(--carbon);font-weight:700;text-decoration:none;letter-spacing:.06em;}
 .ad-v2-link:hover{text-decoration:underline;}
-
-/* Global type filter strip */
 .global-type-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--warm);}
 .global-filter-btn{padding:8px 20px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;border:1px solid var(--warm);color:var(--dark);cursor:pointer;transition:all .15s;border-radius:2px;}
 .global-filter-btn:hover{border-color:var(--carbon);}
 .global-filter-btn.active{background:var(--carbon);color:#fff;border-color:var(--carbon);}
+.live-status{padding:1rem;font-size:14px;color:var(--mid);text-align:center;}
+.live-error{color:#dc2626;}
+.last-updated-bar{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding-top:16px;border-top:1px solid var(--warm);}
+.last-updated-bar span{font-size:12px;color:var(--mid);}
+.last-updated-bar a{color:var(--dark);text-decoration:none;font-size:12px;}
+.last-updated-bar a:hover{text-decoration:underline;}
 
-@media(max-width:768px){
+/* FOOTER */
+footer{background:var(--carbon);padding:0 48px;height:72px;display:flex;align-items:center;border-top:1px solid rgba(255,255,255,0.06);}
+footer .container{display:flex;align-items:center;justify-content:space-between;width:100%;}
+footer img{height:28px;opacity:.4;}
+.ft-note{font-size:11px;color:rgba(255,255,255,.25);letter-spacing:.06em;}
+
+/* RESPONSIVE */
+@media(max-width:1100px){.summary .container{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){
+  .charts-grid,.insights-grid,.analisis-grid,.brecha-row,.sintesis-grid{grid-template-columns:1fr;}
+  .hero .container{grid-template-columns:1fr;}
+  .summary .container{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:600px){
+  .container{padding:0 20px;}
+  nav{padding:0 20px;}
+  .hero,.brand-section,.charts-section,.insights-section,.tabla-section,.sintesis-section,.live-ads-section-wrap{padding-left:20px;padding-right:20px;}
+  .summary-item{padding:20px 14px;}
+  .summary .container{grid-template-columns:1fr 1fr;}
   .brand-ads-head{flex-direction:column;}
-  .brand-ads-type-tabs{width:100%;}
   .brand-ads-grid{grid-template-columns:1fr;}
 }
-
 </style>
 </head>
 <body>
@@ -224,15 +245,15 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
 <!-- NAV -->
 <nav>
   <div class="container">
-    <a href="/" style="display:block;line-height:0;">
+    <a href="index.html" style="display:block;line-height:0;">
       <img src="assets/logo-negativo.png" alt="UNO × UNO">
     </a>
-    <nav style="gap:0;" class="nav-links">
-    <a href="index.html" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;padding:0 16px;border-right:1px solid rgba(255,255,255,.06);line-height:48px;">Estrategia</a>
-    <a href="briefs.html" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;padding:0 16px;border-right:1px solid rgba(255,255,255,.06);line-height:48px;">Briefs</a>
-    <a href="competidores.html" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;padding:0 16px;border-right:1px solid rgba(255,255,255,.06);line-height:48px;">Competidores</a>
-    <a href="ads-builder.html" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;padding:0 16px;line-height:48px;">Crear Ads</a>
-  </nav>
+    <div class="nav-links">
+      <a href="index.html">Estrategia</a>
+      <a href="briefs.html">Briefs</a>
+      <a href="competidores.html" class="active">Competidores</a>
+      <a href="ads-builder.html">Crear Ads</a>
+    </div>
   </div>
 </nav>
 
@@ -245,16 +266,18 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
     </div>
     <div class="hero-right">
       <div class="hero-divider"></div>
-      <p class="hero-sub">Meta Ad Library. Anuncios activos de los seis competidores DTC de básicos en Argentina. Junio 2026.</p>
+      <p class="hero-sub">Meta Ad Library. Anuncios activos de los seis competidores DTC de básicos en Argentina. Uso interno — Método Uno SRL.</p>
       <div class="hero-meta">
         <span>Tecla · Valfort · UMANO · SER Basics · Elemental · Club Básico</span>
-        <span>Uso interno · Método Uno SRL</span>
+      </div>
+      <div class="update-badge" id="hero-update-badge">
+        <span id="hero-update-text">Cargando última actualización…</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- SUMMARY -->
+<!-- SUMMARY STRIP -->
 <div class="summary">
   <div class="container">
     <div class="summary-item">
@@ -262,6 +285,12 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
       <p class="s-count">170</p>
       <p class="s-label">anuncios activos</p>
       <span class="s-tag">Líder en volumen</span>
+    </div>
+    <div class="summary-item">
+      <p class="s-brand">Elemental</p>
+      <p class="s-count" id="elemental-count">107</p>
+      <p class="s-label">anuncios activos</p>
+      <span class="s-tag">Dos páginas activas</span>
     </div>
     <div class="summary-item">
       <p class="s-brand">UMANO</p>
@@ -279,20 +308,142 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
       <p class="s-brand">Valfort</p>
       <p class="s-count">20</p>
       <p class="s-label">anuncios activos</p>
-      <span class="s-tag">Testing agresivo</span>
-    </div>
-    <div class="summary-item">
-      <p class="s-brand">Elemental</p>
-      <p class="s-count" id="elemental-count">—</p>
-      <p class="s-label">anuncios activos</p>
-      <span class="s-tag">Dos páginas activas</span>
+      <span class="s-tag">Nicho específico</span>
     </div>
     <div class="summary-item">
       <p class="s-brand">Club Básico</p>
       <p class="s-count" id="club-basico-count">—</p>
       <p class="s-label">anuncios activos</p>
-      <span class="s-tag">Nuevo — agregado jun 2026</span>
+      <span class="s-tag">Nuevo — jun 2026</span>
     </div>
+  </div>
+</div>
+
+<!-- TABLA COMPARATIVA -->
+<div class="tabla-section">
+  <div class="container">
+    <p class="tabla-eyebrow">Comparativa de oferta</p>
+    <p class="tabla-title">Qué recibe el cliente</p>
+    <p class="tabla-sub">Basada en información observada en ads y sitios web. Los campos N/D no están publicados. Precios de referencia — pueden variar.</p>
+    <div class="tabla-wrap">
+      <table class="tabla-comp">
+        <thead>
+          <tr>
+            <th style="width:160px;">Variable</th>
+            <th>Tecla</th>
+            <th>Valfort</th>
+            <th>UMANO</th>
+            <th>SER Basics</th>
+            <th>Elemental</th>
+            <th>Club Básico</th>
+            <th class="uxu-col">UNO × UNO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">Precio / unidad</td>
+            <td>~$36.000+</td>
+            <td><span class="tabla-nd">N/D</span></td>
+            <td>~$30–35.000</td>
+            <td>~$28–32.000</td>
+            <td>~$30–35.000</td>
+            <td>$59.900</td>
+            <td class="uxu-col">$40.000</td>
+          </tr>
+          <tr>
+            <td class="row-label">Pack 3 unidades</td>
+            <td><span class="tabla-cross">No venden pack</span></td>
+            <td><span class="tabla-cross">No venden pack</span></td>
+            <td>~$90.000</td>
+            <td>~$85.000 (3+1)</td>
+            <td>~$85.000</td>
+            <td>$119.800 (3x2)</td>
+            <td class="uxu-col">$119.990</td>
+          </tr>
+          <tr>
+            <td class="row-label">Pack incluido</td>
+            <td><span class="tabla-cross">✕</span></td>
+            <td><span class="tabla-cross">✕</span></td>
+            <td><span class="tabla-check">✓</span></td>
+            <td><span class="tabla-check">✓ 3+1 gratis</span></td>
+            <td><span class="tabla-check">✓</span></td>
+            <td><span class="tabla-check">✓ 3x2</span></td>
+            <td class="uxu-col"><span class="tabla-check">✓ Formato único</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Colores</td>
+            <td>+7 colores</td>
+            <td>Limitado</td>
+            <td>7 colores</td>
+            <td>Variado</td>
+            <td>N/B/G + otros</td>
+            <td>8 colores</td>
+            <td class="uxu-col">Negro / Blanco / Gris</td>
+          </tr>
+          <tr>
+            <td class="row-label">Cuotas</td>
+            <td>Sí</td>
+            <td><span class="tabla-nd">N/D</span></td>
+            <td><span class="tabla-nd">N/D</span></td>
+            <td>6 sin interés</td>
+            <td><span class="tabla-nd">N/D</span></td>
+            <td>6 sin interés</td>
+            <td class="uxu-col">No</td>
+          </tr>
+          <tr>
+            <td class="row-label">Envío gratis</td>
+            <td>Sí</td>
+            <td><span class="tabla-nd">N/D</span></td>
+            <td>Sí</td>
+            <td>Sí</td>
+            <td>Sí</td>
+            <td><span class="tabla-nd">N/D</span></td>
+            <td class="uxu-col">Sí</td>
+          </tr>
+          <tr>
+            <td class="row-label">Descuentos activos</td>
+            <td>Esporádico</td>
+            <td><span class="tabla-nd">N/D</span></td>
+            <td>Esporádico</td>
+            <td>Frecuente (3x2)</td>
+            <td>Esporádico</td>
+            <td>Permanente (3x2)</td>
+            <td class="uxu-col">Nunca</td>
+          </tr>
+          <tr>
+            <td class="row-label">Garantía / cambio</td>
+            <td><span class="tabla-nd">N/D</span></td>
+            <td><span class="tabla-nd">N/D</span></td>
+            <td><span class="tabla-nd">N/D</span></td>
+            <td><span class="tabla-nd">N/D</span></td>
+            <td><span class="tabla-nd">N/D</span></td>
+            <td><span class="tabla-nd">N/D</span></td>
+            <td class="uxu-col">Cambio aunque usada</td>
+          </tr>
+          <tr>
+            <td class="row-label">Catálogo</td>
+            <td>Remeras</td>
+            <td>Remeras</td>
+            <td>Remeras + buzos + más</td>
+            <td>Remeras + buzos + más</td>
+            <td>Remeras + más</td>
+            <td>Ropa completa</td>
+            <td class="uxu-col">Solo packs de remeras</td>
+          </tr>
+          <tr>
+            <td class="row-label">Promesa central</td>
+            <td>Calce perfecto</td>
+            <td>Molde para flacos</td>
+            <td>Simplificación</td>
+            <td>Básico + precio</td>
+            <td>Premium local</td>
+            <td>Calidad importada</td>
+            <td class="uxu-col">Sistema de uso diario</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tabla-note">* Precios y condiciones son estimaciones basadas en publicidad observada. Los campos N/D requieren investigación directa. Última revisión: junio 2026.</p>
   </div>
 </div>
 
@@ -303,28 +454,33 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
       <div>
         <p class="brand-num">01 — Competidor</p>
         <p class="brand-name">Tecla</p>
-        <p class="brand-url">estilotecla.com · La más activa del mercado</p>
-        <a class="adlib-link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=102329249357803" target="_blank" rel="noopener"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Ver en Meta Ad Library</a>
+        <p class="brand-tagline">estilotecla.com · La más activa del mercado en volumen de pauta</p>
+        <a class="adlib-link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=102329249357803" target="_blank" rel="noopener">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver en Meta Ad Library
+        </a>
       </div>
       <div class="brand-count-block">
         <p class="brand-big-num">170</p>
         <p class="brand-ads-label">ads activos</p>
       </div>
     </div>
-    <div class="facts-grid">
-      <div class="fact">
-        <p class="fact-label">Propuesta central</p>
-        <p class="fact-text"><strong>"El Calce Tecla"</strong> — ajustado en hombros y brazos, suelto en la panza. Lo repiten en el 90% de sus ads. No cambian el mensaje, cambian el formato.</p>
+
+    <div class="analisis-grid">
+      <div class="analisis-col">
+        <span class="dlh-label dato">Dato observado</span>
+        <p><strong>"El Calce Tecla"</strong> aparece en el 90% de sus ads activos en todos los formatos: video, foto, carrusel. ~170 ads activos hacen de Tecla la marca con mayor volumen de pauta del segmento. Presencia física en showroom (Villa Crespo).</p>
       </div>
-      <div class="fact">
-        <p class="fact-label">Velocidad creativa</p>
-        <p class="fact-text"><strong>Alta.</strong> Mismo mensaje en múltiples versiones. Testeo sistemático y continuo. Son los únicos con algo parecido a un creator mínimo funcional.</p>
+      <div class="analisis-col">
+        <span class="dlh-label lectura">Lectura estratégica</span>
+        <p>Un mensaje único repetido en volumen alto tiene ventaja de algoritmo: Meta optimiza mejor con datos acumulados. No cambian el mensaje — cambian el formato. El testeo constante de variantes es su principal activo operativo.</p>
       </div>
-      <div class="fact">
-        <p class="fact-label">Por qué no es una amenaza directa</p>
-        <p class="fact-text">Venden calce y estética masculina. No venden el sistema de vestimenta. Su cliente evalúa y elige — el nuestro no quiere evaluar.</p>
+      <div class="analisis-col">
+        <span class="dlh-label hipotesis">Hipótesis para UNO × UNO</span>
+        <p>Tecla resuelve el <em>calce</em>. UNO × UNO resuelve la <em>decisión</em>. Son territorios distintos — sin conflicto directo si el posicionamiento se sostiene. Lo que sí conviene replicar: el volumen y la disciplina de mensaje único.</p>
       </div>
     </div>
+
     <p class="copies-title">Copies representativos</p>
     <div class="copies-grid">
       <div class="copy-card">
@@ -332,17 +488,31 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
       </div>
       <div class="copy-card">
         <p class="copy-text">"Cuando una marca te funciona de verdad, cada cosa nueva que saca la querés probar. El Calce Tecla que ya conocés, ahora en manga larga."</p>
+        <p class="copy-insight"><strong>Patrón:</strong> Fidelización por satisfacción, no por descuento. Uno de los pocos competidores que construye recompra desde la experiencia.</p>
       </div>
       <div class="copy-card">
         <p class="copy-text">"Si tu novio pudiera elegir, seguiría usando camisetas de fútbol para todo. Pero vos podés elegir por él."</p>
+        <p class="copy-insight"><strong>Patrón:</strong> Activación regalo para fechas comerciales — bien ejecutado para Día del Padre. UNO × UNO puede hacer lo mismo con tono más adulto.</p>
       </div>
     </div>
+
     <p class="messages-title">Mensajes clave</p>
     <div class="messages-list">
       <span class="msg-pill">El Calce Tecla</span>
       <span class="msg-pill">Ajustado en hombros</span>
-      <span class="msg-pill">Showroom Vila Crespo</span>
+      <span class="msg-pill">Showroom Villa Crespo</span>
       <span class="msg-pill">Regalo para hombre</span>
+    </div>
+
+    <div class="brecha-row">
+      <div class="brecha-col">
+        <span class="brecha-label bien">Qué hace bien</span>
+        <p>Una promesa clara y repetida en volumen. Testing sistemático de formatos. El showroom como argumento de confianza en un mercado de compra online.</p>
+      </div>
+      <div class="brecha-col oportunidad">
+        <span class="brecha-label op">Dónde está la oportunidad</span>
+        <p>Hablan de <strong>calce</strong>, no de sistema. Su cliente igual tiene que pensar — elige Tecla, pero no resuelve el armario de forma permanente. UNO × UNO puede ir un paso más lejos.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -354,28 +524,33 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
       <div>
         <p class="brand-num">02 — Competidor</p>
         <p class="brand-name">Valfort</p>
-        <p class="brand-url">valfort.site · El más agresivo en tono</p>
-        <a class="adlib-link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=740480865810440" target="_blank" rel="noopener"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Ver en Meta Ad Library</a>
+        <p class="brand-tagline">valfort.site · Segmento específico: hombres flacos</p>
+        <a class="adlib-link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=740480865810440" target="_blank" rel="noopener">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver en Meta Ad Library
+        </a>
       </div>
       <div class="brand-count-block">
         <p class="brand-big-num">20</p>
         <p class="brand-ads-label">ads activos</p>
       </div>
     </div>
-    <div class="facts-grid">
-      <div class="fact">
-        <p class="fact-label">Gancho central</p>
-        <p class="fact-text"><strong>"No es tu cuerpo, es la remera."</strong> Atacan el problema emocional antes que el producto. Tono confrontacional, directo, orientado al hombre flaco.</p>
+
+    <div class="analisis-grid">
+      <div class="analisis-col">
+        <span class="dlh-label dato">Dato observado</span>
+        <p><strong>"No es tu cuerpo, es la remera"</strong> es el copy dominante. Varios ads de junio con 0 impresiones — posiblemente en fase de testeo o reactivación. Mix de video + imagen estática. Volumen bajo: 20 ads activos.</p>
       </div>
-      <div class="fact">
-        <p class="fact-label">Señal de alerta</p>
-        <p class="fact-text">Varios ads lanzados en junio con <strong>0 impresiones</strong> — reactivando campaña o en test masivo. Formato mix video + imagen estática.</p>
+      <div class="analisis-col">
+        <span class="dlh-label lectura">Lectura estratégica</span>
+        <p>Atacan el problema emocional antes que el producto — técnica efectiva para capturar atención en scroll. El gancho confrontacional ("no es tu cuerpo") convierte bien en frío. Mercado acotado: hombres flacos.</p>
       </div>
-      <div class="fact">
-        <p class="fact-label">Diferencia con UNO × UNO</p>
-        <p class="fact-text">Resuelven la inseguridad corporal. UNO × UNO resuelve la <strong>fatiga de decisión</strong> — territorio opuesto y complementario.</p>
+      <div class="analisis-col">
+        <span class="dlh-label hipotesis">Hipótesis para UNO × UNO</span>
+        <p>Resuelven la inseguridad corporal. UNO × UNO resuelve la fatiga de decisión. Son territorios diferentes — sin superposición directa. La técnica (problema emocional primero) es adaptable con tono más sobrio.</p>
       </div>
     </div>
+
     <p class="copies-title">Copies representativos</p>
     <div class="copies-grid">
       <div class="copy-card">
@@ -383,13 +558,26 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
       </div>
       <div class="copy-card">
         <p class="copy-text">"Si sos flaco, el problema nunca fue tu cuerpo. Fueron las remeras mal hechas. Mangas que cuelgan y te hacen ver el brazo más delgado todavía."</p>
+        <p class="copy-insight"><strong>Técnica:</strong> Problem-first sin mención de producto en el primer párrafo. Efectivo para scroll. La estructura (problema → causa → solución) es adaptable para UNO × UNO con tono sobrio.</p>
       </div>
     </div>
+
     <p class="messages-title">Mensajes clave</p>
     <div class="messages-list">
       <span class="msg-pill">No es tu cuerpo</span>
-      <span class="msg-pill">Molde que define</span>
+      <span class="msg-pill">Molde que define el porte</span>
       <span class="msg-pill">Para hombres flacos</span>
+    </div>
+
+    <div class="brecha-row">
+      <div class="brecha-col">
+        <span class="brecha-label bien">Qué hace bien</span>
+        <p>El gancho emocional es uno de los más fuertes del segmento. Convierte bien en frío porque toca un dolor real antes de mencionar el producto.</p>
+      </div>
+      <div class="brecha-col oportunidad">
+        <span class="brecha-label op">Dónde está la oportunidad</span>
+        <p>Mercado acotado. Tono agresivo que no escala a perfil ABC1. El problema emocional que resuelve UNO × UNO es más universal: <strong>no quiero pensar qué ponerme todos los días</strong>.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -401,47 +589,65 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
       <div>
         <p class="brand-num">03 — Competidor</p>
         <p class="brand-name">UMANO</p>
-        <p class="brand-url">umano.com.ar · El más cercano al territorio de UNO × UNO</p>
-        <a class="adlib-link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=295781300274660" target="_blank" rel="noopener"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Ver en Meta Ad Library</a>
+        <p class="brand-tagline">umano.com.ar · El más cercano al territorio de UNO × UNO</p>
+        <a class="adlib-link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=295781300274660" target="_blank" rel="noopener">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver en Meta Ad Library
+        </a>
       </div>
       <div class="brand-count-block">
         <p class="brand-big-num">37</p>
         <p class="brand-ads-label">ads activos</p>
       </div>
     </div>
-    <div class="facts-grid">
-      <div class="fact">
-        <p class="fact-label">Diferencial que repiten</p>
-        <p class="fact-text"><strong>Fabricación propia en Argentina</strong> — "sin intermediarios" como argumento precio-calidad. Fuerte en invierno con buzos y hoodies.</p>
+
+    <div class="analisis-grid">
+      <div class="analisis-col">
+        <span class="dlh-label dato">Dato observado</span>
+        <p><strong>Fabricación propia en Argentina</strong> como argumento central. "Sin intermediarios" en ads de precio/calidad. Catálogo amplio: remeras, buzos, hoodies, accesorios. Menciona 5.500 clientes y 25.500 prendas en ads.</p>
       </div>
-      <div class="fact">
-        <p class="fact-label">Ad más parecido al nuestro</p>
-        <p class="fact-text">"Blanca o negra. La pensás dos segundos… y volvés al mismo lugar. Elegí una o llevate las dos y listo." — La única marca que roza la idea de simplificación.</p>
+      <div class="analisis-col">
+        <span class="dlh-label lectura">Lectura estratégica</span>
+        <p>El único competidor que roza la idea de simplificación en comunicación — el ad "Blanca o negra, la pensás dos segundos" es el más cercano al territorio de UNO × UNO. Pero la variedad de catálogo diluye ese mensaje.</p>
       </div>
-      <div class="fact">
-        <p class="fact-label">Por qué no llegan hasta ahí</p>
-        <p class="fact-text">Tienen catálogo amplio (buzos, hoodies, accesorios). <strong>La variedad diluye el mensaje.</strong> No pueden ser "el sistema" si venden de todo.</p>
+      <div class="analisis-col">
+        <span class="dlh-label hipotesis">Hipótesis para UNO × UNO</span>
+        <p>Si Umano ya está bordeando el territorio de "decisión resuelta", UNO × UNO necesita ir más lejos y más profundo. No alcanza con mencionarlo — hay que construirlo como sistema en cada punto de contacto.</p>
       </div>
     </div>
+
     <p class="copies-title">Copies representativos</p>
     <div class="copies-grid">
       <div class="copy-card">
         <p class="copy-text">"Blanca o negra. La pensás dos segundos… y volvés al mismo lugar. Las dos funcionan. Elegí una o llevate las dos y listo."</p>
-        <p class="copy-insight"><strong>Por qué importa:</strong> Es el ad más parecido al territorio de UNO × UNO en todo el mercado. Si Umano ya está ahí, UNO × UNO necesita ir más lejos y más profundo.</p>
+        <p class="copy-insight"><strong>Por qué importa:</strong> El ad que más se acerca al territorio de UNO × UNO. Lo usan como gancho de conveniencia, no como sistema. La diferencia es conceptual y debe sostenerse desde el producto.</p>
       </div>
       <div class="copy-card">
-        <p class="copy-text">"Queremos hacértela fácil. Por eso armamos packs. Para que tengas lo que necesitás, sin perder tiempo eligiendo todos los días. Menos vueltas, más uso real."</p>
+        <p class="copy-text">"Queremos hacértela fácil. Por eso armamos packs. Para que tengas lo que necesitás, sin perder tiempo eligiendo todos los días."</p>
       </div>
       <div class="copy-card">
         <p class="copy-text">"7 colores. 25.500 prendas fabricadas. Fabricación propia en Argentina. 5.500 clientes satisfechos."</p>
+        <p class="copy-insight"><strong>Patrón:</strong> Números como argumento de confianza — funciona bien en frío para marcas sin reconocimiento previo. UNO × UNO puede usar la garantía de cambio como equivalente.</p>
       </div>
     </div>
+
     <p class="messages-title">Mensajes clave</p>
     <div class="messages-list">
       <span class="msg-pill">Fabricación propia</span>
       <span class="msg-pill">Sin intermediarios</span>
       <span class="msg-pill">Pack simplificado</span>
       <span class="msg-pill">Menos vueltas</span>
+    </div>
+
+    <div class="brecha-row">
+      <div class="brecha-col">
+        <span class="brecha-label bien">Qué hace bien</span>
+        <p>El único competidor que bordea la idea de simplificación. Fabricación propia como argumento de calidad-precio es sólido y verificable.</p>
+      </div>
+      <div class="brecha-col oportunidad">
+        <span class="brecha-label op">Dónde está la oportunidad</span>
+        <p>Catálogo amplio (buzos, hoodies, accesorios) que diluye el mensaje. <strong>No pueden ser el sistema quien vende de todo.</strong> UNO × UNO solo vende packs de remeras — esa restricción es un activo.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -453,28 +659,33 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
       <div>
         <p class="brand-num">04 — Competidor</p>
         <p class="brand-name">SER Basics</p>
-        <p class="brand-url">serbasics.com · El veterano — activo desde 2020</p>
-        <a class="adlib-link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=122859739497984" target="_blank" rel="noopener"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Ver en Meta Ad Library</a>
+        <p class="brand-tagline">serbasics.com · El veterano — activo desde 2020</p>
+        <a class="adlib-link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=122859739497984" target="_blank" rel="noopener">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver en Meta Ad Library
+        </a>
       </div>
       <div class="brand-count-block">
         <p class="brand-big-num">29</p>
         <p class="brand-ads-label">ads activos</p>
       </div>
     </div>
-    <div class="facts-grid">
-      <div class="fact">
-        <p class="fact-label">Mecánica de venta</p>
-        <p class="fact-text">Pack <strong>3+1 gratis</strong> como oferta flagship. Fuerte activación estacional: <strong>Mes del Padre</strong> en junio con múltiples ads dedicados. Conocen su funnel.</p>
+
+    <div class="analisis-grid">
+      <div class="analisis-col">
+        <span class="dlh-label dato">Dato observado</span>
+        <p>Pack <strong>3+1 gratis</strong> como oferta recurrente. Activación estacional clara: ads de <strong>Mes del Padre</strong> en junio con múltiples creativos dedicados. 6 cuotas sin interés y envíos a todo el país como argumento de cierre.</p>
       </div>
-      <div class="fact">
-        <p class="fact-label">Debilidad estructural</p>
-        <p class="fact-text">Mochilas, accesorios, buzos, sweaters. <strong>El catálogo diluye el mensaje.</strong> No pueden ser "básicos puros" si venden de todo.</p>
+      <div class="analisis-col">
+        <span class="dlh-label lectura">Lectura estratégica</span>
+        <p>Los más maduros del segmento en manejo de funnel. Saben cuándo activar (fecha comercial), cómo retargetear y qué oferta usar para cerrar. El 3+1 funciona como gancho de eficiencia, no de calidad.</p>
       </div>
-      <div class="fact">
-        <p class="fact-label">Lo que hacen bien</p>
-        <p class="fact-text">Retargeting y <strong>activación estacional</strong> (Día del Padre). Los más maduros en funnel. Precio en el rango $30–35k — debajo de UNO × UNO.</p>
+      <div class="analisis-col">
+        <span class="dlh-label hipotesis">Hipótesis para UNO × UNO</span>
+        <p>El aprendizaje de funnel de SER Basics es replicable — la estructura (activación estacional + retargeting) funciona. Lo que no conviene copiar: el descuento como argumento central de venta.</p>
       </div>
     </div>
+
     <p class="copies-title">Copies representativos</p>
     <div class="copies-grid">
       <div class="copy-card">
@@ -482,11 +693,14 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
       </div>
       <div class="copy-card">
         <p class="copy-text">"Mi papá es de esos que no complican nada. Le gustan las cosas simples, pero que estén bien hechas. Por eso le regalé SER BASICS."</p>
+        <p class="copy-insight"><strong>Patrón:</strong> Activación regalo con código emocional. Bien ejecutado para Día del Padre. UNO × UNO puede hacer lo mismo con tono más adulto y menos condescendente.</p>
       </div>
       <div class="copy-card">
         <p class="copy-text">"Si llegaste hasta acá… algo te gustó 👀 Aprovechá ahora: 3x2 en productos seleccionados, hasta 60% OFF."</p>
+        <p class="copy-insight"><strong>Problema:</strong> El descuento como argumento de cierre forma hábito de compra basado en precio — el cliente que compra por 3x2 espera siempre el 3x2.</p>
       </div>
     </div>
+
     <p class="messages-title">Mensajes clave</p>
     <div class="messages-list">
       <span class="msg-pill">3+1 gratis</span>
@@ -494,59 +708,87 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
       <span class="msg-pill">6 cuotas sin interés</span>
       <span class="msg-pill">Envíos a todo el país</span>
     </div>
+
+    <div class="brecha-row">
+      <div class="brecha-col">
+        <span class="brecha-label bien">Qué hace bien</span>
+        <p>Retargeting y activación estacional con buena ejecución. Los más maduros del segmento en manejo de funnel completo. Longevidad (desde 2020) como señal de modelo sostenible.</p>
+      </div>
+      <div class="brecha-col oportunidad">
+        <span class="brecha-label op">Dónde está la oportunidad</span>
+        <p>Sin el 3+1, <strong>no hay propuesta de valor clara</strong>. El descuento es el mecanismo de conversión principal — no el producto. UNO × UNO cobra más y justifica la diferencia desde el producto, no desde la oferta.</p>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- ELEMENTAL OUTFIT -->
+<!-- ELEMENTAL -->
 <div class="brand-section">
   <div class="container">
     <div class="brand-header">
       <div>
         <p class="brand-num">05 — Competidor</p>
         <p class="brand-name">Elemental</p>
-        <p class="brand-url">elementaloutfit.com · Pauta desde dos páginas ("Elemental" + "El Calce Argentino")</p>
-        <a class="adlib-link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=1035888372948586" target="_blank" rel="noopener"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Ver en Meta Ad Library</a>
+        <p class="brand-tagline">elementaloutfit.com · Pauta desde dos páginas: "Elemental" + "El Calce Argentino"</p>
+        <a class="adlib-link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=1035888372948586" target="_blank" rel="noopener">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver en Meta Ad Library (El Calce Argentino)
+        </a>
       </div>
       <div class="brand-count-block">
-        <p class="brand-big-num" id="elemental-big">—</p>
+        <p class="brand-big-num" id="elemental-big">107</p>
         <p class="brand-ads-label">ads activos</p>
       </div>
     </div>
-    <div class="facts-grid">
-      <div class="fact">
-        <p class="fact-label">Estrategia de páginas</p>
-        <p class="fact-text">Opera con <strong>dos páginas de Meta</strong>: "Elemental Outfit" (421257577744593) para branding y "El Calce Argentino" (1035888372948586) para pauta de conversión. Separan awareness de performance.</p>
+
+    <div class="analisis-grid">
+      <div class="analisis-col">
+        <span class="dlh-label dato">Dato observado</span>
+        <p>Opera con <strong>dos páginas de Meta</strong>: "Elemental Outfit" y "El Calce Argentino". <strong>107 ads activos</strong> combinados — uno de los mayores volúmenes del segmento. Pioneros en DTC de básicos en Argentina. Pack negro/blanco/gris ya en su comunicación.</p>
       </div>
-      <div class="fact">
-        <p class="fact-label">Pauta histórica</p>
-        <p class="fact-text">Uno de los pioneros del DTC de básicos en Argentina. <strong>Crearon demanda con pauta agresiva</strong> — son el principal responsable de que el cliente hoy sepa que existe "la remera básica premium de algodón".</p>
+      <div class="analisis-col">
+        <span class="dlh-label lectura">Lectura estratégica</span>
+        <p>Construyeron el mercado de básicos premium DTC con pauta sostenida. Son probablemente los principales responsables de que el cliente hoy sepa que existe "la remera básica de algodón premium". Ese trabajo beneficia a todo el segmento.</p>
       </div>
-      <div class="fact">
-        <p class="fact-label">Por qué son el cliente más fácil de convertir</p>
-        <p class="fact-text">La expectativa que crearon con sus ads <strong>superó la calidad real del producto</strong>. Hay una brecha promesa/entrega. Ese cliente insatisfecho es el más receptivo al mensaje de UNO × UNO.</p>
+      <div class="analisis-col">
+        <span class="dlh-label hipotesis">Hipótesis para UNO × UNO</span>
+        <p>Hay indicios de una posible brecha entre promesa publicitaria y experiencia real — observable en comentarios de redes. Si esa brecha existe, el cliente que ya probó Elemental y sigue buscando puede ser receptivo al mensaje de UNO × UNO. <em>A validar con research de reseñas y devoluciones.</em></p>
       </div>
     </div>
+
     <p class="copies-title">Línea de comunicación</p>
     <div class="copies-grid">
       <div class="copy-card">
         <p class="copy-text">"La remera que no sabías que necesitabas. Algodón premium, calce perfecto, colores que combinan con todo. El básico que te cambia el armario."</p>
-        <p class="copy-insight"><strong>Patrón:</strong> Prometen transformación del armario. El producto no siempre acompaña esa promesa — ahí está la oportunidad de UNO × UNO.</p>
+        <p class="copy-insight"><strong>Patrón:</strong> Prometen transformación del armario. Una promesa grande que el producto necesita sostener consistentemente para que la experiencia esté a la altura.</p>
       </div>
       <div class="copy-card">
         <p class="copy-text">"3 remeras que te sacan del apuro todos los días. Negro, blanco y gris. El pack que necesitás en el armario."</p>
-        <p class="copy-insight"><strong>Por qué importa:</strong> Ya mencionan la combinación negro/blanco/gris — el mismo territorio de UNO × UNO. La diferencia está en que ellos lo usan como gancho de conveniencia, nosotros como sistema.</p>
+        <p class="copy-insight"><strong>Por qué importa:</strong> Ya usan la combinación N/B/G. La diferencia con UNO × UNO: ellos lo usan como gancho de conveniencia — nosotros como sistema permanente con garantía.</p>
       </div>
       <div class="copy-card">
         <p class="copy-text">"¿Cansado de comprar remeras que se deforman al tercer lavado? Elemental tiene la solución."</p>
-        <p class="copy-insight"><strong>El problema:</strong> Si el producto no resuelve eso, el cliente queda más frustrado que antes. Ese cliente está buscando activamente la alternativa.</p>
+        <p class="copy-insight"><strong>Riesgo:</strong> Si el producto no sostiene esa promesa específica, la insatisfacción es mayor porque el cliente compró esperando exactamente eso.</p>
       </div>
     </div>
+
     <p class="messages-title">Mensajes clave</p>
     <div class="messages-list">
       <span class="msg-pill">Algodón premium</span>
       <span class="msg-pill">Calce perfecto</span>
       <span class="msg-pill">Pack negro/blanco/gris</span>
       <span class="msg-pill">No se deforma</span>
+    </div>
+
+    <div class="brecha-row">
+      <div class="brecha-col">
+        <span class="brecha-label bien">Qué hace bien</span>
+        <p>Construyeron la demanda del mercado con pauta sostenida. Educaron al cliente sobre el básico premium de algodón. Volumen de ads demuestra inversión real y sostenida en Meta.</p>
+      </div>
+      <div class="brecha-col oportunidad">
+        <span class="brecha-label op">Dónde está la oportunidad</span>
+        <p>Si existe una brecha promesa/experiencia, el cliente que pasó por Elemental ya tiene criterio formado y sigue buscando. Ese perfil — educado, con expectativa alta, que no encontró consistencia — puede ser receptivo al mensaje de UNO × UNO. <strong>Hipótesis a validar.</strong></p>
+      </div>
     </div>
   </div>
 </div>
@@ -558,50 +800,67 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
       <div>
         <p class="brand-num">06 — Competidor</p>
         <p class="brand-name">Club Básico</p>
-        <p class="brand-url">todoimportado.store · @club.basics · Bella Vista, GBA</p>
-        <a class="adlib-link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=156367830894050" target="_blank" rel="noopener"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Ver en Meta Ad Library</a>
+        <p class="brand-tagline">todoimportado.store · @club.basics · Bella Vista, GBA · 20K+ miembros declarados</p>
+        <a class="adlib-link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=156367830894050" target="_blank" rel="noopener">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver en Meta Ad Library
+        </a>
       </div>
       <div class="brand-count-block">
         <p class="brand-big-num" id="club-basico-big">—</p>
         <p class="brand-ads-label">ads activos</p>
       </div>
     </div>
-    <div class="facts-grid">
-      <div class="fact">
-        <p class="fact-label">Modelo de negocio</p>
-        <p class="fact-text">Ropa masculina importada amplia: remeras, sweaters, camperas, buzos, pantalones, calzado. Remera algodón importado <strong>$59.900</strong> — más cara que UNO × UNO por unidad. Modelo "club" con 20K+ miembros.</p>
+
+    <div class="analisis-grid">
+      <div class="analisis-col">
+        <span class="dlh-label dato">Dato observado</span>
+        <p>Catálogo amplio: remeras, sweaters, camperas, buzos, pantalones, calzado. Precio unitario <strong>$59.900</strong> — el más caro por unidad. Modelo "club" con 20K+ miembros. <strong>3x2 permanente</strong> en toda la tienda. Urgencia constante en ads: "últimas horas", "cupos limitados".</p>
       </div>
-      <div class="fact">
-        <p class="fact-label">Mecánica principal</p>
-        <p class="fact-text"><strong>3x2 en toda la tienda</strong> más urgencia artificial constante ("últimas horas", "cupos limitados"). El descuento y la escasez son el argumento — no el producto. Exactamente lo que UNO × UNO no hace.</p>
+      <div class="analisis-col">
+        <span class="dlh-label lectura">Lectura estratégica</span>
+        <p>El precio unitario alto ($59.900) se neutraliza perceptualmente con el 3x2 — el cliente percibe valor en la mecánica del descuento, no en el producto. El modelo "club" construye pertenencia pero depende de la oferta para funcionar.</p>
       </div>
-      <div class="fact">
-        <p class="fact-label">Por qué compite</p>
-        <p class="fact-text">Alcanza al mismo hombre ABC1 AMBA con algodón "importado" como claim de calidad. Tiene presencia activa en Meta. Su cliente puede ser el mismo que el nuestro — <strong>antes de encontrarnos</strong>.</p>
+      <div class="analisis-col">
+        <span class="dlh-label hipotesis">Hipótesis para UNO × UNO</span>
+        <p>Club Básico y UNO × UNO apuntan al mismo hombre ABC1 AMBA que busca básicos de calidad. La diferencia en comunicación es total: su argumento es urgencia + precio — el nuestro es certeza permanente. Sin necesidad de descuento para cerrar.</p>
       </div>
     </div>
+
     <p class="copies-title">Línea de comunicación</p>
     <div class="copies-grid">
       <div class="copy-card">
         <p class="copy-text">"Remera Algodón Importado + Molde Perfecto. 8 colores. XS al 4XL. La que te vas a poner todos los días."</p>
-        <p class="copy-insight"><strong>Tensión:</strong> Dicen "la que te vas a poner todos los días" — pero venden 8 colores y tienen 50+ SKUs. No es un sistema, es un catálogo.</p>
+        <p class="copy-insight"><strong>Tensión interna:</strong> Dicen "la que te vas a poner todos los días" pero venden 8 colores y 50+ SKUs. No es un sistema — es un catálogo con esa aspiración.</p>
       </div>
       <div class="copy-card">
         <p class="copy-text">"3 llevás, 1 te regalamos. Llevate el pack que necesitás. Por tiempo limitado."</p>
-        <p class="copy-insight"><strong>Por qué importa:</strong> El 3x2 les funciona como gancho pero establece un precio psicológico que después no pueden sostener sin descuento. UNO × UNO cobra $40k/unidad sin justificarlo con promoción.</p>
+        <p class="copy-insight"><strong>Patrón:</strong> El 3x2 permanente establece un precio psicológico. Quitar el descuento después es muy difícil — el cliente ya no compra sin él.</p>
       </div>
       <div class="copy-card">
         <p class="copy-text">"Últimas horas con 6 cuotas sin interés. ⏳ No llegues tarde."</p>
-        <p class="copy-insight"><strong>El contraste:</strong> Su copy es urgencia permanente. El nuestro es certeza permanente. Son el opuesto exacto de lo que UNO × UNO comunica.</p>
+        <p class="copy-insight"><strong>El contraste:</strong> Su copy es urgencia permanente. El nuestro es certeza permanente. Son comunicaciones opuestas para el mismo cliente.</p>
       </div>
     </div>
+
     <p class="messages-title">Mensajes clave</p>
     <div class="messages-list">
       <span class="msg-pill">Algodón importado</span>
-      <span class="msg-pill">3x2</span>
+      <span class="msg-pill">3x2 permanente</span>
       <span class="msg-pill">Últimas horas</span>
       <span class="msg-pill">6 cuotas sin interés</span>
       <span class="msg-pill">Club de miembros</span>
+    </div>
+
+    <div class="brecha-row">
+      <div class="brecha-col">
+        <span class="brecha-label bien">Qué hace bien</span>
+        <p>Comunidad activa con modelo "club". Precio unitario real alto que les da margen para promociones. Activos en GBA, zona con demanda real.</p>
+      </div>
+      <div class="brecha-col oportunidad">
+        <span class="brecha-label op">Dónde está la oportunidad</span>
+        <p>Sin el 3x2, <strong>el argumento de venta no es claro</strong>. El cliente que busca certeza — sin oferta, sin urgencia — es el cliente de UNO × UNO. El precio de UNO × UNO es menor por unidad sin descuento.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -613,11 +872,11 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
     <p class="section-title">Los números</p>
     <div class="charts-grid">
       <div class="chart-card">
-        <p class="chart-label">Volumen de anuncios activos (datos conocidos)</p>
+        <p class="chart-label">Volumen de anuncios activos — junio 2026</p>
         <div class="chart-wrap"><canvas id="barChart"></canvas></div>
       </div>
       <div class="chart-card">
-        <p class="chart-label">Perfil estratégico comparado</p>
+        <p class="chart-label">Perfil estratégico comparado — estimación interna</p>
         <div class="chart-wrap"><canvas id="radarChart"></canvas></div>
       </div>
     </div>
@@ -632,184 +891,105 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
     <div class="insights-grid">
       <div class="insight-card">
         <p class="insight-num">01</p>
-        <p class="insight-title">Tecla domina el volumen — y tiene ventaja de data</p>
-        <p class="insight-body">Con ~170 ads activos, tienen meses de aprendizaje del algoritmo que las demás no tienen. Arrancar con volumen bajo está bien, pero hay que llegar a punto de datos rápido. Recomendable: 5–8 ads con variaciones de mensaje desde el día 1.</p>
+        <p class="insight-title">Tecla domina el volumen — y tiene ventaja de datos</p>
+        <p class="insight-body">Con ~170 ads activos, acumularon meses de aprendizaje del algoritmo. <strong>Arrancar con volumen bajo está bien, pero hay que llegar a punto de datos rápido.</strong> Recomendable: 5–8 ads con variaciones de mensaje desde el día 1, no 1 ad perfecto.</p>
       </div>
       <div class="insight-card">
         <p class="insight-num">02</p>
         <p class="insight-title">El precio de UNO × UNO necesita que los ads hagan el trabajo</p>
-        <p class="insight-body">SER Basics y Umano están en $30–35k. Tecla desde $36k. Club Básico cobra $59.900 por unidad pero lo compensa con 3x2. UNO × UNO a $40k necesita que los ads justifiquen esa diferencia sin decirla explícitamente.</p>
+        <p class="insight-body">SER Basics y Umano en $28–35k. Tecla desde $36k. Club Básico a $59.900 con 3x2. UNO × UNO a $40k sin descuento. <strong>Los ads tienen que justificar esa posición desde consistencia, calce, garantía y tono</strong> — no desde comparación de precio.</p>
       </div>
       <div class="insight-card">
         <p class="insight-num">03</p>
-        <p class="insight-title">El cliente insatisfecho de Elemental es nuestro cliente más fácil</p>
-        <p class="insight-body">Elemental creó el mercado con pauta agresiva. Pero la brecha entre promesa y producto dejó clientes insatisfechos que siguen buscando "la remera que funcione de verdad". Ese cliente ya está educado y listo para UNO × UNO.</p>
+        <p class="insight-title">El cliente educado en básicos premium es el más receptivo</p>
+        <p class="insight-body">Elemental, Club Básico y Umano formaron un cliente que ya sabe lo que busca. Si ese cliente no encontró la consistencia prometida en su experiencia anterior, sigue activo en el mercado. <strong>Hipótesis a validar con research de comentarios y reseñas.</strong></p>
       </div>
       <div class="insight-card">
         <p class="insight-num">04</p>
-        <p class="insight-title">El descuento y la urgencia son el lenguaje dominante — y ahí está el hueco</p>
-        <p class="insight-body">Club Básico, SER Basics y Elemental viven del 3x2, las cuotas y las "últimas horas". Ninguno comunica certeza ni permanencia. UNO × UNO puede ser la única marca del segmento que no necesita urgencia artificial para vender.</p>
+        <p class="insight-title">El descuento y la urgencia son el lenguaje dominante</p>
+        <p class="insight-body">Club Básico, SER Basics y Elemental viven del 3x2, las cuotas y las "últimas horas". Ninguno comunica certeza ni permanencia. <strong>UNO × UNO puede ser la única marca del segmento que no necesita urgencia artificial para vender.</strong> Ese es el hueco.</p>
       </div>
       <div class="insight-card">
         <p class="insight-num">05</p>
-        <p class="insight-title">El regalo masculino es un vector no explotado bien</p>
-        <p class="insight-body">Tecla y SER Basics lo usan para regalos. UNO × UNO puede activarlo de forma más elegante: "el regalo que no vuelve al cajón" — sin la condescendencia de "la remera que él no sabe que necesita".</p>
+        <p class="insight-title">El regalo masculino es un vector subutilizado</p>
+        <p class="insight-body">Tecla y SER Basics lo activan para Día del Padre. UNO × UNO puede hacerlo con ángulo más elegante: <strong>"el regalo que no vuelve al cajón"</strong> — sin condescendencia y sin justificarlo con precio o descuento.</p>
       </div>
       <div class="insight-card">
         <p class="insight-num">06</p>
         <p class="insight-title">Nadie habla de sistema — todos hablan de producto</p>
-        <p class="insight-body">Tecla habla de calce. Umano de fabricación. SER de precio. Elemental de calidad. Club Básico de origen. Ninguno resuelve la decisión de forma permanente. El posicionamiento de UNO × UNO — elegís una vez, funciona todos los días — no tiene competencia directa en este mercado.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- OPORTUNIDAD -->
-<div class="oportunidad-section">
-  <div class="container">
-    <p class="section-eyebrow" style="color:var(--mid);">Síntesis</p>
-    <p class="section-title">Qué hace bien cada uno — y dónde está la brecha</p>
-    <div class="op-grid">
-      <div class="op-card">
-        <p class="op-brand">Tecla</p>
-        <p class="op-text"><strong>Hace bien:</strong> una promesa clara ("El Calce Tecla") y repetirla. Alto volumen de testing. <strong>Brecha:</strong> hablan de calce, no de sistema — su cliente igual tiene que pensar.</p>
-      </div>
-      <div class="op-card">
-        <p class="op-brand">Valfort</p>
-        <p class="op-text"><strong>Hace bien:</strong> atacar el problema emocional antes que el producto. "No es tu cuerpo" es un gancho de scroll potente. <strong>Brecha:</strong> mercado muy específico (hombres flacos), tono agresivo.</p>
-      </div>
-      <div class="op-card">
-        <p class="op-brand">SER Basics</p>
-        <p class="op-text"><strong>Hace bien:</strong> retargeting y activación estacional. Los más maduros en funnel. <strong>Brecha:</strong> el descuento es el argumento central — no el producto.</p>
-      </div>
-      <div class="op-card">
-        <p class="op-brand">UMANO</p>
-        <p class="op-text"><strong>Hace bien:</strong> el único que roza el territorio de simplificación ("elegí una o llevate las dos"). <strong>Brecha:</strong> catálogo amplio que diluye la promesa. No pueden ser el sistema si venden de todo.</p>
-      </div>
-      <div class="op-card">
-        <p class="op-brand">Elemental Outfit</p>
-        <p class="op-text"><strong>Hace bien:</strong> construyeron el mercado con pauta sostenida. Educaron al cliente sobre el básico premium. <strong>Brecha:</strong> la promesa superó al producto — dejaron clientes listos para cambiarse.</p>
-      </div>
-      <div class="op-card">
-        <p class="op-brand">Club Básico</p>
-        <p class="op-text"><strong>Hace bien:</strong> comunidad activa, modelo "club" con membresía, buen precio unitario real. <strong>Brecha:</strong> viven del 3x2 y la urgencia. Sin eso, no tienen argumento de venta claro.</p>
+        <p class="insight-body">Tecla habla de calce. Umano de fabricación. SER de precio. Elemental de calidad. Club Básico de origen. <strong>Ninguno resuelve la decisión de forma permanente.</strong> El posicionamiento de UNO × UNO no tiene competencia directa en este mercado hoy.</p>
       </div>
     </div>
   </div>
 </div>
 
 <!-- SÍNTESIS ACCIONABLE -->
-<div style="background:var(--white);padding:80px 48px;border-top:1px solid var(--warm);">
+<div class="sintesis-section">
   <div class="container">
-    <p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;">Síntesis accionable</p>
-    <p style="font-family:'TradeGothic',sans-serif;font-size:clamp(28px,4vw,56px);text-transform:uppercase;color:var(--carbon);margin-bottom:48px;line-height:1;">Qué copiamos /<br>Qué evitamos /<br>Qué hacemos distinto</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--warm);">
-      <div style="background:var(--white);padding:32px 28px;">
-        <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:20px;font-weight:700;">Qué copiamos</p>
-        <p style="font-size:13px;color:var(--dark);padding:9px 0;border-bottom:1px solid var(--warm);line-height:1.5;">Testear muchas variantes desde el día 1 (Tecla).</p>
-        <p style="font-size:13px;color:var(--dark);padding:9px 0;border-bottom:1px solid var(--warm);line-height:1.5;">Repetir una promesa central hasta que se grabe.</p>
-        <p style="font-size:13px;color:var(--dark);padding:9px 0;border-bottom:1px solid var(--warm);line-height:1.5;">Activar fechas comerciales cuando tenga sentido.</p>
-        <p style="font-size:13px;color:var(--dark);padding:9px 0;line-height:1.5;">Atacar el problema emocional antes que el producto (Valfort, sin el tono agresivo).</p>
+    <p class="section-eyebrow" style="color:var(--mid);">Síntesis accionable</p>
+    <p class="section-title">Qué copiamos /<br>Qué evitamos /<br>Qué hacemos distinto</p>
+    <div class="sintesis-grid">
+      <div class="sintesis-col">
+        <span class="sintesis-col-title copy">Qué copiamos</span>
+        <p class="sintesis-item">Testear muchas variantes desde el día 1 — el volumen genera datos (Tecla).</p>
+        <p class="sintesis-item">Repetir una promesa central hasta que se grabe en la memoria del cliente.</p>
+        <p class="sintesis-item">Atacar el problema emocional antes que el producto (Valfort, sin el tono agresivo).</p>
+        <p class="sintesis-item">Activar fechas comerciales cuando tiene sentido — Día del Padre, por ejemplo.</p>
+        <p class="sintesis-item">Variedad de formatos: video corto, foto de producto, carrusel comparativo.</p>
       </div>
-      <div style="background:var(--cream);padding:32px 28px;">
-        <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:20px;font-weight:700;">Qué evitamos</p>
-        <p style="font-size:13px;color:var(--dark);padding:9px 0;border-bottom:1px solid var(--warm);line-height:1.5;">Depender del descuento o el 3x2 como argumento central.</p>
-        <p style="font-size:13px;color:var(--dark);padding:9px 0;border-bottom:1px solid var(--warm);line-height:1.5;">Urgencia artificial: "últimas horas", "cupos limitados".</p>
-        <p style="font-size:13px;color:var(--dark);padding:9px 0;border-bottom:1px solid var(--warm);line-height:1.5;">Hablar genéricamente de "calidad y precio".</p>
-        <p style="font-size:13px;color:var(--dark);padding:9px 0;border-bottom:1px solid var(--warm);line-height:1.5;">Catálogo amplio que diluye el mensaje (Umano, SER, Club Básico).</p>
-        <p style="font-size:13px;color:var(--dark);padding:9px 0;line-height:1.5;">Prometer más de lo que el producto puede dar (Elemental).</p>
+      <div class="sintesis-col">
+        <span class="sintesis-col-title avoid">Qué evitamos</span>
+        <p class="sintesis-item">Depender del descuento o el 3x2 como argumento central de venta.</p>
+        <p class="sintesis-item">Urgencia artificial: "últimas horas", "cupos limitados", contadores falsos.</p>
+        <p class="sintesis-item">Hablar genéricamente de "calidad y precio" — no diferencia y no convierte.</p>
+        <p class="sintesis-item">Catálogo amplio que diluye el mensaje y la identidad de marca.</p>
+        <p class="sintesis-item">Hacer promesas de producto que la experiencia real no puede sostener consistentemente.</p>
+        <p class="sintesis-item">Estética excesivamente fashion o streetwear — no es nuestro cliente.</p>
       </div>
-      <div style="background:var(--white);padding:32px 28px;">
-        <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:20px;font-weight:700;">Qué hacemos distinto</p>
-        <p style="font-size:13px;color:var(--carbon);padding:9px 0;border-bottom:1px solid var(--warm);line-height:1.5;font-weight:500;">No vendemos moda: vendemos decisión resuelta.</p>
-        <p style="font-size:13px;color:var(--carbon);padding:9px 0;border-bottom:1px solid var(--warm);line-height:1.5;font-weight:500;">No competimos por catálogo: competimos por claridad.</p>
-        <p style="font-size:13px;color:var(--carbon);padding:9px 0;border-bottom:1px solid var(--warm);line-height:1.5;font-weight:500;">No vendemos una remera: vendemos un sistema de uso diario.</p>
-        <p style="font-size:13px;color:var(--carbon);padding:9px 0;border-bottom:1px solid var(--warm);line-height:1.5;font-weight:500;">La certeza reemplaza a la urgencia. Siempre.</p>
-        <p style="font-size:13px;color:var(--carbon);padding:9px 0;line-height:1.5;font-weight:500;">Si necesitás exagerar para convencer, el producto no está listo.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CREATIVOS DE REFERENCIA -->
-<div class="creativos-section">
-  <div class="container">
-    <p class="section-eyebrow">Referencia visual</p>
-    <p class="section-title" style="color:var(--carbon);">Videos y creativos</p>
-    <p class="creativos-intro">Slots para agregar videos o creativos de referencia de cada competidor. Reemplazá el bloque placeholder por un iframe de YouTube o Vimeo.</p>
-    <div class="creativos-grid">
-      <div class="creativo-card">
-        <p class="creativo-brand">Tecla</p>
-        <p class="creativo-title">Video referencia — Calce Tecla</p>
-        <div class="creativo-placeholder"><span>Pendiente — pegar link</span></div>
-      </div>
-      <div class="creativo-card">
-        <p class="creativo-brand">Valfort</p>
-        <p class="creativo-title">Video referencia — "No es tu cuerpo"</p>
-        <div class="creativo-placeholder"><span>Pendiente — pegar link</span></div>
-      </div>
-      <div class="creativo-card">
-        <p class="creativo-brand">UMANO</p>
-        <p class="creativo-title">Video referencia — Pack simplificado</p>
-        <div class="creativo-placeholder"><span>Pendiente — pegar link</span></div>
-      </div>
-      <div class="creativo-card">
-        <p class="creativo-brand">SER Basics</p>
-        <p class="creativo-title">Video referencia — Día del Padre</p>
-        <div class="creativo-placeholder"><span>Pendiente — pegar link</span></div>
-      </div>
-      <div class="creativo-card">
-        <p class="creativo-brand">Elemental Outfit</p>
-        <p class="creativo-title">Video referencia — Pack negro/blanco/gris</p>
-        <div class="creativo-placeholder"><span>Pendiente — pegar link</span></div>
-      </div>
-      <div class="creativo-card">
-        <p class="creativo-brand">Club Básico</p>
-        <p class="creativo-title">Video referencia — Algodón importado</p>
-        <div class="creativo-placeholder"><span>Pendiente — pegar link</span></div>
+      <div class="sintesis-col">
+        <span class="sintesis-col-title distinto">Qué hacemos distinto</span>
+        <p class="sintesis-item">No vendemos moda: vendemos decisión resuelta.</p>
+        <p class="sintesis-item">No competimos por catálogo: competimos por claridad.</p>
+        <p class="sintesis-item">No vendemos una remera aislada: vendemos un sistema de uso diario.</p>
+        <p class="sintesis-item">La certeza reemplaza a la urgencia. Siempre.</p>
+        <p class="sintesis-item">El producto tiene que justificar el precio desde consistencia, calce, tela y experiencia — no desde el descuento.</p>
+        <p class="sintesis-item">Una promesa que la experiencia no puede sostener genera más daño que no hacerla.</p>
       </div>
     </div>
   </div>
 </div>
 
 <!-- ADS EN VIVO -->
-<div style="padding:64px 48px 80px;background:var(--white);border-top:1px solid var(--warm);" id="creativos-section">
+<div class="live-ads-section-wrap" id="creativos-section">
   <div class="container">
-    <section class="live-ads-section">
-      <div class="live-ads-header" style="margin-bottom:8px;">
-        <h2 style="font-family:'TradeGothic',sans-serif;font-size:clamp(28px,4vw,56px);text-transform:uppercase;color:var(--carbon);">Creativos en vivo</h2>
-        <span class="live-badge">LIVE</span>
-      </div>
-      <p style="font-size:14px;color:var(--dark);margin-bottom:32px;line-height:1.7;max-width:560px;">Anuncios activos en Meta Ads Library por marca. Organizados por tipo creativo. Actualización diaria automática.</p>
+    <div class="live-ads-header" style="margin-bottom:8px;">
+      <h2 style="font-family:'TradeGothic',sans-serif;font-size:clamp(28px,4vw,52px);text-transform:uppercase;color:var(--carbon);">Creativos en vivo</h2>
+      <span class="live-badge">LIVE</span>
+    </div>
+    <p style="font-size:15px;color:var(--dark);margin-bottom:32px;line-height:1.75;max-width:600px;">Anuncios activos en Meta Ads Library por marca. Organizados por tipo creativo. Actualización automática desde Supabase.</p>
 
-      <!-- Filtro global por tipo -->
-      <div class="global-type-filter" id="global-type-filter">
-        <button class="global-filter-btn active" data-type="all">Todos</button>
-        <button class="global-filter-btn" data-type="video">Video</button>
-        <button class="global-filter-btn" data-type="photo">Foto</button>
-        <button class="global-filter-btn" data-type="carousel">Carrusel</button>
-      </div>
+    <div class="global-type-filter" id="global-type-filter">
+      <button class="global-filter-btn active" data-type="all">Todos</button>
+      <button class="global-filter-btn" data-type="video">Video</button>
+      <button class="global-filter-btn" data-type="photo">Foto</button>
+      <button class="global-filter-btn" data-type="carousel">Carrusel</button>
+    </div>
 
-      <div id="live-ads-container">
-        <div class="live-status">Cargando creativos...</div>
-      </div>
-      <p class="last-updated" id="last-updated-label" style="margin-top:20px;"></p>
-    </section>
+    <div id="live-ads-container">
+      <div class="live-status">Cargando creativos…</div>
+    </div>
 
-    <section class="history-section" style="margin-top:64px;">
-      <h2 style="font-family:'TradeGothic',sans-serif;font-size:clamp(24px,3vw,40px);text-transform:uppercase;color:var(--carbon);">Evolución diaria</h2>
-      <p style="font-size:14px;color:var(--dark);margin-bottom:1rem;line-height:1.7;">Ads activos por marca — últimos 30 días.</p>
-      <div class="history-chart-wrap">
-        <canvas id="history-chart"></canvas>
-      </div>
-    </section>
+    <div class="last-updated-bar">
+      <span id="last-updated-label"></span>
+      <a href="#" onclick="location.reload();return false;">Recargar</a>
+    </div>
   </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
   <div class="container">
-    <img src="assets/logo-negativo.png" alt="UNO × UNO" class="ft-img">
+    <img src="assets/logo-negativo.png" alt="UNO × UNO">
     <span class="ft-note">Inteligencia Competitiva 2026 · Método Uno SRL</span>
   </div>
 </footer>
@@ -819,16 +999,16 @@ footer .container{display:flex;align-items:center;justify-content:space-between;
 new Chart(document.getElementById('barChart'), {
   type: 'bar',
   data: {
-    labels: ['Tecla','UMANO','SER Basics','Valfort','Elemental*','Club Básico*'],
+    labels: ['Tecla','Elemental','UMANO','SER Basics','Valfort','Club Básico'],
     datasets: [{
-      data: [170, 37, 29, 20, null, null],
+      data: [170, 107, 37, 29, 20, null],
       backgroundColor: [
         'rgba(255,255,255,0.85)',
-        'rgba(255,255,255,0.55)',
-        'rgba(255,255,255,0.40)',
-        'rgba(255,255,255,0.25)',
-        'rgba(255,255,255,0.12)',
-        'rgba(255,255,255,0.12)',
+        'rgba(255,255,255,0.68)',
+        'rgba(255,255,255,0.48)',
+        'rgba(255,255,255,0.32)',
+        'rgba(255,255,255,0.20)',
+        'rgba(255,255,255,0.10)',
       ],
       borderRadius: 2,
     }]
@@ -837,7 +1017,7 @@ new Chart(document.getElementById('barChart'), {
     responsive: true, maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
-      tooltip: { callbacks: { label: ctx => ctx.raw === null ? 'Pendiente (scraper en proceso)' : ctx.raw + ' ads' } }
+      tooltip: { callbacks: { label: ctx => ctx.raw === null ? 'Cargando…' : ctx.raw + ' ads activos' } }
     },
     scales: {
       x: { ticks: { color: 'rgba(255,255,255,0.4)', font: { size: 10 } }, grid: { display: false }, border: { color: 'rgba(255,255,255,0.1)' } },
@@ -852,10 +1032,11 @@ new Chart(document.getElementById('radarChart'), {
     labels: ['Volumen pauta', 'Madurez funnel', 'Longevidad', 'Tono premium', 'Claridad mensaje'],
     datasets: [
       { label: 'Tecla',        data: [95, 70, 85, 30, 80], borderColor: 'rgba(255,255,255,0.85)', backgroundColor: 'rgba(255,255,255,0.05)', borderWidth: 1.5, pointRadius: 2 },
-      { label: 'UMANO',        data: [30, 45, 60, 45, 50], borderColor: 'rgba(255,255,255,0.50)', backgroundColor: 'rgba(255,255,255,0.03)', borderWidth: 1.5, pointRadius: 2 },
-      { label: 'SER Basics',   data: [25, 80, 80, 30, 40], borderColor: 'rgba(255,255,255,0.35)', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 2 },
-      { label: 'Elemental',    data: [60, 55, 75, 35, 45], borderColor: 'rgba(255,255,255,0.20)', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 2 },
-      { label: 'Club Básico',  data: [45, 40, 30, 20, 30], borderColor: 'rgba(255,255,255,0.12)', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 2 },
+      { label: 'Elemental',    data: [75, 55, 80, 40, 50], borderColor: 'rgba(255,255,255,0.60)', backgroundColor: 'rgba(255,255,255,0.03)', borderWidth: 1.5, pointRadius: 2 },
+      { label: 'UMANO',        data: [30, 45, 60, 45, 50], borderColor: 'rgba(255,255,255,0.40)', backgroundColor: 'rgba(255,255,255,0.02)', borderWidth: 1.5, pointRadius: 2 },
+      { label: 'SER Basics',   data: [25, 80, 80, 30, 40], borderColor: 'rgba(255,255,255,0.28)', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 2 },
+      { label: 'Valfort',      data: [18, 35, 40, 30, 70], borderColor: 'rgba(255,255,255,0.18)', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 2 },
+      { label: 'Club Básico',  data: [45, 40, 30, 20, 30], borderColor: 'rgba(255,255,255,0.10)', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 2 },
     ]
   },
   options: {
@@ -870,11 +1051,11 @@ new Chart(document.getElementById('radarChart'), {
   }
 });
 
-// ── Live ads desde Supabase — con tipo creativo ──────────────────────────
+// ── Live ads desde Supabase ───────────────────────────────────────────────
 (function () {
   const SUPABASE_URL      = 'https://jsvnuylvqclqhjkotwvk.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_aiXuJmB_bZe8clxZ2r4LqQ_5oRBfiui';
-  const COMPETITOR_SLUGS  = ['tecla','umano','club-basico','valfort','ser-basics','elemental'];
+  const COMPETITOR_SLUGS  = ['tecla','elemental','umano','club-basico','valfort','ser-basics'];
   const TYPE_LABELS       = { video:'Video', photo:'Foto', carousel:'Carrusel' };
 
   async function supaFetch(path, params = {}) {
@@ -937,7 +1118,7 @@ new Chart(document.getElementById('radarChart'), {
           <h3 class="brand-ads-name">${comp.name}</h3>
           <div class="brand-ads-type-pills">
             ${typePills}
-            ${newCount>0?`<span class="type-pill type-new">+${newCount} nuevos hoy</span>`:''}
+            ${newCount>0?`<span class="type-pill type-new">+${newCount} nuevos</span>`:''}
           </div>
         </div>
         <div class="brand-ads-type-tabs">${typeTabs}</div>
@@ -951,7 +1132,7 @@ new Chart(document.getElementById('radarChart'), {
       grid.innerHTML = '';
       const filtered = typeFilter === 'all' ? ads : ads.filter(a=>(a.creative_type||'photo')===typeFilter);
       if (filtered.length === 0) {
-        grid.innerHTML = '<p class="live-status">Sin ads de este tipo aún</p>';
+        grid.innerHTML = '<p class="live-status">Sin ads de este tipo</p>';
         return;
       }
       filtered.forEach(ad => grid.appendChild(buildAdCard(ad)));
@@ -971,51 +1152,16 @@ new Chart(document.getElementById('radarChart'), {
     document.querySelectorAll('.ad-card-v2').forEach(card => {
       card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';
     });
-    // Mostrar/ocultar secciones vacías
     document.querySelectorAll('.brand-ads-section').forEach(sec => {
       const visible = sec.querySelectorAll('.ad-card-v2:not([style*="none"])').length;
       sec.style.display = visible > 0 ? '' : 'none';
     });
   }
 
-  async function renderHistoryChart(competitorMap) {
-    const since = new Date(Date.now()-30*86400000).toISOString().split('T')[0];
-    const snapshots = await supaFetch('ad_snapshots', {
-      select: 'snapshot_date,active_ads_count,competitor_id,competitors(slug,name)',
-      snapshot_date: `gte.${since}`,
-      order: 'snapshot_date.asc',
-    });
-    const allDates = [...new Set(snapshots.map(s=>s.snapshot_date))].sort();
-    const byComp   = {};
-    snapshots.forEach(s => {
-      const slug = s.competitors?.slug;
-      if (!slug) return;
-      if (!byComp[slug]) byComp[slug] = {};
-      byComp[slug][s.snapshot_date] = s.active_ads_count;
-    });
-    const colors = ['#292A2E','#555152','#888780','#CCCBC8','#aaa','#ddd'];
-    const datasets = COMPETITOR_SLUGS.filter(s=>byComp[s]).map((slug,i) => ({
-      label: competitorMap[slug]?.name || slug,
-      data: allDates.map(d=>byComp[slug]?.[d]??null),
-      borderColor: colors[i]||'#ccc',
-      borderWidth: 2, pointRadius: 3, tension: 0.3, spanGaps: true,
-    }));
-    const ctx = document.getElementById('history-chart');
-    if (!ctx || typeof Chart==='undefined') return;
-    new Chart(ctx, {
-      type: 'line',
-      data: { labels: allDates.map(d=>new Date(d).toLocaleDateString('es-AR',{day:'numeric',month:'short'})), datasets },
-      options: {
-        responsive:true, maintainAspectRatio:false,
-        plugins:{ legend:{ position:'bottom', labels:{ font:{size:11}, boxWidth:12, color:'#555' } } },
-        scales:{ y:{ beginAtZero:true, grid:{color:'#f0f0f0'} }, x:{ grid:{display:false} } },
-      },
-    });
-  }
-
   async function init() {
-    const container = document.getElementById('live-ads-container');
-    const label     = document.getElementById('last-updated-label');
+    const container  = document.getElementById('live-ads-container');
+    const label      = document.getElementById('last-updated-label');
+    const heroText   = document.getElementById('hero-update-text');
     const filterBtns = document.querySelectorAll('#global-type-filter .global-filter-btn');
 
     filterBtns.forEach(btn => btn.addEventListener('click', () => {
@@ -1043,20 +1189,24 @@ new Chart(document.getElementById('radarChart'), {
 
         container.appendChild(buildCompetitorSection(comp, ads));
 
-        // Actualizar summary strip
+        // Actualizar contadores dinámicos
         const countEl = document.getElementById(`${slug}-count`);
         const bigEl   = document.getElementById(`${slug}-big`);
-        if (countEl) countEl.textContent = ads.length;
-        if (bigEl)   bigEl.textContent   = ads.length;
+        if (countEl) countEl.textContent = ads.length || '—';
+        if (bigEl)   bigEl.textContent   = ads.length || '—';
       }
 
-      await renderHistoryChart(competitorMap);
+      // Timestamp
+      const now = new Date();
+      const fmt = now.toLocaleDateString('es-AR', { day:'numeric', month:'long', year:'numeric' }) + ' · ' +
+                  now.toLocaleTimeString('es-AR', { hour:'2-digit', minute:'2-digit' });
+      if (label)    label.textContent    = `Actualizado: ${fmt}`;
+      if (heroText) heroText.textContent = `Actualizado: ${fmt}`;
 
-      const latest = await supaFetch('ad_snapshots', { select:'snapshot_date', order:'snapshot_date.desc', limit:'1' });
-      if (latest[0]) label.textContent = `Última actualización: ${fmtDate(latest[0].snapshot_date)}`;
     } catch (err) {
       console.error(err);
       container.innerHTML = `<p class="live-status live-error">Error cargando datos: ${err.message}</p>`;
+      if (heroText) heroText.textContent = 'No se pudo verificar la actualización';
     }
   }
 
