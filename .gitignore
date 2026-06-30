@@ -1,2 +1,12 @@
 node_modules/
 .DS_Store
+# Google Drive shortcuts/symlinks
+Libros/
+Julian Vilche/
+Transformación Cultural
+*.gsheet
+*.mp3
+*.mp4
+
+# Scraper
+scraper/package-lock.json
