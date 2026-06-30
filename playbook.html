@@ -29,14 +29,16 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 .nav-links a.active{color:#fff;}
 
 /* HERO */
-.hero{background:var(--carbon);padding:64px 48px 56px;}
-.hero-eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:20px;}
-.hero h1{font-family:'TradeGothic',sans-serif;font-size:clamp(56px,7vw,120px);text-transform:uppercase;color:#fff;line-height:.9;margin-bottom:20px;}
-.hero-sub{font-size:15px;color:rgba(255,255,255,.5);line-height:1.75;max-width:540px;}
+.hero{background:var(--carbon);padding:0;display:grid;grid-template-columns:1fr 1.4fr;min-height:320px;}
+.hero-left{padding:56px 48px 48px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid rgba(255,255,255,.07);}
+.hero-right-funnel{padding:40px 48px 40px;}
+.hero-eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px;}
+.hero h1{font-family:'TradeGothic',sans-serif;font-size:clamp(32px,3.2vw,52px);text-transform:uppercase;color:#fff;line-height:.95;margin-bottom:16px;}
+.hero-sub{font-size:13px;color:rgba(255,255,255,.4);line-height:1.7;max-width:340px;}
 
 /* ─── FUNNEL VISUAL ─── */
-.funnel-section{background:var(--carbon);padding:0;}
-.funnel-diagram{max-width:900px;margin:0 auto;padding:0 48px 40px;}
+/* funnel now inside .hero */
+.funnel-diagram{width:100%;padding:0;}
 .funnel-level{border-bottom:1px solid rgba(255,255,255,.07);}
 .funnel-level:last-child{border-bottom:none;}
 .funnel-bar{display:flex;align-items:center;justify-content:space-between;padding:22px 0 22px 20px;cursor:pointer;text-decoration:none;gap:16px;border-left:3px solid transparent;transition:background .15s;}
@@ -137,7 +139,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 
 /* PERSONA GROUP LABEL */
 .persona-group{margin-bottom:32px;}
-.dolor-subgroup{margin-bottom:20px;}.script-format{display:inline-block;font-size:8px;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;border-radius:2px;font-weight:700;flex-shrink:0;}.fmt-ugc{background:#e8e4e0;color:#555152;}.fmt-broll{background:#dce8f0;color:#2e6080;}
+.dolor-subgroup{margin-bottom:20px;}.script-format{display:inline-block;font-size:8px;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;border-radius:2px;font-weight:700;flex-shrink:0;}.fmt-ugc{background:#e8e4e0;color:#555152;}.fmt-broll{background:#dce8f0;color:#2e6080;}.fmt-demo{background:#ede8f5;color:#5a3a8a;}
 .dolor-label{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
 .dolor-num{background:var(--carbon);color:rgba(255,255,255,.7);padding:2px 7px;border-radius:1px;font-size:8px;letter-spacing:.1em;}
 .persona-group-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--warm);display:flex;align-items:center;gap:10px;}
@@ -264,7 +266,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 .tip-box-text{font-size:13px;color:var(--dark);line-height:1.7;}
 
 @media(max-width:768px){
-  .hero,.funnel-section,.stage-header,.content-panel,.format-guide-strip,.rule-strip,.stage-anchor-nav{padding-left:20px;padding-right:20px;}
+  .hero{grid-template-columns:1fr;}.hero-left{padding:32px 20px 24px;border-right:none;}.hero-right-funnel{padding:0 20px 32px;}.stage-header,.content-panel,.format-guide-strip,.rule-strip,.stage-anchor-nav{padding-left:20px;padding-right:20px;}
   .content-tabs{margin:0 20px;}
   .stage-title-row{grid-template-columns:1fr;}
   .scripts-grid{grid-template-columns:1fr;}
@@ -293,23 +295,19 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 
 <!-- HERO -->
 <div class="hero">
-  <p class="hero-eyebrow">06 — Playbook de Ads</p>
-  <h1>El embudo.<br>Ad por ad.</h1>
-  <p class="hero-sub">Cuatro etapas, dos formatos por etapa: videos con tu cara y piezas estáticas. Cada ad tiene audiencia, momento y objetivo definido.</p>
-  <div style="margin-top:24px;padding:20px 24px;border:1px solid rgba(255,255,255,.1);border-radius:4px;max-width:640px;background:rgba(255,255,255,.04);">
-    <p style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px;">Para qué sirve esta página</p>
-    <p style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.75;">Este playbook no reemplaza los briefs ni el builder. Ordena qué pieza usar en cada momento del embudo: qué decirle a alguien que no conoce la marca, qué mostrarle cuando ya entendió el problema, qué objeción resolver antes de la compra y cómo recordarle la decisión sin caer en descuento.</p>
-    <div style="display:flex;gap:20px;margin-top:14px;flex-wrap:wrap;">
-      <span style="font-size:10px;color:rgba(255,255,255,.25);letter-spacing:.08em;"><a href="briefs.html" style="color:rgba(255,255,255,.35);text-decoration:none;">/briefs</a> — biblioteca de ideas creativas</span>
-      <span style="font-size:10px;color:rgba(255,255,255,.25);letter-spacing:.08em;"><a href="ads-builder.html" style="color:rgba(255,255,255,.35);text-decoration:none;">/ads-builder</a> — herramienta para construir y guardar piezas</span>
-      <span style="font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.08em;">/playbook — qué usar, cuándo y por qué</span>
+  <!-- LEFT: título y descripción -->
+  <div class="hero-left">
+    <p class="hero-eyebrow">06 — Playbook de Ads</p>
+    <h1>El embudo.<br>Ad por ad.</h1>
+    <p class="hero-sub">Cuatro etapas. Cada ad tiene audiencia, formato y objetivo definidos. Qué usar, cuándo y por qué.</p>
+    <div style="margin-top:20px;display:flex;flex-direction:column;gap:6px;">
+      <a href="briefs.html" style="font-size:10px;color:rgba(255,255,255,.25);letter-spacing:.08em;text-decoration:none;">/briefs — biblioteca de ideas</a>
+      <a href="ads-builder.html" style="font-size:10px;color:rgba(255,255,255,.25);letter-spacing:.08em;text-decoration:none;">/ads-builder — construir y guardar piezas</a>
     </div>
   </div>
-</div>
-
-<!-- FUNNEL VISUAL -->
-<div class="funnel-section">
-  <div class="funnel-diagram">
+  <!-- RIGHT: funnel como tabla de navegación -->
+  <div class="hero-right-funnel">
+    <div class="funnel-diagram">
 
     <div class="funnel-level funnel-level-1">
       <a class="funnel-bar" href="#frio">
@@ -393,6 +391,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
       </a>
     </div>
 
+    </div>
   </div>
 </div>
 
@@ -573,7 +572,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
   <div class="content-panel active" id="frio-videos">
     <div class="tip-box">
       <div class="tip-box-label">📹 Formato — Video UGC con tu cara</div>
-      <div class="tip-box-text">Tres formatos: <strong>UGC</strong> (mirando a cámara, voz directa, hook personal), <strong>B-ROLL</strong> (voz en off + planos de producto, tela, uso cotidiano), <strong>TEXTO</strong> (copy en pantalla + video ambiente). Cada script indica el formato recomendado. No hacer todos mirando a cámara — alternando formatos se reduce la fatiga y se testea qué conecta más. Sin edición agresiva — cortes limpios y texto de apoyo alcanzan.</div>
+      <div class="tip-box-text">Tres formatos. <strong>UGC</strong>: mirando a cámara, voz directa — requiere tu presencia. <strong>B-ROLL</strong>: grabás el audio solo en casa, un editor pone el video encima (remera puesta, planos de tela, uso cotidiano) — no aparecés en cámara. <strong>DEMO</strong>: manos y producto, sin cara, comparaciones visuales. Alternar formatos reduce fatiga y permite probar qué tipo de creatividad convierte mejor. Sin edición agresiva — cortes limpios y texto de apoyo alcanzan.</div>
     </div>
 
     <!-- Ejecutivo -->
@@ -628,7 +627,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
             <div class="script-section"><div class="script-label">CTA</div><div class="script-text">Conocé el pack — metodounoxuno.com.ar</div></div>
             <div class="script-variants">
           <div class="script-variants-title">Variantes de producción</div>
-          <div class="script-variants-body">Grabá este mismo script 3 veces cambiando solo la remera: <strong>negra · blanca · gris</strong>. Publicalas como creativos distintos en el mismo conjunto de Meta. Variante rápida: mantener guion, duración y encuadre lo más parecido posible para comparar mejor.</div>
+          <div class="script-variants-body">Formato B-roll: grabá el audio en casa con auriculares o micro. Un editor pone el video encima (remera puesta, planos de tela, cuello, hombros, uso cotidiano). <strong>No necesitás aparecer en cámara.</strong> Repetí la voz en off 3 veces cambiando solo la mención de color: <strong>negra · blanca · gris</strong>.</div>
         </div>
             <div class="script-actions"><a href="ads-builder.html?brief=C1" class="script-btn">→ Builder</a><a href="briefs.html#C1" class="script-btn secondary">Ver brief C1</a></div>
           </div>
@@ -675,12 +674,68 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
             <div class="script-section"><div class="script-label">CTA</div><div class="script-text">metodounoxuno.com.ar</div></div>
             <div class="script-variants">
           <div class="script-variants-title">Variantes de producción</div>
-          <div class="script-variants-body">Grabá este mismo script 3 veces cambiando solo la remera: <strong>negra · blanca · gris</strong>. Publicalas como creativos distintos en el mismo conjunto de Meta. Variante rápida: mantener guion, duración y encuadre lo más parecido posible para comparar mejor.</div>
+          <div class="script-variants-body">Formato B-roll: grabá el audio en casa con auriculares o micro. Un editor pone el video encima (remera puesta, planos de tela, cuello, hombros, uso cotidiano). <strong>No necesitás aparecer en cámara.</strong> Repetí la voz en off 3 veces cambiando solo la mención de color: <strong>negra · blanca · gris</strong>.</div>
         </div>
             <div class="script-actions"><a href="ads-builder.html?brief=C4" class="script-btn">→ Builder</a></div>
           </div>
         </div>
 
+      </div>
+    </div>
+
+
+    <!-- CREATIVOS ESPECIALES -->
+    <div class="persona-group" style="border-top:1px solid var(--warm);padding-top:20px;margin-top:8px;">
+      <div class="persona-group-label" style="color:var(--carbon);">Creativos especiales <span class="persona-tag" style="background:var(--carbon);color:rgba(255,255,255,.6);">Formato comparación</span></div>
+      <div class="dolor-subgroup">
+        <div class="dolor-label"><span class="dolor-num" style="background:#5a3a8a;">DEMO</span>Comparación de calce</div>
+        <div class="scripts-grid">
+
+          <div class="script-card" id="sc-comp1">
+            <div class="script-card-header" onclick="toggleScript('sc-comp1')">
+              <div class="script-card-meta">
+                <span class="script-card-id">COMP · Script A</span><span class="script-format fmt-demo">DEMO</span>
+                <span class="script-card-hook">"Puse las dos remeras sobre la mesa. Las grabé."</span>
+              </div>
+              <div class="script-card-controls"><span class="script-letter">A</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
+            </div>
+            <div class="script-body">
+              <div class="script-section"><div class="script-label">Hook (demo — sin cara)</div><div class="script-text">Puse las dos remeras sobre la mesa. Las grabé.</div></div>
+              <div class="script-section"><div class="script-label">Voz en off</div><div class="script-text vo">La izquierda es una básica de shopping. La derecha es UNO × UNO. No digo que la otra esté mal. Solo mostrá lo que pasa con el cuello después de diez lavados. Con el ajuste en los hombros. Con la caída de la tela. Sin hablar.</div></div>
+              <div class="script-section"><div class="script-label">Planos sugeridos</div><div class="script-planos">Ambas remeras sobre superficie neutra (plano cenital) → detalle cuello lado a lado → hombros puestos lado a lado → tela en mano: textura comparada → pack UNO al final</div></div>
+              <div class="script-section"><div class="script-label">Nota de producción</div><div class="script-text" style="color:#5a3a8a;">No mencionar ni mostrar la marca de la otra remera. Usar una básica genérica de shopping o H&M. El video habla solo — la diferencia tiene que ser visible sin explicación.</div></div>
+              <div class="script-section"><div class="script-label">CTA</div><div class="script-text">metodounoxuno.com.ar</div></div>
+              <div class="script-variants">
+                <div class="script-variants-title">Variantes de producción</div>
+                <div class="script-variants-body">Formato <strong>100% sin cara</strong>. Grabá con trípode o soporte. Plano cenital para la mesa, plano americano para cuando están puestas. Variante: grabá la comparación poniéndote vos las dos remeras seguidas — mismo encuadre, misma luz, corte en el medio. Repetí en negro y blanco.</div>
+              </div>
+              <div class="script-actions"><a href="briefs.html" class="script-btn secondary">Ver briefs</a></div>
+            </div>
+          </div>
+
+          <div class="script-card" id="sc-comp2">
+            <div class="script-card-header" onclick="toggleScript('sc-comp2')">
+              <div class="script-card-meta">
+                <span class="script-card-id">COMP · Script B</span><span class="script-format fmt-demo">DEMO</span>
+                <span class="script-card-hook">"Me la pongo. Me saco la otra. Notá la diferencia."</span>
+              </div>
+              <div class="script-card-controls"><span class="script-letter">B</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
+            </div>
+            <div class="script-body">
+              <div class="script-section"><div class="script-label">Hook (mirando a cámara)</div><div class="script-text">Me la pongo. Me saco la otra. Notá la diferencia.</div></div>
+              <div class="script-section"><div class="script-label">Voz en off</div><div class="script-text vo">Esta es una básica que uso hace meses. Esta es UNO × UNO. Me las pongo las dos. No voy a decir cuál es cuál. A los diez segundos ya lo sabés.</div></div>
+              <div class="script-section"><div class="script-label">Planos sugeridos</div><div class="script-planos">Ponerse remera genérica → plano medio, hablar directo → corte → ponerse UNO × UNO → mismo encuadre, mismo plano → silencio 3 segundos → CTA</div></div>
+              <div class="script-section"><div class="script-label">Nota de producción</div><div class="script-text" style="color:#5a3a8a;">La diferencia tiene que ser visible en pantalla: cuello, ajuste en hombros, caída. Si la diferencia no se ve, el video no funciona. Probá con buena luz lateral.</div></div>
+              <div class="script-section"><div class="script-label">CTA</div><div class="script-text">metodounoxuno.com.ar</div></div>
+              <div class="script-variants">
+                <div class="script-variants-title">Variantes de producción</div>
+                <div class="script-variants-body">Versión A: con cara (UGC directo). Versión B: sin cara — solo el cuerpo del cuello para abajo, ponerse y sacarse. Las dos son testeables como creativos distintos en el mismo conjunto de Meta.</div>
+              </div>
+              <div class="script-actions"><a href="briefs.html" class="script-btn secondary">Ver briefs</a></div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
 
@@ -727,7 +782,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
             <div class="script-section"><div class="script-label">CTA</div><div class="script-text">Conocé el pack — metodounoxuno.com.ar</div></div>
             <div class="script-variants">
           <div class="script-variants-title">Variantes de producción</div>
-          <div class="script-variants-body">Grabá este mismo script 3 veces cambiando solo la remera: <strong>negra · blanca · gris</strong>. Publicalas como creativos distintos en el mismo conjunto de Meta. Variante rápida: mantener guion, duración y encuadre lo más parecido posible para comparar mejor.</div>
+          <div class="script-variants-body">Formato B-roll: grabá el audio en casa con auriculares o micro. Un editor pone el video encima (remera puesta, planos de tela, cuello, hombros, uso cotidiano). <strong>No necesitás aparecer en cámara.</strong> Repetí la voz en off 3 veces cambiando solo la mención de color: <strong>negra · blanca · gris</strong>.</div>
         </div>
             <div class="script-actions"><a href="ads-builder.html?brief=C7" class="script-btn">→ Builder</a></div>
           </div>
@@ -753,7 +808,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
             <div class="script-section"><div class="script-label">CTA</div><div class="script-text">Ver cómo está hecha — metodounoxuno.com.ar</div></div>
             <div class="script-variants">
           <div class="script-variants-title">Variantes de producción</div>
-          <div class="script-variants-body">Grabá este mismo script 3 veces cambiando solo la remera: <strong>negra · blanca · gris</strong>. Publicalas como creativos distintos en el mismo conjunto de Meta. Variante rápida: mantener guion, duración y encuadre lo más parecido posible para comparar mejor.</div>
+          <div class="script-variants-body">Formato B-roll: grabá el audio en casa con auriculares o micro. Un editor pone el video encima (remera puesta, planos de tela, cuello, hombros, uso cotidiano). <strong>No necesitás aparecer en cámara.</strong> Repetí la voz en off 3 veces cambiando solo la mención de color: <strong>negra · blanca · gris</strong>.</div>
         </div>
             <div class="script-actions"><a href="ads-builder.html?brief=C10" class="script-btn">→ Builder</a></div>
           </div>
@@ -826,7 +881,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
             <div class="script-section"><div class="script-label">CTA</div><div class="script-text">Resolver la ropa de una vez — metodounoxuno.com.ar</div></div>
             <div class="script-variants">
           <div class="script-variants-title">Variantes de producción</div>
-          <div class="script-variants-body">Grabá este mismo script 3 veces cambiando solo la remera: <strong>negra · blanca · gris</strong>. Publicalas como creativos distintos en el mismo conjunto de Meta. Variante rápida: mantener guion, duración y encuadre lo más parecido posible para comparar mejor.</div>
+          <div class="script-variants-body">Formato B-roll: grabá el audio en casa con auriculares o micro. Un editor pone el video encima (remera puesta, planos de tela, cuello, hombros, uso cotidiano). <strong>No necesitás aparecer en cámara.</strong> Repetí la voz en off 3 veces cambiando solo la mención de color: <strong>negra · blanca · gris</strong>.</div>
         </div>
             <div class="script-actions"><a href="ads-builder.html?brief=C13" class="script-btn">→ Builder</a></div>
           </div>
@@ -852,7 +907,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
             <div class="script-section"><div class="script-label">CTA</div><div class="script-text">Las tres correctas — metodounoxuno.com.ar</div></div>
             <div class="script-variants">
           <div class="script-variants-title">Variantes de producción</div>
-          <div class="script-variants-body">Grabá este mismo script 3 veces cambiando solo la remera: <strong>negra · blanca · gris</strong>. Publicalas como creativos distintos en el mismo conjunto de Meta. Variante rápida: mantener guion, duración y encuadre lo más parecido posible para comparar mejor.</div>
+          <div class="script-variants-body">Formato B-roll: grabá el audio en casa con auriculares o micro. Un editor pone el video encima (remera puesta, planos de tela, cuello, hombros, uso cotidiano). <strong>No necesitás aparecer en cámara.</strong> Repetí la voz en off 3 veces cambiando solo la mención de color: <strong>negra · blanca · gris</strong>.</div>
         </div>
             <div class="script-actions"><a href="ads-builder.html?brief=C16" class="script-btn">→ Builder</a><a href="briefs.html#C16" class="script-btn secondary">Ver brief C16</a></div>
           </div>
@@ -873,7 +928,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
             <div class="script-section"><div class="script-label">CTA</div><div class="script-text">metodounoxuno.com.ar</div></div>
             <div class="script-variants">
           <div class="script-variants-title">Variantes de producción</div>
-          <div class="script-variants-body">Grabá este mismo script 3 veces cambiando solo la remera: <strong>negra · blanca · gris</strong>. Publicalas como creativos distintos en el mismo conjunto de Meta. Variante rápida: mantener guion, duración y encuadre lo más parecido posible para comparar mejor.</div>
+          <div class="script-variants-body">Formato B-roll: grabá el audio en casa con auriculares o micro. Un editor pone el video encima (remera puesta, planos de tela, cuello, hombros, uso cotidiano). <strong>No necesitás aparecer en cámara.</strong> Repetí la voz en off 3 veces cambiando solo la mención de color: <strong>negra · blanca · gris</strong>.</div>
         </div>
             <div class="script-actions"><a href="ads-builder.html?brief=C16" class="script-btn">→ Builder</a></div>
           </div>
@@ -972,7 +1027,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
             <div class="script-section"><div class="script-label">CTA</div><div class="script-text">metodounoxuno.com.ar</div></div>
             <div class="script-variants">
           <div class="script-variants-title">Variantes de producción</div>
-          <div class="script-variants-body">Grabá este mismo script 3 veces cambiando solo la remera: <strong>negra · blanca · gris</strong>. Publicalas como creativos distintos en el mismo conjunto de Meta. Variante rápida: mantener guion, duración y encuadre lo más parecido posible para comparar mejor.</div>
+          <div class="script-variants-body">Formato B-roll: grabá el audio en casa con auriculares o micro. Un editor pone el video encima (remera puesta, planos de tela, cuello, hombros, uso cotidiano). <strong>No necesitás aparecer en cámara.</strong> Repetí la voz en off 3 veces cambiando solo la mención de color: <strong>negra · blanca · gris</strong>.</div>
         </div>
             <div class="script-actions"><a href="ads-builder.html?brief=C22" class="script-btn">→ Builder</a></div>
           </div>
