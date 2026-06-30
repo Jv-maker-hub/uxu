@@ -238,6 +238,22 @@ footer img{height:28px;opacity:.4;}
   .brand-ads-head{flex-direction:column;}
   .brand-ads-grid{grid-template-columns:1fr;}
 }
+.embudo-table-wrap{overflow-x:auto;margin-top:32px;}
+.embudo-comp-table{width:100%;border-collapse:collapse;font-size:14px;}
+.embudo-comp-table th{background:var(--smoke, #2d2d2d);color:var(--silver, #9b9b9b);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:12px 16px;text-align:left;border-bottom:1px solid var(--ash, #404040);}
+.embudo-comp-table td{padding:16px;vertical-align:top;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;color:var(--silver, #9b9b9b);}
+.embudo-comp-table tbody tr:hover td{background:rgba(255,255,255,.02);}
+.etapa-cell{width:100px;}
+.stage-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:4px;}
+.stage-badge.frio{background:rgba(52,152,219,.15);color:#3498db;}
+.stage-badge.tibio{background:rgba(230,126,34,.15);color:#e67e22;}
+.stage-badge.caliente{background:rgba(231,76,60,.15);color:#e74c3c;}
+.stage-badge.rm{background:rgba(155,155,155,.15);color:#9b9b9b;}
+.embudo-lectura{margin-top:40px;padding:24px;background:var(--obsidian, #0d0d0d);border:1px solid var(--smoke, #2d2d2d);border-radius:8px;}
+.embudo-lectura h3{font-size:14px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent, #c8a96e);margin-bottom:16px;}
+.lectura-list{display:flex;flex-direction:column;gap:8px;list-style:none;padding:0;margin:0;}
+.lectura-list li{font-size:14px;color:var(--silver, #9b9b9b);line-height:1.6;padding-left:16px;position:relative;}
+.lectura-list li::before{content:"→";position:absolute;left:0;color:var(--accent, #c8a96e);font-size:12px;}
 </style>
 </head>
 <body>
@@ -1217,5 +1233,66 @@ new Chart(document.getElementById('radarChart'), {
   else init();
 })();
 </script>
+
+<section id="embudo-competitivo" class="section">
+  <div class="section-header">
+    <span class="section-eyebrow">Estrategia</span>
+    <h2>Cómo está armado el embudo de la competencia</h2>
+    <p class="section-sub">Además de mirar marcas y anuncios sueltos, conviene entender qué etapa del embudo trabaja cada competidor: qué usan para captar atención, cómo presentan producto, cómo resuelven objeciones y cómo empujan la conversión.</p>
+  </div>
+
+  <div class="embudo-table-wrap">
+    <table class="embudo-comp-table">
+      <thead>
+        <tr>
+          <th>Etapa</th>
+          <th>Qué hace la competencia</th>
+          <th>Riesgo de copiarlo</th>
+          <th>Oportunidad para UNO × UNO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="etapa-cell"><span class="stage-badge frio">Frío</span></td>
+          <td>Mucho dolor directo, promesas rápidas, cuerpos, calce, incomodidad, precio y descuentos agresivos.</td>
+          <td>Caer en tono agresivo, genérico o demasiado promocional.</td>
+          <td>Activar el dolor con más sobriedad: decisión diaria, placard, uso real, producto cuidado, fotos premium y frases simples.</td>
+        </tr>
+        <tr>
+          <td class="etapa-cell"><span class="stage-badge tibio">Tibio</span></td>
+          <td>Muchas marcas saltan rápido de dolor a oferta. No siempre explican bien el sistema, la tela, el pack o por qué elegir esa básica.</td>
+          <td>Vender solo "calidad/precio" sin construir una razón clara para preferir la marca.</td>
+          <td>Explicar el sistema: tres remeras, colores que funcionan, algodón peinado, calce, uso diario, pack como decisión resuelta.</td>
+        </tr>
+        <tr>
+          <td class="etapa-cell"><span class="stage-badge caliente">Caliente</span></td>
+          <td>Usan garantía, cuotas, envío, descuentos, urgencia, prueba social o testimonios.</td>
+          <td>Depender de promociones o claims difíciles de sostener a largo plazo.</td>
+          <td>Resolver dudas con claridad: talle, cambio, textura, cuello, calce, packaging, precio explicado sin descuento agresivo.</td>
+        </tr>
+        <tr>
+          <td class="etapa-cell"><span class="stage-badge rm">Remarketing</span></td>
+          <td>Recordatorios, promociones, "últimas unidades", descuentos, repetición de oferta.</td>
+          <td>Presionar demasiado y afectar el posicionamiento premium.</td>
+          <td>Recordar con calma: "Si el talle no va, lo resolvemos", "Disponible cuando estés listo", "El valor está en usarla siempre."</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="embudo-lectura">
+    <h3>Lectura para UNO × UNO</h3>
+    <ul class="lectura-list">
+      <li>La competencia produce mucho volumen, especialmente en piezas estáticas.</li>
+      <li>Muchas marcas van rápido a oferta o descuento, sin construir bien la etapa tibia.</li>
+      <li>Hay oportunidad clara de construir mejor la etapa de consideración.</li>
+      <li>UXU debería usar más fotos reales de producto/lifestyle con frases claras.</li>
+      <li>Los videos deben ser pocos, elegidos y útiles — no volumen por volumen.</li>
+      <li>Remarketing debe cerrar sin presionar ni descontar.</li>
+      <li>La oportunidad no es gritar más. Es ordenar mejor la decisión.</li>
+    </ul>
+  </div>
+</section>
+
 </body>
 </html>

@@ -26,6 +26,10 @@
   --red:#e74c3c;
   --green:#27ae60;
   --blue:#3498db;
+  --smoke:#d0cec9;
+  --steel:#888682;
+  --silver:#a8a5a0;
+  --bone:#e8e5e0;
 }
 html{scroll-behavior:smooth;}
 body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--carbon);-webkit-font-smoothing:antialiased;font-size:14px;}
@@ -228,6 +232,24 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
 .stage-ejecucion{display:flex;flex-direction:column;gap:6px;margin-top:8px;}
 .badge-now{font-size:11px;background:rgba(39,174,96,.1);color:#27ae60;padding:4px 8px;border-radius:4px;display:inline-block;}
 .badge-backlog-pill{font-size:11px;background:rgba(155,155,155,.1);color:rgba(255,255,255,.4);padding:4px 8px;border-radius:4px;display:inline-block;}
+
+/* FOTO DETAILS ACCORDION */
+.foto-details{margin-top:16px;border-top:1px solid var(--smoke);padding-top:12px;}
+.foto-details-toggle{cursor:pointer;font-size:12px;color:var(--accent);letter-spacing:.05em;font-weight:600;text-transform:uppercase;list-style:none;user-select:none;}
+.foto-details-toggle::-webkit-details-marker{display:none;}
+.foto-details-toggle::before{content:'+ ';opacity:.7;}
+details[open] .foto-details-toggle::before{content:'− ';}
+.foto-details-body{padding-top:16px;display:flex;flex-direction:column;gap:14px;}
+.foto-detail-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:600px){.foto-detail-row{grid-template-columns:1fr;}}
+.foto-detail-block{display:flex;flex-direction:column;gap:4px;}
+.foto-detail-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);margin-bottom:2px;}
+.foto-detail-block p{font-size:13px;color:var(--silver);line-height:1.6;margin:0;}
+.prompt-text{font-style:italic;background:rgba(200,169,110,.05);border-left:2px solid var(--accent);padding:8px 12px;border-radius:0 4px 4px 0;color:var(--bone) !important;}
+.embudo-link-ext{margin-top:24px;padding:14px 18px;background:rgba(200,169,110,.05);border-left:2px solid var(--accent);border-radius:0 4px 4px 0;}
+.embudo-link-ext p{font-size:13px;color:var(--silver);margin:0;}
+.link-accent{color:var(--accent);text-decoration:none;font-weight:600;}
+.link-accent:hover{text-decoration:underline;}
 </style>
 </head>
 <body>
@@ -329,6 +351,10 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
           <span class="badge-backlog-pill">Backlog: recordatorios y objeciones específicas</span>
         </div>
       </div>
+    </div>
+
+    <div class="embudo-link-ext">
+      <p>Para entender cómo trabajan el embudo otras marcas, ver: <a href="/competidores#embudo-competitivo" class="link-accent">Competidores → Embudo competitivo</a></p>
     </div>
   </div>
 </section>
@@ -693,6 +719,29 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
         <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Activar simplificación sin vender agresivamente.</p>
         <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Placard, remeras ordenadas, luz natural.</p>
         <span class="badge-prod">Diseñar ahora</span>
+        <details class="foto-details">
+          <summary class="foto-details-toggle">Dirección de foto / prompt</summary>
+          <div class="foto-details-body">
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Dirección de arte</span>
+              <p>Placard masculino ordenado, tres remeras básicas en blanco, negro y gris. Luz natural de mañana, estética sobria y premium. Transmitir calma, orden y decisión resuelta. Dejar espacio negativo para texto.</p>
+            </div>
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Prompt para visualizar</span>
+              <p class="prompt-text">Foto editorial sobria de un placard masculino ordenado en un departamento de Buenos Aires, con tres remeras básicas dobladas o colgadas en colores blanco, negro y gris. Luz natural suave de mañana, estética minimalista premium, sin modelo posando, sin exceso de producción. Transmitir calma, orden y decisión resuelta. Dejar espacio negativo para agregar el texto: 'Una decisión menos todos los días.'</p>
+            </div>
+            <div class="foto-detail-row">
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Formatos</span>
+                <p>4:5 feed/ads — 1:1 cuadrado — 9:16 story/reel. Dejar espacio negativo para texto.</p>
+              </div>
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Variantes rápidas</span>
+                <p>Color de remera (negra / blanca / gris) — Plano cerrado vs panorámica — Con o sin modelo — 4:5 / 9:16</p>
+              </div>
+            </div>
+          </div>
+        </details>
       </div>
 
       <div class="p-card">
@@ -702,6 +751,29 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
         <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Presentar el pack como solución simple.</p>
         <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Pack cerrado sobre fondo limpio.</p>
         <span class="badge-prod">Diseñar ahora</span>
+        <details class="foto-details">
+          <summary class="foto-details-toggle">Dirección de foto / prompt</summary>
+          <div class="foto-details-body">
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Dirección de arte</span>
+              <p>Pack cerrado UNO × UNO sobre fondo limpio. Luz suave, plano cenital o 45°. Packaging premium y simple. Dejar aire alrededor del producto.</p>
+            </div>
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Prompt para visualizar</span>
+              <p class="prompt-text">Foto de producto premium de un pack cerrado de remeras básicas UNO × UNO sobre una superficie neutra color crema o gris claro. Luz natural suave, plano cenital o levemente inclinado, composición limpia, mucho espacio negativo, estética minimalista y sobria. El packaging debe verse cuidado, simple y de buena calidad. Dejar espacio para el texto: 'Tres remeras. Un solo sistema.'</p>
+            </div>
+            <div class="foto-detail-row">
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Formatos</span>
+                <p>4:5 feed/ads — 1:1 cuadrado — 9:16 story/reel. Dejar espacio negativo para texto.</p>
+              </div>
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Variantes rápidas</span>
+                <p>Fondo crema vs gris — Plano cenital vs 45° — Pack sobre mesa vs mano — 4:5 / 1:1</p>
+              </div>
+            </div>
+          </div>
+        </details>
       </div>
 
       <div class="p-card">
@@ -711,6 +783,29 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
         <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Mostrar el sistema completo.</p>
         <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Pack abierto con tres remeras visibles.</p>
         <span class="badge-prod">Diseñar ahora</span>
+        <details class="foto-details">
+          <summary class="foto-details-toggle">Dirección de foto / prompt</summary>
+          <div class="foto-details-body">
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Dirección de arte</span>
+              <p>Pack abierto con tres remeras visibles, idealmente blanco, negro y gris. Mostrar orden, textura, packaging y sistema. No recargar.</p>
+            </div>
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Prompt para visualizar</span>
+              <p class="prompt-text">Foto editorial de un pack abierto de tres remeras básicas en colores blanco, negro y gris, presentadas de forma ordenada sobre una superficie neutra. Packaging cuidado, estética premium, luz natural suave, plano limpio con foco en textura, orden y simpleza. Transmitir sistema, practicidad y uso diario. Dejar espacio negativo para agregar el texto: 'Elegís una vez. Funciona todos los días.'</p>
+            </div>
+            <div class="foto-detail-row">
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Formatos</span>
+                <p>4:5 feed/ads — 1:1 cuadrado — 9:16 story/reel. Dejar espacio negativo para texto.</p>
+              </div>
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Variantes rápidas</span>
+                <p>Plano cenital vs lateral — Las tres remeras desplegadas vs dobladas — Con packaging vs sin packaging — 4:5 / 1:1</p>
+              </div>
+            </div>
+          </div>
+        </details>
       </div>
 
       <div class="p-card">
@@ -720,6 +815,29 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
         <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Mostrar calce y calidad sobre el cuerpo.</p>
         <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Foto de producto puesto, plano cuello-hombro.</p>
         <span class="badge-prod">Diseñar ahora</span>
+        <details class="foto-details">
+          <summary class="foto-details-toggle">Dirección de foto / prompt</summary>
+          <div class="foto-details-body">
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Dirección de arte</span>
+              <p>Hombre adulto usando remera básica negra o blanca. Plano recortado de cuello, hombro y torso, sin mostrar demasiado la cara. Se tiene que ver calce, caída y textura. Fondo cotidiano premium.</p>
+            </div>
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Prompt para visualizar</span>
+              <p class="prompt-text">Foto editorial sobria de un hombre adulto usando una remera básica premium negra o blanca. Plano medio recortado en cuello, hombros y torso, con foco en el calce, la caída de la tela y la limpieza visual. Fondo cotidiano de departamento en Buenos Aires, luz natural suave, estética minimalista, sin pose exagerada. Dejar espacio para el texto: 'Lo resolvés una vez. Después no lo pensás más.'</p>
+            </div>
+            <div class="foto-detail-row">
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Formatos</span>
+                <p>4:5 feed/ads — 1:1 cuadrado — 9:16 story/reel. Dejar espacio negativo para texto.</p>
+              </div>
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Variantes rápidas</span>
+                <p>Remera negra vs blanca — Con cara vs sin cara — Plano más cerrado (solo cuello) — Exterior suave vs interior — 4:5 / 9:16</p>
+              </div>
+            </div>
+          </div>
+        </details>
       </div>
 
       <div class="p-card">
@@ -729,6 +847,29 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
         <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Lifestyle que refleja el dolor sin texto agresivo.</p>
         <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Café, notebook, placard al fondo, luz matutina.</p>
         <span class="badge-prod">Diseñar ahora</span>
+        <details class="foto-details">
+          <summary class="foto-details-toggle">Dirección de foto / prompt</summary>
+          <div class="foto-details-body">
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Dirección de arte</span>
+              <p>Escena de mañana: café, notebook, celular, placard o remera cerca. No tiene que parecer stock genérico. Transmitir rutina real y carga mental baja.</p>
+            </div>
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Prompt para visualizar</span>
+              <p class="prompt-text">Foto lifestyle sobria de una mañana en un departamento de Buenos Aires: una taza de café, notebook o celular, una remera básica limpia preparada cerca del placard o sobre una silla. Luz natural de mañana, estética premium y minimalista, clima calmo, sin actuación exagerada. Transmitir rutina, practicidad y una decisión menos antes de empezar el día. Dejar espacio para el texto: 'Qué ponerse no debería ser otra decisión.'</p>
+            </div>
+            <div class="foto-detail-row">
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Formatos</span>
+                <p>4:5 feed/ads — 1:1 cuadrado — 9:16 story/reel. Dejar espacio negativo para texto.</p>
+              </div>
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Variantes rápidas</span>
+                <p>Con café vs sin café — Remera en primer plano vs fondo — Interior luminoso vs intimista — 4:5 / 1:1</p>
+              </div>
+            </div>
+          </div>
+        </details>
       </div>
 
       <div class="p-card">
@@ -738,6 +879,29 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
         <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Dolor de tener mucha ropa pero ninguna que funcione bien.</p>
         <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Remeras apiladas, desorganizadas o de colores mezclados.</p>
         <span class="badge-prod">Diseñar ahora</span>
+        <details class="foto-details">
+          <summary class="foto-details-toggle">Dirección de foto / prompt</summary>
+          <div class="foto-details-body">
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Dirección de arte</span>
+              <p>Pila o cajón con varias remeras, con foco en el contraste entre acumulación y elección correcta. Una remera UNO × UNO destacada de forma sutil. No hacerlo caótico ni feo.</p>
+            </div>
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Prompt para visualizar</span>
+              <p class="prompt-text">Foto editorial de un placard o cajón con varias remeras básicas apiladas, mostrando sensación de acumulación pero con estética cuidada. Una remera básica de mejor calidad queda destacada de forma sutil, más ordenada y visible. Luz natural suave, tonos neutros, estilo minimalista. Transmitir el problema de tener muchas prendas pero no la correcta. Dejar espacio para el texto: 'Placard lleno. Sin la correcta.'</p>
+            </div>
+            <div class="foto-detail-row">
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Formatos</span>
+                <p>4:5 feed/ads — 1:1 cuadrado — 9:16 story/reel. Dejar espacio negativo para texto.</p>
+              </div>
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Variantes rápidas</span>
+                <p>Pila desordenada vs semiordenada — Con remera destacada vs sin marca clara — Cajón vs perchero — 4:5 / 1:1</p>
+              </div>
+            </div>
+          </div>
+        </details>
       </div>
 
       <div class="p-card">
@@ -747,6 +911,29 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
         <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Mostrar calidad del material sin claims absolutos.</p>
         <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Macro del cuello, plano de la tela, detalle costura.</p>
         <span class="badge-prod">Diseñar ahora</span>
+        <details class="foto-details">
+          <summary class="foto-details-toggle">Dirección de foto / prompt</summary>
+          <div class="foto-details-body">
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Dirección de arte</span>
+              <p>Primer plano de cuello, costura o textura de la tela. Puede aparecer una mano tocando la tela. Transmitir calidad sin ser técnico.</p>
+            </div>
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Prompt para visualizar</span>
+              <p class="prompt-text">Primer plano editorial de una remera básica premium, mostrando detalle del cuello, costura y textura de la tela. Una mano toca suavemente la tela para transmitir suavidad y cuerpo. Luz natural lateral, fondo neutro, estética limpia y premium. Comunicar calidad de forma simple, sin parecer técnica ni industrial. Dejar espacio para el texto: 'Se nota en la mano. Se confirma con el uso.'</p>
+            </div>
+            <div class="foto-detail-row">
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Formatos</span>
+                <p>4:5 feed/ads — 1:1 cuadrado — 9:16 story/reel. Dejar espacio negativo para texto.</p>
+              </div>
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Variantes rápidas</span>
+                <p>Tela negra vs blanca — Solo cuello vs detalle costura — Con mano vs sin mano — Macro muy cerrado vs semi-cerrado — 4:5 / 1:1</p>
+              </div>
+            </div>
+          </div>
+        </details>
       </div>
 
       <div class="p-card">
@@ -756,6 +943,29 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
         <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Ángulo regalo como opción secundaria o para fechas especiales.</p>
         <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Pack cerrado con presentación de regalo.</p>
         <span class="badge-prod">Diseñar ahora (secundario)</span>
+        <details class="foto-details">
+          <summary class="foto-details-toggle">Dirección de foto / prompt</summary>
+          <div class="foto-details-body">
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Dirección de arte</span>
+              <p>Packaging UNO × UNO como regalo. Puede estar en manos o sobre mesa preparada, pero el foco debe estar en el pack, no en el avatar. El ángulo regalo es secundario: sirve para fechas especiales o piezas puntuales, no es el eje principal de la marca.</p>
+            </div>
+            <div class="foto-detail-block">
+              <span class="foto-detail-label">Prompt para visualizar</span>
+              <p class="prompt-text">Foto editorial sobria de un pack de remeras UNO × UNO presentado como regalo sobre una mesa neutra o sostenido de forma natural por una persona, sin que el rostro sea protagonista. Packaging cuidado, luz natural suave, estética premium y minimalista. Transmitir regalo útil, cotidiano y bien elegido, sin parecer campaña romántica ni exagerada. Dejar espacio para el texto: 'Dice que no necesita nada. Ya sé.'</p>
+            </div>
+            <div class="foto-detail-row">
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Formatos</span>
+                <p>4:5 feed/ads — 1:1 cuadrado — 9:16 story/reel. Dejar espacio negativo para texto.</p>
+              </div>
+              <div class="foto-detail-block">
+                <span class="foto-detail-label">Variantes rápidas</span>
+                <p>Pack solo vs con manos — Mesa natural vs envuelto — Con tarjeta vs sin tarjeta — 4:5 / 1:1</p>
+              </div>
+            </div>
+          </div>
+        </details>
       </div>
 
     </div>
