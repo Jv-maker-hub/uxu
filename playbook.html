@@ -212,6 +212,22 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
 @media(max-width:480px){
   .photo-grid{grid-template-columns:1fr;}
 }
+
+/* FUNNEL GRID */
+.funnel-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px;}
+@media(max-width:768px){.funnel-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.funnel-grid{grid-template-columns:1fr;}}
+.funnel-stage{background:var(--carbon);border:1px solid var(--warm);border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:12px;color:#fff;}
+.stage-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:4px;display:inline-block;width:fit-content;}
+.stage-label.frio{background:rgba(52,152,219,.15);color:#3498db;}
+.stage-label.tibio{background:rgba(230,126,34,.15);color:#e67e22;}
+.stage-label.caliente{background:rgba(231,76,60,.15);color:#e74c3c;}
+.stage-label.rm{background:rgba(155,155,155,.15);color:#9b9b9b;}
+.stage-objetivo,.stage-que{font-size:13px;color:rgba(255,255,255,.6);line-height:1.6;}
+.stage-ejemplo{font-size:13px;color:var(--accent);font-style:italic;}
+.stage-ejecucion{display:flex;flex-direction:column;gap:6px;margin-top:8px;}
+.badge-now{font-size:11px;background:rgba(39,174,96,.1);color:#27ae60;padding:4px 8px;border-radius:4px;display:inline-block;}
+.badge-backlog-pill{font-size:11px;background:rgba(155,155,155,.1);color:rgba(255,255,255,.4);padding:4px 8px;border-radius:4px;display:inline-block;}
 </style>
 </head>
 <body>
@@ -233,14 +249,14 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
 
 <!-- ANCHOR NAV -->
 <nav class="anchor-nav">
-  <a href="#primera-ejecucion">Primera ejecución</a>
-  <a href="#que-producir">Qué producir</a>
-  <a href="#frases-madre">Textos aprobados</a>
-  <a href="#textos-evitar">Textos a evitar</a>
-  <a href="#backlog">Backlog</a>
-  <a href="#diagnostico">Diagnóstico</a>
-  <a href="#evolucion">Evolución</a>
   <a href="#embudo">Embudo</a>
+  <a href="#primera-ejecucion">Primera ejecución</a>
+  <a href="#videos">Videos</a>
+  <a href="#fotos">Fotos</a>
+  <a href="#carruseles">Carruseles</a>
+  <a href="#backlog">Backlog</a>
+  <a href="#textos">Textos</a>
+  <a href="#diagnostico">Diagnóstico</a>
 </nav>
 
 <!-- HERO -->
@@ -257,6 +273,65 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
   </div>
 </div>
 
+
+<!-- SECCIÓN 2: CÓMO FUNCIONA EL EMBUDO -->
+<section class="section" id="embudo">
+  <div class="section-inner">
+    <p class="section-eyebrow">El sistema</p>
+    <h2 class="section-title">Cómo funciona el embudo</h2>
+    <p class="section-sub">Cada pieza cumple una función distinta. Frío activa el problema. Tibio presenta el sistema. Caliente resuelve dudas. Remarketing recuerda la decisión sin presionar.</p>
+
+    <div class="funnel-grid">
+      <!-- FRÍO -->
+      <div class="funnel-stage">
+        <div class="stage-label frio">Frío</div>
+        <p class="stage-objetivo"><strong>Objetivo:</strong> que se vea reflejado en el problema.</p>
+        <p class="stage-que"><strong>Qué usamos:</strong> videos con hook + fotos con frase sobre producto o lifestyle.</p>
+        <p class="stage-ejemplo">"¿Cuántas decisiones tomás antes de las 9 AM?"</p>
+        <div class="stage-ejecucion">
+          <span class="badge-now">Primera ejecución: 4 videos + 6–8 fotos</span>
+          <span class="badge-backlog-pill">Backlog: scripts adicionales</span>
+        </div>
+      </div>
+
+      <!-- TIBIO -->
+      <div class="funnel-stage">
+        <div class="stage-label tibio">Tibio</div>
+        <p class="stage-objetivo"><strong>Objetivo:</strong> explicar qué es UNO × UNO.</p>
+        <p class="stage-que"><strong>Qué usamos:</strong> pack, producto, carruseles, detalles.</p>
+        <p class="stage-ejemplo">"Tres remeras. Un solo sistema."</p>
+        <div class="stage-ejecucion">
+          <span class="badge-now">Primera ejecución: 2–3 piezas</span>
+          <span class="badge-backlog-pill">Backlog: briefs educativos y comparativos</span>
+        </div>
+      </div>
+
+      <!-- CALIENTE -->
+      <div class="funnel-stage">
+        <div class="stage-label caliente">Caliente</div>
+        <p class="stage-objetivo"><strong>Objetivo:</strong> resolver dudas de talle, calidad, precio, envío o confianza.</p>
+        <p class="stage-que"><strong>Qué usamos:</strong> cambio de talle, detalle producto, prueba visual.</p>
+        <p class="stage-ejemplo">"Si el talle no va, lo resolvemos."</p>
+        <div class="stage-ejecucion">
+          <span class="badge-now">Primera ejecución: 0–1 pieza si hay tráfico</span>
+          <span class="badge-backlog-pill">Backlog: testimonios, objeciones, prueba de calidad</span>
+        </div>
+      </div>
+
+      <!-- REMARKETING -->
+      <div class="funnel-stage">
+        <div class="stage-label rm">Remarketing</div>
+        <p class="stage-objetivo"><strong>Objetivo:</strong> recordar sin perseguir ni descontar.</p>
+        <p class="stage-que"><strong>Qué usamos:</strong> pack, recordatorio simple, objeción puntual.</p>
+        <p class="stage-ejemplo">"Disponible cuando estés listo."</p>
+        <div class="stage-ejecucion">
+          <span class="badge-now">Primera ejecución: 1–2 piezas si hay audiencia</span>
+          <span class="badge-backlog-pill">Backlog: recordatorios y objeciones específicas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- SECCIÓN 3: PRIMERA EJECUCIÓN -->
 <div class="section" id="primera-ejecucion">
@@ -330,7 +405,7 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
           <td class="id-cell">V3</td>
           <td>Video UGC</td>
           <td>Frío/Tibio</td>
-          <td>Pareja que Regala</td>
+          <td>Ángulo regalo</td>
           <td class="hook-cell">"Dice que no necesita nada. Ya sé."</td>
           <td class="pri">🔴 Prioridad</td>
           <td><span class="badge-prod">Producir ahora</span></td>
@@ -384,7 +459,7 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
           <td class="id-cell">F5</td>
           <td>Foto regalo</td>
           <td>Frío/Tibio</td>
-          <td>Pareja que Regala</td>
+          <td>Ángulo regalo</td>
           <td class="hook-cell">"Dice que no necesita nada. Ya sé."</td>
           <td class="pri">🟡 Importante</td>
           <td><span class="badge-prod">Producir ahora</span></td>
@@ -409,12 +484,12 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
         </tr>
         <tr>
           <td class="id-cell">F8</td>
-          <td>Foto detalle</td>
-          <td>Frío</td>
-          <td>General</td>
-          <td class="hook-cell">"Se nota en la mano. Se confirma con el uso."</td>
-          <td class="pri">🟡 Importante</td>
-          <td><span class="badge-prod">Producir ahora</span></td>
+          <td>Foto regalo</td>
+          <td>Frío/Tibio</td>
+          <td>Regalo / Ángulo secundario</td>
+          <td class="hook-cell">"Dice que no necesita nada. Ya sé."</td>
+          <td class="pri">🟢 Secundario</td>
+          <td><span class="badge-prod">Diseñar ahora (secundario)</span></td>
         </tr>
         <tr>
           <td class="id-cell">CARR1</td>
@@ -468,10 +543,10 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
 </div>
 
 <!-- 4A: VIDEOS -->
-<div class="section">
+<div class="section" id="videos">
   <div class="section-inner">
     <p class="section-eyebrow">4A — Videos a grabar ahora</p>
-    <p style="font-size:13px;color:var(--dark);margin-bottom:20px;">Cuatro videos en orden de prioridad. Script colapsado: expandir solo para producir.</p>
+    <p style="font-size:13px;color:var(--dark);margin-bottom:20px;">Cinco videos en orden de prioridad. V5 es opcional. Script colapsado: expandir solo para producir.</p>
 
     <div class="video-grid">
 
@@ -481,9 +556,10 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
           <span class="v-card-badge">🔴 Prioridad #1</span>
         </div>
         <div class="v-card-body">
-          <div class="v-card-persona">Ejecutivo Saturado · UGC cámara frontal</div>
+          <div class="v-card-persona">Video Frío — Ejecutivo Saturado · UGC cámara frontal</div>
           <div class="v-card-hook">"¿Cuántas decisiones tomás antes de las 9 de la mañana?"</div>
-          <div class="v-card-why">El video más alineado con la promesa madre. No vende una remera: vende una decisión menos.</div>
+          <div class="v-card-why">Activa el dolor de decisión diaria. No vende una remera, vende una decisión menos.</div>
+          <div class="v-card-why"><strong>Asset:</strong> Vos hablando a cámara + apoyo visual de mañana, café o placard.</div>
         </div>
         <button class="acc-trigger" onclick="toggleAcc(this)">
           Ver script <span class="acc-arrow">▾</span>
@@ -503,9 +579,10 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
           <span class="v-card-badge">🔴 Prioridad #2</span>
         </div>
         <div class="v-card-body">
-          <div class="v-card-persona">Viajó y Probó · UGC + apoyo visual (valija, tela, pack)</div>
+          <div class="v-card-persona">Video Frío — Viajó y Probó · UGC + apoyo visual</div>
           <div class="v-card-hook">"¿Cuándo fue la última vez que trajiste remeras del exterior?"</div>
-          <div class="v-card-why">Específico, argentino. Conecta con quien ya conoce el estándar y no lo encuentra acá.</div>
+          <div class="v-card-why">Conecta con quien ya conoce el estándar de una buena básica y no lo encuentra acá.</div>
+          <div class="v-card-why"><strong>Asset:</strong> Vos hablando + b-roll de pack o tela.</div>
         </div>
         <button class="acc-trigger" onclick="toggleAcc(this)">
           Ver script <span class="acc-arrow">▾</span>
@@ -525,31 +602,10 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
           <span class="v-card-badge">🔴 Prioridad #3</span>
         </div>
         <div class="v-card-body">
-          <div class="v-card-persona">Pareja que Regala · Voz propia o femenina</div>
-          <div class="v-card-hook">"Dice que no necesita nada. Ya sé."</div>
-          <div class="v-card-why">Verdad cotidiana, simple, fuerte. Abre la compra de regalo sin artificios.</div>
-        </div>
-        <button class="acc-trigger" onclick="toggleAcc(this)">
-          Ver script <span class="acc-arrow">▾</span>
-        </button>
-        <div class="acc-body">
-          "Pero hay cosas que usa todos los días y casi nunca se compra bien. Tres remeras básicas, bien hechas, en colores que funcionan. No es el regalo más rebuscado. Es el que probablemente más use."<br><br>
-          <strong>CTA:</strong> "Regalo que se usa."
-        </div>
-        <div class="v-card-actions">
-          <a href="ads-builder.html?stage=frio&format=video&hook=Pareja+Regalo" class="btn">Crear en Builder</a>
-        </div>
-      </div>
-
-      <div class="v-card">
-        <div class="v-card-head">
-          <span class="v-card-id">V4</span>
-          <span class="v-card-badge">🔴 Prioridad #4</span>
-        </div>
-        <div class="v-card-body">
-          <div class="v-card-persona">Demo producto · B-roll / manos / plano cenital</div>
+          <div class="v-card-persona">Video Frío/Tibio — Demo Producto · B-roll / manos / plano cenital</div>
           <div class="v-card-hook">"Esto es lo que miro en una remera básica."</div>
-          <div class="v-card-why">No depende de actuación. Muestra cuello, tela, caída y pack. Directo al producto.</div>
+          <div class="v-card-why">Muestra calidad sin sonar técnico. No depende de actuación.</div>
+          <div class="v-card-why"><strong>Asset:</strong> Pack, remera desplegada, detalle cuello y tela.</div>
         </div>
         <button class="acc-trigger" onclick="toggleAcc(this)">
           Ver script <span class="acc-arrow">▾</span>
@@ -563,12 +619,58 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
         </div>
       </div>
 
+      <div class="v-card">
+        <div class="v-card-head">
+          <span class="v-card-id">V4</span>
+          <span class="v-card-badge">🔴 Prioridad #4</span>
+        </div>
+        <div class="v-card-body">
+          <div class="v-card-persona">Video Frío — Minimalista / Placard · UGC propio o b-roll</div>
+          <div class="v-card-hook">"Placard lleno. Sin la correcta."</div>
+          <div class="v-card-why">Activa el reconocimiento del problema: mucho ropa, ninguna funciona bien.</div>
+          <div class="v-card-why"><strong>Asset:</strong> Placard ordenado o desordenado, remeras apiladas.</div>
+        </div>
+        <button class="acc-trigger" onclick="toggleAcc(this)">
+          Ver script <span class="acc-arrow">▾</span>
+        </button>
+        <div class="acc-body">
+          "Tenés diez remeras en el placard y siempre terminás eligiendo la misma. Porque es la única que funciona bien. UNO × UNO es el pack que resuelve eso de una vez."<br><br>
+          <strong>CTA:</strong> "Ver el pack."
+        </div>
+        <div class="v-card-actions">
+          <a href="ads-builder.html?stage=frio&format=video&hook=Minimalista+Placard" class="btn">Crear en Builder</a>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-card-head">
+          <span class="v-card-id">V5</span>
+          <span class="v-card-badge">🟡 Opcional</span>
+        </div>
+        <div class="v-card-body">
+          <div class="v-card-persona">Video Frío — Ángulo regalo · Voz femenina o UGC externo</div>
+          <div class="v-card-hook">"Dice que no necesita nada. Ya sé."</div>
+          <div class="v-card-why">Activa compra de regalo útil. Formato secundario para fechas especiales.</div>
+          <div class="v-card-why"><strong>Asset:</strong> Packaging, pack cerrado.</div>
+        </div>
+        <button class="acc-trigger" onclick="toggleAcc(this)">
+          Ver script <span class="acc-arrow">▾</span>
+        </button>
+        <div class="acc-body">
+          "Pero hay cosas que usa todos los días y casi nunca se compra bien. Tres remeras básicas, bien hechas, en colores que funcionan. No es el regalo más rebuscado. Es el que probablemente más use."<br><br>
+          <strong>CTA:</strong> "Regalo que se usa."
+        </div>
+        <div class="v-card-actions">
+          <a href="ads-builder.html?stage=frio&format=video&hook=Regalo" class="btn">Crear en Builder</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
 
 <!-- 4B: FOTOS -->
-<div class="section" style="background:var(--cream);">
+<div class="section" id="fotos" style="background:var(--cream);">
   <div class="section-inner">
     <p class="section-eyebrow">4B — Fotos a diseñar ahora</p>
     <p style="font-size:13px;color:var(--dark);margin-bottom:16px;">8 piezas estáticas. La frase vive sobre una imagen real, no sobre fondo negro.</p>
@@ -586,58 +688,74 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
 
       <div class="p-card">
         <div class="p-card-head"><span class="p-card-id">F1</span><span class="pri">🔴 Prioridad</span></div>
-        <div class="p-card-desc">Pack cerrado · producto</div>
-        <div class="p-card-hook">"Tres remeras. Un solo sistema."</div>
-        <span class="badge-prod">Producir ahora</span>
+        <div class="p-card-desc">Foto Frío — Placard ordenado</div>
+        <div class="p-card-hook">"Una decisión menos todos los días."</div>
+        <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Activar simplificación sin vender agresivamente.</p>
+        <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Placard, remeras ordenadas, luz natural.</p>
+        <span class="badge-prod">Diseñar ahora</span>
       </div>
 
       <div class="p-card">
         <div class="p-card-head"><span class="p-card-id">F2</span><span class="pri">🔴 Prioridad</span></div>
-        <div class="p-card-desc">Pack abierto / tres remeras visibles</div>
-        <div class="p-card-hook">"Elegís una vez. Funciona todos los días."</div>
-        <span class="badge-prod">Producir ahora</span>
+        <div class="p-card-desc">Foto Frío — Pack cerrado</div>
+        <div class="p-card-hook">"Tres remeras. Un solo sistema."</div>
+        <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Presentar el pack como solución simple.</p>
+        <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Pack cerrado sobre fondo limpio.</p>
+        <span class="badge-prod">Diseñar ahora</span>
       </div>
 
       <div class="p-card">
         <div class="p-card-head"><span class="p-card-id">F3</span><span class="pri">🔴 Prioridad</span></div>
-        <div class="p-card-desc">Remera negra puesta / plano cuello y hombro</div>
-        <div class="p-card-hook">"Lo resolvés una vez. Después no lo pensás más."</div>
-        <span class="badge-prod">Producir ahora</span>
+        <div class="p-card-desc">Foto Frío — Pack abierto / tres remeras visibles</div>
+        <div class="p-card-hook">"Elegís una vez. Funciona todos los días."</div>
+        <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Mostrar el sistema completo.</p>
+        <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Pack abierto con tres remeras visibles.</p>
+        <span class="badge-prod">Diseñar ahora</span>
       </div>
 
       <div class="p-card">
         <div class="p-card-head"><span class="p-card-id">F4</span><span class="pri">🔴 Prioridad</span></div>
-        <div class="p-card-desc">Placard ordenado</div>
-        <div class="p-card-hook">"Una decisión menos todos los días."</div>
-        <span class="badge-prod">Producir ahora</span>
+        <div class="p-card-desc">Foto Frío — Remera puesta / cuello y hombro</div>
+        <div class="p-card-hook">"Lo resolvés una vez. Después no lo pensás más."</div>
+        <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Mostrar calce y calidad sobre el cuerpo.</p>
+        <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Foto de producto puesto, plano cuello-hombro.</p>
+        <span class="badge-prod">Diseñar ahora</span>
       </div>
 
       <div class="p-card">
         <div class="p-card-head"><span class="p-card-id">F5</span><span class="pri">🟡 Importante</span></div>
-        <div class="p-card-desc">Packaging como regalo</div>
-        <div class="p-card-hook">"Dice que no necesita nada. Ya sé."</div>
-        <span class="badge-prod">Producir ahora</span>
+        <div class="p-card-desc">Foto Frío — Lifestyle mañana</div>
+        <div class="p-card-hook">"Qué ponerse no debería ser otra decisión."</div>
+        <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Lifestyle que refleja el dolor sin texto agresivo.</p>
+        <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Café, notebook, placard al fondo, luz matutina.</p>
+        <span class="badge-prod">Diseñar ahora</span>
       </div>
 
       <div class="p-card">
         <div class="p-card-head"><span class="p-card-id">F6</span><span class="pri">🟡 Importante</span></div>
-        <div class="p-card-desc">Lifestyle mañana / café / notebook</div>
-        <div class="p-card-hook">"Qué ponerse no debería ser otra decisión."</div>
-        <span class="badge-prod">Producir ahora</span>
+        <div class="p-card-desc">Foto Frío — Pila de remeras</div>
+        <div class="p-card-hook">"Placard lleno. Sin la correcta."</div>
+        <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Dolor de tener mucha ropa pero ninguna que funcione bien.</p>
+        <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Remeras apiladas, desorganizadas o de colores mezclados.</p>
+        <span class="badge-prod">Diseñar ahora</span>
       </div>
 
       <div class="p-card">
         <div class="p-card-head"><span class="p-card-id">F7</span><span class="pri">🟡 Importante</span></div>
-        <div class="p-card-desc">Pila de remeras de uso diario</div>
-        <div class="p-card-hook">"Placard lleno. Sin la correcta."</div>
-        <span class="badge-prod">Producir ahora</span>
+        <div class="p-card-desc">Foto Frío/Tibio — Detalle cuello / tela</div>
+        <div class="p-card-hook">"Se nota en la mano. Se confirma con el uso."</div>
+        <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Mostrar calidad del material sin claims absolutos.</p>
+        <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Macro del cuello, plano de la tela, detalle costura.</p>
+        <span class="badge-prod">Diseñar ahora</span>
       </div>
 
       <div class="p-card">
-        <div class="p-card-head"><span class="p-card-id">F8</span><span class="pri">🟡 Importante</span></div>
-        <div class="p-card-desc">Detalle cuello / tela</div>
-        <div class="p-card-hook">"Se nota en la mano. Se confirma con el uso."</div>
-        <span class="badge-prod">Producir ahora</span>
+        <div class="p-card-head"><span class="p-card-id">F8</span><span class="pri">🟢 Secundario</span></div>
+        <div class="p-card-desc">Foto Frío/Tibio — Packaging regalo</div>
+        <div class="p-card-hook">"Dice que no necesita nada. Ya sé."</div>
+        <p style="font-size:11px;color:var(--mid);margin-top:4px;"><strong>Objetivo:</strong> Ángulo regalo como opción secundaria o para fechas especiales.</p>
+        <p style="font-size:11px;color:var(--mid);"><strong>Asset:</strong> Pack cerrado con presentación de regalo.</p>
+        <span class="badge-prod">Diseñar ahora (secundario)</span>
       </div>
 
     </div>
@@ -645,7 +763,7 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
 </div>
 
 <!-- 4C: CARRUSELES -->
-<div class="section">
+<div class="section" id="carruseles">
   <div class="section-inner">
     <p class="section-eyebrow">4C — Carruseles</p>
     <p style="font-size:13px;color:var(--dark);margin-bottom:20px;">Dos carruseles iniciales. Educativos, directos, sin urgencia.</p>
@@ -695,25 +813,46 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
 
 
 <!-- SECCIÓN 5: TEXTOS APROBADOS -->
-<div class="section" id="frases-madre">
+<div class="section" id="textos">
+  <!-- anchor -->
+  <div id="frases-madre" style="position:relative;top:-48px;"></div>
   <div class="section-inner">
     <p class="section-eyebrow">Sección 5</p>
     <h2 class="section-title">Textos que sí usamos</h2>
-    <p class="section-sub">Frases aprobadas. Directo, adulto, sin artificios. Funcionan como headline, copy de imagen o CTA.</p>
-    <div class="phrase-grid">
-      <div class="phrase-card">"Elegís una vez. Funciona todos los días."</div>
+    <p class="section-sub">Frases aprobadas organizadas por categoría. Directo, adulto, sin artificios. Funcionan como headline, copy de imagen o CTA.</p>
+
+    <p style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;">Frío / Dolor</p>
+    <div class="phrase-grid" style="margin-bottom:24px;">
       <div class="phrase-card">"Una decisión menos todos los días."</div>
-      <div class="phrase-card">"Tres remeras. Un solo sistema."</div>
-      <div class="phrase-card">"Lo resolvés una vez. Después no lo pensás más."</div>
       <div class="phrase-card">"Qué ponerse no debería ser otra decisión."</div>
       <div class="phrase-card">"Placard lleno. Sin la correcta."</div>
+    </div>
+
+    <p style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;">Sistema / Pack</p>
+    <div class="phrase-grid" style="margin-bottom:24px;">
+      <div class="phrase-card">"Elegís una vez. Funciona todos los días."</div>
+      <div class="phrase-card">"Tres remeras. Un solo sistema."</div>
+      <div class="phrase-card">"Negro. Blanco. Gris. Lo que siempre funciona."</div>
+    </div>
+
+    <p style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;">Producto / Calidad</p>
+    <div class="phrase-grid" style="margin-bottom:24px;">
+      <div class="phrase-card">"Se nota en la mano. Se confirma con el uso."</div>
+      <div class="phrase-card">"Te la ponés y seguís con tu día."</div>
+      <div class="phrase-card">"Algodón peinado: más suave, con más cuerpo y mejor sensación."</div>
+    </div>
+
+    <p style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;">Regalo</p>
+    <div class="phrase-grid" style="margin-bottom:24px;">
       <div class="phrase-card">"Dice que no necesita nada. Ya sé."</div>
       <div class="phrase-card">"El regalo que sí usa."</div>
-      <div class="phrase-card">"El uniforme diario."</div>
-      <div class="phrase-card">"Te la ponés y seguís con tu día."</div>
-      <div class="phrase-card">"Se nota en la mano. Se confirma con el uso."</div>
-      <div class="phrase-card">"Negro. Blanco. Gris. Lo que siempre funciona."</div>
+    </div>
+
+    <p style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;">Cambio / Confianza</p>
+    <div class="phrase-grid" style="margin-bottom:16px;">
       <div class="phrase-card">"Si el talle no va, lo resolvemos."</div>
+      <div class="phrase-card">"Cambio fácil de talle."</div>
+      <div class="phrase-card">"El talle tiene solución."</div>
     </div>
   </div>
 </div>
@@ -861,7 +1000,7 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
 
     <div class="backlog-group">
       <button class="backlog-trigger" onclick="toggleBacklog(this)">
-        Pareja que Regala — variantes <span class="acc-arrow">▾</span>
+        Ángulo regalo — variantes <span class="acc-arrow">▾</span>
       </button>
       <div class="backlog-body">
         <div class="backlog-items">
@@ -993,6 +1132,10 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
       </div>
 
     </div>
+
+    <div class="tip-box" style="margin-top:24px;">
+      <strong>Insight competitivo:</strong> la competencia usa mucho volumen creativo y muchas piezas estáticas. UNO × UNO necesita producir variedad, pero con foco: producto real, fotos sobrias, frases claras y videos bien elegidos. <a href="competidores.html" style="color:var(--carbon);">Ver análisis completo en /competidores →</a>
+    </div>
   </div>
 </div>
 
@@ -1034,61 +1177,7 @@ td.hook-cell{font-style:italic;color:var(--carbon);max-width:280px;}
 </div>
 
 
-<!-- SECCIÓN 10: EMBUDO -->
-<div class="section" id="embudo" style="background:var(--cream);">
-  <div class="section-inner">
-    <p class="section-eyebrow">Sección 10 — Referencia secundaria</p>
-    <h2 class="section-title">Embudo completo</h2>
-    <p class="section-sub">Vista compacta de cada etapa. Referencia — no es por dónde empezar.</p>
 
-    <table class="embudo-table">
-      <thead>
-        <tr>
-          <th>Etapa</th>
-          <th>Frío</th>
-          <th>Tibio</th>
-          <th>Caliente</th>
-          <th>Remarketing</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Objetivo</td>
-          <td>Activar el dolor, frenar el scroll</td>
-          <td>Reforzar convicción, educar</td>
-          <td>Remover última objeción</td>
-          <td>Cerrar sin descuento</td>
-        </tr>
-        <tr>
-          <td>Métricas Meta</td>
-          <td>CTR, retención 3s, costo por landing view</td>
-          <td>Tiempo en sitio, add to cart</td>
-          <td>Add to cart, inicio checkout</td>
-          <td>Compra, costo por compra</td>
-        </tr>
-        <tr>
-          <td>Primera ejecución</td>
-          <td>4 videos + 6–8 fotos</td>
-          <td>2–3 piezas (foto + carrusel)</td>
-          <td>1–2 si hay tráfico</td>
-          <td>1–2 si hay tráfico</td>
-        </tr>
-        <tr>
-          <td>Backlog disponible</td>
-          <td>16 scripts / piezas</td>
-          <td>9 briefs</td>
-          <td>8 briefs</td>
-          <td>4 scripts</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="embudo-insight">
-      <strong>Contexto competitivo:</strong> La competencia usa mucho volumen creativo con énfasis en descuentos y urgencia. UNO × UNO debe producir suficiente variedad sin perder foco: producto real, fotos sobrias, frases claras y videos bien elegidos.<br><br>
-      <a href="competidores.html" style="color:rgba(255,255,255,.4);font-size:11px;letter-spacing:.06em;">Ver análisis completo en /competidores →</a>
-    </div>
-  </div>
-</div>
 
 <!-- FOOTER -->
 <div style="background:var(--carbon);padding:24px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
