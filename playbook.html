@@ -106,6 +106,9 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 
 /* PERSONA GROUP LABEL */
 .persona-group{margin-bottom:32px;}
+.dolor-subgroup{margin-bottom:20px;}
+.dolor-label{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.dolor-num{background:var(--carbon);color:rgba(255,255,255,.7);padding:2px 7px;border-radius:1px;font-size:8px;letter-spacing:.1em;}
 .persona-group-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--warm);display:flex;align-items:center;gap:10px;}
 .persona-tag{font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;background:var(--warm);border-radius:1px;color:var(--dark);}
 
@@ -426,6 +429,8 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
     <!-- Ejecutivo -->
     <div class="persona-group">
       <div class="persona-group-label">Ejecutivo Saturado <span class="persona-tag">Decisiones / Energía mental</span></div>
+      <div class="dolor-subgroup">
+      <div class="dolor-label"><span class="dolor-num">D1</span>Fatiga de decisiones</div>
       <div class="scripts-grid">
 
         <div class="script-card" id="sc-ej1a">
@@ -434,8 +439,9 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
               <span class="script-card-id">EJ · D1 · Script A</span>
               <span class="script-card-hook">"¿Cuántas decisiones tomás antes de las 9 de la mañana?"</span>
             </div>
-            <div style="display:flex;gap:6px;align-items:center;">
+            <div class="script-card-controls">
               <span class="script-letter">A</span>
+              <span class="script-expand-hint">ver script</span>
               <span class="script-toggle">▾</span>
             </div>
           </div>
@@ -478,7 +484,12 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
           </div>
         </div>
 
-        <div class="script-card" id="sc-ej2a">
+              </div>
+    </div>
+    <div class="dolor-subgroup">
+      <div class="dolor-label"><span class="dolor-num">D2</span>Durabilidad / costo de reposición</div>
+      <div class="scripts-grid">
+        div class="script-card" id="sc-ej2a">
           <div class="script-card-header" onclick="toggleScript('sc-ej2a')">
             <div class="script-card-meta">
               <span class="script-card-id">EJ · D2 · Script A</span>
@@ -526,6 +537,8 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
     <!-- Viajó y Probó -->
     <div class="persona-group">
       <div class="persona-group-label">Viajó y Probó <span class="persona-tag">Calidad exterior / Decepción local</span></div>
+      <div class="dolor-subgroup">
+      <div class="dolor-label"><span class="dolor-num">D1</span>Sabe lo que busca</div>
       <div class="scripts-grid">
 
         <div class="script-card" id="sc-vp1a">
@@ -570,7 +583,12 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
           </div>
         </div>
 
-        <div class="script-card" id="sc-vp2a">
+              </div>
+    </div>
+    <div class="dolor-subgroup">
+      <div class="dolor-label"><span class="dolor-num">D2</span>Decepción local</div>
+      <div class="scripts-grid">
+        div class="script-card" id="sc-vp2a">
           <div class="script-card-header" onclick="toggleScript('sc-vp2a')">
             <div class="script-card-meta">
               <span class="script-card-id">VP · D2 · Script A</span>
@@ -618,6 +636,8 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
     <!-- Minimalista -->
     <div class="persona-group">
       <div class="persona-group-label">Minimalista en Proceso <span class="persona-tag">Sistema / Placard lleno</span></div>
+      <div class="dolor-subgroup">
+      <div class="dolor-label"><span class="dolor-num">D1</span>Quiere un sistema</div>
       <div class="scripts-grid">
 
         <div class="script-card" id="sc-min1a">
@@ -662,7 +682,12 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
           </div>
         </div>
 
-        <div class="script-card" id="sc-min2a">
+              </div>
+    </div>
+    <div class="dolor-subgroup">
+      <div class="dolor-label"><span class="dolor-num">D2</span>Placard lleno, sin solución</div>
+      <div class="scripts-grid">
+        div class="script-card" id="sc-min2a">
           <div class="script-card-header" onclick="toggleScript('sc-min2a')">
             <div class="script-card-meta">
               <span class="script-card-id">MIN · D2 · Script A</span>
@@ -710,6 +735,8 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
     <!-- La Pareja -->
     <div class="persona-group">
       <div class="persona-group-label">La Pareja que Regala <span class="persona-tag">No necesita nada / Regalos que no se usan</span></div>
+      <div class="dolor-subgroup">
+      <div class="dolor-label"><span class="dolor-num">D1</span>El regalo que él dice que no necesita</div>
       <div class="scripts-grid">
 
         <div class="script-card" id="sc-par1a">
@@ -754,7 +781,12 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
           </div>
         </div>
 
-        <div class="script-card" id="sc-par2a">
+              </div>
+    </div>
+    <div class="dolor-subgroup">
+      <div class="dolor-label"><span class="dolor-num">D2</span>El regalo que nunca se usa</div>
+      <div class="scripts-grid">
+        div class="script-card" id="sc-par2a">
           <div class="script-card-header" onclick="toggleScript('sc-par2a')">
             <div class="script-card-meta">
               <span class="script-card-id">PAR · D2 · Script A</span>
