@@ -35,15 +35,15 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 .hero-sub{font-size:15px;color:rgba(255,255,255,.5);line-height:1.75;max-width:540px;}
 
 /* ─── FUNNEL VISUAL ─── */
-.funnel-section{background:var(--carbon);padding:0 48px 64px;}
-.funnel-diagram{display:flex;flex-direction:column;align-items:center;gap:0;max-width:720px;margin:0 auto;}
-.funnel-level{width:100%;display:flex;align-items:stretch;margin-bottom:3px;position:relative;}
-.funnel-bar{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-radius:3px;flex:1;cursor:pointer;text-decoration:none;transition:filter .15s;gap:16px;}
-.funnel-bar:hover{filter:brightness(1.1);}
-.funnel-level-1 .funnel-bar{background:rgba(107,114,128,.25);border:1px solid rgba(107,114,128,.4);}
-.funnel-level-2 .funnel-bar{background:rgba(217,119,6,.2);border:1px solid rgba(217,119,6,.35);margin:0 5%;}
-.funnel-level-3 .funnel-bar{background:rgba(220,38,38,.18);border:1px solid rgba(220,38,38,.3);margin:0 10%;}
-.funnel-level-4 .funnel-bar{background:rgba(124,58,237,.18);border:1px solid rgba(124,58,237,.3);margin:0 15%;}
+.funnel-section{background:var(--carbon);padding:0 0 64px;}
+.funnel-diagram{display:flex;flex-direction:column;align-items:center;gap:2px;max-width:900px;margin:0 auto;padding:0 24px;}
+.funnel-level{width:100%;}
+.funnel-bar{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;cursor:pointer;text-decoration:none;transition:filter .18s;gap:16px;min-height:72px;}
+.funnel-bar:hover{filter:brightness(1.12);}
+.funnel-level-1 .funnel-bar{background:rgba(156,163,175,.22);clip-path:polygon(0 0,100% 0,96% 100%,4% 100%);padding-left:28px;padding-right:28px;}
+.funnel-level-2 .funnel-bar{background:rgba(251,191,36,.18);clip-path:polygon(4% 0,96% 0,91% 100%,9% 100%);padding-left:calc(28px + 4%);padding-right:calc(28px + 4%);}
+.funnel-level-3 .funnel-bar{background:rgba(248,113,113,.18);clip-path:polygon(8% 0,92% 0,84% 100%,16% 100%);padding-left:calc(24px + 8%);padding-right:calc(24px + 8%);}
+.funnel-level-4 .funnel-bar{background:rgba(167,139,250,.2);clip-path:polygon(16% 0,84% 0,22% 100%,78% 100%);padding-left:calc(24px + 16%);padding-right:calc(24px + 16%);}
 .funnel-bar-left{display:flex;align-items:center;gap:16px;}
 .funnel-num{font-family:'TradeGothic',sans-serif;font-size:40px;line-height:1;color:rgba(255,255,255,.15);}
 .funnel-info{}
@@ -57,7 +57,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 .funnel-count{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-align:right;}
 .funnel-formats{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;}
 .funnel-fmt{font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:1px;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);}
-.funnel-arrow{text-align:center;color:rgba(255,255,255,.15);font-size:12px;margin:0;}
+.funnel-arrow{display:none;}
 
 /* ANCHORS */
 .stage-anchor-nav{background:var(--cream);border-bottom:1px solid var(--warm);padding:10px 48px;display:flex;gap:6px;flex-wrap:wrap;}
@@ -110,7 +110,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 .persona-tag{font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;background:var(--warm);border-radius:1px;color:var(--dark);}
 
 /* SCRIPT CARDS */
-.scripts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:10px;}
+.scripts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:10px;align-items:start;}
 .script-card{background:var(--white);border:1px solid var(--warm);border-radius:4px;overflow:hidden;transition:border-color .15s,box-shadow .15s;}
 .script-card:not(.open):hover{border-color:#c0bdb9;box-shadow:0 2px 8px rgba(0,0,0,.06);}
 .script-card-header{padding:14px 16px;display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;gap:12px;transition:background .12s;}
