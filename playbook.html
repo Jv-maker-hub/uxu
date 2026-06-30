@@ -61,6 +61,36 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 
 /* ANCHORS */
 .stage-anchor-nav{background:var(--cream);border-bottom:1px solid var(--warm);padding:10px 48px;display:flex;gap:6px;flex-wrap:wrap;}
+.intel-section{background:var(--white);border-top:1px solid var(--warm);}
+.intel-inner{max-width:900px;margin:0 auto;padding:48px 48px 56px;}
+.intel-title{font-family:'TradeGothic',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dark);margin-bottom:8px;}
+.intel-subtitle{font-size:13px;color:var(--dark);line-height:1.5;margin-bottom:32px;max-width:640px;}
+.intel-matrix{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:32px;}
+.intel-matrix th{font-family:'TradeGothic',sans-serif;font-size:8px;letter-spacing:.14em;text-transform:uppercase;padding:8px 12px;text-align:left;border-bottom:2px solid var(--warm);color:var(--dark);}
+.intel-matrix th.stage-col{text-align:center;}
+.intel-matrix td{padding:10px 12px;border-bottom:1px solid var(--warm);vertical-align:middle;}
+.intel-matrix td.comp-name{font-weight:700;font-size:11px;letter-spacing:.06em;color:var(--carbon);white-space:nowrap;}
+.intel-matrix td.stage-cell{text-align:center;}
+.stage-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--mid);margin:0 1px;}
+.stage-dot.full{background:var(--carbon);}
+.stage-dot.half{background:#aaa;}
+.stage-dot.empty{background:var(--warm);border:1px solid var(--mid);}
+.gap-badge{display:inline-block;font-size:8px;letter-spacing:.1em;text-transform:uppercase;background:#dce8f0;color:#2e6080;padding:2px 7px;border-radius:2px;font-weight:700;white-space:nowrap;}
+.opp-badge{display:inline-block;font-size:8px;letter-spacing:.1em;text-transform:uppercase;background:#d8edda;color:#2e6040;padding:2px 7px;border-radius:2px;font-weight:700;white-space:nowrap;}
+.intel-insights{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;}
+.intel-card{background:var(--cream);border:1px solid var(--warm);border-radius:4px;padding:16px 18px;}
+.intel-card-label{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--dark);font-weight:700;margin-bottom:8px;}
+.intel-card-body{font-size:12px;color:var(--carbon);line-height:1.6;}
+.intel-card-body strong{font-weight:600;}
+.intel-diff{background:var(--carbon);border-radius:4px;padding:16px 20px;}
+.intel-diff-label{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:10px;}
+.intel-diff-rows{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.intel-diff-col{font-size:12px;line-height:1.6;}
+.intel-diff-col-label{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px;}
+.intel-diff-col.ellos .intel-diff-col-label{color:#f87171;}
+.intel-diff-col.nosotros .intel-diff-col-label{color:#86efac;}
+.intel-diff-col.ellos{color:#f1f0ef;}
+.intel-diff-col.nosotros{color:#f1f0ef;}
 .stage-anchor-btn{font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border:1px solid var(--warm);border-radius:2px;color:var(--dark);text-decoration:none;transition:all .12s;display:flex;align-items:center;gap:6px;}
 .stage-anchor-btn:hover{border-color:var(--carbon);color:var(--carbon);}
 .sab-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
@@ -365,6 +395,124 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
   </div>
 </div>
 
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- INTELIGENCIA COMPETITIVA -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="intel-section" id="intel-competitiva">
+  <div class="intel-inner">
+    <div class="intel-title">Inteligencia competitiva</div>
+    <div class="intel-subtitle">Qué etapa del embudo trabaja cada competidor según sus ads activos en Meta Ads Library. Base: 200 ads analizados (junio 2026).</div>
+
+    <table class="intel-matrix">
+      <thead>
+        <tr>
+          <th>Competidor</th>
+          <th class="stage-col">01 Frío</th>
+          <th class="stage-col">02 Tibio</th>
+          <th class="stage-col">03 Caliente</th>
+          <th class="stage-col">04 Remarketing</th>
+          <th>Ángulo principal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="comp-name">TECLA</td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot full"></span><span class="stage-dot full"></span></td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot half"></span><span class="stage-dot empty"></span></td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot full"></span><span class="stage-dot full"></span></td>
+          <td class="stage-cell"><span class="stage-dot half"></span><span class="stage-dot empty"></span><span class="stage-dot empty"></span></td>
+          <td style="font-size:11px;color:var(--dark);">Calce + durabilidad · 20% OFF · UGC cara a cámara</td>
+        </tr>
+        <tr>
+          <td class="comp-name">ELEMENTAL</td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot half"></span><span class="stage-dot empty"></span></td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot half"></span><span class="stage-dot empty"></span></td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot full"></span><span class="stage-dot full"></span></td>
+          <td class="stage-cell"><span class="stage-dot empty"></span><span class="stage-dot empty"></span><span class="stage-dot empty"></span></td>
+          <td style="font-size:11px;color:var(--dark);">Influencers + bundle 3+campera · urgencia · FOMO</td>
+        </tr>
+        <tr>
+          <td class="comp-name">SER BASICS</td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot half"></span><span class="stage-dot empty"></span></td>
+          <td class="stage-cell"><span class="stage-dot empty"></span><span class="stage-dot empty"></span><span class="stage-dot empty"></span></td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot full"></span><span class="stage-dot empty"></span></td>
+          <td class="stage-cell"><span class="stage-dot half"></span><span class="stage-dot empty"></span><span class="stage-dot empty"></span></td>
+          <td style="font-size:11px;color:var(--dark);">Pack 3+1 gratis · regalo / "el básico que usás"</td>
+        </tr>
+        <tr>
+          <td class="comp-name">VALFORT</td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot full"></span><span class="stage-dot empty"></span></td>
+          <td class="stage-cell"><span class="stage-dot empty"></span><span class="stage-dot empty"></span><span class="stage-dot empty"></span></td>
+          <td class="stage-cell"><span class="stage-dot empty"></span><span class="stage-dot empty"></span><span class="stage-dot empty"></span></td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot half"></span><span class="stage-dot empty"></span></td>
+          <td style="font-size:11px;color:var(--dark);">"No es tu cuerpo, es la remera" · manejo de objeciones</td>
+        </tr>
+        <tr>
+          <td class="comp-name">UMANO</td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot half"></span><span class="stage-dot empty"></span></td>
+          <td class="stage-cell"><span class="stage-dot empty"></span><span class="stage-dot empty"></span><span class="stage-dot empty"></span></td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot full"></span><span class="stage-dot empty"></span></td>
+          <td class="stage-cell"><span class="stage-dot empty"></span><span class="stage-dot empty"></span><span class="stage-dot empty"></span></td>
+          <td style="font-size:11px;color:var(--dark);">Packs invierno · "resolvelo de una" · precio + cuotas</td>
+        </tr>
+        <tr>
+          <td class="comp-name">CLUB BÁSICO</td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot full"></span><span class="stage-dot empty"></span></td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot empty"></span><span class="stage-dot empty"></span></td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot half"></span><span class="stage-dot empty"></span></td>
+          <td class="stage-cell"><span class="stage-dot full"></span><span class="stage-dot full"></span><span class="stage-dot empty"></span></td>
+          <td style="font-size:11px;color:var(--dark);">PIMA peruano · comparación directa · descuentos con código</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="intel-insights">
+      <div class="intel-card">
+        <div class="intel-card-label">Gap detectado — <span class="gap-badge">Tibio</span></div>
+        <div class="intel-card-body">Casi nadie trabaja la etapa de consideración. La competencia va directo de <strong>dolor → oferta</strong> sin construir convicción en el medio. Solo Tecla tiene algo de tibio (reviews, durabilidad demostrada). El tibio es el espacio menos saturado del mercado.</div>
+      </div>
+      <div class="intel-card">
+        <div class="intel-card-label">Gap detectado — <span class="gap-badge">Remarketing</span></div>
+        <div class="intel-card-body">Solo Club Básico hace remarketing explícito, y lo hace con descuentos ("nos seguís hace meses, dale el 15% off"). El resto no retargetea o usa urgencia genérica. <strong>UNO × UNO puede hacer remarketing de valor, sin descuento.</strong></div>
+      </div>
+      <div class="intel-card">
+        <div class="intel-card-label">Patrón dominante — <span class="gap-badge">Frío → Caliente directo</span></div>
+        <div class="intel-card-body">El esquema que más se repite es: UGC con hook de dolor → pack + 20% OFF. Sin etapa intermedia. Funciona a escala con presupuesto alto, pero el cliente que llega caliente muchas veces no es el correcto. UNO × UNO apunta a menos volumen, más calidad.</div>
+      </div>
+      <div class="intel-card">
+        <div class="intel-card-label">Ángulo frío — <span class="gap-badge">Calce estético vs. calce funcional</span></div>
+        <div class="intel-card-body">Todos hablan de calce como <em>"que te favorece", "que te define el cuerpo"</em>. Es un ángulo estético/aspiracional. <strong>UNO × UNO tiene el único ángulo funcional</strong>: el calce que no pensás. No es que te quede bien — es que dejás de pensar en la remera.</div>
+      </div>
+    </div>
+
+    <div class="intel-diff">
+      <div class="intel-diff-label">Diferenciación — UNO × UNO vs. mercado</div>
+      <div class="intel-diff-rows">
+        <div class="intel-diff-col ellos">
+          <div class="intel-diff-col-label">La competencia dice</div>
+          "El calce que te favorece"<br>
+          "Tela que dura meses"<br>
+          "3 remeras + campera gratis"<br>
+          "20% OFF con transferencia"<br>
+          "Stock limitado"<br>
+          "No es tu cuerpo, es la remera"
+        </div>
+        <div class="intel-diff-col nosotros">
+          <div class="intel-diff-col-label">UNO × UNO dice</div>
+          "El calce que no pensás"<br>
+          "Una decisión que no se repite"<br>
+          "Tres colores. Un sistema."<br>
+          "Precio sin descuento ni excusa"<br>
+          "Sin urgencia. Cuando estés listo."<br>
+          "No es una remera. Es el uniforme diario."
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-- ANCHORS -->
 <div class="stage-anchor-nav">
   <a href="#frio" class="stage-anchor-btn"><span class="sab-dot frio"></span>01 — Frío</a>
@@ -375,6 +523,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
   <a href="#plan-testeo" class="stage-anchor-btn" style="border-color:var(--warm);">Plan de testeo</a>
   <a href="#backlog" class="stage-anchor-btn" style="border-color:var(--warm);">Backlog creativo</a>
   <a href="#diagnostico" class="stage-anchor-btn" style="border-color:var(--warm);">Diagnóstico</a>
+  <a href="#intel-competitiva" class="stage-anchor-btn" style="border-color:var(--warm);">Intel competitiva</a>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════ -->
