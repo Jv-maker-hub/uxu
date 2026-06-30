@@ -111,15 +111,20 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 
 /* SCRIPT CARDS */
 .scripts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:10px;}
-.script-card{background:var(--white);border:1px solid var(--warm);border-radius:4px;overflow:hidden;}
-.script-card-header{padding:14px 16px;display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;gap:12px;}
+.script-card{background:var(--white);border:1px solid var(--warm);border-radius:4px;overflow:hidden;transition:border-color .15s,box-shadow .15s;}
+.script-card:not(.open):hover{border-color:#c0bdb9;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.script-card-header{padding:14px 16px;display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;gap:12px;transition:background .12s;}
 .script-card-header:hover{background:var(--cream);}
 .script-card-meta{display:flex;flex-direction:column;gap:4px;flex:1;}
 .script-card-id{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dark);}
 .script-card-hook{font-size:13px;color:var(--carbon);font-weight:600;line-height:1.45;font-style:italic;}
 .script-letter{width:22px;height:22px;border-radius:50%;background:var(--warm);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--dark);flex-shrink:0;letter-spacing:0;}
-.script-toggle{font-size:14px;color:var(--mid);flex-shrink:0;transition:transform .2s;line-height:1;margin-top:2px;}
+.script-card-controls{display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0;padding-top:1px;}
+.script-toggle{font-size:13px;color:var(--mid);flex-shrink:0;transition:transform .2s;line-height:1;}
 .script-card.open .script-toggle{transform:rotate(180deg);}
+.script-expand-hint{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:#c0bdb9;white-space:nowrap;}
+.script-card.open .script-expand-hint{display:none;}
+.script-card-angle{font-size:11px;color:var(--dark);line-height:1.4;margin-top:2px;}
 .script-body{display:none;border-top:1px solid var(--warm);}
 .script-card.open .script-body{display:block;}
 .script-section{padding:14px 16px;border-bottom:1px solid #e8e6e2;}
@@ -133,6 +138,9 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 .script-btn:hover{background:#1a1a1e;}
 .script-btn.secondary{background:transparent;border:1px solid var(--mid);color:var(--dark);}
 .script-btn.secondary:hover{border-color:var(--carbon);color:var(--carbon);}
+.script-variants{background:var(--cream);padding:10px 14px 11px;border-top:1px solid var(--warm);display:flex;gap:8px;align-items:flex-start;}
+.script-variants-title{font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--dark);font-weight:700;background:var(--warm);padding:2px 8px;border-radius:2px;flex-shrink:0;margin-top:2px;white-space:nowrap;}
+.script-variants-body{font-size:11.5px;color:var(--dark);line-height:1.6;}
 
 /* IMAGE MOCKS */
 .mocks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
@@ -476,7 +484,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
               <span class="script-card-id">EJ · D2 · Script A</span>
               <span class="script-card-hook">"La remera que compraste en marzo. La misma en julio."</span>
             </div>
-            <div style="display:flex;gap:6px;align-items:center;"><span class="script-letter">A</span><span class="script-toggle">▾</span></div>
+            <div class="script-card-controls"><span class="script-letter">A</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
           </div>
           <div class="script-body">
             <div class="script-section"><div class="script-label">Hook</div><div class="script-text">La remera que compraste en marzo. La misma en julio.</div></div>
@@ -497,7 +505,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
               <span class="script-card-id">EJ · D2 · Script B</span>
               <span class="script-card-hook">"Cuatro remeras por temporada. O tres de una vez."</span>
             </div>
-            <div style="display:flex;gap:6px;align-items:center;"><span class="script-letter">B</span><span class="script-toggle">▾</span></div>
+            <div class="script-card-controls"><span class="script-letter">B</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
           </div>
           <div class="script-body">
             <div class="script-section"><div class="script-label">Hook</div><div class="script-text">Cuatro remeras por temporada. O tres de una vez.</div></div>
@@ -526,7 +534,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
               <span class="script-card-id">VP · D1 · Script A</span>
               <span class="script-card-hook">"¿Cuándo fue la última vez que trajiste remeras del exterior?"</span>
             </div>
-            <div style="display:flex;gap:6px;align-items:center;"><span class="script-letter">A</span><span class="script-toggle">▾</span></div>
+            <div class="script-card-controls"><span class="script-letter">A</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
           </div>
           <div class="script-body">
             <div class="script-section"><div class="script-label">Hook</div><div class="script-text">¿Cuándo fue la última vez que trajiste remeras del exterior?</div></div>
@@ -547,7 +555,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
               <span class="script-card-id">VP · D1 · Script B</span>
               <span class="script-card-hook">"Sabés exactamente qué buscás. Solo no lo encontrás acá."</span>
             </div>
-            <div style="display:flex;gap:6px;align-items:center;"><span class="script-letter">B</span><span class="script-toggle">▾</span></div>
+            <div class="script-card-controls"><span class="script-letter">B</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
           </div>
           <div class="script-body">
             <div class="script-section"><div class="script-label">Hook</div><div class="script-text">Sabés exactamente qué buscás. Solo no lo encontrás acá.</div></div>
@@ -568,7 +576,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
               <span class="script-card-id">VP · D2 · Script A</span>
               <span class="script-card-hook">"Compraste convencido. A los dos meses, ya no era la misma."</span>
             </div>
-            <div style="display:flex;gap:6px;align-items:center;"><span class="script-letter">A</span><span class="script-toggle">▾</span></div>
+            <div class="script-card-controls"><span class="script-letter">A</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
           </div>
           <div class="script-body">
             <div class="script-section"><div class="script-label">Hook</div><div class="script-text">Compraste convencido. A los dos meses, ya no era la misma.</div></div>
@@ -589,7 +597,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
               <span class="script-card-id">VP · D2 · Script B</span>
               <span class="script-card-hook">"Si siempre hay una oferta, algo no cierra."</span>
             </div>
-            <div style="display:flex;gap:6px;align-items:center;"><span class="script-letter">B</span><span class="script-toggle">▾</span></div>
+            <div class="script-card-controls"><span class="script-letter">B</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
           </div>
           <div class="script-body">
             <div class="script-section"><div class="script-label">Hook</div><div class="script-text">Si siempre hay una oferta, algo no cierra.</div></div>
@@ -618,7 +626,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
               <span class="script-card-id">MIN · D1 · Script A</span>
               <span class="script-card-hook">"Simplificaste la alimentación. El trabajo. ¿Y la ropa?"</span>
             </div>
-            <div style="display:flex;gap:6px;align-items:center;"><span class="script-letter">A</span><span class="script-toggle">▾</span></div>
+            <div class="script-card-controls"><span class="script-letter">A</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
           </div>
           <div class="script-body">
             <div class="script-section"><div class="script-label">Hook</div><div class="script-text">Simplificaste la alimentación. El trabajo. El teléfono. ¿Y la ropa?</div></div>
@@ -639,7 +647,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
               <span class="script-card-id">MIN · D1 · Script B</span>
               <span class="script-card-hook">"No es una remera más. Es la última vez que pensás en esto."</span>
             </div>
-            <div style="display:flex;gap:6px;align-items:center;"><span class="script-letter">B</span><span class="script-toggle">▾</span></div>
+            <div class="script-card-controls"><span class="script-letter">B</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
           </div>
           <div class="script-body">
             <div class="script-section"><div class="script-label">Hook</div><div class="script-text">No es una remera más. Es la última vez que pensás en esto.</div></div>
@@ -660,7 +668,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
               <span class="script-card-id">MIN · D2 · Script A</span>
               <span class="script-card-hook">"Placard lleno. Y sin remera para usar."</span>
             </div>
-            <div style="display:flex;gap:6px;align-items:center;"><span class="script-letter">A</span><span class="script-toggle">▾</span></div>
+            <div class="script-card-controls"><span class="script-letter">A</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
           </div>
           <div class="script-body">
             <div class="script-section"><div class="script-label">Hook</div><div class="script-text">Placard lleno. Y sin remera para usar.</div></div>
@@ -681,7 +689,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
               <span class="script-card-id">MIN · D2 · Script B</span>
               <span class="script-card-hook">"Comprás una remera para resolver el problema. No lo resuelve."</span>
             </div>
-            <div style="display:flex;gap:6px;align-items:center;"><span class="script-letter">B</span><span class="script-toggle">▾</span></div>
+            <div class="script-card-controls"><span class="script-letter">B</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
           </div>
           <div class="script-body">
             <div class="script-section"><div class="script-label">Hook</div><div class="script-text">Comprás una remera para resolver el problema. No lo resuelve.</div></div>
@@ -710,7 +718,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
               <span class="script-card-id">PAR · D1 · Script A</span>
               <span class="script-card-hook">"Dice que no necesita nada. Ya sé."</span>
             </div>
-            <div style="display:flex;gap:6px;align-items:center;"><span class="script-letter">A</span><span class="script-toggle">▾</span></div>
+            <div class="script-card-controls"><span class="script-letter">A</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
           </div>
           <div class="script-body">
             <div class="script-section"><div class="script-label">Hook</div><div class="script-text">Dice que no necesita nada. Ya sé.</div></div>
@@ -731,7 +739,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
               <span class="script-card-id">PAR · D1 · Script B</span>
               <span class="script-card-hook">"No querés otro regalo que quede guardado."</span>
             </div>
-            <div style="display:flex;gap:6px;align-items:center;"><span class="script-letter">B</span><span class="script-toggle">▾</span></div>
+            <div class="script-card-controls"><span class="script-letter">B</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
           </div>
           <div class="script-body">
             <div class="script-section"><div class="script-label">Hook</div><div class="script-text">No querés otro regalo que quede guardado.</div></div>
@@ -752,7 +760,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
               <span class="script-card-id">PAR · D2 · Script A</span>
               <span class="script-card-hook">"Cuatro meses después, sigue usándolas."</span>
             </div>
-            <div style="display:flex;gap:6px;align-items:center;"><span class="script-letter">A</span><span class="script-toggle">▾</span></div>
+            <div class="script-card-controls"><span class="script-letter">A</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
           </div>
           <div class="script-body">
             <div class="script-section"><div class="script-label">Hook</div><div class="script-text">Cuatro meses después, sigue usándolas.</div></div>
@@ -773,7 +781,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
               <span class="script-card-id">PAR · D2 · Script B</span>
               <span class="script-card-hook">"La ropa que regalás y la que usa son dos categorías distintas."</span>
             </div>
-            <div style="display:flex;gap:6px;align-items:center;"><span class="script-letter">B</span><span class="script-toggle">▾</span></div>
+            <div class="script-card-controls"><span class="script-letter">B</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
           </div>
           <div class="script-body">
             <div class="script-section"><div class="script-label">Hook</div><div class="script-text">La ropa que regalás y la ropa que usa son dos categorías distintas.</div></div>
