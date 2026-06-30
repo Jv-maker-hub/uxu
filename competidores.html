@@ -1092,14 +1092,16 @@ new Chart(document.getElementById('radarChart'), {
     return new Date(iso).toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' });
   }
 
-  function buildAdCard(ad) {
+  function buildAdCard(ad, pageId) {
     const isNew = new Date(ad.first_seen_at) > new Date(Date.now() - 48 * 3600000);
     const copy  = (ad.ad_copy || 'Sin copy').trim();
     const type  = ad.creative_type || 'photo';
     const div   = document.createElement('div');
     div.className = 'ad-card-v2';
     div.dataset.type = type;
-    const libId = ad.meta_ad_id || ad.id || '';
+    const metaUrl = pageId
+      ? `https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AR&search_type=page&view_all_page_id=${pageId}`
+      : (ad.meta_ad_id ? `https://www.facebook.com/ads/library/?id=${ad.meta_ad_id}` : '');
     div.innerHTML = `
       <div class="ad-v2-type">
         <span class="ad-type-badge type-${type}">${TYPE_LABELS[type] || type}</span>
@@ -1108,12 +1110,12 @@ new Chart(document.getElementById('radarChart'), {
       <p class="ad-v2-copy">${copy.slice(0,240)}${copy.length>240?'…':''}</p>
       <div class="ad-v2-footer">
         <span class="ad-v2-date">${fmtDate(ad.delivery_start_date)}</span>
-        ${libId ? `<a class="ad-v2-link" href="https://www.facebook.com/ads/library/?id=${libId}" target="_blank" rel="noopener">Ver en Meta →</a>` : ''}
+        ${metaUrl ? `<a class="ad-v2-link" href="${metaUrl}" target="_blank" rel="noopener">Ver en Meta →</a>` : ''}
       </div>`;
     return div;
   }
 
-  function buildCompetitorSection(comp, ads) {
+  function buildCompetitorSection(comp, ads, pageId) {
     const typeCount = {};
     ads.forEach(a => { const t = a.creative_type||'photo'; typeCount[t] = (typeCount[t]||0)+1; });
     const newCount = ads.filter(a => new Date(a.first_seen_at) > new Date(Date.now()-48*3600000)).length;
@@ -1154,7 +1156,7 @@ new Chart(document.getElementById('radarChart'), {
         grid.innerHTML = '<p class="live-status">Sin ads de este tipo</p>';
         return;
       }
-      filtered.forEach(ad => grid.appendChild(buildAdCard(ad)));
+      filtered.forEach(ad => grid.appendChild(buildAdCard(ad, pageId)));
     }
 
     tabEls.forEach(tab => tab.addEventListener('click', () => {
@@ -1190,7 +1192,7 @@ new Chart(document.getElementById('radarChart'), {
     }));
 
     try {
-      const competitors   = await supaFetch('competitors', { select:'id,name,slug', order:'name.asc' });
+      const competitors   = await supaFetch('competitors', { select:'id,name,slug,facebook_page_id', order:'name.asc' });
       const competitorMap = Object.fromEntries(competitors.map(c=>[c.slug,c]));
 
       container.innerHTML = '';
@@ -1206,7 +1208,7 @@ new Chart(document.getElementById('radarChart'), {
           limit: '200',
         });
 
-        container.appendChild(buildCompetitorSection(comp, ads));
+        container.appendChild(buildCompetitorSection(comp, ads, comp.facebook_page_id || null));
 
         // Actualizar contadores dinámicos
         const countEl = document.getElementById(`${slug}-count`);
