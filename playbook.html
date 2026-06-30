@@ -106,7 +106,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
 
 /* PERSONA GROUP LABEL */
 .persona-group{margin-bottom:32px;}
-.dolor-subgroup{margin-bottom:20px;}
+.dolor-subgroup{margin-bottom:20px;}.script-format{display:inline-block;font-size:8px;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;border-radius:2px;font-weight:700;flex-shrink:0;}.fmt-ugc{background:#e8e4e0;color:#555152;}.fmt-broll{background:#dce8f0;color:#2e6080;}
 .dolor-label{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
 .dolor-num{background:var(--carbon);color:rgba(255,255,255,.7);padding:2px 7px;border-radius:1px;font-size:8px;letter-spacing:.1em;}
 .persona-group-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--warm);display:flex;align-items:center;gap:10px;}
@@ -423,7 +423,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
   <div class="content-panel active" id="frio-videos">
     <div class="tip-box">
       <div class="tip-box-label">📹 Formato — Video UGC con tu cara</div>
-      <div class="tip-box-text">Cámara frontal, plano medio, fondo neutro o cotidiano. Voz directa, sin performance. El hook se dice mirando a cámara. Duración: 15–30 segundos. Sin música de fondo. Sin edición agresiva — cortes limpios y texto de apoyo alcanzan.</div>
+      <div class="tip-box-text">Tres formatos: <strong>UGC</strong> (mirando a cámara, voz directa, hook personal), <strong>B-ROLL</strong> (voz en off + planos de producto, tela, uso cotidiano), <strong>TEXTO</strong> (copy en pantalla + video ambiente). Cada script indica el formato recomendado. No hacer todos mirando a cámara — alternando formatos se reduce la fatiga y se testea qué conecta más. Sin edición agresiva — cortes limpios y texto de apoyo alcanzan.</div>
     </div>
 
     <!-- Ejecutivo -->
@@ -436,7 +436,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
         <div class="script-card" id="sc-ej1a">
           <div class="script-card-header" onclick="toggleScript('sc-ej1a')">
             <div class="script-card-meta">
-              <span class="script-card-id">EJ · D1 · Script A</span>
+              <span class="script-card-id">EJ · D1 · Script A</span><span class="script-format fmt-ugc">UGC</span>
               <span class="script-card-hook">"¿Cuántas decisiones tomás antes de las 9 de la mañana?"</span>
             </div>
             <div class="script-card-controls">
@@ -461,7 +461,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
         <div class="script-card" id="sc-ej1b">
           <div class="script-card-header" onclick="toggleScript('sc-ej1b')">
             <div class="script-card-meta">
-              <span class="script-card-id">EJ · D1 · Script B</span>
+              <span class="script-card-id">EJ · D1 · Script B</span><span class="script-format fmt-broll">B-ROLL</span>
               <span class="script-card-hook">"Lo resolvés una vez. Después no lo pensás más."</span>
               <span class="script-card-angle">Ejecutivo saturado · decisiones / energía mental</span>
             </div>
@@ -489,10 +489,10 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
     <div class="dolor-subgroup">
       <div class="dolor-label"><span class="dolor-num">D2</span>El calce que no encontrás</div>
       <div class="scripts-grid">
-        div class="script-card" id="sc-ej2a">
+        <div class="script-card" id="sc-ej2a">
           <div class="script-card-header" onclick="toggleScript('sc-ej2a')">
             <div class="script-card-meta">
-              <span class="script-card-id">EJ · D2 · Script A</span>
+              <span class="script-card-id">EJ · D2 · Script A</span><span class="script-format fmt-ugc">UGC</span>
               <span class="script-card-hook">"El talle M te queda chico. El L, grande. Hace años es lo mismo."</span>
             </div>
             <div class="script-card-controls"><span class="script-letter">A</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
@@ -513,7 +513,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
         <div class="script-card" id="sc-ej2b">
           <div class="script-card-header" onclick="toggleScript('sc-ej2b')">
             <div class="script-card-meta">
-              <span class="script-card-id">EJ · D2 · Script B</span>
+              <span class="script-card-id">EJ · D2 · Script B</span><span class="script-format fmt-broll">B-ROLL</span>
               <span class="script-card-hook">"Te ponés la remera y a los diez minutos ya querés sacártela."</span>
             </div>
             <div class="script-card-controls"><span class="script-letter">B</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
@@ -544,7 +544,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
         <div class="script-card" id="sc-vp1a">
           <div class="script-card-header" onclick="toggleScript('sc-vp1a')">
             <div class="script-card-meta">
-              <span class="script-card-id">VP · D1 · Script A</span>
+              <span class="script-card-id">VP · D1 · Script A</span><span class="script-format fmt-ugc">UGC</span>
               <span class="script-card-hook">"¿Cuándo fue la última vez que trajiste remeras del exterior?"</span>
             </div>
             <div class="script-card-controls"><span class="script-letter">A</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
@@ -565,7 +565,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
         <div class="script-card" id="sc-vp1b">
           <div class="script-card-header" onclick="toggleScript('sc-vp1b')">
             <div class="script-card-meta">
-              <span class="script-card-id">VP · D1 · Script B</span>
+              <span class="script-card-id">VP · D1 · Script B</span><span class="script-format fmt-broll">B-ROLL</span>
               <span class="script-card-hook">"Sabés exactamente qué buscás. Solo no lo encontrás acá."</span>
             </div>
             <div class="script-card-controls"><span class="script-letter">B</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
@@ -588,10 +588,10 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
     <div class="dolor-subgroup">
       <div class="dolor-label"><span class="dolor-num">D2</span>Decepción local</div>
       <div class="scripts-grid">
-        div class="script-card" id="sc-vp2a">
+        <div class="script-card" id="sc-vp2a">
           <div class="script-card-header" onclick="toggleScript('sc-vp2a')">
             <div class="script-card-meta">
-              <span class="script-card-id">VP · D2 · Script A</span>
+              <span class="script-card-id">VP · D2 · Script A</span><span class="script-format fmt-broll">B-ROLL</span>
               <span class="script-card-hook">"Compraste convencido. A los dos meses, ya no era la misma."</span>
             </div>
             <div class="script-card-controls"><span class="script-letter">A</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
@@ -612,7 +612,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
         <div class="script-card" id="sc-vp2b">
           <div class="script-card-header" onclick="toggleScript('sc-vp2b')">
             <div class="script-card-meta">
-              <span class="script-card-id">VP · D2 · Script B</span>
+              <span class="script-card-id">VP · D2 · Script B</span><span class="script-format fmt-ugc">UGC</span>
               <span class="script-card-hook">"Si siempre hay una oferta, algo no cierra."</span>
             </div>
             <div class="script-card-controls"><span class="script-letter">B</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
@@ -643,7 +643,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
         <div class="script-card" id="sc-min1a">
           <div class="script-card-header" onclick="toggleScript('sc-min1a')">
             <div class="script-card-meta">
-              <span class="script-card-id">MIN · D1 · Script A</span>
+              <span class="script-card-id">MIN · D1 · Script A</span><span class="script-format fmt-ugc">UGC</span>
               <span class="script-card-hook">"Simplificaste la alimentación. El trabajo. ¿Y la ropa?"</span>
             </div>
             <div class="script-card-controls"><span class="script-letter">A</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
@@ -664,7 +664,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
         <div class="script-card" id="sc-min1b">
           <div class="script-card-header" onclick="toggleScript('sc-min1b')">
             <div class="script-card-meta">
-              <span class="script-card-id">MIN · D1 · Script B</span>
+              <span class="script-card-id">MIN · D1 · Script B</span><span class="script-format fmt-broll">B-ROLL</span>
               <span class="script-card-hook">"No es una remera más. Es la última vez que pensás en esto."</span>
             </div>
             <div class="script-card-controls"><span class="script-letter">B</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
@@ -687,10 +687,10 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
     <div class="dolor-subgroup">
       <div class="dolor-label"><span class="dolor-num">D2</span>Placard lleno, sin solución</div>
       <div class="scripts-grid">
-        div class="script-card" id="sc-min2a">
+        <div class="script-card" id="sc-min2a">
           <div class="script-card-header" onclick="toggleScript('sc-min2a')">
             <div class="script-card-meta">
-              <span class="script-card-id">MIN · D2 · Script A</span>
+              <span class="script-card-id">MIN · D2 · Script A</span><span class="script-format fmt-broll">B-ROLL</span>
               <span class="script-card-hook">"Placard lleno. Y sin remera para usar."</span>
             </div>
             <div class="script-card-controls"><span class="script-letter">A</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
@@ -711,7 +711,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
         <div class="script-card" id="sc-min2b">
           <div class="script-card-header" onclick="toggleScript('sc-min2b')">
             <div class="script-card-meta">
-              <span class="script-card-id">MIN · D2 · Script B</span>
+              <span class="script-card-id">MIN · D2 · Script B</span><span class="script-format fmt-broll">B-ROLL</span>
               <span class="script-card-hook">"Cada remera que comprás es la última. Nunca es la última."</span>
             </div>
             <div class="script-card-controls"><span class="script-letter">B</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
@@ -742,7 +742,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
         <div class="script-card" id="sc-par1a">
           <div class="script-card-header" onclick="toggleScript('sc-par1a')">
             <div class="script-card-meta">
-              <span class="script-card-id">PAR · D1 · Script A</span>
+              <span class="script-card-id">PAR · D1 · Script A</span><span class="script-format fmt-ugc">UGC</span>
               <span class="script-card-hook">"Dice que no necesita nada. Ya sé."</span>
             </div>
             <div class="script-card-controls"><span class="script-letter">A</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
@@ -763,7 +763,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
         <div class="script-card" id="sc-par1b">
           <div class="script-card-header" onclick="toggleScript('sc-par1b')">
             <div class="script-card-meta">
-              <span class="script-card-id">PAR · D1 · Script B</span>
+              <span class="script-card-id">PAR · D1 · Script B</span><span class="script-format fmt-ugc">UGC</span>
               <span class="script-card-hook">"No querés otro regalo que quede guardado."</span>
             </div>
             <div class="script-card-controls"><span class="script-letter">B</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
@@ -786,10 +786,10 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
     <div class="dolor-subgroup">
       <div class="dolor-label"><span class="dolor-num">D2</span>El regalo que nunca se usa</div>
       <div class="scripts-grid">
-        div class="script-card" id="sc-par2a">
+        <div class="script-card" id="sc-par2a">
           <div class="script-card-header" onclick="toggleScript('sc-par2a')">
             <div class="script-card-meta">
-              <span class="script-card-id">PAR · D2 · Script A</span>
+              <span class="script-card-id">PAR · D2 · Script A</span><span class="script-format fmt-ugc">UGC</span>
               <span class="script-card-hook">"Nunca le regalaste ropa. Hasta ahora."</span>
             </div>
             <div class="script-card-controls"><span class="script-letter">A</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
@@ -810,7 +810,7 @@ nav{background:var(--carbon);padding:0;display:flex;align-items:center;flex-shri
         <div class="script-card" id="sc-par2b">
           <div class="script-card-header" onclick="toggleScript('sc-par2b')">
             <div class="script-card-meta">
-              <span class="script-card-id">PAR · D2 · Script B</span>
+              <span class="script-card-id">PAR · D2 · Script B</span><span class="script-format fmt-broll">B-ROLL</span>
               <span class="script-card-hook">"El regalo que usa todos los días. No el que agradece y guarda."</span>
             </div>
             <div class="script-card-controls"><span class="script-letter">B</span><span class="script-expand-hint">ver script</span><span class="script-toggle">▾</span></div>
